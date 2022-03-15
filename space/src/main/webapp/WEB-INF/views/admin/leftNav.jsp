@@ -6,12 +6,14 @@
 <html>
 <head>
 <style>
-	
+	.left-aside-nav {
+		list-style: none;
+	}
 </style>
 </head>
 <body>
 	<div class="wrap">
-		<ul>
+		<ul class="left-aside-nav">
 			<c:forEach var="list" items="${param.list }">
 				<li>${list }</li>
 			</c:forEach>

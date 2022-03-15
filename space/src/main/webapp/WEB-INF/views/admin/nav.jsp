@@ -6,19 +6,14 @@
 <html>
 <head>
 	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-		ul {
+		.header-nav {
 			display: flex;
 			list-style: none;
 		}
 	</style>
 </head>
 <body>
-	<ul>
+	<ul class="header-nav">
 		<li>홈</li>
 		<li>신고관리</li>
 		<li>배너관리</li>

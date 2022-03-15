@@ -8,15 +8,11 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
 	.container {
 		display: flex;
 	}
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/common.css" />
 </head>
 <body>
 	<jsp:include page="nav.jsp"/>
