@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.second.space.mapper.CommunityXMLMapper">
+	<!-- ex)
+	<select id="getAllNotificationCount" resultType="int">
+		SELECT
+			SUM(total)
+		FROM
+		(
+			SELECT COUNT(*) AS total FROM notification_board
+			UNION ALL
+			SELECT COUNT(*) AS total FROM notification_cmt
+			UNION ALL
+			SELECT COUNT(*) AS total FROM notification_review
+		)
+		DUAL
+	</select>
+	 -->
+	<!-- 커뮤니티 보드 개수 -->
+	<select id="getCommunityBoardCount" resultType="int">
+		SELECT
+			SUM(total)
+		FROM
+		(
+			SELECT COUNT(*) AS total FROM community_board
+		)
+		DUAL
+	</select>
+	<select id="getCommunityBoardList" resultType="com.second.space.community.model.CommunityBoardDTO">
+		SELECT
+		    community_board.c_board_id,
+		    community_board.c_board_title,
+		    community_category.c_category_name,
+		    community_board.c_board_content,
+		    community_board.c_board_img,
+		    community_board.c_board_view,
+		    community_board.c_board_date,
+		    community_board.c_board_delete,
+		    user_.user_nickname
+		FROM
+		    community_board
+		    INNER JOIN community_category USING (c_category_id)
+		    INNER JOIN user_ USING (user_id)
+	</select>
+</mapper>
