@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.container {
+	display: flex;
+}
+
+table {
+	width: 100%;
+}
+
+/* headerNav.jsp */
+header {
+	position:fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100px;
+	background-color: silver;
+	z-index: 2;
+}
+
+nav {
+	height: 100%;
+}
+
+.header-nav {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.header-nav li {
+	text-align: center;
+	width: 100%;
+}
+
+/* headerNav.jsp */
+
+.left-aside-wrap {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: gray;
+	padding: 100px 30px 0 30px;
+	width: 250px;
+	height: 100vh;
+	z-index: 1;
+}
+
+.left-aside-nav li {
+	padding: 20px;
+}
+
+.board-container {
+	position: relative;
+	top: 100px;
+	left: 250px;
+	text-align: left;
+	width: 80%;
+}
+
+.board-wrap {
+	width: 100%;
+}
+
+
+
+
+
+

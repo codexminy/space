@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.AdminXMLMapper">
-	<!-- 회원 신고 접수 -->
+	<!-- 홈 - 회원 신고 접수 -->
 	<select id="getAllNotificationCount" resultType="int">
 		SELECT
 			SUM(total)
@@ -17,4 +17,33 @@
 		)
 		DUAL
 	</select>
+	
+	<!-- 홈 - 게시글 신고 접수 -->
+	<select id="getNotificationBoardCount" resultType="int">
+		SELECT COUNT(*) FROM notification_board
+	</select>
+	
+	<!-- 홈 - 게시글 신고 접수 -->
+	<select id="getNotificationCmtCount" resultType="int">
+		SELECT COUNT(*) FROM notification_cmt
+	</select>
+	
+	<!-- 홈 - 게시글 신고 접수 -->
+	<select id="getNotificationReviewCount" resultType="int">
+		SELECT COUNT(*) FROM notification_review
+	</select>
+	
+	<!-- 홈 - 배너 관리 -->
+	<select id="getNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
+		SELECT * FROM notification_ad WHERE ROWNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- 홈 - 어드민 안내 -->
+	<select id="getNoticeAdminList" resultType="com.second.space.admin.model.Notice_adminDTO">
+		SELECT * FROM notice_admin WHERE ROWNUM BETWEEN 1 and 5
+	</select>
 </mapper>
+
+
+
+

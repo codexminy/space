@@ -20,7 +20,7 @@ public class AdminController {
 	
 	@GetMapping("/home")
 	public void getAllNotificationCount(Model model) {
-		List<String> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<>();
 		list.add("신고접수");
 		list.add("통계");
 		list.add("광고");
@@ -29,7 +29,12 @@ public class AdminController {
 		
 		try {
 			model.addAttribute("list", list);
-			model.addAttribute("count", service.getAllNotificationCount());
+			model.addAttribute("banner", service.getNotificationAdList());
+			model.addAttribute("admin", service.getNoticeAdminList());
+			model.addAttribute("all", service.getAllNotificationCount());
+			model.addAttribute("board", service.getNotificationBoardCount());
+			model.addAttribute("cmt", service.getNotificationCmtCount());
+			model.addAttribute("review", service.getNotificationReviewCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
