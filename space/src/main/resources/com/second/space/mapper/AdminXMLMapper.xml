@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.second.space.mapper.AdminXMLMapper">
+	<!-- 회원 신고 접수 -->
+	<select id="getAllNotificationCount" resultType="int">
+		SELECT
+			SUM(total)
+		FROM
+		(
+			SELECT COUNT(*) AS total FROM notification_board
+			UNION ALL
+			SELECT COUNT(*) AS total FROM notification_cmt
+			UNION ALL
+			SELECT COUNT(*) AS total FROM notification_review
+		)
+		DUAL
+	</select>
+</mapper>
