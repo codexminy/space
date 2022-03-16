@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
+import com.second.space.admin.model.PageSet;
 import com.second.space.mapper.AdminXMLMapper;
 
 @Service
@@ -43,6 +44,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int getNotificationReviewCount() throws Exception {
 		return mapper.getNotificationReviewCount();
+	}
+
+	@Override
+	public List<Notification_adDTO> getAllNotificationAdList(PageSet ps) throws Exception {
+		return mapper.getAllNotificationAdList(ps);
+	}
+
+	@Override
+	public int getNotificationAdTotal() throws Exception {
+		return mapper.getNotificationAdTotal();
 	}
 
 }

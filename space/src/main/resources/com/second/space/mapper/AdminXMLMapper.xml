@@ -7,8 +7,7 @@
 	<select id="getAllNotificationCount" resultType="int">
 		SELECT
 			SUM(total)
-		FROM
-		(
+		FROM(
 			SELECT COUNT(*) AS total FROM notification_board
 			UNION ALL
 			SELECT COUNT(*) AS total FROM notification_cmt
@@ -23,12 +22,12 @@
 		SELECT COUNT(*) FROM notification_board
 	</select>
 	
-	<!-- 홈 - 게시글 신고 접수 -->
+	<!-- 홈 - 댓글 신고 접수 -->
 	<select id="getNotificationCmtCount" resultType="int">
 		SELECT COUNT(*) FROM notification_cmt
 	</select>
 	
-	<!-- 홈 - 게시글 신고 접수 -->
+	<!-- 홈 -  신고 접수 -->
 	<select id="getNotificationReviewCount" resultType="int">
 		SELECT COUNT(*) FROM notification_review
 	</select>
@@ -41,6 +40,28 @@
 	<!-- 홈 - 어드민 안내 -->
 	<select id="getNoticeAdminList" resultType="com.second.space.admin.model.Notice_adminDTO">
 		SELECT * FROM notice_admin WHERE ROWNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- 배너관리 - 테이블 -->
+	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
+		<![CDATA[
+	        SELECT
+	        	na_title, na_name, na_url, na_start_date, na_end_date
+	        FROM(
+	        	SELECT
+	        		/*+INDEX_DESC(notification_ad n_ad) */ ROWNUM AS rn, na_title, na_name, na_url, na_start_date, na_end_date
+				FROM
+					notification_ad
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+			)
+	        WHERE rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 배너관리 - 테이블 갯수 -->
+	<select id="getNotificationAdTotal" resultType="int">
+		SELECT COUNT(*) FROM notification_ad
 	</select>
 </mapper>
 

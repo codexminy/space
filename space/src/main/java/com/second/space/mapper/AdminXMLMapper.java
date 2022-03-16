@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
+import com.second.space.admin.model.PageSet;
 
 public interface AdminXMLMapper {
 	
@@ -18,4 +19,8 @@ public interface AdminXMLMapper {
 	public List<Notification_adDTO> getNotificationAdList(); // 홈 - 배너 관리
 	
 	public List<Notice_adminDTO> getNoticeAdminList(); // 홈 - 어드민 안내
+	
+	public List<Notification_adDTO> getAllNotificationAdList(PageSet ps); // 배너관리 - 테이블
+	
+	public int getNotificationAdTotal(); // 배너관리 - 총 갯수
 }
