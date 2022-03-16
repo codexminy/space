@@ -7,12 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/common.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/admin.css" />
+<jsp:include page="./common/cssLink.jsp"/>
 </head>
 <body>
-	<jsp:include page="headerNav.jsp"/>
-	<jsp:include page="leftNav.jsp">
+	<jsp:include page="./common/headerNav.jsp"/>
+	<jsp:include page="./common/leftNav.jsp">
 		<jsp:param value="${list }" name="list"/>
 	</jsp:include>
 	<div class="container">

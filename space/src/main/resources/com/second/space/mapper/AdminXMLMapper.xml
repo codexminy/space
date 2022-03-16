@@ -46,10 +46,10 @@
 	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
 		<![CDATA[
 	        SELECT
-	        	na_title, na_name, na_url, na_start_date, na_end_date
+	        	na_id, na_title, na_name, na_url, na_start_date, na_end_date
 	        FROM(
 	        	SELECT
-	        		/*+INDEX_DESC(notification_ad n_ad) */ ROWNUM AS rn, na_title, na_name, na_url, na_start_date, na_end_date
+	        		/*+INDEX_DESC(notification_ad n_ad) */ ROWNUM AS rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
 				FROM
 					notification_ad
 				WHERE
@@ -63,7 +63,13 @@
 	<select id="getNotificationAdTotal" resultType="int">
 		SELECT COUNT(*) FROM notification_ad
 	</select>
+	
+	<!-- 배너관리 - 배너리스트 -->
+	<select id="getNotificationAdDetailList" resultType="com.second.space.admin.model.Notification_adDTO">
+		SELECT * FROM notification_ad WHERE na_id = #{na_id}
+	</select>
 </mapper>
+
 
 
 

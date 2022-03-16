@@ -56,4 +56,9 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.getNotificationAdTotal();
 	}
 
+	@Override
+	public Notification_adDTO getNotificationAdDetailList(int na_id) throws Exception {
+		return mapper.getNotificationAdDetailList(na_id);
+	}
+
 }

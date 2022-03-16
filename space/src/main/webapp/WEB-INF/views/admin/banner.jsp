@@ -7,14 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/common.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/admin.css" />
+<jsp:include page="./common/cssLink.jsp"/>
 </head>
 <body>
-	<jsp:include page="headerNav.jsp"/>
+	<jsp:include page="./common/headerNav.jsp"/>
 	<div class="container">
 		<div class="common-menu">
-			<jsp:include page="leftNav.jsp">
+			<jsp:include page="./common/leftNav.jsp">
 				<jsp:param value="${list }" name="list"/>
 			</jsp:include>
 		</div>
@@ -44,8 +43,8 @@
 						<tbody>
 							<c:forEach var="pageList" items="${pageList }">
 								<tr>
-									<td><a href="#"><c:out value="${pageList.na_title }"/></a></td>
-									<td><a href="#"><c:out value="${pageList.na_name }"/></a></td>
+									<td><a class="banner-list" href="${pageList.na_id }"><c:out value="${pageList.na_title }"/></a></td>
+									<td><a class="banner-list" href="${pageList.na_id }"><c:out value="${pageList.na_name }"/></a></td>
 									<td><c:out value="${pageList.na_url }"/></td>
 									<td>
 										<fmt:formatDate value="${pageList.na_start_date }" pattern="yyyy/MM/dd"/> ~
@@ -82,5 +81,25 @@
 			</div>
 		</div>
 	</div>
+	<form id="form" method="get">
+		<input type="hidden" name="na_id">
+		<input type="hidden" name="pageNum" value="${paging.ps.pageNum }"/>
+		<input type="hidden" name="amount" value="${paging.ps.amount }"/>
+	</form>
+	<script>
+		const form = document.querySelector('#form');
+		const bannerList = document.querySelectorAll('.banner-list');
+		const naId = document.querySelector('input[name="na_id"]');
+		
+		bannerList.forEach(list => {
+			list.addEventListener('click', (e) => {
+				e.preventDefault();
+				naId.value = list.getAttribute('href');
+				form.setAttribute('action', '${pageContext.request.contextPath}/admin/list');
+				form.submit();
+			});
+		});
+		
+	</script>
 </body>
 </html>

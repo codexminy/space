@@ -23,4 +23,6 @@ public interface AdminService {
 	public List<Notification_adDTO> getAllNotificationAdList(PageSet ps) throws Exception; // 배너관리 - 테이블
 	
 	public int getNotificationAdTotal() throws Exception; // 배너관리 - 총 갯수
+	
+	public Notification_adDTO getNotificationAdDetailList(int na_id) throws Exception; // 배너리스트
 }
