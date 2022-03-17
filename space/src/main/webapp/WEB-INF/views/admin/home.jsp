@@ -7,18 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/common.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/css/admin.css" />
+<jsp:include page="./common/cssLink.jsp"/>
 </head>
 <body>
-	<jsp:include page="headerNav.jsp"/>
+	<jsp:include page="./common/headerNav.jsp"/>
+	<jsp:include page="./common/leftNav.jsp">
+		<jsp:param value="${list }" name="list"/>
+	</jsp:include>
 	<div class="container">
-		<div class="left-aside">
-			<jsp:include page="leftNav.jsp">
-				<jsp:param value="${list }" name="list"/>
-			</jsp:include>
-		</div>
-		<div class="board-container">
+		<div class="common-con board-container">
 			<div class="board-wrap">
 				<div class="stats-wrap">
 					<table class="notification" border="1">

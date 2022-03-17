@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-.container {
-	display: flex;
-}
-
-table {
-	width: 100%;
-}
-
 /* headerNav.jsp */
 header {
 	position:fixed;
@@ -36,7 +28,18 @@ nav {
 
 /* headerNav.jsp */
 
-.left-aside-wrap {
+.container {
+    position: relative;
+    top: 100px;
+    margin-left: 250px;
+    text-align: left;
+}
+
+table {
+	width: 100%;
+}
+
+.common-menu-wrap {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -47,22 +50,13 @@ nav {
 	z-index: 1;
 }
 
-.left-aside-nav li {
+.common-menu-nav li {
 	padding: 20px;
 }
 
-.board-container {
-	position: relative;
-	top: 100px;
-	left: 250px;
-	text-align: left;
-	width: 80%;
+.disable {
+	color: lightGray;
 }
-
-.board-wrap {
-	width: 100%;
-}
-
 
 
 
