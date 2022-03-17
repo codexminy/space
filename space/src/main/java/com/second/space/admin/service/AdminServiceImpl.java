@@ -61,4 +61,9 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.getNotificationAdDetailList(na_id);
 	}
 
+	@Override
+	public int insertNotificationAd(String imgPath) throws Exception {
+		return mapper.insertNotificationAd(imgPath);
+	}
+
 }

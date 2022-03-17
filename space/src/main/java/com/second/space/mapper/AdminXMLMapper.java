@@ -25,4 +25,6 @@ public interface AdminXMLMapper {
 	public int getNotificationAdTotal(); // 배너관리 - 총 갯수
 	
 	public Notification_adDTO getNotificationAdDetailList(int na_id); // 배너리스트
+	
+	public int insertNotificationAd(String imgPath); // 배너 등록
 }

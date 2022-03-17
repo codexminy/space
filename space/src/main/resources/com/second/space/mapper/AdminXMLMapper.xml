@@ -68,6 +68,10 @@
 	<select id="getNotificationAdDetailList" resultType="com.second.space.admin.model.Notification_adDTO">
 		SELECT * FROM notification_ad WHERE na_id = #{na_id}
 	</select>
+
+	<insert id="insertNotificationAd">
+		INSERT INTO notification_ad VALUES(notification_ad_na_id_seq.nextval, sysdate-30, sysdate+30, #{imgPath}, 'Y', 'https://www.naver.com/', 'ad2', '테스트2', '테스트2')
+	</insert>
 </mapper>
 
 

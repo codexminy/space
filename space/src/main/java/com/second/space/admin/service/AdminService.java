@@ -25,4 +25,6 @@ public interface AdminService {
 	public int getNotificationAdTotal() throws Exception; // 배너관리 - 총 갯수
 	
 	public Notification_adDTO getNotificationAdDetailList(int na_id) throws Exception; // 배너리스트
+	
+	public int insertNotificationAd(String imgPath) throws Exception; // 배너 등록
 }
