@@ -1,0 +1,153 @@
+@charset "UTF-8";
+html{
+	width:1920px;
+          height: 100%;
+          background-color: white;
+}
+body{
+	width:1200px;
+	background-color: #dddddd;
+          height: 100%;
+          margin: 0 auto;
+}
+main {
+	width:800px;
+	background-color: #fff;
+          height: 100%;
+          margin: 0 auto;
+}
+main > ul{
+	/* 임시*/
+	padding-top: 300px;
+	display: flex;
+	justify-content: space-between;
+}
+main > ul > li {
+	width:100px;
+	height:40px;
+	font-size: 12px;
+	background-color: #eee;
+	text-align: center;
+	line-height: 40px;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
+.c_board {
+	margin-top: 50px;
+	width: 100%;
+	border: 1px solid #333;
+	border-radius: 10px;
+}
+.c_board > .c_category {
+	display:inline-block;
+	margin: 10px 0 10px 20px;
+	padding: 5px;
+	border: 1px solid #999;
+	border-radius: 5px;
+}
+.c_board > .c_board_profile {
+	display:inline-block;
+	width: 60px;
+	height: 60px;
+	float: right;
+	margin: 10px 20px 10px 10px;
+	border: 1px solid #999;
+	border-radius: 9999px;
+	text-align: center;
+	line-height: 60px;
+	overflow:hidden;
+}
+.c_board > .c_board_writer {
+	display:inline-block;
+	float: right;
+	text-align: right;
+	font-size: 16px;
+	margin: 10px;
+	margin-top: 20px;
+	line-height: 20px;
+}
+.c_board > h3 {
+	margin: 20px 0 10px 20px;
+	font-size: 20px;
+}
+.c_board > hr {
+	margin: 0 10px;
+}
+.c_board > .c_board_content {
+	margin: 30px 20px;
+	font-size: 20px;
+}
+.c_board > .c_board_option {
+	font-size: 16px;
+	margin: 20px;
+	text-align: right;
+}
+.c_board > .c_board_option > li {
+	display:inline-block;
+	margin-left: 20px;
+}
+.c_board > .c_board_option > li:hover {
+	cursor: pointer;
+}
+.c_board > .c_comment {
+	display: none;
+}
+.active {
+	display: block;
+}
+.c_board > .c_comment  > .c_comment_profile {
+	display:inline-block;
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin: 10px 10px 10px 20px;
+	border: 1px solid #999;
+	border-radius: 9999px;
+	text-align: center;
+	line-height: 60px;
+	overflow:hidden;
+}
+.c_board > .c_comment  > .c_board_commenter {
+	display:inline-block;
+	text-align: left;
+	font-size: 12px;
+	margin: 10px;
+	line-height: 15px;
+}
+.c_board > .c_comment  > .c_comment_option {
+	font-size: 14px;
+	margin: 15px 0 20px 20px;
+}
+.c_board > .c_comment  > .c_comment_option > li {
+	display:inline-block;
+	margin-right: 20px;
+}
+.c_board > .c_comment  > .c_comment_content {
+	display:block;
+	margin: 0 20px;
+	font-size: 16px;
+}
+.c_board > .c_comment  > .mycomment{
+	margin-bottom: 20px;
+}
+.c_board > .c_comment  > .mycomment > .c_comment_myprofile {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin: 0 10px 10px 20px;
+	border: 1px solid #999;
+	border-radius: 9999px;
+	text-align: center;
+	line-height: 60px;
+	overflow:hidden;
+}
+.c_board > .c_comment  > .mycomment > .c_comment_write > .c_comment_btn {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border: 1px solid #555;
+	float:right;
+	margin-right: 20px;
+}
+
+

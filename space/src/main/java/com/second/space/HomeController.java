@@ -6,15 +6,10 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.second.space.community.model.CommunityBoardDTO;
-import com.second.space.mapper.CommunityXMLMapper;
 
 /**
  * Handles requests for the application home page.
@@ -41,12 +36,4 @@ public class HomeController {
 		return "home";
 	}
 	
-	@Autowired
-	CommunityXMLMapper community_mapper;
-	
-	@GetMapping("community/main")
-	public String ajax_community(CommunityBoardDTO list, Model model) {
-		model.addAttribute("c_board_list", community_mapper.getCommunityBoardList());
-		return "community/main";
-	}
 }

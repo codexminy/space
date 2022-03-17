@@ -1,6 +1,5 @@
 package com.second.space.community.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class CommunityBoardDTO {
 	private Integer c_board_id;
 	private String c_board_title;
+	private Integer c_category_id;
+	private Integer user_id;
 	private String c_category_name;
 	private String c_board_content;
 	private String c_board_img;

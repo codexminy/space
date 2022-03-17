@@ -28,10 +28,13 @@
 		)
 		DUAL
 	</select>
+	<!-- 커뮤니티 보드 리스트 -->
 	<select id="getCommunityBoardList" resultType="com.second.space.community.model.CommunityBoardDTO">
 		SELECT
 		    community_board.c_board_id,
 		    community_board.c_board_title,
+		    c_category_id,
+		    user_id,
 		    community_category.c_category_name,
 		    community_board.c_board_content,
 		    community_board.c_board_img,
@@ -42,6 +45,28 @@
 		FROM
 		    community_board
 		    INNER JOIN community_category USING (c_category_id)
+		    INNER JOIN user_ USING (user_id)
+	</select>
+	<!-- 커뮤니티 카테고리 리스트 -->
+	<select id="getCommunityCategoryList" resultType="com.second.space.community.model.CommunityCategoryDTO">
+		SELECT * FROM community_category
+	</select>
+	<!-- 커뮤니티 댓글 리스트 -->
+	<select id="getCommunityCommentList" resultType="com.second.space.community.model.CommunityCommentDTO">
+		SELECT
+		    c_id,
+		    c_board_id,
+		    c_depth,
+		    c_group_id,
+		    c_group_order_id,
+		    c_content,
+		    user_id,
+		    c_delete,
+		    c_date,
+		    c_icon_name,
+		    user_nickname
+		FROM
+		    community_comment
 		    INNER JOIN user_ USING (user_id)
 	</select>
 </mapper>
