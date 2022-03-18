@@ -69,4 +69,15 @@
 		    community_comment
 		    INNER JOIN user_ USING (user_id)
 	</select>
+	<!-- 커뮤니티 댓글 개수 -->
+	<select id="getCommunityCommentCount" resultType="com.second.space.community.model.CommunityCommentCountDTO">
+		SELECT c_board_id, count(*) AS total from community_comment GROUP BY c_board_id
+	</select>
+	<!-- 커뮤니티 댓글쓰기 -->
+	<insert id="addCommunityComment">
+		INSERT INTO
+			community_comment(c_board_id, c_content, user_id, c_delete)
+		VALUES
+			(#{c_board_id}, #{c_content}, #{ing_id}, 'n');
+	</insert>
 </mapper>

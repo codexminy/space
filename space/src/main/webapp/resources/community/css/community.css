@@ -32,6 +32,16 @@ main > ul > li {
 	border: 1px solid #999;
 	border-radius: 5px;
 }
+#hello {
+	display:none;
+}
+.hello_login{
+	font-size: 35px;
+	display:none;
+}
+.input_login{
+	display:none;
+}
 .c_board {
 	margin-top: 50px;
 	width: 100%;
@@ -71,7 +81,7 @@ main > ul > li {
 	font-size: 20px;
 }
 .c_board > hr {
-	margin: 0 10px;
+	margin: 0 10px 20px;
 }
 .c_board > .c_board_content {
 	margin: 30px 20px;
@@ -89,8 +99,11 @@ main > ul > li {
 .c_board > .c_board_option > li:hover {
 	cursor: pointer;
 }
-.c_board > .c_comment {
+.c_comment {
 	display: none;
+}
+.c_comment > hr {
+	margin: 0 10px 10px;
 }
 .active {
 	display: block;

@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
@@ -7,13 +7,19 @@
 	<title>우주장터</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=2" />
-	<script src="${pageContext.request.contextPath}/resources/community/js/community.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<div>
 		<header>
-			
+			<div class="input_login">
+				<form id="temp_user" name="createForm" action="./login" method="POST">
+					<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
+					<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
+				</form>
+				<button id="login_btn">확인</button>
+			</div>
+			<div class="hello_login">${ing_id }님 반갑습니다.</div>
+			<p id="hello">${ing_id }</p>
 		</header>
 		<main>
 			<ul>
@@ -35,7 +41,15 @@
 					<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					<ul class='c_board_option'>
 						<li>신고하기</li>
-						<li class='view_comment'>댓글보기</li>
+						<li class='view_comment'>댓글보기(
+							<c:forEach items="${c_comment_count }" var="c_comment_count">
+							<c:choose>
+							<c:when test="${c_comment_count.c_board_id eq c_board_list.c_board_id }">
+								${c_comment_count.total }
+							</c:when>
+							</c:choose>	
+							</c:forEach>
+						)</li>
 					</ul>
 					<div class='c_comment'>
 						<hr />
@@ -53,17 +67,24 @@
 							</ul>
 						</c:if>	
 						</c:forEach>
-						<div class='mycomment'>
-							<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile1.png" width="50px"/></div>
-							<form class='c_comment_write' action="./" method="POST">
-								<textarea class='c_comment_textarea' name="c_comment_write" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
-								<input class='c_comment_btn' type="submit" value="등록"/>
-							</form>
-						</div>
+						<c:choose>
+						<c:when test="${not empty ing_id}">
+							<div class='mycomment'>
+								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${ing_id }.png" width="50px"/></div>
+								<form class='c_comment_write' name="commentForm" action="./comment_write" method="POST">
+									<textarea class='c_comment_textarea' name="c_content" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
+									<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
+									<input class='c_comment_btn' type="submit" value="등록"/>
+								</form>
+							</div>			
+						</c:when>
+						</c:choose>	
+						
 					</div>
 				</div>
 			</c:forEach>
 		</main>
 	</div>
+<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
 </body>
 </html>

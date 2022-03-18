@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
+import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.mapper.CommunityXMLMapper;
 
@@ -44,5 +45,22 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List<CommunityCommentDTO> getCommunityCommentList() throws Exception {
 		return community_mapper.getCommunityCommentList();
+	}
+
+	@Override
+	public List<CommunityCommentCountDTO> getCommunityCommentCount() throws Exception {
+		return community_mapper.getCommunityCommentCount();
+	}
+	
+	/* 댓글쓰기 */
+	@Override
+	public CommunityCommentDTO newCommunityComment(CommunityCommentDTO comment) throws Exception {
+		int row = community_mapper.addCommunityComment(comment);
+		
+		if(row == 0) {
+			throw new Exception("댓글등록 실패");
+		}
+		
+		return community_mapper.getCommunityComment(comment.getC_id());
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
+import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 
 public interface CommunityService {
@@ -16,4 +17,7 @@ public interface CommunityService {
 	public List<CommunityCategoryDTO> getCommunityCategoryList() throws Exception;
 	
 	public List<CommunityCommentDTO> getCommunityCommentList() throws Exception;
+	public List<CommunityCommentCountDTO> getCommunityCommentCount() throws Exception;
+	
+	public CommunityCommentDTO newCommunityComment(CommunityCommentDTO list) throws Exception;
 }
