@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/common.css?ver=1"/>
 </head>
 <body>
-	
+	<jsp:include page="./common/nav.jsp"/>
+	<jsp:include page="./common/homeAside.jsp"/>
 </body>
 </html>
