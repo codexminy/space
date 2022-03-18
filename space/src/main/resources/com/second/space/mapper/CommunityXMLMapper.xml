@@ -75,11 +75,14 @@
 	</select>
 	<!-- 커뮤니티 댓글쓰기 -->
 	<insert id="addCommunityComment">
+		<selectKey keyProperty="c_id" order="BEFORE" resultType="int">
+			SELECT community_c_c_id_seq.nextval FROM dual
+		</selectKey>
 		INSERT INTO
-			community_comment(c_board_id, c_content, user_id, c_delete)
+			community_comment(c_id, c_board_id, c_content, user_id, c_delete)
 		VALUES
 			(
-				#{c_board_id}, #{c_content}, #{user_id}, 'n'
+				#{c_id}, #{c_board_id}, #{c_content}, #{user_id}, 'N'
 			)
 	</insert>
 </mapper>
