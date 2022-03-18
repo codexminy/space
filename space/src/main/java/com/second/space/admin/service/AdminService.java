@@ -2,6 +2,7 @@ package com.second.space.admin.service;
 
 import java.util.List;
 
+import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
@@ -23,6 +24,16 @@ public interface AdminService {
 	public List<Notification_adDTO> getAllNotificationAdList(PageSet ps) throws Exception; // 배너관리 - 테이블
 	
 	public int getNotificationAdTotal() throws Exception; // 배너관리 - 총 갯수
-	
+
 	public Notification_adDTO getNotificationAdDetailList(int na_id) throws Exception; // 배너리스트
+	
+	public int insertNotificationAd(String imgPath) throws Exception; // 배너 등록
+	
+	public List<NoticeDTO> getAllNoticeList(PageSet ps) throws Exception; // 공지사항 - 전체 테이블
+	
+	public NoticeDTO getNotice(int notice_id); // 공지사항 - 게시물
+	
+	public int getNoticeTotal(PageSet ps); // 총 갯수
+	
+	public int insertNotice(NoticeDTO dto); // 공지사항 - 등록
 }
