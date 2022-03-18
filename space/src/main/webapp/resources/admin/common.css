@@ -29,5 +29,9 @@
 /* common/nav */
 
 /* common/aside들 */
-
+aside {
+	position: fixed;
+	top: 80px;
+	left: 0;
+}
 /* common/aside들 */
