@@ -24,27 +24,21 @@ import com.second.space.admin.model.PageSet;
 import com.second.space.admin.model.Paging;
 import com.second.space.admin.service.AdminService;
 
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
+	
+	private static String[] home = {"신고접수", "통계", "광고", "배너관리", "공지사항"};
+	private static String[] notification = {"회원 신고 관리", "게시글 신고 관리", "댓글 신고 관리", "리뷰 신고 관리"};
+	private static String[] banner = {"목록", "신규 등록", "마감"};
+	private static String[] notice = {"목록", "신규 등록"};
 	
 	@Autowired
 	AdminService service;
 	
-	@GetMapping("/home")
+	@GetMapping("/admin/home")
 	public void homePage(Model model) {
-		List<String> list = new ArrayList<>();
-		list.add("신고접수");
-		list.add("통계");
-		list.add("광고");
-		list.add("배너관리");
-		list.add("공지사항");
-		
 		try {
-			model.addAttribute("list", list);
+			model.addAttribute("list", home);
 			model.addAttribute("banner", service.getNotificationAdList());
 			model.addAttribute("admin", service.getNoticeAdminList());
 			model.addAttribute("all", service.getAllNotificationCount());
@@ -56,55 +50,34 @@ public class AdminController {
 		}
 	}
 	
-	@GetMapping("/notification")
+	@GetMapping("/admin/notification/main")
 	public void notificatonPage(Model model) {
-		List<String> list = new ArrayList<>();
-		list.add("회원 신고 관리");
-		list.add("게시글 신고 관리");
-		list.add("댓글 신고 관리");
-		list.add("리뷰 신고 관리");
-		
-		model.addAttribute("list", list);
+		model.addAttribute("list", notification);
 	}
 	
-	@GetMapping("/banner")
+	@GetMapping("/admin/banner/main")
 	public void bannerPage(Model model, PageSet ps) throws Exception {
-		List<String> list = new ArrayList<>();
-		list.add("목록");
-		list.add("신규 등록");
-		list.add("마감");
-		
 		model.addAttribute("ps", ps);
 		model.addAttribute("pageList", service.getAllNotificationAdList(ps));
 		model.addAttribute("paging", new Paging(service.getNotificationAdTotal(), ps));
-		model.addAttribute("list", list);
+		model.addAttribute("list", banner);
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/admin/banner/detail")
 	public void bannerListPage(Model model, int na_id, PageSet ps) throws Exception {
-		List<String> list = new ArrayList<>();
-		list.add("목록");
-		list.add("신규 등록");
-		list.add("마감");
-		
-		model.addAttribute("list", list);
+		model.addAttribute("list", banner);
 		model.addAttribute("na_id", na_id);
 		model.addAttribute("ps", ps);
 		model.addAttribute("banner", service.getNotificationAdDetailList(na_id));
 	}
 	
-	@GetMapping("/update")
+	@GetMapping("/admin/banner/update")
 	public void updatePage(Model model, int na_id, PageSet ps) throws Exception {
-		List<String> list = new ArrayList<>();
-		list.add("목록");
-		list.add("신규 등록");
-		list.add("마감");
-		
-		model.addAttribute("list", list);
+		model.addAttribute("list", banner);
 		model.addAttribute("banner", service.getNotificationAdDetailList(na_id));
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/admin/banner/insert")
 	public String updateUpload(@RequestParam("multiFile") List<MultipartFile> multiFileList, Model model, HttpServletRequest re, RedirectAttributes redirect) throws Exception {
 		String path = "C:\\javaWeb\\repository\\space\\space\\src\\main\\webapp\\resources";
 		String root = path + "\\images\\notification_ad";
@@ -135,17 +108,46 @@ public class AdminController {
 				multiFileList.get(i).transferTo(uploadFile);
 				service.insertNotificationAd("images/notification_ad/" + fileList.get(i).get("changeFile"));
 			}
-			
 			redirect.addFlashAttribute("updateResult", "Y");
 		} catch (IllegalStateException | IOException e) {
 			for(int i = 0; i < multiFileList.size(); i++) {
 				new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
 			}
-			
 			e.printStackTrace();
 		}
 		
-		return "redirect:banner";
+		return "redirect:/admin/banner/main";
+	}
+	
+	@GetMapping("/admin/banner/insert")
+	public void insertPage(Model model) {
+		model.addAttribute("list", banner);
+	}
+	
+	@GetMapping("/admin/notice/main")
+	public void noticePage(Model model, PageSet ps) throws Exception {
+		model.addAttribute("list", notice);
+		model.addAttribute("pageList", service.getAllNoticeList(ps));
+		model.addAttribute("paging", new Paging(service.getNoticeTotal(ps), ps));
+	}
+	
+	@GetMapping("/admin/notice/detail")
+	public void noticeListPage(Model model, int notice_id, PageSet ps) throws Exception {
+		model.addAttribute("list", notice);
+		model.addAttribute("ps", ps);
+		model.addAttribute("notice", service.getNotice(notice_id));
+	}
+	
+	@GetMapping("/admin/notice/update")
+	public void noticeUpdatePage(Model model, int notice_id, PageSet ps) throws Exception {
+		model.addAttribute("list", notice);
+		model.addAttribute("ps", ps);
+		model.addAttribute("notice", service.getNotice(notice_id));
+	}
+	
+	@GetMapping("/admin/notice/insert")
+	public void noticeInsertPage(Model model) throws Exception {
+		model.addAttribute("list", notice);
 	}
 }
 

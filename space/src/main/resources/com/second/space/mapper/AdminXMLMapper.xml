@@ -63,14 +63,73 @@
 	<select id="getNotificationAdTotal" resultType="int">
 		SELECT COUNT(*) FROM notification_ad
 	</select>
-	
+
 	<!-- 배너관리 - 배너리스트 -->
 	<select id="getNotificationAdDetailList" resultType="com.second.space.admin.model.Notification_adDTO">
 		SELECT * FROM notification_ad WHERE na_id = #{na_id}
 	</select>
 
+	<!-- 배너관리 - 신규 등록 -->
 	<insert id="insertNotificationAd">
 		INSERT INTO notification_ad VALUES(notification_ad_na_id_seq.nextval, sysdate-30, sysdate+30, #{imgPath}, 'Y', 'https://www.naver.com/', 'ad2', '테스트2', '테스트2')
+	</insert>
+	
+	<!-- 공지사항 검색 조건문 -->
+	<sql id="pageset">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            notice_title like '%'||#{keyword}||'%' 
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            notice_content like '%'||#{keyword}||'%' 
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+
+	<!-- 공지사항 - 전체 테이블 -->
+	<select id="getAllNoticeList" resultType="com.second.space.admin.model.NoticeDTO">
+		<![CDATA[
+	        SELECT
+	        	notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view
+	        FROM(
+	        	SELECT
+	        		/*+INDEX_DESC(notice noti) */ ROWNUM AS rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view
+				FROM
+					notice
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+		]]>
+			<if test="keyword != null">
+				<include refid="pageset"></include>
+			</if>
+		<![CDATA[
+			)
+	        WHERE rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 공지사항 - 테이블 갯수 -->
+	<select id="getNoticeTotal" resultType="int">
+		SELECT COUNT(*) FROM notice
+		<if test="keyword != null">
+			WHERE notice_id > 0 <include refid="pageset"></include>
+		</if>
+	</select>
+	
+	<!-- 공지사항 - 게시물 -->
+	<select id="getNotice" resultType="com.second.space.admin.model.NoticeDTO">
+		SELECT * FROM notice WHERE notice_id = #{notice_id}
+	</select>
+	
+	<!-- 공지사항 - 등록 -->
+	<insert id="insertNotice">
+		INSERT INTO notice VALUES(NOTICE_NOTICE_ID_SEQ.nextval, #{notice_title}, #{notice_content}, 1, sysdate, #{notice_img, jdbcType=VARCHAR}, 'N', 0)
 	</insert>
 </mapper>
 

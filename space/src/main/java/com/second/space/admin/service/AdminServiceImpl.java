@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
@@ -64,6 +65,26 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int insertNotificationAd(String imgPath) throws Exception {
 		return mapper.insertNotificationAd(imgPath);
+	}
+
+	@Override
+	public List<NoticeDTO> getAllNoticeList(PageSet ps) throws Exception {
+		return mapper.getAllNoticeList(ps);
+	}
+
+	@Override
+	public int getNoticeTotal(PageSet ps) {
+		return mapper.getNoticeTotal(ps);
+	}
+
+	@Override
+	public NoticeDTO getNotice(int notice_id) {
+		return mapper.getNotice(notice_id);
+	}
+
+	@Override
+	public int insertNotice(NoticeDTO dto) {
+		return mapper.insertNotice(dto);
 	}
 
 }
