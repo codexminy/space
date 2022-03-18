@@ -78,6 +78,8 @@
 		INSERT INTO
 			community_comment(c_board_id, c_content, user_id, c_delete)
 		VALUES
-			(#{c_board_id}, #{c_content}, #{ing_id}, 'n');
+			(
+				#{c_board_id}, #{c_content}, #{user_id}, 'n'
+			)
 	</insert>
 </mapper>

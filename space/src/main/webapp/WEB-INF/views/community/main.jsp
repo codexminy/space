@@ -18,8 +18,8 @@
 				</form>
 				<button id="login_btn">확인</button>
 			</div>
-			<div class="hello_login">${ing_id }님 반갑습니다.</div>
-			<p id="hello">${ing_id }</p>
+			<div class="hello_login">${user_id }님 반갑습니다.</div>
+			<p id="hello">${user_id }</p>
 		</header>
 		<main>
 			<ul>
@@ -68,12 +68,13 @@
 						</c:if>	
 						</c:forEach>
 						<c:choose>
-						<c:when test="${not empty ing_id}">
+						<c:when test="${not empty user_id}">
 							<div class='mycomment'>
-								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${ing_id }.png" width="50px"/></div>
+								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="50px"/></div>
 								<form class='c_comment_write' name="commentForm" action="./comment_write" method="POST">
 									<textarea class='c_comment_textarea' name="c_content" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 									<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
+									<input type="hidden" name="user_id" value="${user_id }" />
 									<input class='c_comment_btn' type="submit" value="등록"/>
 								</form>
 							</div>			

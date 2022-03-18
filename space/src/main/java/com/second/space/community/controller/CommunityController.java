@@ -44,11 +44,11 @@ public class CommunityController {
 		String temp_pw = request.getParameter("temp_pw");
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("ing_id", temp_id);
-		session.setAttribute("ing_pw", temp_pw);
+		session.setAttribute("user_id", temp_id);
+		session.setAttribute("user_pw", temp_pw);
 		
-		System.out.println("아이디: "+session.getAttribute("ing_id"));
-		System.out.println("비밀번호: "+session.getAttribute("ing_pw"));
+		System.out.println("아이디: "+session.getAttribute("user_id"));
+		System.out.println("비밀번호: "+session.getAttribute("user_pw"));
 		return "redirect:/community/main";
 	}
 	
@@ -69,10 +69,6 @@ public class CommunityController {
 	
 	@PostMapping("/comment_write")
 	public String communityCommentWrite(CommunityCommentDTO list, HttpServletRequest request, Model model) {
-		String c_content = request.getParameter("c_comment_write");
-		String c_board_id = request.getParameter("c_board_id");
-		model.addAttribute("c_content", c_content);
-		model.addAttribute("c_board_id", c_board_id);
 		try {
 			System.out.println("보냈다");
 			model.addAttribute(community_service.newCommunityComment(list));
