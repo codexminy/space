@@ -1,0 +1,51 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration : none;    
+}
+#wrap{
+    max-width: 1920px;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 360px;
+}
+.wrap-login-logo{
+    margin: 50px 150px 90px 150px;
+    
+}
+.wrap-login {
+    width: 450px;
+}
+.wrap-login .login-box .space-login p{
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+.wrap-login .login-box .space-login #submit{
+    width: 450px;
+    height: 50px;
+    background-color:#22007F;
+    color: white;
+    margin-bottom: 100px;  
+}
+
+.wrap-login .login-box .social-login p{
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+
+.wrap-login .login-box .social-login ul li{
+    width: 450px;
+    height: 50px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    text-align: center;
+
+}
+.wrap-login .login-box .social-login ul li img{
+    width: 450px;
+    height: 50px;
+}
