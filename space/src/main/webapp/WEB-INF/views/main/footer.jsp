@@ -16,7 +16,6 @@
     text-decoration : none;     
 }
 footer{
-    max-width: 1920px;
     width: 1200px;
     margin: 0 auto;
 }
@@ -30,15 +29,20 @@ footer{
     padding:0 5px;
     font-size: 12px;
     text-align: center;
-    
+    color:#707070;  
+}
+.footer .copyright ul a{
+	color:#707070;
 }
 .footer .copyright ul li{
     display: inline-block;
+    color:#707070;
 }
 
 .footer .copyright-text{
     font-size: 12px;
     text-align: center;
+    color:#707070;
 }
 </style>
 <body>

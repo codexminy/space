@@ -17,7 +17,6 @@
     text-decoration : none;   
 }
 header{
-    max-width: 1920px;
     width: 1200px;
     margin: 0 auto;
 }
