@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration : none;  
+}
+
+body {
+	font-family: 'NanumSquare', sans-serif;
+}
+#wrap{
+    width: 100%;
+    margin: 0 auto;
+}
+/*네비*/
+#navbar-box {
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+
+.navbar{
+    width: 1200px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+	padding-top: 13px;
+}
+.navbar .navbar-header-left a{
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color:#707070;
+}
+.navbar .navbar-header-right a{
+    padding-right:30px;
+    display: inline;
+    align-items: center;
+    position: relative;
+    color:#707070;
+}
+
+/*헤더*/
+#fixed-bar{
+    width: 1200px;
+	border-bottom: 1px solid black;
+}
+#fixed-bar-wrap{
+    display : flex;
+	align-items: center;
+    height: 145px;
+}
+#fixed-bar #fixed-bar-wrap #menu-icon{
+    padding-left: 30px;
+    padding-right: 80px;
+    
+}
+#fixed-bar #fixed-bar-wrap #fixed-bar-logo {
+    padding-right: 110px;
+
+}
+.search-bar {
+  width: 370px;
+  height: 30px;
+  border-radius: 5px;
+  border: solid 1px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 1;
+  
+}
+.search-bar-input {
+  width: 100px;
+  border: none;
+  text-align: left;
+  margin-left: 10px;
+  overflow: auto;
+  z-index: -1;
+  font-size: 15px;
+}
+.search-bar-input:focus {
+  outline: none;
+  width: 350px;
+  text-align: left;
+}
+.fa-search {
+ 	font-size: 15px;
+}
+
+#fixed-bar #fixed-bar-wrap ul{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style:none;
+    padding-left: 100px;
+}
+#fixed-bar #fixed-bar-wrap li{
+    padding: 0 20px;
+}
+/*슬라이드*/
+.swiper {
+    width: 1200px;
+    height: 400px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;    
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*인기매물*/
+.hot-items{
+	width: 1200px;
+	position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hot-items h2{
+	float: left;
+    margin: 30px;
+    height: auto;
+    font-size: 26px;
+    line-height: 1.4;
+    background-image: none;
+}
+.hot-items p{
+	float: right;
+    margin: 30px;
+    padding: 4px 32px 4px 15px;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.cards-wrap {
+	clear:both;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cards-wrap .card{
+    padding-right: 1px;
+    padding-bottom: 42px;
+}
+.cards-wrap .card .card-link .card-photo img{
+    width: 228px;
+    height: 228px;
+    float: left;
+    border: 1px solid;
+    border-radius: 15px; 
+}
+.cards-wrap .card .card-link .card-text{
+    padding-left: 10px;
+    font-size: 15px;
+}
+/*공지*/
+.notice{
+    width: 530px;
+	height: 334px;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    float: left;
+    overflow: hidden;
+}
+.notice-title h2{
+    float: left;
+    margin: 30px;
+   
+}
+.notice-title p{
+    float: right;
+    margin: 30px;
+    padding: 4px 32px 4px 15px;
+    font-size: 20px;
+}
+.notice .notice-board ul li{
+    clear: both;
+    padding: 5px 30px;
+}
+/*커뮤니티*/
+.community{
+	width: 530px;
+	height: 334px;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    float: right;
+}
+
+.community h2{
+    float: left;
+    margin: 30px;
+}
+.community .text{
+	float: right;
+    margin: 30px;
+    padding: 4px 32px 4px 15px;
+    font-size: 20px;
+}
+.community .community-board ul li{
+    clear: both;
+    padding: 5px 30px;
+    
+}
+/*푸터*/
+.footer {
+    clear: both;
+	width: 1200px;
+	height: 150px;
+	padding :70px;
+}
+.footer .copyright ul{
+    padding:0 5px;
+    font-size: 12px;
+    text-align: center;
+    
+}
+.footer .copyright ul li{
+    display: inline-block;
+}
+
+.footer .copyright-text{
+    font-size: 12px;
+    text-align: center;
+}
