@@ -5,32 +5,20 @@
 <aside>
 	<ul>
 		<li>
-			<a href="${path }/admin/notification/main">
-				<span>신고 접수</span>
+			<a href="#">
+				<span>게시글</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
 		<li>
 			<a href="#">
-				<span>통계</span>
+				<span>댓글</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
 		<li>
 			<a href="#">
-				<span>광고</span>
-				<span><i class="fa-solid fa-angle-right"></i></span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<span>배너 관리</span>
-				<span><i class="fa-solid fa-angle-right"></i></span>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<span>관리자 공지</span>
+				<span>후기</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
