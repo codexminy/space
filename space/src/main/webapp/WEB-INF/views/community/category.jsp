@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,15 @@
 <body>
 	<div>
 		<header>
-			
+			<div class="input_login">
+				<form id="temp_user" name="createForm" action="./login" method="POST">
+					<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
+					<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
+				</form>
+				<button id="login_btn">확인</button>
+			</div>
+			<div class="hello_login">${user_id }님 반갑습니다.</div>
+			<p id="hello">${user_id }</p>
 		</header>
 		<main>
 			<ul>
@@ -60,19 +68,26 @@
 							</ul>
 						</c:if>	
 						</c:forEach>
-						<div class='mycomment'>
-							<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile1.png" width="50px"/></div>
-							<form class='c_comment_write' action="./" method="POST">
-								<textarea class='c_comment_textarea' name="c_comment_write" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
-								<input class='c_comment_btn' type="submit" value="등록"/>
-							</form>
-						</div>
+						<c:choose>
+						<c:when test="${not empty user_id}">
+							<div class='mycomment'>
+								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="50px"/></div>
+								<form class='c_comment_write' name="commentForm" action="./comment_write" method="POST">
+									<textarea class='c_comment_textarea' name="c_content" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
+									<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
+									<input type="hidden" name="user_id" value="${user_id }" />
+									<input class='c_comment_btn' type="submit" value="등록"/>
+								</form>
+							</div>			
+						</c:when>
+						</c:choose>	
+						
 					</div>
 				</div>
 			</c:if>
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=2"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
 </body>
 </html>

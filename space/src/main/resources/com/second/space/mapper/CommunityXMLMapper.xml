@@ -72,6 +72,7 @@
 		FROM
 		    community_comment
 		    INNER JOIN user_ USING (user_id)
+		ORDER BY c_id		    
 	</select>
 	<!-- 커뮤니티 댓글 개수 -->
 	<select id="getCommunityCommentCount" resultType="com.second.space.community.model.CommunityCommentCountDTO">
