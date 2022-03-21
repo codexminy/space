@@ -6,10 +6,8 @@
     text-decoration : none;    
 }
 #wrap{
-    max-width: 1920px;
     width: 1200px;
     margin: 0 auto;
-    padding: 0 360px;
 }
 .wrap-login-logo{
     margin: 30px 150px;

@@ -6,14 +6,11 @@
     text-decoration : none;    
 }
 #wrap{
-    max-width: 1920px;
     width: 1200px;
     margin: 0 auto;
-    padding: 0 360px;
 }
 .wrap-login-logo{
-    margin: 50px 150px 90px 150px;
-    
+    margin: 50px 150px 90px 150px;  
 }
 .wrap-login {
     width: 450px;

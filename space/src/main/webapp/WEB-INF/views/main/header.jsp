@@ -6,8 +6,13 @@
 <title>header.jsp</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<<<<<<< HEAD
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
+=======
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+>>>>>>> refs/remotes/origin/main
 </head>
 <body>
 	<div id="wrap">
@@ -53,5 +58,11 @@
 	           </div>
 	        </div>
         </header>
+<<<<<<< HEAD
 	</div>
 
+=======
+    </div>
+</body>
+</html>
+>>>>>>> refs/remotes/origin/main
