@@ -5,14 +5,12 @@
 <meta charset="UTF-8">
 <title>SPACE</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
 </head>
 <body>
-<div id="wrap">
+	<div id="wrap">
 		<header id="fixed-bar">
 			<div id="navbar-box">
 		        <nav class="navbar">
@@ -55,7 +53,6 @@
 	           </div>
 	        </div>
         </header>
-
         <section>
             <div class="blank"></div>
             <div class="swiper mySwiper">
@@ -73,16 +70,21 @@
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
-
-
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script>
+                var swiper = new Swiper(".mySwiper", {
+					navigation: {
+						nextEl: ".swiper-button-next",
+						prevEl: ".swiper-button-prev",
+					},
+                });
+            </script>
             <div class="hot-items">
                 <div class="hot-items-text">
                     <h2>인기매물</h2>
                     <p class="text"><a href="#">더보기 ></a></p>
                 </div>
             </div>
-
-
             <div class="cards-wrap">
                 <article class="card">	                   
                     <div class="card-photobox">
@@ -255,7 +257,6 @@
                     </div>
                 </article>            
             </div>
-
             <div class="bottom-contents">
                 <div class="notice">
                     <div class="notice-title">
@@ -289,8 +290,6 @@
                 </div>
             </div>
         </section>
-
-
         <!--푸터-->
         <footer class="footer">
 	        <div class="copyright">

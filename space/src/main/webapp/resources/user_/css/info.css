@@ -1,14 +1,6 @@
 @charset "UTF-8";
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration : none;   
-}
 #wrap{
-    width: 1200px;
-    margin: 0 auto;
-    padding: 0 360px;
+	display: flex;
 }
 .wrap-login-logo{
     margin: 50px 225px 30px 225px;  
@@ -17,8 +9,7 @@
     border: 1px solid;
     border-radius: 5px;
     width: 600px;
-    height: 770px;
-    
+    height: 770px;  
 }
 .inputinfo #userId{
     width: 450px;

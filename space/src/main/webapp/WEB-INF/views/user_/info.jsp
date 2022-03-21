@@ -14,7 +14,7 @@
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
         </div>
         <div class="info">
-            <form action="#" method="POST" id="info">
+            <form action="#" method="POST" id="infopage">
                 <div class="inputinfo">
                     <input type="text" name="아이디" placeholder="아이디" id="userId"><br>
                     <input type="password" name="비밀번호" placeholder="비밀번호" id="userPassword"><br>
