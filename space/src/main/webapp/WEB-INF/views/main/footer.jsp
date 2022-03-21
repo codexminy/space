@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
 <body>
 	<div id="wrap">
