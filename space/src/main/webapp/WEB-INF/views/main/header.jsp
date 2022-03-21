@@ -59,7 +59,7 @@ header{
 }
 #fixed-bar #fixed-bar-wrap #fixed-bar-logo {
     padding-right: 110px;
-
+	color:#707070;
 }
 .search-bar {
   width: 370px;
@@ -71,7 +71,7 @@ header{
   align-items: center;
   z-index: 1;
   opacity: 1;
-  
+  color:#707070;
 }
 .search-bar-input {
   width: 100px;
