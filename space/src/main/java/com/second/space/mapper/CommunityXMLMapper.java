@@ -16,9 +16,10 @@ public interface CommunityXMLMapper {
 	public CommunityCategoryDTO getCommunityCategory(int pk);
 	public List<CommunityCategoryDTO> getCommunityCategoryList();
 	
-	public CommunityCommentDTO getCommunityComment(int user);
+	public CommunityCommentDTO getCommunityComment(int pk);
 	public List<CommunityCommentDTO> getCommunityCommentList();
 	public List<CommunityCommentCountDTO> getCommunityCommentCount();
 	
 	public int addCommunityComment(CommunityCommentDTO list);
+	
 }
