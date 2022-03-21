@@ -5,8 +5,8 @@
 <ul class="nav">
 	<li><a href="${path }/admin/home">홈</a></li>
 	<li><a href="${path }/admin/notification/main">신고 관리</a></li>
-	<li><a href="#">배너 관리</a></li>
-	<li><a href="#">공지사항</a></li>
+	<li><a href="${path }/admin/banner/list">배너 관리</a></li>
+	<li><a href="${path }/admin/notice/list">공지사항</a></li>
 	<li><a href="#">통계</a></li>
 	<li><a href="#">문의사항</a></li>
 	<li><a href="#">회원 관리</a></li>

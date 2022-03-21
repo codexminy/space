@@ -58,6 +58,96 @@
 	<select id="getNoticeAdminList" resultMap="Notice_adminDTO">
 		SELECT * FROM notice_admin INNER JOIN admin_category USING(ac_id) INNER JOIN admin_emp USING(ae_id)
 	</select>
+	
+	<!-- 배너관리 - 목록 리스트 -->
+	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
+		<![CDATA[
+	        SELECT
+	        	rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+				FROM
+					notification_ad
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+				ORDER BY
+					na_id DESC
+			)
+	        WHERE rn > (#{pageNum} -1) * #{amount} ORDER BY na_id DESC
+    	]]>
+	</select>
+	
+	<!-- 배너관리 - 목록 전체 갯수 -->
+	<select id="getNotificationAdTotal" resultType="int">
+		SELECT COUNT(*) FROM notification_ad
+	</select>
+	
+	<!-- 배너관리 - 신규 등록 -->
+	<insert id="createNotificationAd">
+		<selectKey keyProperty="na_id" order="BEFORE" resultType="int">
+			SELECT NOTIFICATION_AD_NA_ID_SEQ.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO notification_ad VALUES(#{na_id}, #{na_start_date}, #{na_end_date}, #{na_img}, 'Y', #{na_url}, '1', #{na_title}, #{na_name})
+	</insert>
+	
+	<!-- 배너관리 - 상세 정보 -->
+	<select id="getNotificationAdDetail" resultType="com.second.space.admin.model.Notification_adDTO">
+		SELECT * FROM notification_ad WHERE na_id = #{na_id}
+	</select>
+	
+	<resultMap type="com.second.space.admin.model.Notice_categoryDTO" id="Notice_categoryDTO">
+	    <result column="noc_id" property="noc_id"/>
+	    <result column="noc_name" property="noc_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.NoticeDTO" id="NoticeDTO">
+		<result column="rn" property="rn"/>
+ 		<result column="notice_id" property="notice_id"/>
+ 		<result column="notice_title" property="notice_title"/>
+ 		<result column="notice_content" property="notice_content"/>
+ 		<result column="user_id" property="user_id"/>
+ 		<result column="notice_date" property="notice_date"/>
+ 		<result column="notice_img" property="notice_img"/>
+ 		<result column="notice_delete" property="notice_delete"/>
+ 		<result column="notice_view" property="notice_view"/>
+ 		<collection property="ncDTO" resultMap="Notice_categoryDTO"/>
+ 	</resultMap>
+	
+	<!-- 공지사항 - 목록 리스트 -->
+	<select id="getAllNoticeList" resultMap="NoticeDTO">
+		<![CDATA[
+	        SELECT
+	        	rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, n.notice_id, n.notice_title, n.notice_content, n.user_id, n.notice_date, n.notice_img, n.notice_delete, n.notice_view, nc.noc_id, nc.noc_name
+				FROM
+					notice n,
+					notice_category nc
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount} AND n.noc_id = nc.noc_id
+				ORDER BY
+					n.notice_id DESC
+			)
+	        WHERE rn > (#{pageNum} -1) * #{amount} ORDER BY notice_id DESC
+    	]]>
+	</select>
+	
+	<!-- 공지사항 - 목록 전체 갯수 -->
+	<select id="getNoticeTotal" resultType="int">
+		SELECT COUNT(*) FROM notice
+	</select>
+	
+	<!-- 공지사항 - 상세 정보 -->
+	<select id="getNoticeDetail" resultMap="NoticeDTO">
+		SELECT * FROM notice INNER JOIN notice_category USING(noc_id) WHERE notice_id = #{notice_id}
+	</select>
+	
+	<!-- 공지사항 - 카테고리 리스트 -->
+	<select id="getNoticeCategory" resultType="com.second.space.admin.model.Notice_categoryDTO">
+		SELECT * FROM notice_category
+	</select>
 </mapper>
 
 

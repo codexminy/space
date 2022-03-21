@@ -14,7 +14,7 @@
 	<jsp:include page="../common/nav.jsp"/>
 	<jsp:include page="../common/notificationAside.jsp"/>
 	<div class="container nc-container">
-		<div class="nc-title-wrap">
+		<div class="title-wrap">
 			<h2 class="title">신고 관리</h2>
 			<div class="line"></div>
 		</div>

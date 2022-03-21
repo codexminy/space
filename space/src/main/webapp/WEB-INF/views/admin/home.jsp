@@ -17,7 +17,7 @@
 		<div class="stats-container">
 			<div class="info-wrap">
 				<div class="info">
-					<div class="title-wrap">
+					<div class="home-title-wrap">
 						<h2 class="title">신고 접수</h2>
 						<p><i class="fa-solid fa-angle-right"></i></p>
 					</div>
@@ -27,7 +27,7 @@
 					</table>
 				</div>
 				<div class="info">
-					<div class="title-wrap">
+					<div class="home-title-wrap">
 						<h2 class="title">통계</h2>
 						<p><i class="fa-solid fa-angle-right"></i></p>
 					</div>
@@ -37,7 +37,7 @@
 					</table>
 				</div>
 				<div class="info">
-					<div class="title-wrap">
+					<div class="home-title-wrap">
 						<h2 class="title">광고</h2>
 						<p><i class="fa-solid fa-angle-right"></i></p>
 					</div>
@@ -50,7 +50,7 @@
 			<div class="list-wrap">
 				<div class="banner-wrap">
 					<div class="banner info">
-						<div class="title-wrap">
+						<div class="home-title-wrap">
 							<h2 class="title">배너 관리</h2>
 							<p><i class="fa-solid fa-angle-right"></i></p>
 						</div>
@@ -62,7 +62,7 @@
 				</div>
 				<div class="admin-wrap">
 					<div class="admin info">
-						<div class="title-wrap">
+						<div class="home-title-wrap">
 							<h2 class="title">관리자 공지</h2>
 							<p><i class="fa-solid fa-angle-right"></i></p>
 						</div>
@@ -80,6 +80,18 @@
 			getLoad();
 		});
 
+		function formatDate(date) {
+		    let d = new Date(date);
+		    let month = '' + (d.getMonth() + 1);
+		    let day = '' + d.getDate();
+		    let year = d.getFullYear();
+		    
+		    if (month.length < 2) month = '0' + month; 
+		    if (day.length < 2) day = '0' + day; 
+		    
+		    return [year, month, day].join('-');
+	    }
+		
 		function getLoad() {
 			const notifyInfo = $('.notify-info');
 			const statsInfo = $('.stats-info');
@@ -107,8 +119,8 @@
 					
 					banner.forEach(list => {
 						bannerData += "<tr>";
-						bannerData += "<td>"<c:out value=" + list.na_title + "/>"</td>";
-						bannerData += "<td class=text-right>" + list.na_start_date + " ~ " + list.na_end_date + "</td>";
+						bannerData += '<td><a href="${path}/admin/banner/detail?na_id=' + list.na_id + '">' + list.na_title + '</a></td>';
+						bannerData += "<td class=text-right>" + formatDate(list.na_start_date) + " ~ " + formatDate(list.na_end_date) + "</td>";
 						bannerData += "</tr>";
 					});
 					
