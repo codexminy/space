@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+/* home */
+.line {
+	height: 1px;
+	background-color: black;
+	margin: 10px 0;
+}
+
+.red {
+	color: red;
+}
+
+
+.info-wrap {
+	display: flex;
+}
+
+
+.info {
+	width: 250px;
+	margin-right: 50px;
+	margin-bottom: 50px;
+}
+
+.info td {
+	padding: 10px 0;
+}
+
+.banner, .admin {
+	width: 100%;
+	
+}
+
+.title-wrap {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+}
+
+table {
+	width: 100%;
+}
+
+.text-right {
+	text-align: right;
+}
+/* home */
+
+/* notification */
+.nc-title-wrap ul {
+	display: flex;
+}
+
+.sep {
+	width: 1px;
+	height: auto;
+	background-color: black;
+}
+
+.board {
+	padding-left: 10px;
+	font-size: 14px;
+}
+
+.active {
+	display: none;	
+}
+/* notification */
+
+
+
+
+
+

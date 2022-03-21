@@ -1,0 +1,74 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration : none;    
+}
+#wrap{
+    width: 1200px;
+    margin: 0 auto;
+}
+.wrap-login-logo{
+    margin: 30px 150px;
+}
+.wrap-login {
+    width: 450px;
+}
+.wrap-login .login-box #loginform{
+    width: 450px;
+    height: 270px;
+    border: 1px solid;
+    border-radius: 5px;
+
+}
+.wrap-login .login-box #loginform .login{
+    width: 370px;
+    height: 90px;
+    margin: 30px 40px 15px 40px;
+}
+input[type="text"] {
+   width: 370px;
+   height: 45px;
+   border-radius: 3px;
+}
+
+input[type="password"] {
+    width: 370px;
+    height: 45px;
+    border-radius: 3px;
+    
+}
+.wrap-login .login-box #loginform .login-status{
+    margin-left: 40px;
+    margin-bottom: 25px;
+}
+.wrap-login .login-box #loginform #submit{
+    background-color:#22007F;
+    color: #fff;
+    width: 370px;
+    height: 50px;
+    text-align: center;
+    margin-left: 40px;
+    font-size: 20px;
+    
+}
+.wrap-login .login-box .login-option{
+   margin: 20px 50px 50px 50px;  
+}
+.wrap-login .login-box .login-option ul li{
+    display: inline-block;
+    padding-right: 10px;
+}
+.wrap-login .login-box .social-login{
+    display: flex;
+    overflow: hidden;
+}
+.wrap-login .login-box .social-login ul li{
+    padding-bottom: 15px;
+    text-align: center;
+}
+.wrap-login .login-box .social-login ul li img{
+    width: 450px;
+    height: 50px;
+}

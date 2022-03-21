@@ -3,134 +3,61 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.AdminXMLMapper">
-	<!-- 홈 - 회원 신고 접수 -->
-	<select id="getAllNotificationCount" resultType="int">
-		SELECT
-			SUM(total)
-		FROM(
-			SELECT COUNT(*) AS total FROM notification_board
-			UNION ALL
-			SELECT COUNT(*) AS total FROM notification_cmt
-			UNION ALL
-			SELECT COUNT(*) AS total FROM notification_review
-		)
-		DUAL
+	<!-- 홈 - 신고 관리 접수 갯수 -->
+	<select id="getNotificationCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_board /*WHERE n_notify_date BETWEEN sysdate-7 AND sysdate*/
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt /*WHERE nc_notify_date BETWEEN sysdate-7 AND sysdate*/
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review /*WHERE nr_notify_date BETWEEN sysdate-7 AND sysdate*/
 	</select>
 	
-	<!-- 홈 - 게시글 신고 접수 -->
-	<select id="getNotificationBoardCount" resultType="int">
-		SELECT COUNT(*) FROM notification_board
+	<!-- 홈 - 통계 갯수 -->
+	<select id="getStatsCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM user_
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE user_delete = 'Y'
+		UNION ALL
+		SELECT COUNT(*) FROM board
+		UNION ALL
+		SELECT COUNT(*) FROM count_user_date
 	</select>
 	
-	<!-- 홈 - 댓글 신고 접수 -->
-	<select id="getNotificationCmtCount" resultType="int">
-		SELECT COUNT(*) FROM notification_cmt
-	</select>
-	
-	<!-- 홈 -  신고 접수 -->
-	<select id="getNotificationReviewCount" resultType="int">
-		SELECT COUNT(*) FROM notification_review
-	</select>
-	
-	<!-- 홈 - 배너 관리 -->
+	<!-- 홈 - 배너 관리 리스트 -->
 	<select id="getNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
-		SELECT * FROM notification_ad WHERE ROWNUM BETWEEN 1 and 5
-	</select>
-	
-	<!-- 홈 - 어드민 안내 -->
-	<select id="getNoticeAdminList" resultType="com.second.space.admin.model.Notice_adminDTO">
-		SELECT * FROM notice_admin WHERE ROWNUM BETWEEN 1 and 5
-	</select>
-	
-	<!-- 배너관리 - 테이블 -->
-	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
-		<![CDATA[
-	        SELECT
-	        	na_id, na_title, na_name, na_url, na_start_date, na_end_date
-	        FROM(
-	        	SELECT
-	        		/*+INDEX_DESC(notification_ad n_ad) */ ROWNUM AS rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
-				FROM
-					notification_ad
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-			)
-	        WHERE rn > (#{pageNum} -1) * #{amount}
-    	]]>
-	</select>
-	
-	<!-- 배너관리 - 테이블 갯수 -->
-	<select id="getNotificationAdTotal" resultType="int">
-		SELECT COUNT(*) FROM notification_ad
+		SELECT * FROM notification_ad WHERE ROWNUM BETWEEN 1 AND 4 ORDER BY na_end_date
 	</select>
 
-	<!-- 배너관리 - 배너리스트 -->
-	<select id="getNotificationAdDetailList" resultType="com.second.space.admin.model.Notification_adDTO">
-		SELECT * FROM notification_ad WHERE na_id = #{na_id}
-	</select>
+	<resultMap type="com.second.space.admin.model.Admin_categoryDTO" id="Admin_categoryDTO">
+	    <result column="ac_id" property="ac_id"/>
+	    <result column="ac_code" property="ac_code"/>
+	    <result column="ac_name" property="ac_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Admin_empDTO" id="Admin_empDTO">
+	    <result column="ae_id" property="ae_id"/>
+	    <result column="ae_name" property="ae_name"/>
+	    <result column="ae_class" property="ae_class"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Notice_adminDTO" id="Notice_adminDTO">
+ 		<result column="notice_admin_id" property="notice_admin_id"/>
+ 		<result column="notice_admin_title" property="notice_admin_title"/>
+ 		<result column="notice_admin_content" property="notice_admin_content"/>
+ 		<result column="user_id" property="user_id"/>
+ 		<result column="notice_admin_date" property="notice_admin_date"/>
+ 		<result column="notice_admin_img" property="notice_admin_img"/>
+ 		<result column="notice_admin_view" property="notice_admin_view"/>
+ 		<result column="ac_id" property="ac_id"/>
+ 		<result column="ae_id" property="ae_id"/>
+ 		<collection property="acDTO" resultMap="Admin_categoryDTO"/>
+ 		<collection property="aeDTO" resultMap="Admin_empDTO"/>
+ 	</resultMap>
 
-	<!-- 배너관리 - 신규 등록 -->
-	<insert id="insertNotificationAd">
-		INSERT INTO notification_ad VALUES(notification_ad_na_id_seq.nextval, sysdate-30, sysdate+30, #{imgPath}, 'Y', 'https://www.naver.com/', 'ad2', '테스트2', '테스트2')
-	</insert>
-	
-	<!-- 공지사항 검색 조건문 -->
-	<sql id="pageset">
-        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
-            <foreach collection="typeArr" item="type">
-                <trim prefix="OR">
-                    <choose>
-                        <when test="type == 'T'.toString()">
-                            notice_title like '%'||#{keyword}||'%' 
-                        </when>
-                        <when test="type == 'C'.toString()">
-                            notice_content like '%'||#{keyword}||'%' 
-                        </when>
-                    </choose>
-                </trim>
-            </foreach>
-        </trim>
-    </sql>
-
-	<!-- 공지사항 - 전체 테이블 -->
-	<select id="getAllNoticeList" resultType="com.second.space.admin.model.NoticeDTO">
-		<![CDATA[
-	        SELECT
-	        	notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view
-	        FROM(
-	        	SELECT
-	        		/*+INDEX_DESC(notice noti) */ ROWNUM AS rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view
-				FROM
-					notice
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-		]]>
-			<if test="keyword != null">
-				<include refid="pageset"></include>
-			</if>
-		<![CDATA[
-			)
-	        WHERE rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	<!-- 홈 - 어드민 안내 리스트 -->
+	<select id="getNoticeAdminList" resultMap="Notice_adminDTO">
+		SELECT * FROM notice_admin INNER JOIN admin_category USING(ac_id) INNER JOIN admin_emp USING(ae_id)
 	</select>
-	
-	<!-- 공지사항 - 테이블 갯수 -->
-	<select id="getNoticeTotal" resultType="int">
-		SELECT COUNT(*) FROM notice
-		<if test="keyword != null">
-			WHERE notice_id > 0 <include refid="pageset"></include>
-		</if>
-	</select>
-	
-	<!-- 공지사항 - 게시물 -->
-	<select id="getNotice" resultType="com.second.space.admin.model.NoticeDTO">
-		SELECT * FROM notice WHERE notice_id = #{notice_id}
-	</select>
-	
-	<!-- 공지사항 - 등록 -->
-	<insert id="insertNotice">
-		INSERT INTO notice VALUES(NOTICE_NOTICE_ID_SEQ.nextval, #{notice_title}, #{notice_content}, 1, sysdate, #{notice_img, jdbcType=VARCHAR}, 'N', 0)
-	</insert>
 </mapper>
 
 

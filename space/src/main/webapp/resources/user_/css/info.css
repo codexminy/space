@@ -1,0 +1,113 @@
+@charset "UTF-8";
+#wrap{
+
+	display: flex;
+    width: 1200px;
+    margin: 0 auto;
+}
+.wrap-login-logo{
+    margin: 50px 225px 30px 225px;  
+}
+.info{
+    border: 1px solid;
+    border-radius: 5px;
+    width: 600px;
+
+    height: 770px;  
+
+    height: 770px;
+}
+.inputinfo #userId{
+    width: 450px;
+    height: 50px;
+    margin: 40px 75px 15px 75px;
+}
+.inputinfo #userPassword{
+    width: 450px;
+    height: 50px;
+    margin: 0 75px 5px 75px;
+}
+.inputinfo #userPasswordcheck{
+    width: 450px;
+    height: 50px;
+    margin: 0 75px 15px 75px;
+}
+.inputinfo #userName{
+    width: 295px;
+    height: 50px;
+    margin: 0 10px 15px 75px;
+}
+.inputinfo #userGender{
+    width: 140px;
+    height: 50px;
+    
+}
+.inputinfo #userYear{
+    width: 140px;
+    height: 50px;
+    margin: 0 10px 15px 75px;
+}
+.inputinfo #userMonth{
+    width: 140px;
+    height: 50px;
+    margin-right: 10px;
+}
+.inputinfo #userDay{
+    width: 140px;
+    height: 50px;
+}
+.inputinfo #userEmail{
+    width: 295px;
+    height: 50px;
+    margin: 0 10px 15px 75px;
+}
+.inputinfo #userEmail2{
+    width: 140px;
+    height: 50px;
+}
+.inputinfo #userAgency{
+    width: 140px;
+    height: 50px;
+    margin: 0 10px 5px 75px;
+}
+.inputinfo #userPhone{
+    width: 295px;
+    height: 50px;
+}
+.inputinfo #userNumber{
+    width: 295px;
+    height: 50px;
+    margin: 0 10px 15px 75px;
+}
+.inputinfo .number{
+    width: 140px;
+    height: 50px;
+    background-color: #22007F;
+    color: #fff;
+    font-weight: 700;
+}
+.inputinfo #userAddress{
+    width: 450px;
+    height: 50px;
+    margin: 0 75px 5px 75px;    
+}
+.inputinfo #userPostcode{
+    width: 295px;
+    height: 50px;
+    margin: 0 10px 30px 75px;
+}
+.inputinfo .address{
+    width: 140px;
+    height: 50px;
+    background-color:#22007F;
+    color: #fff;
+    font-weight: 700;
+}
+.inputinfo .join{
+    width: 450px;
+    height: 50px;
+    background-color:#22007F;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 75px 0 75px;
+}

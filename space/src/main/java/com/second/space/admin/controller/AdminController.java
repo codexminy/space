@@ -14,7 +14,12 @@ public class AdminController {
 	
 	@GetMapping("/admin/home")
 	public void home() {
-		
+
+	}
+	
+	@GetMapping("/admin/notification/main")
+	public void notification() {
+
 	}
 }
 
