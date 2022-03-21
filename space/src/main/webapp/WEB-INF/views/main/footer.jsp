@@ -7,44 +7,9 @@
 <title>footer.jsp</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration : none;     
-}
-footer{
-    width: 1200px;
-    margin: 0 auto;
-}
-.footer {
-    clear: both;
-	width: 1200px;
-	height: 150px;
-	padding :70px;
-}
-.footer .copyright ul{
-    padding:0 5px;
-    font-size: 12px;
-    text-align: center;
-    color:#707070;  
-}
-.footer .copyright ul a{
-	color:#707070;
-}
-.footer .copyright ul li{
-    display: inline-block;
-    color:#707070;
-}
-
-.footer .copyright-text{
-    font-size: 12px;
-    text-align: center;
-    color:#707070;
-}
-</style>
 <body>
 	<footer class="footer">
         <div class="copyright">
