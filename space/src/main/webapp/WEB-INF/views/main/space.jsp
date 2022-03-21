@@ -27,7 +27,23 @@
 	        <div id="fixed-bar-wrap">
 	           <div id="menu-box">
 	                <div class="menu-left">
-	                    <div class="menu-icon"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/menu.png"></a></div>
+	                    <div class="dropdown">
+	                        <img src="${pageContext.request.contextPath}/resources/images/main/menu.png" class="dropbtn" onclick="myFunction()" class="dropbtn"></img>
+                            <div id="myDropdown" class="dropdown-content">
+                                <div class="category-box"><a href="#">인기매물</a></div>
+                                <div class="category-box"><a href="#">디지털</a></div>
+                                <div class="category-box"><a href="#">가전</a></div>
+                                <div class="category-box"><a href="#">가구</a></div>
+                                <div class="category-box"><a href="#">패션</a></div>
+                                <div class="category-box"><a href="#">스포츠</a></div>
+                                <div class="category-box"><a href="#">문화</a></div>
+                                <div class="category-box"><a href="#">취미</a></div>
+                                <div class="category-box"><a href="#">미용</a></div>
+                                <div class="category-box"><a href="#">반려동물</a></div>
+                                <div class="category-box"><a href="#">기타</a></div>
+                                <div class="category-box"><a href="#">커뮤니티</a></div>
+                            </div>
+	                    </div>
         	            <div class="space-logo"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px"></a></div>
 	                </div>
     	            <div class="search-bar">
@@ -321,4 +337,31 @@
 	    </footer>
     </div>
 </body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+	var swiper = new Swiper(".mySwiper", {
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+	});
+	
+	function myFunction() {
+	    document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn')) {
+
+	    var dropdowns = document.getElementsByClassName("dropdown-content");
+	    var i;
+	    for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+	        openDropdown.classList.remove('show');
+			}
+	    }
+	  }
+	}
+</script>
 </html>
