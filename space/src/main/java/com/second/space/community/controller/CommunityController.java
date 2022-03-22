@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.community.service.CommunityService;
 
@@ -31,6 +32,8 @@ public class CommunityController {
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
 		} catch (Exception e) {
 			log.info("Error");
@@ -60,6 +63,8 @@ public class CommunityController {
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,5 +84,27 @@ public class CommunityController {
 			log.info("Error");
 		}
 		return "redirect:/community/main";
+	}
+	
+	@GetMapping("/report")
+	public String communityReportWrite(Model model) {
+		try {
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/community/report";
+	}
+	
+	@PostMapping("/report/process")
+	public String communityReportProcess(Notification_boardDTO list, HttpServletRequest request, Model model) {
+		try {
+			System.out.println("보냈다");
+			model.addAttribute(community_service.newNotificationBoard(list));
+		} catch (Exception e) {
+			System.out.println("안보냈다");
+			e.printStackTrace();
+		}
+		return "/community/exit";
 	}
 }

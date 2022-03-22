@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
@@ -62,5 +63,27 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		
 		return community_mapper.getCommunityComment(comment.getC_id());
+	}
+
+	@Override
+	public CommunityCommentDTO newCommunityCommentReply(CommunityCommentDTO comment) throws Exception {
+		int row = community_mapper.addCommunityCommentReply(comment);
+		
+		if(row == 0) {
+			throw new Exception("댓글등록 실패");
+		}
+		
+		return community_mapper.getCommunityComment(comment.getC_id());
+	}
+
+	@Override
+	public Notification_boardDTO newNotificationBoard(Notification_boardDTO list) throws Exception {
+		int row = community_mapper.addNotificationBoard(list);
+		
+		if(row == 0) {
+			throw new Exception("신고등록 실패");
+		}
+		
+		return community_mapper.getNotificationBoard(list.getN_id());
 	}
 }
