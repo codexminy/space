@@ -1,0 +1,26 @@
+@charset "UTF-8";
+h3{
+	font-size : 26px;
+	text-align: center;
+	margin-top: 20px;
+}
+p{
+	font-size : 18px;
+	margin: 20px;
+}
+.c_content{
+	font-size:16px;
+	margin-left: 40px;
+}
+.report_textarea {
+	margin: 0 20px 20px 20px;
+}
+#send_btn {
+	position: relative;
+	width: 70px;
+	height: 30px;
+	left: 265px;
+	background-color: #333;
+	color: #ccc;
+	border-radius: 9999px;
+}

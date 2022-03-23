@@ -32,7 +32,7 @@
 	
 }
 
-.title-wrap {
+.home-title-wrap {
 	display: flex;
 	justify-content: space-between;
 	padding: 10px 0;
@@ -40,6 +40,7 @@
 
 table {
 	width: 100%;
+	border: 1px;
 }
 
 .text-right {
@@ -48,16 +49,6 @@ table {
 /* home */
 
 /* notification */
-.nc-title-wrap ul {
-	display: flex;
-}
-
-.sep {
-	width: 1px;
-	height: auto;
-	background-color: black;
-}
-
 .board {
 	padding-left: 10px;
 	font-size: 14px;
@@ -68,6 +59,125 @@ table {
 }
 /* notification */
 
+/* banner/list */
+
+/* banner/list */
+
+/* banner/create */
+.pic-img {
+	width: 300px;
+	padding: 50px;
+	text-align: center;
+	cursor: pointer;
+	background-color: lightGray;
+}
+
+.pic-img i {
+	font-size: 50px;
+}
+
+.banner-create input {
+	padding: 10px;
+}
+
+.btn-wrap ul {
+	display: flex;
+	justify-content: flex-end;
+	padding: 20px;
+}
+
+.btn-wrap ul li {
+	padding: 10px 40px;
+	background-color: lightGray;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-right: 15px;
+}
+/* banner/create */
+
+/* banner/detail */
+.banner-table tr {
+	border-bottom: 1px solid lightGray;
+}
+
+.banner-table td {
+	padding: 25px 15px;
+}
+
+.banner-table td:nth-child(odd) {
+	border-bottom: 1px solid white;
+	background-color: lightgray;
+}
+/* banner/detail */
+
+/* notice/detail */
+.notice-title {
+	display: flex;
+	justify-content: space-between;
+	background-color: lightgray;
+	border-radius: 10px;
+	padding: 15px;
+}
+
+.notice-title ul {
+	display: flex;
+	padding: 20px;
+}
+
+.notice-title ul li {
+	padding: 10px;
+}
+
+.notice-title ul li:first-child {
+	background-color: gray;
+	border-radius: 10px;
+	padding: 10px 20px;
+}
+
+.notice-title ul:last-child li:first-child {
+	background-color: transparent;
+	border-radius: 0;
+	padding: 10px;
+}
+
+.notice-content {
+	padding: 50px;
+}
+/* notice/detail */
+
+/* notice/create */
+.notice-title-area {
+	display: flex;
+}
+.notice-title-area select {
+	padding: 15px;
+}
+
+.notice-title-input {
+	width: 100%;
+	margin-left: 10px;
+}
+
+.notice-title-area input {
+	padding: 15px;
+	width: 100%;
+}
+
+.notice-content-area {
+	padding: 30px 0;
+}
+
+#editor {
+	padding: 20px;
+	border: 1px solid lightgray;
+}
+/* notice/create */
+
+/* stats/stats */
+.userChart {
+	width: 50%;
+}
+/* stats/stats */
 
 
 

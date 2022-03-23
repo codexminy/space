@@ -99,16 +99,16 @@ main > ul > li {
 .c_board > .c_board_option > li:hover {
 	cursor: pointer;
 }
+.c_board > .c_board_option .data_board_id{
+	display:none;
+}
 .c_comment {
 	display: none;
 }
 .c_comment > hr {
 	margin: 0 10px 10px;
 }
-.active {
-	display: block;
-}
-.c_board > .c_comment  > .c_comment_profile {
+.c_board > .c_comment .c_comment_profile {
 	display:inline-block;
 	width: 60px;
 	height: 60px;
@@ -120,30 +120,62 @@ main > ul > li {
 	line-height: 60px;
 	overflow:hidden;
 }
-.c_board > .c_comment  > .c_board_commenter {
+.depth1 {
+	padding-left: 50px;
+}
+.c_board > .c_comment > .c_comment_box > .depth2 {
+	padding-left: 100px;
+}
+.c_board > .c_comment .c_comment_box{
+	margin: 20px;
+}
+.reply_form,
+.rereply_form {
+	display:none;
+}
+.c_board > .c_comment .reply_form > .c_comment_myprofile,
+.c_board > .c_comment .rereply_form > .c_comment_myprofile{
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin: 0 10px 10px 20px;
+	border: 1px solid #999;
+	border-radius: 9999px;
+	text-align: center;
+	line-height: 60px;
+	overflow:hidden;
+}
+.c_board > .c_comment .c_board_commenter {
 	display:inline-block;
 	text-align: left;
 	font-size: 12px;
 	margin: 10px;
 	line-height: 15px;
 }
-.c_board > .c_comment  > .c_comment_option {
+.c_board > .c_comment .c_comment_option {
 	font-size: 14px;
 	margin: 15px 0 20px 20px;
 }
-.c_board > .c_comment  > .c_comment_option > li {
+.c_board > .c_comment .c_comment_option > li {
 	display:inline-block;
 	margin-right: 20px;
 }
-.c_board > .c_comment  > .c_comment_content {
+.c_board > .c_comment .c_comment_option > li:hover {
+	cursor: pointer;
+}
+.c_board > .c_comment .c_comment_option .data_board_id2,
+.c_board > .c_comment .c_comment_option .data_comment_id{
+	display: none;
+}
+.c_board > .c_comment .c_comment_content {
 	display:block;
 	margin: 0 20px;
 	font-size: 16px;
 }
-.c_board > .c_comment  > .mycomment{
+.c_board > .c_comment .mycomment{
 	margin-bottom: 20px;
 }
-.c_board > .c_comment  > .mycomment > .c_comment_myprofile {
+.c_board > .c_comment .mycomment > .c_comment_myprofile {
 	width: 50px;
 	height: 50px;
 	float: left;
@@ -154,7 +186,7 @@ main > ul > li {
 	line-height: 60px;
 	overflow:hidden;
 }
-.c_board > .c_comment  > .mycomment > .c_comment_write > .c_comment_btn {
+.c_board > .c_comment .mycomment > .c_comment_write > .c_comment_btn {
 	display: inline-block;
 	width: 50px;
 	height: 50px;
@@ -162,5 +194,14 @@ main > ul > li {
 	float:right;
 	margin-right: 20px;
 }
-
-
+.reply_btn,
+.rereply_btn {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #555;
+	float:right;
+}
+.active {
+	display: block;
+}

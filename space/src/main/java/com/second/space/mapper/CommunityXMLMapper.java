@@ -2,6 +2,8 @@ package com.second.space.mapper;
 
 import java.util.List;
 
+import com.second.space.admin.model.Notification_boardDTO;
+import com.second.space.admin.model.Notification_cmtDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
@@ -16,9 +18,16 @@ public interface CommunityXMLMapper {
 	public CommunityCategoryDTO getCommunityCategory(int pk);
 	public List<CommunityCategoryDTO> getCommunityCategoryList();
 	
-	public CommunityCommentDTO getCommunityComment(int user);
+	public CommunityCommentDTO getCommunityComment(int pk);
 	public List<CommunityCommentDTO> getCommunityCommentList();
 	public List<CommunityCommentCountDTO> getCommunityCommentCount();
 	
 	public int addCommunityComment(CommunityCommentDTO list);
+	public int addCommunityCommentReply(CommunityCommentDTO list);
+	
+	public Notification_boardDTO getNotificationBoard(int pk);
+	public int addNotificationBoard(Notification_boardDTO list);
+	
+	public Notification_cmtDTO getNotificationCmt(int pk);
+	public int addNotificationCmt(Notification_cmtDTO list);
 }

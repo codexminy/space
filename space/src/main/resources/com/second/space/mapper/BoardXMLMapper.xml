@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.second.space.mapper.BoardXMLMapper">
+	<select  id="getPaymentsCategory" resultType="com.second.space.board.model.PaymentsCategoryDTO">
+		SELECT * FROM payments_category
+	</select>
+	
+	<select id="getAddress" resultType="string">
+		SELECT user_address FROM user_ where user_id = #{user_id}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.second.space.board.model.BoardDTO">
+		INSERT INTO board (board_id, board_title, p_category_id, board_content, board_price, board_trade_type, user_id, board_view, 
+		board_date, board_delete, board_state, auction_state)
+		VALUES 
+		(board_board_id_seq.nextval,  #{board_title}, #{p_category_id}, #{board_content}, #{board_price}, #{board_trade_type},
+		#{user_id}, 0, sysdate, 'N', 'N', 'N')
+	</insert>
+	
+	<select id="getBoardId" resultType="_int">
+		SELECT board_id FROM 
+		(
+			SELECT * 
+			FROM board
+			WHERE user_id = #{user_id}
+			ORDER BY board_date DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<insert id="insertBoardImg" parameterType="com.second.space.board.model.BoardImgDTO">
+		INSERT INTO board_img 
+		(board_img_id, board_id, originalfilename , renamedfilename , upload_date, main_img, status) 
+		VALUES
+		(board_img_id_seq.nextval , 
+			#{board_id}, #{originalfilename}, #{renamedfilename}, sysdate, #{main_img}, #{status})
+	</insert>
+	
+	<select id="getBoardDto" resultType="com.second.space.board.model.BoardDTO">
+		SELECT * FROM board WHERE board_id = #{board_id}
+	</select>
+	
+	<select id="getBoardImgDto" resultType="com.second.space.board.model.BoardImgDTO" parameterType="_int">
+		SELECT * FROM board_img WHERE board_id = #{board_id}
+	</select>
+	
+	<select id="getCategoryName" parameterType="_int" resultType="string">
+		SELECT p_category_name FROM payments_category WHERE p_category_id = #{p_category_id}
+	</select>
+
+</mapper>

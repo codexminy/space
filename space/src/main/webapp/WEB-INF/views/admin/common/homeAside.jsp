@@ -23,7 +23,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="${path }/admin/banner/list">
 				<span>배너 관리</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>

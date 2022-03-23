@@ -3,21 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.CommunityXMLMapper">
-	<!-- ex)
-	<select id="getAllNotificationCount" resultType="int">
-		SELECT
-			SUM(total)
-		FROM
-		(
-			SELECT COUNT(*) AS total FROM notification_board
-			UNION ALL
-			SELECT COUNT(*) AS total FROM notification_cmt
-			UNION ALL
-			SELECT COUNT(*) AS total FROM notification_review
-		)
-		DUAL
-	</select>
-	 -->
 	<!-- 커뮤니티 보드 개수 -->
 	<select id="getCommunityBoardCount" resultType="int">
 		SELECT
@@ -51,6 +36,10 @@
 	<select id="getCommunityCategoryList" resultType="com.second.space.community.model.CommunityCategoryDTO">
 		SELECT * FROM community_category
 	</select>
+	<!-- 커뮤니티 댓글 꺼내기 -->
+	<select id="getCommunityComment" resultType="com.second.space.community.model.CommunityCommentDTO">
+		SELECT * from community_comment WHERE c_id=#{c_id}
+	</select>
 	<!-- 커뮤니티 댓글 리스트 -->
 	<select id="getCommunityCommentList" resultType="com.second.space.community.model.CommunityCommentDTO">
 		SELECT
@@ -68,6 +57,7 @@
 		FROM
 		    community_comment
 		    INNER JOIN user_ USING (user_id)
+		ORDER BY c_id		    
 	</select>
 	<!-- 커뮤니티 댓글 개수 -->
 	<select id="getCommunityCommentCount" resultType="com.second.space.community.model.CommunityCommentCountDTO">
@@ -85,4 +75,48 @@
 				#{c_id}, #{c_board_id}, #{c_content}, #{user_id}, 'N'
 			)
 	</insert>
+	<!-- 커뮤니티 대댓글쓰기 -->
+	<insert id="addCommunityCommentReply">
+		<selectKey keyProperty="c_id" order="BEFORE" resultType="int">
+			SELECT community_c_c_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO
+			community_comment(c_id, c_board_id, c_depth, c_group_id, c_group_order_id, c_content, user_id, c_delete)
+		VALUES
+			(
+				#{c_id}, #{c_board_id}, #{c_depth}, #{c_group_id}, #{c_group_order_id}, #{c_content}, #{user_id}, 'N'
+			)
+	</insert>
+	<!-- 게시물 신고하기 -->
+	<insert id="addNotificationBoard">
+		<selectKey keyProperty="n_id" order="BEFORE" resultType="int">
+			SELECT noti_board_n_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO
+			notification_board(n_id, c_board_id, user_id, nfc_id, n_content)
+		VALUES
+			(
+				#{n_id}, #{c_board_id}, #{user_id}, #{nfc_id}, #{n_content}
+			)
+	</insert>
+	<!-- 게시물 신고글 꺼내기 -->
+	<select id="getNotificationBoard" resultType="com.second.space.admin.model.Notification_boardDTO">
+		SELECT * from notification_board WHERE n_id=#{n_id}
+	</select>
+	<!-- 댓글 신고하기 -->
+	<insert id="addNotificationCmt">
+		<selectKey keyProperty="nc_id" order="BEFORE" resultType="int">
+			SELECT noti_comment_nc_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO
+			notification_cmt(nc_id, c_board_id, c_id, user_id)
+		VALUES
+			(
+				#{nc_id}, #{c_board_id}, #{c_id}, #{user_id}
+			)
+	</insert>
+	<!-- 댓글 신고글 꺼내기 -->
+	<select id="getNotificationCmt" resultType="com.second.space.admin.model.Notification_cmtDTO">
+		SELECT * from notification_cmt WHERE nc_id=#{nc_id}
+	</select>
 </mapper>
