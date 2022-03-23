@@ -63,7 +63,7 @@
 	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
 		<![CDATA[
 	        SELECT
-	        	rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+	        	/*+INDEX_DESC(notification_id nad) */ rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
 	        FROM(
 	        	SELECT
 	        		ROWNUM AS rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
@@ -71,10 +71,9 @@
 					notification_ad
 				WHERE
 					ROWNUM <= #{pageNum} * #{amount}
-				ORDER BY
-					na_id DESC
 			)
-	        WHERE rn > (#{pageNum} -1) * #{amount} ORDER BY na_id DESC
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
     	]]>
 	</select>
 	
@@ -118,7 +117,7 @@
 	<select id="getAllNoticeList" resultMap="NoticeDTO">
 		<![CDATA[
 	        SELECT
-	        	rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
+	        	/*+INDEX_DESC(notice n) */ rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
 	        FROM(
 	        	SELECT
 	        		ROWNUM AS rn, n.notice_id, n.notice_title, n.notice_content, n.user_id, n.notice_date, n.notice_img, n.notice_delete, n.notice_view, nc.noc_id, nc.noc_name
@@ -127,10 +126,9 @@
 					notice_category nc
 				WHERE
 					ROWNUM <= #{pageNum} * #{amount} AND n.noc_id = nc.noc_id
-				ORDER BY
-					n.notice_id DESC
 			)
-	        WHERE rn > (#{pageNum} -1) * #{amount} ORDER BY notice_id DESC
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
     	]]>
 	</select>
 	
@@ -147,6 +145,342 @@
 	<!-- 공지사항 - 카테고리 리스트 -->
 	<select id="getNoticeCategory" resultType="com.second.space.admin.model.Notice_categoryDTO">
 		SELECT * FROM notice_category
+	</select>
+	
+	<!-- 공지사항 - 신규 등록 -->
+	<insert id="insertNotice">
+		INSERT INTO
+			notice(notice_id, notice_title, notice_content, noc_id)
+		VALUES
+			(NOTICE_NOTICE_ID_SEQ.nextval, #{notice_title}, #{notice_content}, #{noc_id})
+	</insert>
+	
+	<resultMap type="com.second.space.admin.model.Login_id_listDTO" id="Login_id_listDTO">
+	    <result column="user_login_id" property="user_login_id"/>
+	    <result column="login_id" property="login_id"/>
+	    <result column="user_login_type" property="user_login_type"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Delete_accountDTO" id="Delete_accountDTO">
+	    <result column="delete_id" property="delete_id"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="delete_reason" property="delete_reason"/>
+	    <result column="delete_date" property="delete_date"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.board.model.PaymentsCategoryDTO" id="PaymentsCategoryDTO">
+	    <result column="p_category_id" property="p_category_id"/>
+	    <result column="p_category_name" property="p_category_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.community.model.CommunityCategoryDTO" id="CommunityCategoryDTO">
+	    <result column="c_category_id" property="c_category_id"/>
+	    <result column="c_category_name" property="c_category_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.A_boardDTO" id="A_boardDTO">
+	    <result column="board_id" property="board_id"/>
+	    <result column="board_title" property="board_title"/>
+	    <result column="board_content" property="board_content"/>
+	    <result column="board_price" property="board_price"/>
+	    <result column="board_trade_type" property="board_trade_type"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="board_view" property="board_view"/>
+	    <result column="board_date" property="board_date"/>
+	    <result column="board_delete" property="board_delete"/>
+	    <result column="board_state" property="board_state"/>
+	    <result column="auction_state" property="auction_state"/>
+	    <result column="board_hidden" property="board_hidden"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.A_Community_boardDTO" id="A_Community_boardDTO">
+	    <result column="c_board_id" property="c_board_id"/>
+	    <result column="c_board_title" property="c_board_title"/>
+	    <result column="c_category_id" property="c_category_id"/>
+	    <result column="c_board_content" property="c_board_content"/>
+	    <result column="c_board_img" property="c_board_img"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="c_board_view" property="c_board_view"/>
+	    <result column="c_board_date" property="c_board_date"/>
+	    <result column="c_board_delete" property="c_board_delete"/>
+	    <result column="c_board_hidden" property="c_board_hidden"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Cs_categoryDTO" id="Cs_categoryDTO">
+	    <result column="cs_category_id" property="cs_category_id"/>
+	    <result column="cs_name" property="cs_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Contact_usDTO" id="Contact_usDTO">
+	    <result column="cu_id" property="cu_id"/>
+	    <result column="cs_category_id" property="cs_category_id"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="cu_title" property="cu_title"/>
+	    <result column="cu_content" property="cu_content"/>
+	    <result column="cu_img" property="cu_img"/>
+	    <result column="cu_date" property="cu_date"/>
+	    <result column="cu_state" property="cu_state"/>
+	    <result column="c_board_delete" property="c_board_delete"/>
+	    <result column="c_board_hidden" property="c_board_hidden"/>
+	    <collection property="cscDTO" resultMap="Cs_categoryDTO"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.UserDTO" id="UserDTO">
+		<result column="rn" property="rn"/>
+ 		<result column="user_id" property="user_id"/>
+ 		<result column="user_phone" property="user_phone"/>
+ 		<result column="user_password" property="user_password"/>
+ 		<result column="user_admin" property="user_admin"/>
+ 		<result column="user_login_id" property="user_login_id"/>
+ 		<result column="user_nickname" property="user_nickname"/>
+ 		<result column="user_address" property="user_address"/>
+ 		<result column="user_gender" property="user_gender"/>
+ 		<result column="user_name" property="user_name"/>
+ 		<result column="user_ban" property="user_ban"/>
+ 		<result column="user_join_date" property="user_join_date"/>
+ 		<result column="user_profile" property="user_profile"/>
+ 		<result column="user_following" property="user_following"/>
+ 		<result column="user_followed" property="user_followed"/>
+ 		<result column="user_check_email" property="user_check_email"/>
+ 		<result column="user_public_profile" property="user_public_profile"/>
+ 		<result column="user_delete" property="user_delete"/>
+ 		<result column="user_reported" property="user_reported"/>
+ 		<collection property="lilDTO" resultMap="Login_id_listDTO"/>
+ 		<collection property="daDTO" resultMap="Delete_accountDTO"/>
+ 		<collection property="pcDTO" resultMap="PaymentsCategoryDTO"/>
+ 		<collection property="abDTO" resultMap="A_boardDTO"/>
+ 		<collection property="acbDTO" resultMap="A_Community_boardDTO"/>
+ 		<collection property="ccDTO" resultMap="CommunityCategoryDTO"/>
+ 		<collection property="naDTO" resultMap="Notice_adminDTO"/>
+ 		<collection property="cuDTO" resultMap="Contact_usDTO"/>
+ 	</resultMap>
+ 	
+ 	<!-- 회원 관리 - 목록 리스트 -->
+	<select id="getAllUserList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, user_id, login_id, user_nickname, user_join_date, user_address, user_phone
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, u.user_id, lil.login_id, u.user_nickname, u.user_join_date, u.user_address, u.user_phone
+				FROM
+					user_ u,
+					login_id_list lil
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount} AND u.user_admin = 'N' AND u.user_login_id = lil.user_login_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 회원 관리 - 목록 전체 갯수 -->
+	<select id="getUserTotal" resultType="int">
+		SELECT COUNT(*) FROM user_
+	</select>
+	
+	<!-- 회원 관리 - 탈퇴 회원 리스트 -->
+	<select id="getAllWithdrawalList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, user_id, login_id, user_nickname, user_join_date, delete_reason, delete_date
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, u.user_id, lil.login_id, u.user_nickname, u.user_join_date, da.delete_reason, da.delete_date
+				FROM
+					user_ u,
+					login_id_list lil,
+					delete_account da
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount} AND u.user_admin = 'N' AND u.user_login_id = lil.user_login_id AND u.user_id = da.user_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 회원 관리 - 탈퇴 회원 전체 갯수 -->
+	<select id="getWithdrawalTotal" resultType="int">
+		SELECT COUNT(*) FROM user_ WHERE user_delete = 'Y'
+	</select>
+
+	<!-- 게시물 관리 - 장터 게시물 리스트 -->
+	<select id="getAllSaleList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, user_id, board_id, login_id, user_nickname, board_title, board_date, board_hidden, p_category_name
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, b.user_id, b.board_id, lil.login_id, u.user_nickname, b.board_title, b.board_date, b.board_hidden, p.p_category_name
+				FROM
+					user_ u,
+					login_id_list lil,
+					board b,
+					payments_category p
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+					AND u.user_admin = 'N'
+					AND u.user_login_id = lil.user_login_id
+					AND u.user_id = b.user_id 
+					AND b.p_category_id = p.p_category_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 게시물 관리 - 장터 게시물 갯수 -->
+	<select id="getSaleTotal" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+	
+	<!-- 게시물 관리 - 커뮤니티 게시물 리스트 -->
+	<select id="getAllCommunityList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, user_id, c_board_id, login_id, user_nickname, c_board_title, c_board_date, c_board_hidden, c_category_name
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, b.user_id, b.c_board_id, lil.login_id, u.user_nickname, b.c_board_title, b.c_board_date, b.c_board_hidden, p.c_category_name
+				FROM
+					user_ u,
+					login_id_list lil,
+					community_board b,
+					community_category p
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+					AND u.user_admin = 'N'
+					AND u.user_login_id = lil.user_login_id
+					AND u.user_id = b.user_id 
+					AND b.c_category_id = p.c_category_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 게시물 관리 - 커뮤니티 게시물 갯수 -->
+	<select id="getCommunityTotal" resultType="int">
+		SELECT COUNT(*) FROM community_board
+	</select>
+	
+	<!-- 관리자 공지 - 목록 리스트 -->
+	<select id="getAllNoticeAdminList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, na.user_id, ac.ac_code, ac.ac_name, ae.ae_name, ae.ae_class, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
+				FROM
+					user_ u,
+			        admin_category ac,
+			        admin_emp ae,
+			        notice_admin na,
+			        login_id_list lil
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+					AND u.user_id=na.user_id
+			        AND na.ac_id=ac.ac_id
+			        AND ae.ae_id=na.ae_id
+			        AND u.user_login_id=lil.user_login_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 관리자 공지 - 목록 갯수 -->
+	<select id="getNoticeAdminTotal" resultType="int">
+		SELECT COUNT(*) FROM notice_admin
+	</select>
+	
+	<!-- 문의사항 - 1:1 문의 리스트 -->
+	<select id="getAllContactUsList" resultMap="UserDTO">
+		<![CDATA[
+	        SELECT
+	        	/*+INDEX_DESC(user_ u) */ rn, cs_name, cu_id, cu_title, cu_date
+	        FROM(
+	        	SELECT
+	        		ROWNUM AS rn, csc.cs_name, cu.cu_id, cu.cu_title, cu.cu_date
+				FROM
+					user_ u,
+			        contact_us cu,
+			        cs_category csc
+				WHERE
+					ROWNUM <= #{pageNum} * #{amount}
+					AND cu.user_id=u.user_id
+        			AND cu.cs_category_id=csc.cs_category_id
+			)
+	        WHERE
+	        	rn > (#{pageNum} -1) * #{amount}
+    	]]>
+	</select>
+	
+	<!-- 문의사항 - 1:1 문의 리스트 갯수 -->
+	<select id="getContactUsTotal" resultType="int">
+		SELECT COUNT(*) FROM contact_us
+	</select>
+	
+	<!-- 통계 - 월별 신규 회원 -->
+	<select id="getMonthlyNewUser" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				NVL(SUM(a.cnt), 0) cnt
+			FROM(SELECT
+			        TO_CHAR(user_join_date, 'YYYY-MM-DD') AS user_join_date, COUNT(*) cnt
+			    FROM
+			        user_
+			    WHERE
+			        user_join_date BETWEEN TRUNC(sysdate, 'YYYY') AND TRUNC(sysdate, 'YYYY')+365 AND user_delete != 'Y'
+			    GROUP BY
+			        user_join_date
+			    ) a,
+			    (SELECT
+			        TRUNC(sysdate, 'YYYY') + LEVEL - 1 AS dt
+			    FROM
+			        dual
+			    CONNECT BY LEVEL <= (TRUNC(sysdate, 'YYYY')+365 - TRUNC(sysdate, 'YYYY'))
+			    ) b
+			WHERE
+			    b.dt = a.user_join_date(+)
+			GROUP BY
+				TO_CHAR(b.dt, 'YYYY-MM')
+			ORDER BY
+				TO_CHAR(b.dt, 'YYYY-MM')
+		]]>
+	</select>
+	
+	<!-- 통계 - 월별 탈퇴 회원 -->
+	<select id="getMonthlyWithdrawalUser" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+			    NVL(SUM(a.cnt), 0) cnt
+			FROM(SELECT
+			        TO_CHAR(delete_date, 'YYYY-MM-DD') AS delete_date, COUNT(*) cnt
+			    FROM
+			        delete_account
+			    WHERE
+			        delete_date BETWEEN TRUNC(sysdate, 'YYYY') AND TRUNC(sysdate, 'YYYY')+365
+			    GROUP BY
+			        delete_date
+			    ) a,
+			    (SELECT
+			        TRUNC(sysdate, 'YYYY') + LEVEL - 1 AS dt
+			    FROM
+			        dual
+			    CONNECT BY LEVEL <= (TRUNC(sysdate, 'YYYY')+365 - TRUNC(sysdate, 'YYYY'))
+			    ) b
+			WHERE
+			    b.dt = a.delete_date(+)
+			GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
+			ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
+		]]>
+	</select>
+	
+	<!-- 통계 - 일일 방문자 -->
+	<select id="getDailyVisit" resultType="java.lang.Integer">
+		SELECT cud_count FROM count_user_date WHERE cud_date BETWEEN sysdate-14 AND sysdate
 	</select>
 </mapper>
 

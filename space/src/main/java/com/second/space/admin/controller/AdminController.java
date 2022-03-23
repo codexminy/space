@@ -1,7 +1,5 @@
 package com.second.space.admin.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.second.space.admin.model.NoticeDTO;
-import com.second.space.admin.model.Notice_categoryDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.service.AdminService;
 
@@ -67,6 +64,40 @@ public class AdminController {
 	@GetMapping("/admin/notice/update")
 	public void noticeUpdate(@ModelAttribute("dto") NoticeDTO dto) {
 		
+	}
+	
+	@GetMapping("/admin/user/list")
+	public void userList() {
+		
+	}
+	
+	@GetMapping("/admin/user/withdrawalList")
+	public void userWithdrawalList() {
+		
+	}
+	
+	@GetMapping("/admin/board/sale")
+	public void saleList() {
+		
+	}
+	
+	@GetMapping("/admin/board/community")
+	public void communityList() {
+		
+	}
+	
+	@GetMapping("/admin/admin/list")
+	public void adminList() {
+		
+	}
+	
+	@GetMapping("/admin/enquiry/contactUs")
+	public void contactUsList() {
+		
+	}
+	
+	@GetMapping("/admin/stats/stats")
+	public void statsList() {
 	}
 }
 
