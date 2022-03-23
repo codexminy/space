@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.second.space.admin.model.Notification_boardDTO;
+import com.second.space.admin.model.Notification_cmtDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.community.service.CommunityService;
 
@@ -73,7 +73,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/comment_write")
-	public String communityCommentWrite(CommunityCommentDTO list, HttpServletRequest request, Model model) {
+	public String communityCommentWrite(CommunityCommentDTO list, Model model) {
 		try {
 			System.out.println("보냈다");
 			model.addAttribute(community_service.newCommunityComment(list));
@@ -86,21 +86,44 @@ public class CommunityController {
 		return "redirect:/community/main";
 	}
 	
-	@GetMapping("/report")
-	public String communityReportWrite(Model model) {
+	@GetMapping("/board_report")
+	public String communityBoardReportWrite(Model model) {
 		try {
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/community/report";
+		return "/community/board_report";
 	}
 	
-	@PostMapping("/report/process")
-	public String communityReportProcess(Notification_boardDTO list, HttpServletRequest request, Model model) {
+	@PostMapping("/board_report/process")
+	public String communityBoardReportProcess(Notification_boardDTO list, Model model) {
 		try {
 			System.out.println("보냈다");
 			model.addAttribute(community_service.newNotificationBoard(list));
+		} catch (Exception e) {
+			System.out.println("안보냈다");
+			e.printStackTrace();
+		}
+		return "/community/exit";
+	}
+	
+	@GetMapping("/comment_report")
+	public String communityCommentReportWrite(Model model) {
+		try {
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/community/comment_report";
+	}
+	
+	@PostMapping("/comment_report/process")
+	public String communityCommentReportProcess(Notification_cmtDTO list, Model model) {
+		try {
+			System.out.println("보냈다");
+			model.addAttribute(community_service.newNotificationCmt(list));
 		} catch (Exception e) {
 			System.out.println("안보냈다");
 			e.printStackTrace();

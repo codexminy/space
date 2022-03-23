@@ -67,7 +67,10 @@
 									</ul>
 									<div class='c_comment_content'>${c_comment_list.c_content }</div>
 									<ul class='c_comment_option'>
-										<li>신고하기</li>
+										<li class='comment_report'>신고하기
+											<p class='data_board_id2'>${c_comment_list.c_board_id }</p>
+											<p class='data_comment_id'>${c_comment_list.c_id }</p>
+										</li>
 										<li class='reply_write'>답글쓰기
 										</li>
 									</ul>
@@ -94,7 +97,10 @@
 										</ul>
 										<div class='c_comment_content'>${c_comment_list2.c_content }</div>
 										<ul class='c_comment_option'>
-											<li>신고하기</li>
+											<li class='comment_report'>신고하기
+												<p class='data_board_id2'>${c_comment_list2.c_board_id }</p>
+												<p class='data_comment_id'>${c_comment_list2.c_id }</p>
+											</li>
 											<li class='rereply_write'>답글쓰기</li>
 										</ul>
 									</div>
@@ -120,7 +126,10 @@
 											</ul>
 											<div class='c_comment_content'>${c_comment_list3.c_content }</div>
 											<ul class='c_comment_option'>
-												<li>신고하기</li>
+												<li class='comment_report'>신고하기
+													<p class='data_board_id2'>${c_comment_list3.c_board_id }</p>
+													<p class='data_comment_id'>${c_comment_list3.c_id }</p>
+												</li>
 											</ul>
 										</div>					
 									</c:if>
@@ -150,6 +159,6 @@
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=2"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
 </body>
 </html>

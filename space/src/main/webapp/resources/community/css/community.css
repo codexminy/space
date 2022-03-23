@@ -163,6 +163,10 @@ main > ul > li {
 .c_board > .c_comment .c_comment_option > li:hover {
 	cursor: pointer;
 }
+.c_board > .c_comment .c_comment_option .data_board_id2,
+.c_board > .c_comment .c_comment_option .data_comment_id{
+	display: none;
+}
 .c_board > .c_comment .c_comment_content {
 	display:block;
 	margin: 0 20px;

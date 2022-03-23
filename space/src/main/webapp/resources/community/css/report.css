@@ -8,6 +8,10 @@ p{
 	font-size : 18px;
 	margin: 20px;
 }
+.c_content{
+	font-size:16px;
+	margin-left: 40px;
+}
 .report_textarea {
 	margin: 0 20px 20px 20px;
 }

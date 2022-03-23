@@ -66,7 +66,7 @@ for(let i=0; i<rereply_write.length; ++i) {
 
 const view_report = document.querySelectorAll('.view_report');
 const data_board_id = document.querySelectorAll('.data_board_id');
-for(let i=0; i<rereply_write.length; ++i) {
+for(let i=0; i<view_report.length; ++i) {
     view_report[i].addEventListener('click', () =>{
 		if(hello.innerText == ""){
 			alert("로그인이 필요합니다.")
@@ -76,8 +76,28 @@ for(let i=0; i<rereply_write.length; ++i) {
 			var center_left = Math.ceil((window.screen.width - center_width)/2);
     		var center_top = Math.ceil((window.screen.height - center_height)/2);
     		var uid = data_board_id[i].innerText;
-    		var url = "report?uid="+uid;
-	        window.open(url,"report_page",'width='+ center_width +', height='+ center_height +', left=' + center_left + ', top='+ center_top);
+    		var url = "board_report?uid="+uid;
+	        window.open(url,"board_report",'width='+ center_width +', height='+ center_height +', left=' + center_left + ', top='+ center_top);
+		}
+    });
+}
+
+const comment_report = document.querySelectorAll('.comment_report');
+const data_board_id2 = document.querySelectorAll('.data_board_id2');
+const data_comment_id = document.querySelectorAll('.data_comment_id');
+for(let i=0; i<comment_report.length; ++i) {
+    comment_report[i].addEventListener('click', () =>{
+		if(hello.innerText == ""){
+			alert("로그인이 필요합니다.")
+		} else {
+			var center_width = '600';
+    		var center_height = '250';
+			var center_left = Math.ceil((window.screen.width - center_width)/2);
+    		var center_top = Math.ceil((window.screen.height - center_height)/2);
+    		var uid1 = data_board_id2[i].innerText;
+    		var uid2 = data_comment_id[i].innerText;
+    		var url = "comment_report?uid1="+uid1+"&uid2="+uid2;
+	        window.open(url,"comment_report",'width='+ center_width +', height='+ center_height +', left=' + center_left + ', top='+ center_top);
 		}
     });
 }
