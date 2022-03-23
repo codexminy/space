@@ -7,6 +7,7 @@ import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
+import com.second.space.admin.model.UserDTO;
 
 public interface AdminService {
 
@@ -34,4 +35,46 @@ public interface AdminService {
 	
 	public List<Notice_categoryDTO> getNoticeCategory() throws Exception; // 공지사항 - 카테고리 리스트
 	
+	public int insertNotice(NoticeDTO dto) throws Exception; // 공지사항 - 신규 등록
+	
+	public List<UserDTO> getAllUserList(PageSet ps) throws Exception; // 회원 관리 - 목록 리스트
+	
+	public int getUserTotal() throws Exception; // 회원 관리 - 목록 전체 갯수
+	
+	public List<UserDTO> getAllWithdrawalList(PageSet ps) throws Exception; // 회원 관리 - 탈퇴 회원 리스트
+	
+	public int getWithdrawalTotal() throws Exception; // 회원 관리 - 탈퇴 회원 전체 갯수
+	
+	public List<UserDTO> getAllSaleList(PageSet ps) throws Exception; // 게시물 관리 - 장터 게시물 리스트
+	
+	public int getSaleTotal() throws Exception; // 게시물 관리 - 장터 게시물 갯수
+	
+	public List<UserDTO> getAllCommunityList(PageSet ps) throws Exception; // 게시물 관리 - 장터 게시물 리스트
+	
+	public int getCommunityTotal() throws Exception; // 게시물 관리 - 장터 게시물 갯수
+	
+	public List<UserDTO> getAllNoticeAdminList(PageSet ps) throws Exception; // 관리자 공지 - 목록 리스트
+	
+	public int getNoticeAdminTotal() throws Exception; // 관리자 공지 - 목록 갯수
+	
+	public List<UserDTO> getAllContactUsList(PageSet ps) throws Exception; // 문의사항 - 1:1 문의 리스트
+	
+	public int getContactUsTotal() throws Exception; // 문의사항 - 1:1 문의 리스트 갯수
+	
+	public List<Integer> getMonthlyNewUser() throws Exception; // 통계 - 월별 성별 기준 신규 회원
+	
+	public List<Integer> getMonthlyWithdrawalUser() throws Exception; // 통계 - 월별 탈퇴 회원
+	
+	public List<Integer> getDailyVisit() throws Exception; // 일일 방문자수
+	
 }
+
+
+
+
+
+
+
+
+
+

@@ -22,6 +22,7 @@ public class NoticeDTO {
 	private String notice_img;
 	private String notice_delete;
 	private int notice_view;
+	private int noc_id;
 	@JsonIgnore
 	private List<MultipartFile> uploadFile;
 	private Notice_categoryDTO ncDTO;
