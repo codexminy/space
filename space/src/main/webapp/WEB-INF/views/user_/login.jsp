@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath}/resources/user_/js/login.js" rel="stylesheet"/> 
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="wrap">
+	<div id="wraplogin">
         <div class="wrap-login-logo">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
         </div>
@@ -38,13 +38,13 @@
                 </div>
                 <div class="social-login">
                     <ul>
-                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/google.png" alt="구글"></a></li>
-                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/naver.png" alt="네이버"></a></li>
-                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/kakao.png" alt="카카오"></a></li>
+                        <li class="google"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/google.png" alt="구글">구글 계정으로 로그인</a></li>
+                        <li class="naver"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/naver.png" alt="네이버">네이버 계정으로 로그인</a></li>
+                        <li class="kakao"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/user_/kakao.png" alt="카카오">카카오 계정으로 로그인</a></li>
                     </ul>
                 </div>
             </div> 
-        </div>
+     	</div>
     </div>
     <jsp:include page="../main/footer.jsp"></jsp:include> 
 </body>

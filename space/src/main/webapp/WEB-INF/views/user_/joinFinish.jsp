@@ -7,11 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 완료</title>
-</head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user_/css/joinFinish.css" />
+</head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="wrap">
+	<div id="wrapjoinFinish">
         <div class="wrap-login-logo">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
         </div>

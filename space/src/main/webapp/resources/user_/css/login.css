@@ -5,9 +5,10 @@
     box-sizing: border-box;
     text-decoration : none;    
 }
-#wrap{
-    width: 1200px;
-    margin: 0 auto;
+#wraplogin{
+	width : 1200px;
+	padding: 0 360px 100px 360px;
+	margin: 0 auto;
 }
 .wrap-login-logo{
     margin: 30px 150px;
@@ -45,30 +46,57 @@ input[type="password"] {
 }
 .wrap-login .login-box #loginform #submit{
     background-color:#22007F;
-    color: #fff;
     width: 370px;
     height: 50px;
     text-align: center;
     margin-left: 40px;
-    font-size: 20px;
-    
+    font-size: 20px;  
+    border-radius: 5px;  
+}
+span{
+	color: #fff;
 }
 .wrap-login .login-box .login-option{
-   margin: 20px 50px 50px 50px;  
+	width :1200px;
+    margin: 20px 70px 50px 55px;  
 }
 .wrap-login .login-box .login-option ul li{
     display: inline-block;
-    padding-right: 10px;
+    text-align : center;
+    padding: 0 8px;
+    
 }
 .wrap-login .login-box .social-login{
     display: flex;
     overflow: hidden;
 }
 .wrap-login .login-box .social-login ul li{
-    padding-bottom: 15px;
-    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size :25px;
 }
 .wrap-login .login-box .social-login ul li img{
-    width: 450px;
+    width: 24.5px;
+    height: 25px;
+    margin: 0 65px 0 20px;
+}
+.google{
+	color: #fff;
+	background-color: #F46055;
+	width: 450px;
+    height: 50px;
+    
+}
+.naver{
+	color: #fff;
+	background-color: #04CF5C;
+	width: 450px;
+    height: 50px;
+}
+.kakao{
+	color: #fff;
+	background-color: #FFCD00;
+	width: 450px;
     height: 50px;
 }
