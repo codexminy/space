@@ -64,9 +64,9 @@ public class AdminRESTController {
 	}
 	
 	@PostMapping(value = "/admin/page/banner/create")
-	public ResponseEntity<Notification_adDTO> createBanner(Notification_adDTO dto) throws Exception {
-		String path = "C:\\javaWeb\\repository\\space\\space\\src\\main\\webapp\\resources";
-		String root = path + "\\images\\notification_ad";
+	public ResponseEntity<Notification_adDTO> createBanner(Notification_adDTO dto, HttpServletRequest request) throws Exception {
+		String path = request.getSession().getServletContext().getRealPath("");
+		String root = path + "resources/images/notification_ad";
 		
 		File fileCheck = new File(path);
 		
@@ -187,8 +187,8 @@ public class AdminRESTController {
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request)  {
 		HashMap<String, Object> result = new HashMap<>();
 		
-		String contextRoot = "C:\\javaWeb\\repository\\space\\space\\src\\main\\webapp\\resources";
-		String fileRoot = contextRoot + "\\images\\notice\\";
+		String contextRoot = request.getSession().getServletContext().getRealPath("");
+		String fileRoot = contextRoot + "resources/images/notice/";
 		String originalFileName = multipartFile.getOriginalFilename(); //오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; //저장될 파일 명
