@@ -86,6 +86,20 @@ public class CommunityController {
 		return "redirect:/community/main";
 	}
 	
+	@PostMapping("/reply_write")
+	public String communityReplyWrite(CommunityCommentDTO list, Model model) {
+		try {
+			System.out.println("보냈다");
+			model.addAttribute(community_service.newCommunityCommentReply(list));
+			log.info("INSERT");
+		} catch (Exception e) {
+			System.out.println("안보냈다");
+			e.printStackTrace();
+			log.info("Error");
+		}
+		return "redirect:/community/main";
+	}
+	
 	@GetMapping("/board_report")
 	public String communityBoardReportWrite(Model model) {
 		try {
