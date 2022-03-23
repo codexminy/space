@@ -55,6 +55,17 @@ public class CommunityController {
 		return "redirect:/community/main";
 	}
 	
+	@PostMapping("/c_board_write")
+	public String communityBoardWrite(Model model) {
+		System.out.println("글쓰기.jsp");
+		try {
+			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/community/board_write";
+	}
+	
 	@RequestMapping("/category")
 	public String community1(HttpServletRequest request, Model model) {
 		System.out.println("community category_id : "+request.getParameter("id")+"(으)로 이동");

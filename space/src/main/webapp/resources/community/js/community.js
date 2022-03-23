@@ -18,6 +18,18 @@ if(hello.innerText == ""){
 	document.querySelector('.input_login').classList.remove('active');
 }
 
+/* 글쓰기(POST) */
+const board_write = document.getElementById('board_write');
+const board_write_on = document.getElementById('board_write_on');
+board_write.addEventListener('click', () =>{
+	if(hello.innerText == ""){
+		alert("로그인이 필요합니다.")
+	} else {
+        board_write_on.submit();
+	}
+});
+
+/* 댓글보기 토글 */
 const view_comment = document.querySelectorAll('.view_comment');
 for(let i=0; i<view_comment.length; ++i) {
     view_comment[i].addEventListener('click', () =>{
@@ -32,6 +44,7 @@ for(let i=0; i<view_comment.length; ++i) {
     });
 }
 
+/* 댓글쓰기 토글 */
 const reply_write = document.querySelectorAll('.reply_write');
 for(let i=0; i<reply_write.length; ++i) {
     reply_write[i].addEventListener('click', () =>{
@@ -48,6 +61,7 @@ for(let i=0; i<reply_write.length; ++i) {
     });
 }
 
+/* 대댓글쓰기 토글 */
 const rereply_write = document.querySelectorAll('.rereply_write');
 for(let i=0; i<rereply_write.length; ++i) {
     rereply_write[i].addEventListener('click', () =>{
@@ -64,6 +78,7 @@ for(let i=0; i<rereply_write.length; ++i) {
     });
 }
 
+/* 게시글 신고 팝업 */
 const view_report = document.querySelectorAll('.view_report');
 const data_board_id = document.querySelectorAll('.data_board_id');
 for(let i=0; i<view_report.length; ++i) {
@@ -82,6 +97,7 @@ for(let i=0; i<view_report.length; ++i) {
     });
 }
 
+/* 댓글 신고 팝업 */
 const comment_report = document.querySelectorAll('.comment_report');
 const data_board_id2 = document.querySelectorAll('.data_board_id2');
 const data_comment_id = document.querySelectorAll('.data_comment_id');

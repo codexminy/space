@@ -6,7 +6,7 @@
 <head>
 	<title>우주장터</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=3" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=2" />
 </head>
 <body>
 	<div>
@@ -28,6 +28,11 @@
 					<li><a href="category?id=${c_category_list.c_category_id }">${c_category_list.c_category_name }</a></li>
 				</c:forEach>
 			</ul>
+			<div class="flex-end">
+				<div id="board_write">글쓰기
+					<form id="board_write_on" action="./c_board_write" method="POST"/>
+				</div>
+			</div>
 			<c:forEach items="${c_board_list }" var="c_board_list">
 				<div class='c_board'>
 					<div class='c_category'>${c_board_list.c_category_name }</div>
