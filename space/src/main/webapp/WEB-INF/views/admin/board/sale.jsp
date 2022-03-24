@@ -68,6 +68,32 @@
 			getLoad();
 		});
 		
+		function hiddenFunc(board_hidden, value, message) {
+			$.ajax({
+				url : "${path}/admin/board/board/" + board_hidden + "/" + value,
+				type: "PUT",
+				success : function(result) {
+					getLoad();
+					alert('게시글 '+ message +' 완료되었습니다.');
+				},
+				error : function(result) {
+					alert('error : 요청 실패');
+				}
+			});
+		}
+		
+		function hiddenBtn(value) {
+			if(confirm('게시글을 숨기시겠습니까?')) {
+				hiddenFunc('Y', value, '숨김이');
+			}
+		}
+		
+		function visibleBtn(value) {
+			if(confirm('게시글을 숨김 해제하시겠습니까?')) {
+				hiddenFunc('N', value, '숨김 해제가');
+			}
+		}
+		
 		function formatDate(date) {
 		    let d = new Date(date);
 		    let month = '' + (d.getMonth() + 1);
@@ -79,7 +105,7 @@
 		    
 		    return [year, month, day].join('-');
 	    }
-
+		
 		function getLoad(page) {
 			const saleList = $('.sale-list');
 			const pagenation = $('.paging');
@@ -119,7 +145,13 @@
 						listData += "<td>" + list[i].pcDTO.p_category_name + "</td>";
 						listData += "<td>" + list[i].abDTO.board_title + "</td>";
 						listData += "<td>" + formatDate(list[i].abDTO.board_date) + "</td>";
-						listData += "<td>" + list[i].abDTO.board_hidden + "</td>";
+						
+						if(list[i].abDTO.board_hidden === 'N') {
+							listData += '<td><button type="button" class="hiddenBtn" onclick="hiddenBtn('+ list[i].abDTO.board_id +')">숨기기<i class="fa-solid fa-angle-right"></i></button></td>';
+						} else {
+							listData += '<td><button type="button" class="visibleBtn" onclick="visibleBtn('+ list[i].abDTO.board_id +')">숨겨짐<i class="fa-solid fa-angle-right"></i></button></td>';
+						}
+						
 						listData += "</tr>";
 					}
 					

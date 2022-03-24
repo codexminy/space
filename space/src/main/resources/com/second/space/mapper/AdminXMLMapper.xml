@@ -240,6 +240,143 @@
  		<collection property="aeDTO" resultMap="Admin_empDTO"/>
  	</resultMap>
 
+	<resultMap type="com.second.space.admin.model.Notice_categoryDTO" id="Notice_categoryDTO">
+	    <result column="noc_id" property="noc_id"/>
+	    <result column="noc_name" property="noc_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.NoticeDTO" id="NoticeDTO">
+		<result column="rn" property="rn"/>
+ 		<result column="notice_id" property="notice_id"/>
+ 		<result column="notice_title" property="notice_title"/>
+ 		<result column="notice_content" property="notice_content"/>
+ 		<result column="user_id" property="user_id"/>
+ 		<result column="notice_date" property="notice_date"/>
+ 		<result column="notice_img" property="notice_img"/>
+ 		<result column="notice_delete" property="notice_delete"/>
+ 		<result column="notice_view" property="notice_view"/>
+ 		<collection property="ncDTO" resultMap="Notice_categoryDTO"/>
+ 	</resultMap>
+
+	<resultMap type="com.second.space.admin.model.Login_id_listDTO" id="Login_id_listDTO">
+	    <result column="user_login_id" property="user_login_id"/>
+	    <result column="login_id" property="login_id"/>
+	    <result column="login_id_1" property="login_id_1"/>
+	    <result column="login_id_2" property="login_id_2"/>
+	    <result column="user_login_type" property="user_login_type"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Delete_accountDTO" id="Delete_accountDTO">
+	    <result column="delete_id" property="delete_id"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="delete_reason" property="delete_reason"/>
+	    <result column="delete_date" property="delete_date"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.board.model.PaymentsCategoryDTO" id="PaymentsCategoryDTO">
+	    <result column="p_category_id" property="p_category_id"/>
+	    <result column="p_category_name" property="p_category_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.community.model.CommunityCategoryDTO" id="CommunityCategoryDTO">
+	    <result column="c_category_id" property="c_category_id"/>
+	    <result column="c_category_name" property="c_category_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.A_boardDTO" id="A_boardDTO">
+	    <result column="board_id" property="board_id"/>
+	    <result column="board_title" property="board_title"/>
+	    <result column="board_content" property="board_content"/>
+	    <result column="board_price" property="board_price"/>
+	    <result column="board_trade_type" property="board_trade_type"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="board_view" property="board_view"/>
+	    <result column="board_date" property="board_date"/>
+	    <result column="board_delete" property="board_delete"/>
+	    <result column="board_state" property="board_state"/>
+	    <result column="auction_state" property="auction_state"/>
+	    <result column="board_hidden" property="board_hidden"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.A_Community_boardDTO" id="A_Community_boardDTO">
+	    <result column="c_board_id" property="c_board_id"/>
+	    <result column="c_board_title" property="c_board_title"/>
+	    <result column="c_category_id" property="c_category_id"/>
+	    <result column="c_board_content" property="c_board_content"/>
+	    <result column="c_board_img" property="c_board_img"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="c_board_view" property="c_board_view"/>
+	    <result column="c_board_date" property="c_board_date"/>
+	    <result column="c_board_delete" property="c_board_delete"/>
+	    <result column="c_board_hidden" property="c_board_hidden"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Cs_categoryDTO" id="Cs_categoryDTO">
+	    <result column="cs_category_id" property="cs_category_id"/>
+	    <result column="cs_name" property="cs_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Contact_usDTO" id="Contact_usDTO">
+	    <result column="cu_id" property="cu_id"/>
+	    <result column="cs_category_id" property="cs_category_id"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="cu_title" property="cu_title"/>
+	    <result column="cu_content" property="cu_content"/>
+	    <result column="cu_img" property="cu_img"/>
+	    <result column="cu_date" property="cu_date"/>
+	    <result column="cu_state" property="cu_state"/>
+	    <result column="c_board_delete" property="c_board_delete"/>
+	    <result column="c_board_hidden" property="c_board_hidden"/>
+	    <collection property="cscDTO" resultMap="Cs_categoryDTO"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Notification_boardDTO" id="Notification_boardDTO">
+	    <result column="n_id" property="n_id"/>
+	    <result column="board_id" property="board_id"/>
+	    <result column="c_board_id" property="c_board_id"/>
+	    <result column="n_handling" property="n_handling"/>
+	    <result column="user_id" property="user_id"/>
+	    <result column="n_notify_date" property="n_notify_date"/>
+	    <result column="nfc_id" property="nfc_id"/>
+	    <result column="n_content" property="n_content"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.Notification_categoryDTO" id="Notification_categoryDTO">
+	    <result column="nfc_id" property="nfc_id"/>
+	    <result column="nfc_name" property="nfc_name"/>
+	</resultMap>
+	
+	<resultMap type="com.second.space.admin.model.UserDTO" id="UserDTO">
+		<result column="rn" property="rn"/>
+ 		<result column="user_id" property="user_id"/>
+ 		<result column="user_phone" property="user_phone"/>
+ 		<result column="user_password" property="user_password"/>
+ 		<result column="user_admin" property="user_admin"/>
+ 		<result column="user_login_id" property="user_login_id"/>
+ 		<result column="user_nickname" property="user_nickname"/>
+ 		<result column="user_address" property="user_address"/>
+ 		<result column="user_gender" property="user_gender"/>
+ 		<result column="user_name" property="user_name"/>
+ 		<result column="user_ban" property="user_ban"/>
+ 		<result column="user_join_date" property="user_join_date"/>
+ 		<result column="user_profile" property="user_profile"/>
+ 		<result column="user_following" property="user_following"/>
+ 		<result column="user_followed" property="user_followed"/>
+ 		<result column="user_check_email" property="user_check_email"/>
+ 		<result column="user_public_profile" property="user_public_profile"/>
+ 		<result column="user_delete" property="user_delete"/>
+ 		<result column="user_reported" property="user_reported"/>
+ 		<collection property="lilDTO" resultMap="Login_id_listDTO"/>
+ 		<collection property="daDTO" resultMap="Delete_accountDTO"/>
+ 		<collection property="pcDTO" resultMap="PaymentsCategoryDTO"/>
+ 		<collection property="abDTO" resultMap="A_boardDTO"/>
+ 		<collection property="acbDTO" resultMap="A_Community_boardDTO"/>
+ 		<collection property="ccDTO" resultMap="CommunityCategoryDTO"/>
+ 		<collection property="naDTO" resultMap="Notice_adminDTO"/>
+ 		<collection property="nbDTO" resultMap="Notification_boardDTO"/>
+ 		<collection property="ncDTO" resultMap="Notification_categoryDTO"/>
+ 	</resultMap>
+
 	<!-- 홈 - 어드민 안내 리스트 -->
 	<select id="getNoticeAdminList" resultMap="Notice_adminDTO">
 		SELECT * FROM notice_admin INNER JOIN admin_category USING(ac_id) INNER JOIN admin_emp USING(ae_id)
@@ -347,25 +484,7 @@
 	            <include refid="bannerSearch"></include>
 	        </if>
 	</select>
-	
-	<resultMap type="com.second.space.admin.model.Notice_categoryDTO" id="Notice_categoryDTO">
-	    <result column="noc_id" property="noc_id"/>
-	    <result column="noc_name" property="noc_name"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.NoticeDTO" id="NoticeDTO">
-		<result column="rn" property="rn"/>
- 		<result column="notice_id" property="notice_id"/>
- 		<result column="notice_title" property="notice_title"/>
- 		<result column="notice_content" property="notice_content"/>
- 		<result column="user_id" property="user_id"/>
- 		<result column="notice_date" property="notice_date"/>
- 		<result column="notice_img" property="notice_img"/>
- 		<result column="notice_delete" property="notice_delete"/>
- 		<result column="notice_view" property="notice_view"/>
- 		<collection property="ncDTO" resultMap="Notice_categoryDTO"/>
- 	</resultMap>
-	
+
 	<!-- 공지사항 - 목록 리스트 -->
 	<select id="getAllNoticeList" resultMap="NoticeDTO">
 	        SELECT
@@ -429,107 +548,7 @@
 	<delete id="deleteNotice">
 		DELETE FROM notice WHERE notice_id = #{notice_id}
 	</delete>
-	
-	<resultMap type="com.second.space.admin.model.Login_id_listDTO" id="Login_id_listDTO">
-	    <result column="user_login_id" property="user_login_id"/>
-	    <result column="login_id" property="login_id"/>
-	    <result column="user_login_type" property="user_login_type"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.Delete_accountDTO" id="Delete_accountDTO">
-	    <result column="delete_id" property="delete_id"/>
-	    <result column="user_id" property="user_id"/>
-	    <result column="delete_reason" property="delete_reason"/>
-	    <result column="delete_date" property="delete_date"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.board.model.PaymentsCategoryDTO" id="PaymentsCategoryDTO">
-	    <result column="p_category_id" property="p_category_id"/>
-	    <result column="p_category_name" property="p_category_name"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.community.model.CommunityCategoryDTO" id="CommunityCategoryDTO">
-	    <result column="c_category_id" property="c_category_id"/>
-	    <result column="c_category_name" property="c_category_name"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.A_boardDTO" id="A_boardDTO">
-	    <result column="board_id" property="board_id"/>
-	    <result column="board_title" property="board_title"/>
-	    <result column="board_content" property="board_content"/>
-	    <result column="board_price" property="board_price"/>
-	    <result column="board_trade_type" property="board_trade_type"/>
-	    <result column="user_id" property="user_id"/>
-	    <result column="board_view" property="board_view"/>
-	    <result column="board_date" property="board_date"/>
-	    <result column="board_delete" property="board_delete"/>
-	    <result column="board_state" property="board_state"/>
-	    <result column="auction_state" property="auction_state"/>
-	    <result column="board_hidden" property="board_hidden"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.A_Community_boardDTO" id="A_Community_boardDTO">
-	    <result column="c_board_id" property="c_board_id"/>
-	    <result column="c_board_title" property="c_board_title"/>
-	    <result column="c_category_id" property="c_category_id"/>
-	    <result column="c_board_content" property="c_board_content"/>
-	    <result column="c_board_img" property="c_board_img"/>
-	    <result column="user_id" property="user_id"/>
-	    <result column="c_board_view" property="c_board_view"/>
-	    <result column="c_board_date" property="c_board_date"/>
-	    <result column="c_board_delete" property="c_board_delete"/>
-	    <result column="c_board_hidden" property="c_board_hidden"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.Cs_categoryDTO" id="Cs_categoryDTO">
-	    <result column="cs_category_id" property="cs_category_id"/>
-	    <result column="cs_name" property="cs_name"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.Contact_usDTO" id="Contact_usDTO">
-	    <result column="cu_id" property="cu_id"/>
-	    <result column="cs_category_id" property="cs_category_id"/>
-	    <result column="user_id" property="user_id"/>
-	    <result column="cu_title" property="cu_title"/>
-	    <result column="cu_content" property="cu_content"/>
-	    <result column="cu_img" property="cu_img"/>
-	    <result column="cu_date" property="cu_date"/>
-	    <result column="cu_state" property="cu_state"/>
-	    <result column="c_board_delete" property="c_board_delete"/>
-	    <result column="c_board_hidden" property="c_board_hidden"/>
-	    <collection property="cscDTO" resultMap="Cs_categoryDTO"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.UserDTO" id="UserDTO">
-		<result column="rn" property="rn"/>
- 		<result column="user_id" property="user_id"/>
- 		<result column="user_phone" property="user_phone"/>
- 		<result column="user_password" property="user_password"/>
- 		<result column="user_admin" property="user_admin"/>
- 		<result column="user_login_id" property="user_login_id"/>
- 		<result column="user_nickname" property="user_nickname"/>
- 		<result column="user_address" property="user_address"/>
- 		<result column="user_gender" property="user_gender"/>
- 		<result column="user_name" property="user_name"/>
- 		<result column="user_ban" property="user_ban"/>
- 		<result column="user_join_date" property="user_join_date"/>
- 		<result column="user_profile" property="user_profile"/>
- 		<result column="user_following" property="user_following"/>
- 		<result column="user_followed" property="user_followed"/>
- 		<result column="user_check_email" property="user_check_email"/>
- 		<result column="user_public_profile" property="user_public_profile"/>
- 		<result column="user_delete" property="user_delete"/>
- 		<result column="user_reported" property="user_reported"/>
- 		<collection property="lilDTO" resultMap="Login_id_listDTO"/>
- 		<collection property="daDTO" resultMap="Delete_accountDTO"/>
- 		<collection property="pcDTO" resultMap="PaymentsCategoryDTO"/>
- 		<collection property="abDTO" resultMap="A_boardDTO"/>
- 		<collection property="acbDTO" resultMap="A_Community_boardDTO"/>
- 		<collection property="ccDTO" resultMap="CommunityCategoryDTO"/>
- 		<collection property="naDTO" resultMap="Notice_adminDTO"/>
- 		<collection property="cuDTO" resultMap="Contact_usDTO"/>
- 	</resultMap>
- 	
+
  	<!-- 회원 관리 - 목록 리스트 -->
 	<select id="getAllUserList" resultMap="UserDTO">
 		SELECT
@@ -709,6 +728,11 @@
                 <include refid="communitySearch"></include> 
             </if>
 	</select>
+	
+	<!-- 게시물 관리 - 장터 게시물 숨김 처리 -->
+	<update id="updateHidden">
+		UPDATE board SET board_hidden = #{board_hidden} WHERE board_id = #{board_id}
+	</update>
 	
 	<!-- 관리자 공지 - 목록 리스트 -->
 	<select id="getAllNoticeAdminList" resultMap="UserDTO">
@@ -1029,15 +1053,7 @@
 		UNION ALL
 		SELECT COUNT(*) FROM community_board WHERE SUBSTR(c_board_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<!-- 통계 - 일일 게시글 신고 수 -->
 	<select id="getDailyBoardNotifyList" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
@@ -1144,7 +1160,7 @@
 		SELECT COUNT(*) FROM notification_cmt WHERE SUBSTR(nc_notify_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
 	</select>
 	
-	<!-- 통계 - 월별 댓글 신고 수 -->
+	<!-- 통계 - 월별 리뷰 신고 수 -->
 	<select id="getMonthlyReviewNotifyList" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
 		UNION ALL
@@ -1153,6 +1169,118 @@
 		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
 		UNION ALL
 		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	<!-- 신고 관리 - 게시글 신고 리스트-->
+	<select id="getBoardNotifyList" resultType="com.second.space.admin.model.BoardNotifyDTO">
+		WITH nb1(dump1, login_id_1, n_notify_date, user_id, board_id, c_board_id) AS
+		(SELECT
+		    n_id, login_id, n_notify_date, b.user_id, b.board_id, b.board_id
+		FROM
+		    notification_board nb, board b, user_ u, login_id_list lil
+		WHERE
+		    nb.board_id = b.board_id AND b.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		UNION ALL
+		SELECT
+		    n_id, login_id, n_notify_date, cb.user_id, cb.c_board_id, cb.c_board_id
+		FROM
+		    notification_board nb, community_board cb, user_ u, login_id_list lil
+		WHERE
+		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		),
+		nb2(dump2, login_id_2) AS
+		(SELECT
+		    n_id, login_id
+		FROM
+		    notification_board nb, user_ u, login_id_list lil
+		WHERE
+		    nb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		),
+		nb3(dump3, nfc_name) AS
+		(SELECT
+		    n_id, nfc_name
+		FROM
+		    notification_board nb, notification_category nc
+		WHERE
+		    nb.nfc_id = nc.nfc_id
+		),
+		nb4(dump4, user_reported) AS
+		(SELECT
+		    n_id, u.user_reported
+		FROM
+		    notification_board nb, board b, user_ u
+		WHERE
+		    nb.board_id = b.board_id AND b.user_id = u.user_id
+		UNION ALL
+		SELECT
+		    n_id, u.user_reported
+		FROM
+		    notification_board nb, community_board cb, user_ u
+		WHERE
+		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id
+		)
+		SELECT 
+		    nb1.login_id_1, nb1.n_notify_date, nb1.user_id, nb1.board_id, nb1.c_board_id, nb2.login_id_2, nb3.nfc_name, nb4.user_reported
+		FROM
+		  nb1, nb2, nb3, nb4
+		WHERE
+		    nb1.dump1 = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
+	</select>
+	
+	<!-- 신고 관리 - 게시글 신고 갯수-->
+	<select id="getBoardNotifyCount" resultType="int">
+		WITH nb1(dump1, login_id_1, n_notify_date, user_id, board_id, c_board_id) AS
+		(SELECT
+		    n_id, login_id, n_notify_date, b.user_id, b.board_id, b.board_id
+		FROM
+		    notification_board nb, board b, user_ u, login_id_list lil
+		WHERE
+		    nb.board_id = b.board_id AND b.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		UNION ALL
+		SELECT
+		    n_id, login_id, n_notify_date, cb.user_id, cb.c_board_id, cb.c_board_id
+		FROM
+		    notification_board nb, community_board cb, user_ u, login_id_list lil
+		WHERE
+		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		),
+		nb2(dump2, login_id_2) AS
+		(SELECT
+		    n_id, login_id
+		FROM
+		    notification_board nb, user_ u, login_id_list lil
+		WHERE
+		    nb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
+		),
+		nb3(dump3, nfc_name) AS
+		(SELECT
+		    n_id, nfc_name
+		FROM
+		    notification_board nb, notification_category nc
+		WHERE
+		    nb.nfc_id = nc.nfc_id
+		),
+		nb4(dump4, user_reported) AS
+		(SELECT
+		    n_id, u.user_reported
+		FROM
+		    notification_board nb, board b, user_ u
+		WHERE
+		    nb.board_id = b.board_id AND b.user_id = u.user_id
+		UNION ALL
+		SELECT
+		    n_id, u.user_reported
+		FROM
+		    notification_board nb, community_board cb, user_ u
+		WHERE
+		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id
+		)
+		SELECT 
+		    COUNT(*)
+		FROM
+		  nb1, nb2, nb3, nb4
+		WHERE
+		    nb1.dump1 = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
 	</select>
 </mapper>
 

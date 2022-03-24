@@ -71,6 +71,7 @@
 				                lineTension: 0,
 				                data: list[1],
 				                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				                borderColor: 'rgba(54, 162, 235, 0.2)',
 				                borderWidth: 1
 				            },
 				            {
@@ -78,13 +79,15 @@
 				                lineTension: 0,
 				                data: list[2],
 				                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				                borderColor: 'rgba(255, 99, 132, 0.2)',
 				                borderWidth: 1
 				            },
 				            {
 				                label: '리뷰',
 				                lineTension: 0,
 				                data: list[3],
-				                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+				                borderColor: 'rgba(255, 205, 86, 0.2)',
 				                borderWidth: 1
 				            }
 				        ]

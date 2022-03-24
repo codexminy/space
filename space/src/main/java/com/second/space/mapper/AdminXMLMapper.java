@@ -2,6 +2,8 @@ package com.second.space.mapper;
 
 import java.util.List;
 
+import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.BoardNotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
@@ -68,6 +70,8 @@ public interface AdminXMLMapper {
 	
 	public int getCommunityTotal(PageSet ps); // 게시물 관리 - 커뮤니티 게시물 갯수
 	
+	public int updateHidden(A_boardDTO dto); // 게시물 관리 - 장터 게시물 숨김 처리
+
 	public List<UserDTO> getAllNoticeAdminList(PageSet ps); // 관리자 공지 - 목록 리스트
 	
 	public int getNoticeAdminTotal(); // 관리자 공지 - 목록 갯수
@@ -129,6 +133,10 @@ public interface AdminXMLMapper {
 	public List<Integer> getMonthlyCmtNotifyList(); // 통계 - 월별 댓글 신고 수
 	
 	public List<Integer> getMonthlyReviewNotifyList(); // 통계 - 월별 댓글 신고 수
+	
+	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps); // 신고 관리 - 게시글 신고 리스트
+	
+	public int getBoardNotifyCount(PageSet ps); // 신고 관리 - 게시물 신고 갯수
 }
 
 

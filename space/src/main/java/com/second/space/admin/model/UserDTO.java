@@ -39,4 +39,7 @@ public class UserDTO {
 	private CommunityCategoryDTO ccDTO;
 	private Notice_adminDTO naDTO;
 	private Contact_usDTO cuDTO;
+	private Notification_boardDTO nbDTO;
+	private Notification_categoryDTO ncDTO;
+	
 }

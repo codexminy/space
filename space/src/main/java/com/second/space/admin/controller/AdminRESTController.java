@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
@@ -49,9 +50,13 @@ public class AdminRESTController {
 		
 	}
 	
-	@GetMapping(value = "/admin/page/notification", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<String, Object>> board() throws Exception {
+	@GetMapping(value = "/admin/notify/notify", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> board(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
+		
+		result.put("list", service.getBoardNotifyList(ps));
+		result.put("count", service.getBoardNotifyCount(ps));
+		
 		return ResponseEntity.ok(result);
 		
 	}
@@ -213,6 +218,18 @@ public class AdminRESTController {
 		result.put("paging", new Paging(service.getSaleTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
+	}
+	
+	@PutMapping(value = "/admin/board/board/{board_hidden}/{board_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<A_boardDTO> updateHidden(@PathVariable String board_hidden, @PathVariable int board_id) throws Exception {
+		A_boardDTO dto = new A_boardDTO();
+		
+		dto.setBoard_id(board_id);
+		dto.setBoard_hidden(board_hidden);
+		
+		service.updateHidden(dto);
+		
+		return ResponseEntity.ok(dto);
 	}
 	
 	@GetMapping(value = "/admin/page/board/community", produces = MediaType.APPLICATION_JSON_VALUE)

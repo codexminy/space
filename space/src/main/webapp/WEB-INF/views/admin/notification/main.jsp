@@ -45,10 +45,10 @@
 			const noti = $('.noti');
 			
 			$.ajax({
-				url : "${path}/admin/page/notification",
+				url : "${path}/admin/notify/notify",
 				type : "GET",
 				success : function(result) {
-					
+					alert('받아오기 성공!' + result['list'].length);
 				}
 			});
 		}
