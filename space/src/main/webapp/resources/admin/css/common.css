@@ -99,10 +99,6 @@ aside ul li a {
 	background-color: lightgray;
 }
 
-.list-wrap {
-	display: flex;
-}
-
 .list-wrap th {
 	padding: 20px;
 	background-color: lightgray;

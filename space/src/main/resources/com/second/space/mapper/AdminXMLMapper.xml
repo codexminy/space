@@ -3,6 +3,192 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.AdminXMLMapper">
+	<!-- 배너 검색 조건문 -->
+    <sql id="bannerSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+                            na_title like '%'||LOWER(#{keyword})||'%' OR na_title like '%'||UPPER(#{keyword})||'%'
+                            OR na_name like '%'||LOWER(#{keyword})||'%' OR na_name like '%'||UPPER(#{keyword})||'%'
+                            OR na_url like '%'||LOWER(#{keyword})||'%' OR na_url like '%'||LOWER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            na_title like '%'||LOWER(#{keyword})||'%' OR na_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            na_name like '%'||LOWER(#{keyword})||'%' OR na_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+
+    <!-- 공지사항 검색 조건문 -->
+    <sql id="noticeSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							notice_title like '%'||LOWER(#{keyword})||'%' OR notice_title like '%'||UPPER(#{keyword})||'%'
+							OR noc_name like '%'||LOWER(#{keyword})||'%' OR noc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            notice_title like '%'||LOWER(#{keyword})||'%' OR notice_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            noc_name like '%'||LOWER(#{keyword})||'%' OR noc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+   <!-- 회원관리 검색 조건문 -->
+    <sql id="userSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+							OR user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+							OR user_address like '%'||LOWER(#{keyword})||'%' OR user_address like '%'||UPPER(#{keyword})||'%'
+							OR user_phone like '%'||LOWER(#{keyword})||'%' OR user_phone like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+                        </when>
+						<when test="type == 'D'.toString()">
+						   user_address like '%'||LOWER(#{keyword})||'%' OR user_address like '%'||UPPER(#{keyword})||'%'
+						</when>
+						<when test="type == 'E'.toString()">
+						   user_phone like '%'||LOWER(#{keyword})||'%' OR user_phone like '%'||UPPER(#{keyword})||'%'
+						</when>
+						<when test="type == 'F'.toString()">
+						   login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+						</when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 문의사항 검색 조건문 -->
+    <sql id="contactUsSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							cs_name like '%'||LOWER(#{keyword})||'%' OR cs_name like '%'||UPPER(#{keyword})||'%'
+							OR cu_title like '%'||LOWER(#{keyword})||'%' OR cu_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            cs_name like '%'||LOWER(#{keyword})||'%' OR cs_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            cu_title like '%'||LOWER(#{keyword})||'%' OR cu_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 장터 게시글 검색 조건문 -->
+    <sql id="saleSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+							OR user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+							OR board_title like '%'||LOWER(#{keyword})||'%' OR board_title like '%'||UPPER(#{keyword})||'%'
+							OR p_category_name like '%'||LOWER(#{keyword})||'%' OR p_category_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'D'.toString()">
+                            p_category_name like '%'||LOWER(#{keyword})||'%' OR p_category_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'E'.toString()">
+                            board_title like '%'||LOWER(#{keyword})||'%' OR board_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 커뮤니티 게시글 검색 조건문 -->
+    <sql id="communitySearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+							OR user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+							OR c_board_title like '%'||LOWER(#{keyword})||'%' OR c_board_title like '%'||UPPER(#{keyword})||'%'
+							OR c_category_name like '%'||LOWER(#{keyword})||'%' OR c_category_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            login_id like '%'||LOWER(#{keyword})||'%' OR login_id like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            user_nickname like '%'||LOWER(#{keyword})||'%' OR user_nickname like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'D'.toString()">
+                            c_category_name like '%'||LOWER(#{keyword})||'%' OR c_category_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'E'.toString()">
+                           c_board_title like '%'||LOWER(#{keyword})||'%' OR c_board_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 관리자공지 게시글 검색 조건문 -->
+    <sql id="adminSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							ac_name like '%'||LOWER(#{keyword})||'%' OR ac_name like '%'||UPPER(#{keyword})||'%'
+							OR ae_name like '%'||LOWER(#{keyword})||'%' OR ae_name like '%'||UPPER(#{keyword})||'%'
+							OR notice_admin_title like '%'||LOWER(#{keyword})||'%' OR notice_admin_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            ac_name like '%'||LOWER(#{keyword})||'%' OR ac_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            ae_name like '%'||LOWER(#{keyword})||'%' OR ae_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'D'.toString()">
+                            notice_admin_title like '%'||LOWER(#{keyword})||'%' OR notice_admin_title like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+
 	<!-- 홈 - 신고 관리 접수 갯수 -->
 	<select id="getNotificationCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM notification_board /*WHERE n_notify_date BETWEEN sysdate-7 AND sysdate*/
@@ -61,25 +247,39 @@
 	
 	<!-- 배너관리 - 목록 리스트 -->
 	<select id="getAllNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
-		<![CDATA[
 	        SELECT
-	        	/*+INDEX_DESC(notification_id nad) */ rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+	        	rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
 	        FROM(
-	        	SELECT
-	        		ROWNUM AS rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
-				FROM
-					notification_ad
+		        SELECT
+		        	ROWNUM rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+		        FROM(
+		        	SELECT
+		        		na_id, na_title, na_name, na_url, na_start_date, na_end_date
+					FROM
+						notification_ad
+					<if test="keyword != null">
+	                    WHERE na_id > 0 <include refid="bannerSearch"></include> 
+	                </if>
+					ORDER BY
+						na_end_date DESC
+				)
+		<![CDATA[
 				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-			)
+					na_end_date > sysdate-1
+	        )
 	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
     	]]>
 	</select>
 	
 	<!-- 배너관리 - 목록 전체 갯수 -->
 	<select id="getNotificationAdTotal" resultType="int">
-		SELECT COUNT(*) FROM notification_ad
+		<![CDATA[
+			SELECT COUNT(*) FROM notification_ad WHERE na_end_date > sysdate-1
+		]]>
+			<if test="keyword != null">
+	            <include refid="bannerSearch"></include>
+	        </if>
 	</select>
 	
 	<!-- 배너관리 - 신규 등록 -->
@@ -93,6 +293,59 @@
 	<!-- 배너관리 - 상세 정보 -->
 	<select id="getNotificationAdDetail" resultType="com.second.space.admin.model.Notification_adDTO">
 		SELECT * FROM notification_ad WHERE na_id = #{na_id}
+	</select>
+	
+	<!-- 배너관리 - 수정 -->
+	<update id="updateBanner">
+		UPDATE
+			notification_ad
+		SET
+			na_start_date = #{na_start_date}, na_end_date = #{na_end_date}, na_img = #{na_img},
+			na_url = #{na_url}, na_title = #{na_title}, na_name = #{na_name}
+		WHERE
+			na_id = #{na_id}
+	</update>
+	
+	<!-- 배너관리 - 삭제 -->
+	<delete id="deleteBanner">
+		DELETE FROM notification_ad WHERE na_id = #{na_id}
+	</delete>
+	
+	<!-- 배너관리 - 마감 목록 리스트 -->
+	<select id="getAllBannerEndDateList" resultType="com.second.space.admin.model.Notification_adDTO">
+	        SELECT
+	        	rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+	        FROM(
+		        SELECT
+		        	ROWNUM rn, na_id, na_title, na_name, na_url, na_start_date, na_end_date
+		        FROM(
+		        	SELECT
+		        		na_id, na_title, na_name, na_url, na_start_date, na_end_date
+					FROM
+						notification_ad
+					<if test="keyword != null">
+			            WHERE na_id > 0 <include refid="bannerSearch"></include>
+			        </if>
+					ORDER BY
+						na_end_date DESC
+				)
+			<![CDATA[
+		        WHERE
+		        	na_end_date < sysdate-1
+	        )
+	        WHERE
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount} 
+        	]]>
+	</select>
+	
+	<!-- 배너관리 - 마감 목록 전체 갯수 -->
+	<select id="getBannerEndDateTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM notification_ad WHERE na_end_date < sysdate-1
+		]]>
+			<if test="keyword != null">
+	            <include refid="bannerSearch"></include>
+	        </if>
 	</select>
 	
 	<resultMap type="com.second.space.admin.model.Notice_categoryDTO" id="Notice_categoryDTO">
@@ -115,26 +368,38 @@
 	
 	<!-- 공지사항 - 목록 리스트 -->
 	<select id="getAllNoticeList" resultMap="NoticeDTO">
-		<![CDATA[
 	        SELECT
-	        	/*+INDEX_DESC(notice n) */ rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
+	        	rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
 	        FROM(
-	        	SELECT
-	        		ROWNUM AS rn, n.notice_id, n.notice_title, n.notice_content, n.user_id, n.notice_date, n.notice_img, n.notice_delete, n.notice_view, nc.noc_id, nc.noc_name
-				FROM
-					notice n,
-					notice_category nc
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount} AND n.noc_id = nc.noc_id
-			)
+		        SELECT
+		        	ROWNUM rn, notice_id, notice_title, notice_content, user_id, notice_date, notice_img, notice_delete, notice_view, noc_id, noc_name
+		        FROM(
+		        	SELECT
+		        		n.notice_id, n.notice_title, n.notice_content, n.user_id, n.notice_date, n.notice_img, n.notice_delete, n.notice_view, nc.noc_id, nc.noc_name
+					FROM
+						notice n,
+						notice_category nc
+					WHERE
+						n.noc_id = nc.noc_id
+						<if test="keyword != null">
+			                <include refid="noticeSearch"></include> 
+			            </if>
+					ORDER BY
+						n.notice_date DESC
+				)
+	        )
+	        <![CDATA[
 	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+	        ]]>
 	</select>
 	
 	<!-- 공지사항 - 목록 전체 갯수 -->
 	<select id="getNoticeTotal" resultType="int">
-		SELECT COUNT(*) FROM notice
+		SELECT COUNT(*) FROM notice INNER JOIN notice_category USING(noc_id)
+		<if test="keyword != null">
+            WHERE notice_id > 0 <include refid="noticeSearch"></include> 
+        </if>
 	</select>
 	
 	<!-- 공지사항 - 상세 정보 -->
@@ -154,6 +419,16 @@
 		VALUES
 			(NOTICE_NOTICE_ID_SEQ.nextval, #{notice_title}, #{notice_content}, #{noc_id})
 	</insert>
+	
+	<!-- 공지사항 - 수정 -->
+	<update id="updateNotice">
+		UPDATE notice SET notice_title = #{notice_title}, notice_content = #{notice_content}, noc_id = #{noc_id} WHERE notice_id = #{notice_id}
+	</update>
+	
+	<!-- 공지사항 - 삭제 -->
+	<delete id="deleteNotice">
+		DELETE FROM notice WHERE notice_id = #{notice_id}
+	</delete>
 	
 	<resultMap type="com.second.space.admin.model.Login_id_listDTO" id="Login_id_listDTO">
 	    <result column="user_login_id" property="user_login_id"/>
@@ -257,121 +532,194 @@
  	
  	<!-- 회원 관리 - 목록 리스트 -->
 	<select id="getAllUserList" resultMap="UserDTO">
-		<![CDATA[
+		SELECT
+			rn, user_id, login_id, user_nickname, user_join_date, user_address, user_phone
+		FROM(
 	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, user_id, login_id, user_nickname, user_join_date, user_address, user_phone
+	        	ROWNUM rn, user_id, login_id, user_nickname, user_join_date, user_address, user_phone
 	        FROM(
 	        	SELECT
-	        		ROWNUM AS rn, u.user_id, lil.login_id, u.user_nickname, u.user_join_date, u.user_address, u.user_phone
+	        		u.user_id, lil.login_id, u.user_nickname, u.user_join_date, u.user_address, u.user_phone
 				FROM
 					user_ u,
 					login_id_list lil
 				WHERE
-					ROWNUM <= #{pageNum} * #{amount} AND u.user_admin = 'N' AND u.user_login_id = lil.user_login_id
+					u.user_admin = 'N'
+					AND u.user_login_id = lil.user_login_id
+					<if test="keyword != null">
+		                <include refid="userSearch"></include> 
+		            </if>
+				ORDER BY
+					u.user_join_date DESC
 			)
-	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
-    	]]>
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
 	</select>
 	
 	<!-- 회원 관리 - 목록 전체 갯수 -->
 	<select id="getUserTotal" resultType="int">
-		SELECT COUNT(*) FROM user_
+		SELECT COUNT(*) FROM user_ INNER JOIN login_id_list USING(user_login_id)
+		<if test="keyword != null">
+            WHERE user_id > 0 <include refid="userSearch"></include> 
+        </if>
 	</select>
 	
 	<!-- 회원 관리 - 탈퇴 회원 리스트 -->
 	<select id="getAllWithdrawalList" resultMap="UserDTO">
-		<![CDATA[
-	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, user_id, login_id, user_nickname, user_join_date, delete_reason, delete_date
-	        FROM(
-	        	SELECT
-	        		ROWNUM AS rn, u.user_id, lil.login_id, u.user_nickname, u.user_join_date, da.delete_reason, da.delete_date
-				FROM
-					user_ u,
-					login_id_list lil,
-					delete_account da
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount} AND u.user_admin = 'N' AND u.user_login_id = lil.user_login_id AND u.user_id = da.user_id
+			SELECT
+				rn, user_id, login_id, user_nickname, user_join_date, delete_reason, delete_date
+			FROM(
+		        SELECT
+		        	ROWNUM rn, user_id, login_id, user_nickname, user_join_date, delete_reason, delete_date
+		        FROM(
+		        	SELECT
+		        		u.user_id, lil.login_id, u.user_nickname, u.user_join_date, da.delete_reason, da.delete_date
+					FROM
+						user_ u,
+						login_id_list lil,
+						delete_account da
+					WHERE
+						u.user_admin = 'N'
+						AND u.user_login_id = lil.user_login_id
+						AND u.user_id = da.user_id
+						<if test="keyword != null">
+			                <include refid="userSearch"></include> 
+			            </if>
+					ORDER BY
+						da.delete_date DESC
+				)
 			)
+	        <![CDATA[
 	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+	   		]]>
 	</select>
 	
 	<!-- 회원 관리 - 탈퇴 회원 전체 갯수 -->
 	<select id="getWithdrawalTotal" resultType="int">
-		SELECT COUNT(*) FROM user_ WHERE user_delete = 'Y'
+		SELECT COUNT(*) FROM user_ INNER JOIN login_id_list USING(user_login_id) INNER JOIN delete_account USING(user_id)
+		<if test="keyword != null">
+            WHERE user_id > 0 <include refid="userSearch"></include> 
+        </if>
 	</select>
 
 	<!-- 게시물 관리 - 장터 게시물 리스트 -->
 	<select id="getAllSaleList" resultMap="UserDTO">
-		<![CDATA[
 	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, user_id, board_id, login_id, user_nickname, board_title, board_date, board_hidden, p_category_name
+	        	rn, user_id, board_id, login_id, user_nickname, board_title, board_date, board_hidden, p_category_name
 	        FROM(
-	        	SELECT
-	        		ROWNUM AS rn, b.user_id, b.board_id, lil.login_id, u.user_nickname, b.board_title, b.board_date, b.board_hidden, p.p_category_name
-				FROM
-					user_ u,
-					login_id_list lil,
-					board b,
-					payments_category p
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-					AND u.user_admin = 'N'
-					AND u.user_login_id = lil.user_login_id
-					AND u.user_id = b.user_id 
-					AND b.p_category_id = p.p_category_id
-			)
+		        SELECT
+		        	ROWNUM rn, user_id, board_id, login_id, user_nickname, board_title, board_date, board_hidden, p_category_name
+		        FROM(
+		        	SELECT
+		        		b.user_id, b.board_id, lil.login_id, u.user_nickname, b.board_title, b.board_date, b.board_hidden, p.p_category_name
+					FROM
+						user_ u,
+						login_id_list lil,
+						board b,
+						payments_category p
+					WHERE
+						u.user_admin = 'N'
+						AND u.user_login_id = lil.user_login_id
+						AND u.user_id = b.user_id 
+						AND b.p_category_id = p.p_category_id
+						<if test="keyword != null">
+			                <include refid="saleSearch"></include> 
+			            </if>
+					ORDER BY
+						b.board_date DESC
+				)
+	        )
+			<![CDATA[
 	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   			]]>
 	</select>
 	
 	<!-- 게시물 관리 - 장터 게시물 갯수 -->
 	<select id="getSaleTotal" resultType="int">
-		SELECT COUNT(*) FROM board
+		SELECT
+       		COUNT(*)
+		FROM
+			user_ u,
+			login_id_list lil,
+			board b,
+			payments_category p
+		WHERE
+			u.user_admin = 'N'
+			AND u.user_login_id = lil.user_login_id
+			AND u.user_id = b.user_id 
+			AND b.p_category_id = p.p_category_id
+			<if test="keyword != null">
+                <include refid="saleSearch"></include> 
+            </if>
 	</select>
 	
 	<!-- 게시물 관리 - 커뮤니티 게시물 리스트 -->
 	<select id="getAllCommunityList" resultMap="UserDTO">
-		<![CDATA[
-	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, user_id, c_board_id, login_id, user_nickname, c_board_title, c_board_date, c_board_hidden, c_category_name
-	        FROM(
+        	SELECT
+        		rn, user_id, c_board_id, login_id, user_nickname, c_board_title, c_board_date, c_board_hidden, c_category_name
+        	FROM(
 	        	SELECT
-	        		ROWNUM AS rn, b.user_id, b.c_board_id, lil.login_id, u.user_nickname, b.c_board_title, b.c_board_date, b.c_board_hidden, p.c_category_name
-				FROM
-					user_ u,
-					login_id_list lil,
-					community_board b,
-					community_category p
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-					AND u.user_admin = 'N'
-					AND u.user_login_id = lil.user_login_id
-					AND u.user_id = b.user_id 
-					AND b.c_category_id = p.c_category_id
-			)
-	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
+		        	ROWNUM rn, user_id, c_board_id, login_id, user_nickname, c_board_title, c_board_date, c_board_hidden, c_category_name
+		        FROM(
+		        	SELECT
+		        		b.user_id, b.c_board_id, lil.login_id, u.user_nickname, b.c_board_title, b.c_board_date, b.c_board_hidden, p.c_category_name
+					FROM
+						user_ u,
+						login_id_list lil,
+						community_board b,
+						community_category p
+					WHERE
+						u.user_admin = 'N'
+						AND u.user_login_id = lil.user_login_id
+						AND u.user_id = b.user_id 
+						AND b.c_category_id = p.c_category_id
+						<if test="keyword != null">
+			                <include refid="communitySearch"></include> 
+			            </if>
+					ORDER BY
+						b.c_board_date DESC
+				)
+        	)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
     	]]>
 	</select>
 	
 	<!-- 게시물 관리 - 커뮤니티 게시물 갯수 -->
 	<select id="getCommunityTotal" resultType="int">
-		SELECT COUNT(*) FROM community_board
+		SELECT
+       		COUNT(*)
+		FROM
+			user_ u,
+			login_id_list lil,
+			community_board b,
+			community_category p
+		WHERE
+			u.user_admin = 'N'
+			AND u.user_login_id = lil.user_login_id
+			AND u.user_id = b.user_id 
+			AND b.c_category_id = p.c_category_id
+			<if test="keyword != null">
+                <include refid="communitySearch"></include> 
+            </if>
 	</select>
 	
 	<!-- 관리자 공지 - 목록 리스트 -->
 	<select id="getAllNoticeAdminList" resultMap="UserDTO">
-		<![CDATA[
+        SELECT
+        	rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
+        FROM(
 	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
+	        	ROWNUM rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
 	        FROM(
 	        	SELECT
-	        		ROWNUM AS rn, na.user_id, ac.ac_code, ac.ac_name, ae.ae_name, ae.ae_class, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
+	        		na.user_id, ac.ac_code, ac.ac_name, ae.ae_name, ae.ae_class, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
 				FROM
 					user_ u,
 			        admin_category ac,
@@ -379,110 +727,439 @@
 			        notice_admin na,
 			        login_id_list lil
 				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-					AND u.user_id=na.user_id
+					u.user_id=na.user_id
 			        AND na.ac_id=ac.ac_id
 			        AND ae.ae_id=na.ae_id
 			        AND u.user_login_id=lil.user_login_id
+			        <if test="keyword != null">
+		                <include refid="adminSearch"></include> 
+		            </if>
+				ORDER BY
+					na.notice_admin_date DESC
 			)
-	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
+        )
+		<![CDATA[
+		WHERE
+			rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
     	]]>
 	</select>
 	
 	<!-- 관리자 공지 - 목록 갯수 -->
 	<select id="getNoticeAdminTotal" resultType="int">
-		SELECT COUNT(*) FROM notice_admin
+		SELECT
+       		COUNT(*)
+		FROM
+			user_ u,
+	        admin_category ac,
+	        admin_emp ae,
+	        notice_admin na,
+	        login_id_list lil
+		WHERE
+			u.user_id=na.user_id
+	        AND na.ac_id=ac.ac_id
+	        AND ae.ae_id=na.ae_id
+	        AND u.user_login_id=lil.user_login_id
+	        <if test="keyword != null">
+                <include refid="adminSearch"></include> 
+            </if>
 	</select>
 	
 	<!-- 문의사항 - 1:1 문의 리스트 -->
 	<select id="getAllContactUsList" resultMap="UserDTO">
-		<![CDATA[
 	        SELECT
-	        	/*+INDEX_DESC(user_ u) */ rn, cs_name, cu_id, cu_title, cu_date
+	        	rn, cs_name, cu_id, cu_title, cu_date
 	        FROM(
-	        	SELECT
-	        		ROWNUM AS rn, csc.cs_name, cu.cu_id, cu.cu_title, cu.cu_date
-				FROM
-					user_ u,
-			        contact_us cu,
-			        cs_category csc
-				WHERE
-					ROWNUM <= #{pageNum} * #{amount}
-					AND cu.user_id=u.user_id
-        			AND cu.cs_category_id=csc.cs_category_id
-			)
+		        SELECT
+		        	ROWNUM rn, cs_name, cu_id, cu_title, cu_date
+		        FROM(
+		        	SELECT
+		        		csc.cs_name, cu.cu_id, cu.cu_title, cu.cu_date
+					FROM
+						user_ u,
+				        contact_us cu,
+				        cs_category csc
+					WHERE
+						cu.user_id=u.user_id
+	        			AND cu.cs_category_id=csc.cs_category_id
+	        			<if test="keyword != null">
+			                <include refid="contactUsSearch"></include> 
+			            </if>
+	        		ORDER BY
+	        			cu_date DESC
+				)
+	        )
+	        <![CDATA[
 	        WHERE
-	        	rn > (#{pageNum} -1) * #{amount}
-    	]]>
+	        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+	        ]]>
 	</select>
 	
 	<!-- 문의사항 - 1:1 문의 리스트 갯수 -->
 	<select id="getContactUsTotal" resultType="int">
-		SELECT COUNT(*) FROM contact_us
+		SELECT COUNT(*) FROM contact_us INNER JOIN cs_category USING(cs_category_id)
+		<if test="keyword != null">
+            WHERE cu_id > 0 <include refid="contactUsSearch"></include> 
+        </if>
+	</select>
+	
+	<!-- 통계 - 일일 라벨 -->
+	<select id="getDailyLabel" resultType="java.lang.String">
+		<![CDATA[
+			SELECT
+	    		TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') - 6 + LEVEL - 1
+			FROM
+			    dual 
+			CONNECT BY LEVEL <= (TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') + 6 - TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') + 1)
+		]]>
+	</select>
+	
+	<!-- 통계 - 주별 라벨 -->
+	<select id="getWeeklyLabel" resultType="java.lang.String">
+		SELECT TO_CHAR(sysdate-21, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-14, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-7, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate, 'MM/DD') FROM dual
+	</select>
+	
+	<!-- 통계 - 월별 라벨 -->
+	<select id="getMonthlyLabel" resultType="java.lang.String">
+		SELECT TO_CHAR(ADD_MONTHS(TRUNC(sysdate, 'MM'), -3), 'MM') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(ADD_MONTHS(TRUNC(sysdate, 'MM'), -2), 'MM') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(ADD_MONTHS(TRUNC(sysdate, 'MM'), -1), 'MM') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(ADD_MONTHS(TRUNC(sysdate, 'MM'), 0), 'MM') FROM dual
+	</select>
+	
+	<!-- 통계 - 일일 신규 회원 -->
+	<select id="getDailyNewUser" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE TO_DATE(user_join_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+
+	<!-- 통계 - 일일 탈퇴 회원 -->
+	<select id="getDailyWithdrawalUser" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE TO_DATE(delete_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 일일 방문자수 -->
+	<select id="getDailyVisit" resultType="java.lang.Integer">
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE TO_DATE(cud_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 주별 신규 회원 -->
+	<select id="getWeeklyNewUser" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM user_ WHERE user_join_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE user_join_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE user_join_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE user_join_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 주별 탈퇴 회원 -->
+	<select id="getWeeklyWithdrawalUser" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM delete_account WHERE delete_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE delete_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE delete_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE delete_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 주별 방문자수 -->
+	<select id="getWeeklyVisit" resultType="java.lang.Integer">
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE cud_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE cud_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE cud_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE cud_date BETWEEN sysdate-6 AND sysdate
 	</select>
 	
 	<!-- 통계 - 월별 신규 회원 -->
 	<select id="getMonthlyNewUser" resultType="java.lang.Integer">
-		<![CDATA[
-			SELECT
-				NVL(SUM(a.cnt), 0) cnt
-			FROM(SELECT
-			        TO_CHAR(user_join_date, 'YYYY-MM-DD') AS user_join_date, COUNT(*) cnt
-			    FROM
-			        user_
-			    WHERE
-			        user_join_date BETWEEN TRUNC(sysdate, 'YYYY') AND TRUNC(sysdate, 'YYYY')+365 AND user_delete != 'Y'
-			    GROUP BY
-			        user_join_date
-			    ) a,
-			    (SELECT
-			        TRUNC(sysdate, 'YYYY') + LEVEL - 1 AS dt
-			    FROM
-			        dual
-			    CONNECT BY LEVEL <= (TRUNC(sysdate, 'YYYY')+365 - TRUNC(sysdate, 'YYYY'))
-			    ) b
-			WHERE
-			    b.dt = a.user_join_date(+)
-			GROUP BY
-				TO_CHAR(b.dt, 'YYYY-MM')
-			ORDER BY
-				TO_CHAR(b.dt, 'YYYY-MM')
-		]]>
+		SELECT COUNT(*) FROM user_ WHERE SUBSTR(user_join_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE SUBSTR(user_join_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE SUBSTR(user_join_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM user_ WHERE SUBSTR(user_join_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
 	</select>
 	
 	<!-- 통계 - 월별 탈퇴 회원 -->
 	<select id="getMonthlyWithdrawalUser" resultType="java.lang.Integer">
-		<![CDATA[
-			SELECT 
-			    NVL(SUM(a.cnt), 0) cnt
-			FROM(SELECT
-			        TO_CHAR(delete_date, 'YYYY-MM-DD') AS delete_date, COUNT(*) cnt
-			    FROM
-			        delete_account
-			    WHERE
-			        delete_date BETWEEN TRUNC(sysdate, 'YYYY') AND TRUNC(sysdate, 'YYYY')+365
-			    GROUP BY
-			        delete_date
-			    ) a,
-			    (SELECT
-			        TRUNC(sysdate, 'YYYY') + LEVEL - 1 AS dt
-			    FROM
-			        dual
-			    CONNECT BY LEVEL <= (TRUNC(sysdate, 'YYYY')+365 - TRUNC(sysdate, 'YYYY'))
-			    ) b
-			WHERE
-			    b.dt = a.delete_date(+)
-			GROUP BY TO_CHAR(b.dt, 'YYYY-MM')
-			ORDER BY TO_CHAR(b.dt, 'YYYY-MM')
-		]]>
+		SELECT COUNT(*) FROM delete_account WHERE SUBSTR(delete_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE SUBSTR(delete_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE SUBSTR(delete_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM delete_account WHERE SUBSTR(delete_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
 	</select>
 	
-	<!-- 통계 - 일일 방문자 -->
-	<select id="getDailyVisit" resultType="java.lang.Integer">
-		SELECT cud_count FROM count_user_date WHERE cud_date BETWEEN sysdate-14 AND sysdate
+	<!-- 통계 - 월별 방문자수 -->
+	<select id="getMonthlyVisit" resultType="java.lang.Integer">
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE SUBSTR(cud_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE SUBSTR(cud_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE SUBSTR(cud_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT NVL(SUM(cud_count),0) FROM count_user_date WHERE SUBSTR(cud_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	<!-- 통계 - 일일 장터 게시글 수 -->
+	<select id="getDailySaleList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE TO_DATE(board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 일일 커뮤니티 게시글 수 -->
+	<select id="getDailyCommunityList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE TO_DATE(c_board_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 주별 장터 게시글 수 -->
+	<select id="getWeeklySaleList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM board WHERE board_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE board_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE board_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE board_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 주별 커뮤니티 게시글 수 -->
+	<select id="getWeeklyCommunityList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM community_board WHERE c_board_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE c_board_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE c_board_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE c_board_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 월별 장터 게시글 수 -->
+	<select id="getMonthlySaleList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM board WHERE SUBSTR(board_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE SUBSTR(board_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE SUBSTR(board_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM board WHERE SUBSTR(board_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	<!-- 통계 - 월별 커뮤니티 게시글 수 -->
+	<select id="getMonthlyCommunityList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM community_board WHERE SUBSTR(c_board_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE SUBSTR(c_board_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE SUBSTR(c_board_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM community_board WHERE SUBSTR(c_board_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 통계 - 일일 게시글 신고 수 -->
+	<select id="getDailyBoardNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE TO_DATE(n_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 일일 댓글 신고 수 -->
+	<select id="getDailyCmtNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE TO_DATE(nc_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 일일 리뷰 신고 수 -->
+	<select id="getDailyReviewNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-6
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-5
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-4
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-3
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-2
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')-1
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE TO_DATE(nr_notify_date, 'YYYY-MM-DD') = TO_DATE(sysdate, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 통계 - 주별 게시글 신고 수 -->
+	<select id="getWeeklyBoardNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_board WHERE n_notify_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE n_notify_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE n_notify_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE n_notify_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 주별 댓글 신고 수 -->
+	<select id="getWeeklyCmtNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_cmt WHERE nc_notify_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE nc_notify_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE nc_notify_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE nc_notify_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 주별 리뷰 신고 수 -->
+	<select id="getWeeklyReviewNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_review WHERE nr_notify_date BETWEEN sysdate-28 AND sysdate-22
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE nr_notify_date BETWEEN sysdate-21 AND sysdate-15
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE nr_notify_date BETWEEN sysdate-14 AND sysdate-7
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE nr_notify_date BETWEEN sysdate-6 AND sysdate
+	</select>
+	
+	<!-- 통계 - 월별 게시글 신고 수 -->
+	<select id="getMonthlyBoardNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_board WHERE SUBSTR(n_notify_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE SUBSTR(n_notify_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE SUBSTR(n_notify_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_board WHERE SUBSTR(n_notify_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	<!-- 통계 - 월별 댓글 신고 수 -->
+	<select id="getMonthlyCmtNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_cmt WHERE SUBSTR(nc_notify_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE SUBSTR(nc_notify_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE SUBSTR(nc_notify_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_cmt WHERE SUBSTR(nc_notify_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
+	</select>
+	
+	<!-- 통계 - 월별 댓글 신고 수 -->
+	<select id="getMonthlyReviewNotifyList" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,-3), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,-2), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,-1), 'MM')
+		UNION ALL
+		SELECT COUNT(*) FROM notification_review WHERE SUBSTR(nr_notify_date,4,2) = TO_CHAR(add_months(sysdate,0), 'MM')
 	</select>
 </mapper>
+
+
+
+
+
 
 
 

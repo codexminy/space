@@ -32,7 +32,7 @@
 				<textarea class="summernote" name="notice_content"></textarea>
 				<div class="btn-wrap">
 					<ul>
-						<li class="notice-create">등록</li>
+						<li class="notice-update">수정</li>
 						<li class="notice-cancel">취소</li>
 					</ul>
 				</div>
@@ -40,11 +40,24 @@
 		</div>
 	</div>
 	<script>
-		$('.notice-create').on('click', () => {
+		$.ajax({
+			url : "${path}/admin/notice/notice/${dto.notice_id}",
+			type: "GET",
+			success : function(result) {
+				const list = result['list'];
+				const options = $("#category option");
+				$('input[name="notice_title"]').val(list['notice_title']);
+				$('#category').val(list['ncDTO'].noc_id).prop("selected",true);
+				$('.summernote').summernote('pasteHTML', list['notice_content']);
+			}
+		});
+		
+		$('.notice-update').on('click', () => {
 			const data = {
+				notice_id: "${dto.notice_id}",
 				notice_title: $('input[name="notice_title"]').val(),
 				notice_content: $('textarea[name="notice_content"]').val(),
-				noc_id: $("#category option:selected").val()
+				noc_id: $("#category").val()
 			};
 			
 			if($("#category").val() === '0') {
@@ -58,23 +71,23 @@
 				return;
 			}
 			
-			if(confirm('공지사항을 등록하시겠습니까?')) {
+			if(confirm('공지사항을 수정하시겠습니까?')) {
 				$.ajax({
-					url : "${path}/admin/notice/notice",
-					type : "POST",
+					url : "${path}/admin/notice/notice/${dto.notice_id}",
+					type : "PUT",
 					data : JSON.stringify(data),
 					contentType: 'application/json; charset=utf-8',
 					success : function(data) {
-						alert('등록이 완료되었습니다.');
-						location.href = "${path}/admin/notice/list";
+						alert('수정이 완료되었습니다.');
+						location.href = "${path}/admin/notice/detail?notice_id=${dto.notice_id}";
 					}
-				});	
+				});
 			}
 		});
-	
+		
 		$('.notice-cancel').on('click', () => {
 			if(confirm('수정을 취소하시겠습니까?')) {
-				location.href = "${path}/admin/notice/list";
+				location.href = "${path}/admin/notice/detail?notice_id=${dto.notice_id}";
 			}
 		});
 		

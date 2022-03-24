@@ -16,12 +16,22 @@
 	<div class="container home-container">
 		<jsp:include page="../common/bannerLink.jsp"/>
 		<div class="list-wrap">
+			<div class="search-area"></div>
+			<button class="banner-search">검색</button>
+			<select name="amount">
+				<option value="10" selected>10건</option>
+				<option value="20">20건</option>
+				<option value="30">30건</option>
+				<option value="40">40건</option>
+				<option value="50">50건</option>
+			</select>
 			<table border="1" class="col5-table">
 				<colgroup>
 					<col width="5%">
 					<col width="10%">
 					<col width="10%">
-					<col width="60%">
+					<col width="50%">
+					<col width="10%">
 					<col width="15%">
 				</colgroup>
 				<thead>
@@ -30,6 +40,7 @@
 						<th>업체</th>
 						<th>노출 상호</th>
 						<th>링크</th>
+						<th>남은 기간</th>
 						<th>기간</th>
 					</tr>
 				</thead>
@@ -66,32 +77,56 @@
 		    return [year, month, day].join('-');
 	    }
 
+		$('.banner-search').on('click', (e) => {
+			e.preventDefault();
+			getLoad();
+		});
+		
+		$('select[name="amount"]').on('change', () => {
+			getLoad();
+		});
+		
 		function getLoad(page) {
 			const bannerList = $('.banner-list');
 			const pagenation = $('.paging');
+			const searchArea = $('.search-area');
 			
 			$.ajax({
-				url : "${path}/admin/page/banner/list",
+				url : "${path}/admin/banner/banner",
+				type: "GET",
 				data: {
-					pageNum: page
+					pageNum: page,
+					type: $('select[name="type"]').val(),
+					keyword: $('input[name="keyword"]').val(),
+					amount: $('select[name="amount"]').val()
 				},
 				success : function(result) {
 					const list = result['list'];
 					const paging = result['paging'];
 					
+					let searchData = "";
 					let listData = "";
 					let pageData = "";
 					
+					searchData += '<select name="type">';
+					searchData += '<option value="A" ' + (paging.ps.type == "A" ? "selected" : "") + '>전체</option>';
+					searchData += '<option value="B" ' + (paging.ps.type == "B" ? "selected" : "") + '>업체</option>';
+					searchData += '<option value="C" ' + (paging.ps.type == "C" ? "selected" : "") + '>노출상호</option>';
+					searchData += '</select>';
+					searchData += '<input type="text" name="keyword" value=' + (paging.ps.keyword == null ? "" : paging.ps.keyword) + '>';
+					
 					for(let i=0; i<list.length; ++i) {
+						let dDay = new Date(list[i].na_end_date).getDate() - new Date().getDate();
 						listData += "<tr>";
 						listData += "<td>" + list[i].rn + "</td>";
 						listData += "<td><a href=javascript:goDetail(" + list[i].na_id + ")>" + list[i].na_title + "</a></td>";
 						listData += "<td>" + list[i].na_name + "</td>";
 						listData += "<td>" + list[i].na_url + "</td>";
+						listData += "<td>" + dDay + "일</td>";
 						listData += "<td>" + formatDate(list[i].na_start_date) + " ~ " + formatDate(list[i].na_end_date) + "</td>";
 						listData += "</tr>";
 					}
-					
+
 					if(paging['prev']) {
 						pageData += '<li><a href=javascript:getLoad(' + (paging['startPage'] - 1)  + ')><i class="fa-solid fa-angle-left"></i></a></li>';
 					} else {
@@ -112,6 +147,7 @@
 						pageData += '<li><a><i class="fa-solid fa-angle-right"></i></a></li>';
 					}
 					
+					searchArea.html(searchData);
 					bannerList.html(listData);
 					pagenation.html(pageData);
 				}

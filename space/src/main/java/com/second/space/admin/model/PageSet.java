@@ -1,10 +1,8 @@
 package com.second.space.admin.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class PageSet {
 	private int pageNum;
 	private int amount;
@@ -20,7 +18,6 @@ public class PageSet {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
-	
 	public void setType(String type) {
 		this.type = type;
 		this.typeArr = type.split("");

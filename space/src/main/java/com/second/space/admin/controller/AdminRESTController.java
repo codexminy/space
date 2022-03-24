@@ -13,8 +13,11 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,17 +56,17 @@ public class AdminRESTController {
 		
 	}
 	
-	@RequestMapping(value = "/admin/page/banner/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/banner/banner", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> bannerList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllNotificationAdList(ps));
-		result.put("paging", new Paging(service.getNotificationAdTotal(), ps));
+		result.put("paging", new Paging(service.getNotificationAdTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
 	
-	@PostMapping(value = "/admin/page/banner/create")
+	@PostMapping(value = "/admin/banner/banner")
 	public ResponseEntity<Notification_adDTO> createBanner(Notification_adDTO dto, HttpServletRequest request) throws Exception {
 		String path = request.getSession().getServletContext().getRealPath("");
 		String root = path + "resources/images/notification_ad";
@@ -95,8 +98,8 @@ public class AdminRESTController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	@GetMapping(value = "/admin/page/banner/detail", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<String, Object>> detailBanner(int na_id) throws Exception {
+	@GetMapping(value = "/admin/banner/banner/{na_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> detailBanner(@PathVariable int na_id) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getNotificationAdDetail(na_id));
@@ -104,18 +107,66 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@RequestMapping(value = "/admin/page/notice/list", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<String, Object>> noticeList(PageSet ps) throws Exception {
-		HashMap<String, Object> result = new HashMap<>();
+	@PostMapping(value = "/admin/banner/banner/{na_id}")
+	public ResponseEntity<Notification_adDTO> updateBanner(@PathVariable int na_id, Notification_adDTO dto, HttpServletRequest request) throws Exception {
+		String path = request.getSession().getServletContext().getRealPath("");
+		String root = path + "resources/images/notification_ad";
+
+		File fileCheck = new File(path);
 		
-		result.put("list", service.getAllNoticeList(ps));
-		result.put("paging", new Paging(service.getNoticeTotal(), ps));
+		if(!fileCheck.exists()) {
+			fileCheck.mkdirs();
+		}
+
+		MultipartFile multiFile = dto.getUploadFile();
+
+		if (multiFile != null && !multiFile.isEmpty()) {
+			String originFile = multiFile.getOriginalFilename();
+			String ext = originFile.substring(originFile.lastIndexOf("."));
+			String changeFile = UUID.randomUUID().toString() + ext;
+
+			try {
+				File uploadFile = new File(root + "\\" + changeFile);
+				dto.setNa_img("images/notification_ad/" + changeFile);
+				multiFile.transferTo(uploadFile);
+				service.updateBanner(dto);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			service.updateBanner(dto);
+		}
+
+		return ResponseEntity.ok(dto);
+	}
+	
+	@DeleteMapping(value = "/admin/banner/banner/{na_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public int deleteBanner(@PathVariable int na_id) throws Exception {
+		return service.deleteBanner(na_id);
+	}
+	
+	@GetMapping(value = "/admin/banner/banner/endDate", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> bannerEndDateList(PageSet ps) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("list", service.getAllBannerEndDateList(ps));
+		result.put("paging", new Paging(service.getBannerEndDateTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/notice/detail", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<String, Object>> detailNotice(int notice_id) throws Exception {
+	@RequestMapping(value = "/admin/notice/notice", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> noticeList(PageSet ps) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		result.put("list", service.getAllNoticeList(ps));
+		result.put("paging", new Paging(service.getNoticeTotal(ps), ps));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping(value = "/admin/notice/notice/{notice_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> detailNotice(@PathVariable int notice_id) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getNoticeDetail(notice_id));
@@ -123,12 +174,23 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
+	@PutMapping(value = "/admin/notice/notice/{notice_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NoticeDTO> updateNotice(@PathVariable int notice_id, @RequestBody NoticeDTO dto) throws Exception {
+		service.updateNotice(dto);
+		return ResponseEntity.ok(dto);
+	}
+	
+	@DeleteMapping(value = "/admin/notice/notice/{notice_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> deleteNotice(@PathVariable int notice_id) throws Exception {
+		return ResponseEntity.ok(service.deleteNotice(notice_id));
+	}
+	
 	@GetMapping(value = "/admin/page/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> userList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllUserList(ps));
-		result.put("paging", new Paging(service.getUserTotal(), ps));
+		result.put("paging", new Paging(service.getUserTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
@@ -138,7 +200,7 @@ public class AdminRESTController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllWithdrawalList(ps));
-		result.put("paging", new Paging(service.getWithdrawalTotal(), ps));
+		result.put("paging", new Paging(service.getWithdrawalTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
@@ -148,7 +210,7 @@ public class AdminRESTController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllSaleList(ps));
-		result.put("paging", new Paging(service.getSaleTotal(), ps));
+		result.put("paging", new Paging(service.getSaleTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
@@ -158,7 +220,7 @@ public class AdminRESTController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllCommunityList(ps));
-		result.put("paging", new Paging(service.getCommunityTotal(), ps));
+		result.put("paging", new Paging(service.getCommunityTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
@@ -178,7 +240,7 @@ public class AdminRESTController {
 		HashMap<String, Object> result = new HashMap<>();
 
 		result.put("list", service.getAllContactUsList(ps));
-		result.put("paging", new Paging(service.getContactUsTotal(), ps));
+		result.put("paging", new Paging(service.getContactUsTotal(ps), ps));
 		
 		return ResponseEntity.ok(result);
 	}
@@ -211,7 +273,7 @@ public class AdminRESTController {
 		return jsonObject.toJSONString();
 	}
 	
-	@PostMapping(value = "/admin/page/notice/create", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/admin/notice/notice", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NoticeDTO> insertNotice(@RequestBody NoticeDTO dto) throws Exception {
 		
 		service.insertNotice(dto);
@@ -223,9 +285,55 @@ public class AdminRESTController {
 	public ResponseEntity<HashMap<String, Object>> monthlyUser() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 		
-		result.put("monthNew", service.getMonthlyNewUser());
-		result.put("monthWd", service.getMonthlyWithdrawalUser());
-		result.put("dailyVisit", service.getDailyVisit());
+		result.put("dayL", service.getDailyLabel());
+		result.put("dayN", service.getDailyNewUser());
+		result.put("dayW", service.getDailyWithdrawalUser());
+		result.put("dayV", service.getDailyVisit());
+		result.put("weekL", service.getWeeklyLabel());
+		result.put("weekN", service.getWeeklyNewUser());
+		result.put("weekW", service.getWeeklyWithdrawalUser());
+		result.put("weekV", service.getWeeklyVisit());
+		result.put("monthL", service.getMonthlyLabel());
+		result.put("monthN", service.getMonthlyNewUser());
+		result.put("monthW", service.getMonthlyWithdrawalUser());
+		result.put("monthV", service.getMonthlyVisit());
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping(value = "/admin/page/stats/board", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> statsBoardUser() throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("dayL", service.getDailyLabel());
+		result.put("sDayN", service.getDailySaleList());
+		result.put("cDayN", service.getDailyCommunityList());
+		result.put("weekL", service.getWeeklyLabel());
+		result.put("sWeekN", service.getWeeklySaleList());
+		result.put("cWeekN", service.getWeeklyCommunityList());
+		result.put("monthL", service.getMonthlyLabel());
+		result.put("sMonthW", service.getMonthlySaleList());
+		result.put("cMonthV", service.getMonthlyCommunityList());
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping(value = "/admin/page/stats/notification", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> statsNotificationUser() throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("dayL", service.getDailyLabel());
+		result.put("bDayN", service.getDailyBoardNotifyList());
+		result.put("cDayN", service.getDailyCmtNotifyList());
+		result.put("rDayN", service.getDailyReviewNotifyList());
+		result.put("weekL", service.getWeeklyLabel());
+		result.put("bWeekN", service.getWeeklyBoardNotifyList());
+		result.put("cWeekN", service.getWeeklyCmtNotifyList());
+		result.put("rWeekN", service.getWeeklyReviewNotifyList());
+		result.put("monthL", service.getMonthlyLabel());
+		result.put("bMonthN", service.getMonthlyBoardNotifyList());
+		result.put("cMonthN", service.getMonthlyCmtNotifyList());
+		result.put("rMonthN", service.getMonthlyReviewNotifyList());
 		
 		return ResponseEntity.ok(result);
 	}

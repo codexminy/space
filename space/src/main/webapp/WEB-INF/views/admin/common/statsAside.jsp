@@ -5,20 +5,20 @@
 <aside>
 	<ul>
 		<li>
-			<a href="${path }/admin/banner/list">
-				<span>목록</span>
+			<a href="${path }/admin/stats/stats">
+				<span>회원</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
 		<li>
-			<a href="${path }/admin/banner/create">
-				<span>신규 등록</span>
+			<a href="${path }/admin/stats/board">
+				<span>게시글</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
 		<li>
-			<a href="${path }/admin/banner/endDate">
-				<span>마감</span>
+			<a href="${path }/admin/stats/notification">
+				<span>신고</span>
 				<span><i class="fa-solid fa-angle-right"></i></span>
 			</a>
 		</li>
