@@ -1,5 +1,10 @@
 package com.second.space.community.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,9 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.admin.model.Notification_cmtDTO;
+import com.second.space.common.util.Utils;
+import com.second.space.community.model.CommunityBoardDTO;
+import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.community.service.CommunityService;
 
@@ -31,6 +41,7 @@ public class CommunityController {
 		try {
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
@@ -66,6 +77,68 @@ public class CommunityController {
 		return "/community/board_write";
 	}
 	
+	@RequestMapping("/c_board_write/process")
+	public String communityBoardWriteProcess(CommunityBoardDTO list, @RequestParam MultipartFile[] upfile, Model model, HttpServletRequest request) {
+		
+		String saveDirection = request.getSession().getServletContext().getRealPath("/resources/upload/c_board");
+		System.out.println(saveDirection);
+				
+		try {
+			System.out.println("보냈다");
+			// 커뮤니티 게시글 insert 후에 c_board_id 가져오기
+			int result = community_service.newCommunityBoard(list);
+			int c_board_id = 0;
+			List<CommunityBoardImgDTO> imgList = new ArrayList<>();
+			
+			if(result > 0) {
+				// c_board_id 가져오기 
+				c_board_id = community_service.getCommunityBoardId(list.getUser_id());
+				log.info("보드 넣기 성공");
+				if(c_board_id != 0) {
+					for(MultipartFile f : upfile) {
+						if(!f.isEmpty()) {
+							//파일명 
+							String originalFileName = f.getOriginalFilename();
+							String renamedFileName = Utils.getRenamedFileName2(originalFileName);
+							
+							//실제서버 저장
+							try {
+								f.transferTo(new File(saveDirection+"/"+renamedFileName));
+							} catch (IllegalStateException | IOException e) {
+								e.printStackTrace();
+							}
+							
+							//List 작성
+							CommunityBoardImgDTO c_board_img = new CommunityBoardImgDTO();
+							c_board_img.setC_board_id(c_board_id);
+							c_board_img.setC_originalfilename(originalFileName);
+							c_board_img.setC_renamedfilename(renamedFileName);
+							imgList.add(c_board_img);							
+						}
+					}
+					//List Insert
+					try {
+						result = community_service.newCommunityBoardImg(imgList);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if(result > 0) {
+						log.info("인서트 성공");
+						System.out.println("성공");
+					}else {
+						log.info("인서트 실패");
+						System.out.println("실패");
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("안보냈다");
+			e.printStackTrace();
+		}
+		return "redirect:/community/main";
+	}
+	
 	@RequestMapping("/category")
 	public String community1(HttpServletRequest request, Model model) {
 		System.out.println("community category_id : "+request.getParameter("id")+"(으)로 이동");
@@ -73,6 +146,7 @@ public class CommunityController {
 		try {
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());

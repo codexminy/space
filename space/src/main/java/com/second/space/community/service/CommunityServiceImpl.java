@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.admin.model.Notification_cmtDTO;
 import com.second.space.community.model.CommunityBoardDTO;
+import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
@@ -100,5 +101,38 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		
 		return community_mapper.getNotificationCmt(list.getNc_id());
+	}
+	
+	/* 커뮤니티 게시글 DB등록 */
+	@Override
+	public int newCommunityBoard(CommunityBoardDTO list) throws Exception {
+		return community_mapper.addCommunityBoard(list);
+	}
+	
+	/* 커뮤니티 게시글 가장 최근 c_board_id GET */
+	@Override
+	public int getCommunityBoardId(Integer user_id) throws Exception {
+		return community_mapper.getCommunityBoardId(user_id);
+	}
+	
+	/* 커뮤니티 게시글 이미지들, 이미지 테이블에 넣기 */
+	@Override
+	public int newCommunityBoardImg(List<CommunityBoardImgDTO> imgList) throws Exception {
+		int result = 0;
+		
+		for(int i = 0; i < imgList.size(); i++) {
+			result = community_mapper.addCommunityBoardImg(imgList.get(i));
+			if(result == 0) {
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
+	/* 커뮤니티 게시글 이미지 리스트 GET */
+	@Override
+	public List<CommunityBoardImgDTO> getCommunityBoardImgList() throws Exception {
+		return community_mapper.getCommunityBoardImgList();
 	}
 }

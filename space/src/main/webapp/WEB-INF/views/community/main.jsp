@@ -6,7 +6,7 @@
 <head>
 	<title>우주장터</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=2" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=3" />
 </head>
 <body>
 	<div>
@@ -30,7 +30,8 @@
 			</ul>
 			<div class="flex-end">
 				<div id="board_write">글쓰기
-					<form id="board_write_on" action="./c_board_write" method="POST"/>
+					<form id="board_write_on" action="./c_board_write" method="POST">
+					</form>
 				</div>
 			</div>
 			<c:forEach items="${c_board_list }" var="c_board_list">
@@ -40,9 +41,20 @@
 					<ul class='c_board_writer'>
 						<li>작성자&nbsp;&nbsp;${c_board_list.user_nickname }</li>
 						<li><fmt:formatDate value="${c_board_list.c_board_date }" pattern="yy.MM.dd a hh:mm"/></li>
-					</ul>				
+					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
+					<div class='c_board_images'>
+						<c:forEach items="${c_board_img_list }" var="c_board_img_list">
+						<c:choose>
+						<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
+							<div>
+								<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
+							</div>
+						</c:when>
+						</c:choose>	
+						</c:forEach>
+					</div>
 					<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					<ul class='c_board_option'>
 						<li class='view_report'>신고하기

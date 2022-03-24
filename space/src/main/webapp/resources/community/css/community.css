@@ -100,6 +100,18 @@ main > ul > li {
 .c_board > hr {
 	margin: 0 10px 20px;
 }
+.c_board > .c_board_images {
+	margin: 10px;
+}
+.c_board > .c_board_images > div {
+	display: inline-block;
+	margin-right: 20px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+}
+.c_board > .c_board_images > div:last-of-type {
+	margin-right: 0;
+}
 .c_board > .c_board_content {
 	margin: 30px 20px;
 	font-size: 20px;
