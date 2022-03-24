@@ -20,9 +20,6 @@
 				<div class="userChart">
 					<canvas id="userChart"></canvas>
 				</div>
-				<div class="userChart">
-					<canvas id="visitChart"></canvas>
-				</div>
 			</div>
 		</div>
 		<div class="daily">일별통계보기</div>
@@ -31,8 +28,7 @@
 	</div>
 	<script type="text/javascript">
 		var userContext = document.getElementById('userChart').getContext('2d');
-		var visitContext = document.getElementById('visitChart').getContext('2d');
-		var userChart, visitChart, list, userConfig, visitConfig;
+		var userChart,list, userConfig;
 		
 		$('.daily').on('click', () => {
 			updateChart(list[0], list[1], list[2], list[3]);
@@ -48,26 +44,22 @@
 
 		function updateChart(list1, list2, list3, list4) {
 			var userDataset = userConfig.data.datasets;
-			var visitDataset = visitConfig.data.datasets;
 			
 			userConfig.data.labels = list1;
 			userDataset[0].data = list2;
 			userDataset[1].data = list3;
-			
-			visitConfig.data.labels = list1;
-			visitDataset[0].data = list4;
+			userDataset[2].data = list4;
 			
 			userChart.update();
-			visitChart.update();
 		}
 		
 		$.ajax({
-			url : "${path}/admin/page/stats/stats",
+			url : "${path}/admin/page/stats/notification",
 			type : "GET",
 			success : function(re) {
 				list = [
-					re['dayL'], re['dayN'], re['dayW'], re['dayV'], re['weekL'], re['weekN'],
-					re['weekW'], re['weekV'], re['monthL'], re['monthN'], re['monthW'], re['monthV']
+					re['dayL'], re['bDayN'], re['cDayN'], re['rDayN'], re['weekL'], re['bWeekN'], re['cWeekN'],
+					re['rWeekN'], re['monthL'], re['bMonthN'], re['cMonthV'], re['rMonthN'], re['cMonthV']
 				];
 				userConfig = {
 					type: 'bar',
@@ -75,45 +67,24 @@
 				        labels: list[0],
 				        datasets: [
 				            {
-				                label: '신규 회원',
+				                label: '게시글',
 				                lineTension: 0,
 				                data: list[1],
 				                backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				                borderWidth: 1
 				            },
 				            {
-				                label: '탈퇴 회원',
+				                label: '댓글',
 				                lineTension: 0,
 				                data: list[2],
 				                backgroundColor: 'rgba(255, 99, 132, 0.2)',
 				                borderWidth: 1
-				            }
-				        ]
-				    },
-				    options: {
-				        scales: {
-				            yAxes: [
-				                {
-				                    ticks: {
-				                        beginAtZero: true
-				                    }
-				                }
-				            ]
-				        }
-				    }
-				}
-
-				visitConfig = {
-					type: 'line',
-				    data: { 
-				        labels: list[0],
-				        datasets: [
+				            },
 				            {
-				                label: '방문자수',
+				                label: '리뷰',
 				                lineTension: 0,
 				                data: list[3],
-				                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				                borderColor: 'rgba(255, 99, 132, 0.2)',
+				                backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				                borderWidth: 1
 				            }
 				        ]
@@ -132,7 +103,7 @@
 				}
 
 				userChart = new Chart(userContext, userConfig);
-				visitChart = new Chart(visitContext, visitConfig);
+				
 			}
 		});
 	</script>

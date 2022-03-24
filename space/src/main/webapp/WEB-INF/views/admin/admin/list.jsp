@@ -16,6 +16,15 @@
 	<div class="container home-container">
 		<jsp:include page="../common/noticeLink.jsp"/>
 		<div class="list-wrap">
+			<div class="search-area"></div>
+			<button class="admin-search">검색</button>
+			<select name="amount">
+				<option value="10" selected>10건</option>
+				<option value="20">20건</option>
+				<option value="30">30건</option>
+				<option value="40">40건</option>
+				<option value="50">50건</option>
+			</select>
 			<table border="1" class="col5-table">
 				<colgroup>
 					<col width="5%">
@@ -54,6 +63,15 @@
 			form.submit();
 		}
 		
+		$('.admin-search').on('click', (e) => {
+			e.preventDefault();
+			getLoad();
+		});
+		
+		$('select[name="amount"]').on('change', () => {
+			getLoad();
+		});
+		
 		function formatDate(date) {
 		    let d = new Date(date);
 		    let month = '' + (d.getMonth() + 1);
@@ -69,18 +87,31 @@
 		function getLoad(page) {
 			const noticeList = $('.notice-list');
 			const pagenation = $('.paging');
+			const searchArea = $('.search-area');
 			
 			$.ajax({
 				url : "${path}/admin/page/admin/list",
 				data: {
-					pageNum: page
+					pageNum: page,
+					type: $('select[name="type"]').val(),
+					keyword: $('input[name="keyword"]').val(),
+					amount: $('select[name="amount"]').val()
 				},
 				success : function(result) {
 					const list = result['list'];
 					const paging = result['paging'];
 
+					let searchData = "";
 					let listData = "";
 					let pageData = "";
+					
+					searchData += '<select name="type">';
+					searchData += '<option value="A" ' + (paging.ps.type == "A" ? "selected" : "") + '>전체</option>';
+					searchData += '<option value="B" ' + (paging.ps.type == "B" ? "selected" : "") + '>부서명</option>';
+					searchData += '<option value="C" ' + (paging.ps.type == "C" ? "selected" : "") + '>사원명</option>';
+					searchData += '<option value="D" ' + (paging.ps.type == "D" ? "selected" : "") + '>제목</option>';
+					searchData += '</select>';
+					searchData += '<input type="text" name="keyword" value=' + (paging.ps.keyword == null ? "" : paging.ps.keyword) + '>';
 
 					for(let i=0; i<list.length; ++i) {
 						listData += "<tr>";
@@ -112,6 +143,7 @@
 						pageData += '<li><a><i class="fa-solid fa-angle-right"></i></a></li>';
 					}
 					
+					searchArea.html(searchData);
 					noticeList.html(listData);
 					pagenation.html(pageData);
 				}

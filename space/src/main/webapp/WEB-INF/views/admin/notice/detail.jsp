@@ -21,13 +21,40 @@
 				<ul></ul>
 			</div>
 			<div class="notice-content"></div>
+			<div class="btn-wrap">
+				<ul>
+					<li class="notice-update" onclick="goDetail(${dto.notice_id})">수정</li>
+					<li class="notice-delete">삭제</li>
+					<li class="notice-go-list">목록</li>
+				</ul>
+			</div>
 		</div>
 	</div>
+	<form id="form" action="${path }/admin/notice/update" method="get">
+		<input type="hidden" name="notice_id"/>
+	</form>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			getLoad();
 		});
 	
+		$('.notice-delete').on('click', () => {
+			if(confirm('공지사항을 삭제하시겠습니까?')) {
+				$.ajax({
+					url : "${path}/admin/notice/notice/${dto.notice_id}",
+					type: "DELETE",
+					success : function(result) {
+						alert('삭제가 완료되었습니다.');
+						location.href = "${path}/admin/notice/list";
+					}
+				});
+			}
+		});
+		
+		$('.notice-go-list').on('click', () => {
+			location.href = "${path}/admin/notice/list";
+		});
+		
 		function goDetail(id) {
 			const form = $('#form');
 			form.find('input[name="notice_id"]').val(id);
@@ -52,10 +79,8 @@
 			const noticeContent = $('.notice-content');
 			
 			$.ajax({
-				url : "${path}/admin/page/notice/detail",
-				data: {
-					notice_id: "${dto.notice_id}"
-				},
+				url : "${path}/admin/notice/notice/${dto.notice_id}",
+				type: "GET",
 				success : function(result) {
 					const list = result['list'];
 					

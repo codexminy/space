@@ -1,21 +1,24 @@
 @charset "UTF-8";
-#wrap{
-
-	display: flex;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration : none;    
+}
+#wrapinfo{
     width: 1200px;
     margin: 0 auto;
+    padding: 0 360px 100px 360px;
 }
 .wrap-login-logo{
+	width:1200px;
     margin: 50px 225px 30px 225px;  
 }
 .info{
     border: 1px solid;
     border-radius: 5px;
     width: 600px;
-
     height: 770px;  
-
-    height: 770px;
 }
 .inputinfo #userId{
     width: 450px;

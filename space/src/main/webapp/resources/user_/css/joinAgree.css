@@ -5,12 +5,13 @@
     box-sizing: border-box;
     text-decoration : none;   
 }
-#wrap{
+#wrapjoinAgree{
     width: 1200px;
     margin: 0 auto;
+    padding: 0 300px 100px 300px;
 }
 .wrap-login-logo{
-    margin: 50px 225px 30px 225px;  
+    margin: 50px 225px 30px 225px;
 }
 .joinAgree{
     border: 1px solid;

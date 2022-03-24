@@ -66,6 +66,7 @@ table {
 /* banner/create */
 .pic-img {
 	width: 300px;
+	height: 250px;
 	padding: 50px;
 	text-align: center;
 	cursor: pointer;
@@ -174,6 +175,10 @@ table {
 /* notice/create */
 
 /* stats/stats */
+.stats-wrap {
+	display: flex;
+}
+
 .userChart {
 	width: 50%;
 }

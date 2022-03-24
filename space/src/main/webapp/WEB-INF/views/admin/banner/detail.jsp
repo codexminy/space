@@ -63,6 +63,23 @@
 			$('#update-form').submit();
 		});
 		
+		$('.go-list').on('click', () => {
+			location.href = '${path}/admin/banner/list';
+		});
+		
+		$('.delete').on('click', () => {
+			if(confirm('배너를 삭제하시겠습니까?')) {
+				$.ajax({
+					url : "${path}/admin/banner/banner/${dto.na_id}",
+					type: 'DELETE',
+					success : function(result) {
+						alert('삭제가 완료되었습니다.');
+						location.href = '${path}/admin/banner/list';
+					}
+				});
+			}
+		});
+		
 		function formatDate(date) {
 		    let d = new Date(date);
 		    let month = '' + (d.getMonth() + 1);
@@ -77,11 +94,8 @@
 		
 		function getLoad() {
 			$.ajax({
-				url : "${path}/admin/page/banner/detail",
+				url : "${path}/admin/banner/banner/${dto.na_id}",
 				type: 'GET',
-				data: {
-					na_id: "${dto.na_id}"
-				},
 				success : function(result) {
 					const list = result['list'];
 					
