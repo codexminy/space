@@ -6,7 +6,7 @@
 <head>
 	<title>우주장터</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=2" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=3" />
 </head>
 <body>
 	<div>
@@ -39,6 +39,9 @@
 			<c:forEach items="${c_board_list }" var="c_board_list">
 			<c:if test="${c_board_list.c_category_id eq category_id }">
 				<div class='c_board'>
+					<form class="c_board_view" action="./c_board" method="GET">
+						<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
+					</form>
 					<div class='c_category'>${c_board_list.c_category_name }</div>
 					<div class='c_board_profile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${c_board_list.user_id }.png" width="60px"/></div>
 					<ul class='c_board_writer'>
@@ -47,22 +50,27 @@
 					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
-					<div class='c_board_images'>
-						<c:forEach items="${c_board_img_list }" var="c_board_img_list">
-						<c:choose>
-						<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
-							</div>
-						</c:when>
-						</c:choose>	
-						</c:forEach>
+					<div class='view_count'>조회수: ${c_board_list.c_board_view }</div>
+					<div class='c_board_max_height'>
+						<div class='c_board_images'>
+							<c:forEach items="${c_board_img_list }" var="c_board_img_list">
+							<c:choose>
+							<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
+								<div>
+									<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
+								</div>
+							</c:when>
+							</c:choose>	
+							</c:forEach>
+						</div>
+						<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					</div>
-					<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					<ul class='c_board_option'>
+						<!-- 
 						<li class='view_report'>신고하기
 							<p class='data_board_id'>${c_board_list.c_board_id }</p>
 						</li>
+						 -->
 						<li class='view_comment'>댓글보기(
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
@@ -180,6 +188,6 @@
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=3"></script>
 </body>
 </html>

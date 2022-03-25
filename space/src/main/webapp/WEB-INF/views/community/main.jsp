@@ -49,6 +49,7 @@
 					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
+					<div class='view_count'>조회수: ${c_board_list.c_board_view }</div>
 					<div class='c_board_max_height'>
 						<div class='c_board_images'>
 							<c:forEach items="${c_board_img_list }" var="c_board_img_list">

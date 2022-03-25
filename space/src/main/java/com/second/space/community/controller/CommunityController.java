@@ -67,9 +67,10 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/c_board")
-	public void communityBoard(Model model) {
+	public void communityBoard(HttpServletRequest request, CommunityBoardDTO list, Model model) {
 		System.out.println("community board로 이동");
 		try {
+			community_service.PutCommunityBoardViewCount(list);
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());

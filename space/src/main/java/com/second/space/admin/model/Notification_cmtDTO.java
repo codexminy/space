@@ -14,4 +14,6 @@ public class Notification_cmtDTO {
 	private int c_id;
 	private int user_id;
 	private Date nc_notify_date;
+	private int nfc_id;
+	private String nc_content;
 }

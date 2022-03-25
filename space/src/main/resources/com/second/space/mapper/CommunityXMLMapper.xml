@@ -37,6 +37,15 @@
 	<select id="getCommunityCategoryList" resultType="com.second.space.community.model.CommunityCategoryDTO">
 		SELECT * FROM community_category
 	</select>
+	<!-- 커뮤니티 조회수 업데이트 -->
+	<update id="communityBoardViewCount">
+		UPDATE
+			community_board
+		SET
+			c_board_view = c_board_view + 1
+		WHERE
+			c_board_id = #{c_board_id}
+	</update>
 	<!-- 커뮤니티 댓글 꺼내기 -->
 	<select id="getCommunityComment" resultType="com.second.space.community.model.CommunityCommentDTO">
 		SELECT * from community_comment WHERE c_id=#{c_id}
@@ -110,10 +119,10 @@
 			SELECT noti_comment_nc_id_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO
-			notification_cmt(nc_id, c_board_id, c_id, user_id)
+			notification_cmt(nc_id, c_board_id, c_id, user_id, nc_content, nfc_id)
 		VALUES
 			(
-				#{nc_id}, #{c_board_id}, #{c_id}, #{user_id}
+				#{nc_id}, #{c_board_id}, #{c_id}, #{user_id}, #{nc_content}, #{nfc_id}
 			)
 	</insert>
 	<!-- 댓글 신고글 꺼내기 -->

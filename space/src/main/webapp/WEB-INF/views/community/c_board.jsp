@@ -50,6 +50,7 @@
 					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
+					<div class='view_count'>조회수: ${c_board_list.c_board_view }</div>
 					<div class='c_board_max_height'>
 						<div class='c_board_images'>
 							<c:forEach items="${c_board_img_list }" var="c_board_img_list">
@@ -186,6 +187,6 @@
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/c_board.js?ver=2"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/c_board.js?ver=3"></script>
 </body>
 </html>

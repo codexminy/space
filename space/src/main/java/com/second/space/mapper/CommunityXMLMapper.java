@@ -37,4 +37,6 @@ public interface CommunityXMLMapper {
 	
 	public int addCommunityBoardImg(CommunityBoardImgDTO boardImg);
 	public List<CommunityBoardImgDTO> getCommunityBoardImgList();
+	
+	public int communityBoardViewCount(CommunityBoardDTO list);
 }

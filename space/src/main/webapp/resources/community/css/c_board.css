@@ -110,6 +110,12 @@ main {
 .c_board > hr {
 	margin: 0 10px 20px;
 }
+.view_count{
+	display: inline-block;
+	float:right;
+	margin-right: 20px;
+	font-size: 14px;
+}
 .c_board > .c_board_max_height{
 }
 .c_board > .c_board_max_height > .c_board_images {

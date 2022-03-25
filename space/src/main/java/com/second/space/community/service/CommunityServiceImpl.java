@@ -135,4 +135,10 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityBoardImgDTO> getCommunityBoardImgList() throws Exception {
 		return community_mapper.getCommunityBoardImgList();
 	}
+	
+	/* 커뮤니티 게시글 조회수 UP */
+	@Override
+	public int PutCommunityBoardViewCount(CommunityBoardDTO list) throws Exception {
+		return community_mapper.communityBoardViewCount(list);
+	}
 }

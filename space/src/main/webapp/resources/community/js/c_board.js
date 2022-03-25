@@ -107,7 +107,7 @@ for(let i=0; i<comment_report.length; ++i) {
 			alert("로그인이 필요합니다.")
 		} else {
 			var center_width = '600';
-    		var center_height = '250';
+    		var center_height = '340';
 			var center_left = Math.ceil((window.screen.width - center_width)/2);
     		var center_top = Math.ceil((window.screen.height - center_height)/2);
     		var uid1 = data_board_id2[i].innerText;

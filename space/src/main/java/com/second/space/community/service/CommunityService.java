@@ -34,4 +34,6 @@ public interface CommunityService {
 	
 	public int newCommunityBoardImg(List<CommunityBoardImgDTO> imgList) throws Exception;
 	public List<CommunityBoardImgDTO> getCommunityBoardImgList() throws Exception;
+	
+	public int PutCommunityBoardViewCount(CommunityBoardDTO list) throws Exception;
 }
