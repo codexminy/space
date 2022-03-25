@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터</title>
-<link href="${pageContext.request.contextPath}/resources/customerService/css/cs.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/resources/customerService/css/customer.css" rel="stylesheet"/>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
