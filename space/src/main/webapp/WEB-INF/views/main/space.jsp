@@ -5,93 +5,28 @@
 <meta charset="UTF-8">
 <title>SPACE</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/main.css">
 </head>
 <body>
-	<div id="wrap">
-		<header id="fixed-bar">
-			<div id="navbar-box">
-		        <nav class="navbar">
-		            <div class="navbar-header-left">
-		                <a href="#">북마크</a>
-		            </div>
-		            <div class="navbar-header-right">
-		                <a href="#">관리자</a>
-		                <a href="#">로그인/회원가입</a>
-		                <a href="#">고객센터</a>
-		            </div>
-		        </nav>
-			</div>           
-	        <div id="fixed-bar-wrap">
-	           <div id="menu-box">
-	                <div class="menu-left">
-	                    <div class="dropdown">
-	                        <img src="${pageContext.request.contextPath}/resources/images/main/menu.png" class="dropbtn" onclick="myFunction()" class="dropbtn"></img>
-                            <div id="myDropdown" class="dropdown-content">
-                                <div class="category-box"><a href="#">인기매물</a></div>
-                                <div class="category-box"><a href="#">디지털</a></div>
-                                <div class="category-box"><a href="#">가전</a></div>
-                                <div class="category-box"><a href="#">가구</a></div>
-                                <div class="category-box"><a href="#">패션</a></div>
-                                <div class="category-box"><a href="#">스포츠</a></div>
-                                <div class="category-box"><a href="#">문화</a></div>
-                                <div class="category-box"><a href="#">취미</a></div>
-                                <div class="category-box"><a href="#">미용</a></div>
-                                <div class="category-box"><a href="#">반려동물</a></div>
-                                <div class="category-box"><a href="#">기타</a></div>
-                                <div class="category-box"><a href="#">커뮤니티</a></div>
-                            </div>
-	                    </div>
-        	            <div class="space-logo"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px"></a></div>
-	                </div>
-    	            <div class="search-bar">
-                        <input class="search-bar-input" type="search">  
-    	                <i class="fas fa-search"></i>
-    	            </div>
-    	            <nav>
-    	                <ul class="gnb">
-    	                    <div class="gnb-button-sell">
-    	                        <li><img src="${pageContext.request.contextPath}/resources/images/main/board.png"></li>
-                                <li>판매하기</li>
-    	                    </div>
-    	                    <div class="gnb-button-store">
-    	                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/store.png"></a></li>
-                                <li>나의 우주</li>
-    	                    </div>
-    	                    <div class="gnb-button-talk">
-    	                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/spacetalk.png"></a></li>
-                                <li>우주톡</li>
-    	                    </div>
-    	                </ul>
-    	            </nav>
-	           </div>
-	        </div>
-        </header>
-        <section>
-            <div class="blank"></div>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_01.jpg"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_02.jpg"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_03.jpg"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_04.jpg"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div>
-                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script>
-                var swiper = new Swiper(".mySwiper", {
-					navigation: {
-						nextEl: ".swiper-button-next",
-						prevEl: ".swiper-button-prev",
-					},
-                });
-            </script>
+<jsp:include page="../main/header.jsp"/>
+	<section>
+		<div class="blank"></div>
+		<div class="swiper mySwiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_01.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_02.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_03.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_04.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div>
+			</div>
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
+		</div>
+            
             <div class="hot-items">
                 <div class="hot-items-text">
                     <h2>인기매물</h2>
@@ -299,30 +234,20 @@
                             <li><a href="#">커뮤니티 게시글4</a></li>
                             <li><a href="#">커뮤니티 게시글5</a></li>
                         </ul>
-                    </div>       
-                </div>
-            </div>
-        </section>
-        <!--푸터-->
-        <footer class="footer">
-	        <div class="copyright">
-	            <ul>
-	                <li><a href="#">회사소개</a></li>
-	                <li>|</li>
-	                <li><a href="#">인재채용</a></li>
-	                <li>|</li>
-	                <li><a href="#">광고문의</a></li>
-	                <li>|</li>
-	                <li><a href="#">개인정보처리방침</a></li>
-	                <li>|</li>
-	                <li><a href="#">이용약관</a></li>
-	            </ul>
-	        </div>
-	        <div class="copyright-text">Copyright ⓒ <strong>SPACE MARKET</strong> Corp. All rights reserved.</div>  
-	    </footer>
-    </div>
+					</div>       
+				</div>
+			</div>
+	</section>
+<jsp:include page="../main/footer.jsp"/>        
 </body>
 <script>
+    var swiper = new Swiper(".mySwiper", {
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+    });
+
 	function myFunction() {
 	    document.getElementById("myDropdown").classList.toggle("show");
 	}

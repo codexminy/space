@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+
+.interested {
+    width: 1140px;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 150px;
+}
+
+.my-space-nav-title {
+    width: 1140px;
+    height: 50px;
+    border-bottom: 1px solid #D1D1D1;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+}
+
+.my-space-nav-title > h2 {
+    margin-right: 15px;
+}
+
+.my-space-nav-title > p {
+    color: #22007F;
+    font-weight: bold;
+}
+
+.myspace-cards-wrap {
+    width: 1140px;
+	clear:both;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.myspace-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-right: 10px;
+}
+
+.myspace-card:nth-child(5n) {
+    margin-right: 0px;
+}
+
+.myspace-card-photo {
+    width: 220px;
+    height: 220px;
+    border: 1px solid #707070;
+    border-radius: 25px;
+}
+
+.myspace-card-photo-img > img{
+    width: 220px;
+    height: 220px;
+}
+
+.myspace-card-textbox {
+    width: 220px;
+    padding-top: 15px;
+}
+
+.myspace-card-text {
+    width: 220px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myspace-card-title {
+    width: 208px;
+    font-size: 18px;
+}
+
+.myspace-card-info {
+    width: 208px;
+}
+
+.myspace-card-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.myspace-card-info :first-child {
+    font-size: 16px;
+    align-items: flex-end;
+}
+
+.myspace-card-text :last-child {
+    font-size: 12px;
+    align-items: flex-end;
+}

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>footer.jsp</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/footer.css">
 </head>
 <body>
 	<div id="wrap">
