@@ -16,18 +16,40 @@
 	<div class="container home-container">
 		<jsp:include page="../common/statsLink.jsp"/>
 		<div class="list-wrap">
-			<div class="stats-wrap">
-				<div class="userChart">
-					<canvas id="userChart"></canvas>
+			<div class="stats-container">
+				<div class="count-wrap">
+					<table class="dailyUserCount">
+						<tbody></tbody>
+					</table>
+					<table class="dailyVisitCount">
+						<tbody></tbody>
+					</table>
+					<table class="weeklyUserCount">
+						<tbody></tbody>
+					</table>
+					<table class="weeklyVisitCount">
+						<tbody></tbody>
+					</table>
+					<table class="monthlyUserCount">
+						<tbody></tbody>
+					</table>
+					<table class="monthlyVisitCount">
+						<tbody></tbody>
+					</table>
+					<div class="daily">일별통계보기</div>
+					<div class="weekly">주별통계보기</div>
+					<div class="monthly">월별통계보기</div>
 				</div>
-				<div class="userChart">
-					<canvas id="visitChart"></canvas>
+				<div class="stats-wrap">
+					<div class="userChart">
+						<canvas id="userChart"></canvas>
+					</div>
+					<div class="userChart">
+						<canvas id="visitChart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="daily">일별통계보기</div>
-		<div class="weekly">주별통계보기</div>
-		<div class="monthly">월별통계보기</div>
 	</div>
 	<script type="text/javascript">
 		var userContext = document.getElementById('userChart').getContext('2d');
@@ -60,6 +82,36 @@
 			userChart.update();
 			visitChart.update();
 		}
+
+		function tableData(userCounts, visitCounts, label, data1, data2, data3) {
+			let userCount = userCounts;
+			let visitCount = visitCounts;
+			
+			let userData = '';
+			let visitData = '';
+			
+			let newUser = 0;
+			let withUser = 0;
+			let visit = 0;
+			
+			for(let i=0; i<label.length; ++i) {
+				newUser += data1[i];
+				withUser += data2[i];
+				visit += data3[i];
+			}
+			
+			userData += '<tr>';
+			userData += '<td>'+ newUser +'</td>';
+			userData += '<td>'+ withUser +'</td>';
+			userData += '<tr>';
+			
+			visitData += '<tr>';
+			visitData += '<td>'+ visit +'</td>';
+			visitData += '<tr>';
+			
+			userCount.html(userData);
+			visitCount.html(visitData);
+		}
 		
 		$.ajax({
 			url : "${path}/admin/page/stats/stats",
@@ -69,6 +121,11 @@
 					re['dayL'], re['dayN'], re['dayW'], re['dayV'], re['weekL'], re['weekN'],
 					re['weekW'], re['weekV'], re['monthL'], re['monthN'], re['monthW'], re['monthV']
 				];
+
+				tableData($('.dailyUserCount tbody'), $('.dailyVisitCount tbody'), re['dayL'], re['dayN'], re['dayW'], re['dayV']);
+				tableData($('.weeklyUserCount tbody'), $('.weeklyVisitCount tbody'), re['weekL'], re['weekN'], re['weekW'], re['weekV']);
+				tableData($('.monthlyUserCount tbody'), $('.monthlyVisitCount tbody'), re['monthL'], re['monthN'], re['monthW'], re['monthV']);
+
 				userConfig = {
 					type: 'bar',
 				    data: {
@@ -79,6 +136,7 @@
 				                lineTension: 0,
 				                data: list[1],
 				                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				                borderColor: 'rgba(54, 162, 235, 0.2)',
 				                borderWidth: 1
 				            },
 				            {
@@ -86,6 +144,7 @@
 				                lineTension: 0,
 				                data: list[2],
 				                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				                borderColor: 'rgba(255, 99, 132, 0.2)',
 				                borderWidth: 1
 				            }
 				        ]

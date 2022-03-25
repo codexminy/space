@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.BoardNotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
@@ -271,50 +273,57 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Integer> getDailyCmtNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getDailyCmtNotifyList();
 	}
 
 	@Override
 	public List<Integer> getDailyReviewNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getDailyReviewNotifyList();
 	}
 
 	@Override
 	public List<Integer> getWeeklyBoardNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getWeeklyBoardNotifyList();
 	}
 
 	@Override
 	public List<Integer> getWeeklyCmtNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getWeeklyCmtNotifyList();
 	}
 
 	@Override
 	public List<Integer> getWeeklyReviewNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getWeeklyReviewNotifyList();
 	}
 
 	@Override
 	public List<Integer> getMonthlyBoardNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getMonthlyBoardNotifyList();
 	}
 
 	@Override
 	public List<Integer> getMonthlyCmtNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getMonthlyCmtNotifyList();
 	}
 
 	@Override
 	public List<Integer> getMonthlyReviewNotifyList() throws Exception {
-		// TODO Auto-generated method stub
 		return mapper.getMonthlyReviewNotifyList();
+	}
+
+	@Override
+	public int updateHidden(A_boardDTO dto) throws Exception {
+		return mapper.updateHidden(dto);
+	}
+
+	@Override
+	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps) throws Exception {
+		return mapper.getBoardNotifyList(ps);
+	}
+
+	@Override
+	public int getBoardNotifyCount(PageSet ps) throws Exception {
+		return mapper.getBoardNotifyCount(ps);
 	}
 }
 

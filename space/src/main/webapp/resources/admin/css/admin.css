@@ -175,12 +175,17 @@ table {
 /* notice/create */
 
 /* stats/stats */
-.stats-wrap {
+.stats-container {
 	display: flex;
+	justify-content: space-between;
 }
 
-.userChart {
-	width: 50%;
+.count-wrap {
+	width: 40%;
+}
+
+.stats-wrap {
+	width: 60%;
 }
 /* stats/stats */
 

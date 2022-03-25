@@ -11,7 +11,7 @@ public class Notification_boardDTO {
 	private int c_board_id;
 	private String n_handling;
 	private int user_id;
-	private Date notify_date;
+	private Date n_notify_date;
 	private int nfc_id;
 	private String n_content;
 }
