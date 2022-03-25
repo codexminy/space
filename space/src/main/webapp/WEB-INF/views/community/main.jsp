@@ -21,13 +21,15 @@
 			<div class="hello_login">${user_id }님 반갑습니다.</div>
 			<p id="hello">${user_id }</p>
 		</header>
-		<main>
+		<div id="community_category">
 			<ul>
-				<li><a href="main">전체보기</a></li>
+				<a href="main"><li>전체보기</li></a>
 				<c:forEach items="${c_category_list }" var="c_category_list">
-					<li><a href="category?id=${c_category_list.c_category_id }">${c_category_list.c_category_name }</a></li>
+					<a href="category?id=${c_category_list.c_category_id }"><li>${c_category_list.c_category_name }</li></a>
 				</c:forEach>
-			</ul>
+			</ul>		
+		</div>
+		<main>
 			<div class="flex-end">
 				<div id="board_write">글쓰기
 					<form id="board_write_on" action="./c_board_write" method="POST">
@@ -36,6 +38,9 @@
 			</div>
 			<c:forEach items="${c_board_list }" var="c_board_list">
 				<div class='c_board'>
+					<form class="c_board_view" action="./c_board" method="GET">
+						<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
+					</form>
 					<div class='c_category'>${c_board_list.c_category_name }</div>
 					<div class='c_board_profile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${c_board_list.user_id }.png" width="60px"/></div>
 					<ul class='c_board_writer'>
@@ -44,22 +49,26 @@
 					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
-					<div class='c_board_images'>
-						<c:forEach items="${c_board_img_list }" var="c_board_img_list">
-						<c:choose>
-						<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
-							</div>
-						</c:when>
-						</c:choose>	
-						</c:forEach>
+					<div class='c_board_max_height'>
+						<div class='c_board_images'>
+							<c:forEach items="${c_board_img_list }" var="c_board_img_list">
+							<c:choose>
+							<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
+								<div>
+									<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
+								</div>
+							</c:when>
+							</c:choose>	
+							</c:forEach>
+						</div>
+						<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					</div>
-					<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					<ul class='c_board_option'>
+						<!-- 
 						<li class='view_report'>신고하기
 							<p class='data_board_id'>${c_board_list.c_board_id }</p>
 						</li>
+						 -->
 						<li class='view_comment'>댓글보기(
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
@@ -176,6 +185,6 @@
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=3"></script>
 </body>
 </html>

@@ -66,6 +66,23 @@ public class CommunityController {
 		return "redirect:/community/main";
 	}
 	
+	@GetMapping("/c_board")
+	public void communityBoard(Model model) {
+		System.out.println("community board로 이동");
+		try {
+			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
+			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+		} catch (Exception e) {
+			log.info("Error");
+			e.printStackTrace();
+		}
+	}
+	
 	@PostMapping("/c_board_write")
 	public String communityBoardWrite(Model model) {
 		System.out.println("글쓰기.jsp");

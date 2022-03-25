@@ -73,10 +73,6 @@ main {
 	width: 100%;
 	border: 1px solid #333;
 	border-radius: 10px;
-	cursor: pointer;
-}
-.c_board:hover {
-	background-color: #ddd;
 }
 .c_board > .c_category {
 	display:inline-block;
@@ -115,8 +111,6 @@ main {
 	margin: 0 10px 20px;
 }
 .c_board > .c_board_max_height{
-	max-height: 140px;
-	overflow: hidden;
 }
 .c_board > .c_board_max_height > .c_board_images {
 	margin: 10px;
@@ -145,6 +139,9 @@ main {
 }
 .c_board > .c_board_option > li:hover {
 	cursor: pointer;
+}
+.c_board > .c_board_option > li:first-of-type {
+	cursor: default;
 }
 .c_board > .c_board_option .data_board_id{
 	display:none;

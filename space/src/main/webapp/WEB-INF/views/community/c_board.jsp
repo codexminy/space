@@ -1,12 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%
+	request.setAttribute("c_board_id", request.getParameter("c_board_id"));
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>우주장터</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=2" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board.css?ver=3" />
 </head>
 <body>
 	<div>
@@ -37,7 +40,7 @@
 				</div>
 			</div>
 			<c:forEach items="${c_board_list }" var="c_board_list">
-			<c:if test="${c_board_list.c_category_id eq category_id }">
+			<c:if test="${c_board_list.c_board_id eq c_board_id }">
 				<div class='c_board'>
 					<div class='c_category'>${c_board_list.c_category_name }</div>
 					<div class='c_board_profile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${c_board_list.user_id }.png" width="60px"/></div>
@@ -47,23 +50,22 @@
 					</ul>
 					<h3>${c_board_list.c_board_title }</h3>
 					<hr />
-					<div class='c_board_images'>
-						<c:forEach items="${c_board_img_list }" var="c_board_img_list">
-						<c:choose>
-						<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
-							<div>
-								<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="120px"/>
-							</div>
-						</c:when>
-						</c:choose>	
-						</c:forEach>
+					<div class='c_board_max_height'>
+						<div class='c_board_images'>
+							<c:forEach items="${c_board_img_list }" var="c_board_img_list">
+							<c:choose>
+							<c:when test="${c_board_list.c_board_id eq c_board_img_list.c_board_id }">
+								<div>
+									<img src="${pageContext.request.contextPath}/resources/upload/c_board/${c_board_img_list.c_renamedfilename }" width="200px"/>
+								</div>
+							</c:when>
+							</c:choose>	
+							</c:forEach>
+						</div>
+						<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					</div>
-					<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					<ul class='c_board_option'>
-						<li class='view_report'>신고하기
-							<p class='data_board_id'>${c_board_list.c_board_id }</p>
-						</li>
-						<li class='view_comment'>댓글보기(
+						<li>댓글(
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
 							<c:when test="${c_comment_count.c_board_id eq c_board_list.c_board_id }">
@@ -72,8 +74,12 @@
 							</c:choose>	
 							</c:forEach>
 						)</li>
+						<li class='view_report'>신고하기
+							<p class='data_board_id'>${c_board_list.c_board_id }</p>
+						</li>
+						<li class='view_comment'>댓글접기↑</li>
 					</ul>
-					<div class='c_comment'>
+					<div class='c_comment active'>
 						<hr />
 						<c:forEach items="${c_comment_list }" var="c_comment_list">
 						<c:choose>
@@ -98,7 +104,7 @@
 								<div class='reply_form'>
 									<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="30px"/></div>
 									<form class='reply_write_form' name="replyForm" action="./reply_write" method="POST">
-										<textarea class='reply_textarea' name="c_content" style="width:87%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
+										<textarea class='reply_textarea' name="c_content" style="width:91%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 										<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
 										<input type="hidden" name="user_id" value="${user_id }" />
 										<input type="hidden" name="c_depth" value="1" />
@@ -127,7 +133,7 @@
 									<div class='rereply_form'>
 										<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="30px"/></div>
 										<form class='rereply_write_form' name="rereplyForm" action="./reply_write" method="POST">
-											<textarea class='reply_textarea' name="c_content" style="width:87%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
+											<textarea class='reply_textarea' name="c_content" style="width:91%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 											<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
 											<input type="hidden" name="user_id" value="${user_id }" />
 											<input type="hidden" name="c_depth" value="2" />
@@ -165,7 +171,7 @@
 							<div class='mycomment'>
 								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="50px"/></div>
 								<form class='c_comment_write' name="commentForm" action="./comment_write" method="POST">
-									<textarea class='c_comment_textarea' name="c_content" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
+									<textarea class='c_comment_textarea' name="c_content" style="width:87%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 									<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
 									<input type="hidden" name="user_id" value="${user_id }" />
 									<input class='c_comment_btn' type="submit" value="등록"/>
@@ -180,6 +186,6 @@
 			</c:forEach>
 		</main>
 	</div>
-<script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=1"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/c_board.js?ver=2"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 		}
 	</style>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board_write.css?ver=2" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board_write.css?ver=1" />
 </head>
 <body>
 	<form id="go_back_main" action="./main"></form>
@@ -28,15 +28,15 @@
 		<div class="hello_login">${user_id }님 반갑습니다.</div>
 		<p id="hello">${user_id }</p>
 	</header>
+	<div id="community_category">
+		<ul>
+			<a href="main"><li>전체보기</li></a>
+			<c:forEach items="${c_category_list }" var="c_category_list">
+				<a href="category?id=${c_category_list.c_category_id }"><li>${c_category_list.c_category_name }</li></a>
+			</c:forEach>
+		</ul>		
+	</div>
 	<main>
-		<div>
-			<ul id="temp_ul">
-				<li><a href="main">전체보기</a></li>
-				<c:forEach items="${c_category_list }" var="c_category_list">
-					<li><a href="category?id=${c_category_list.c_category_id }">${c_category_list.c_category_name }</a></li>
-				</c:forEach>
-			</ul>
-		</div>
 		<!-- 바깥 박스 -->
 		<div id="outer_box">
 			<!-- 왼쪽 박스 -->
@@ -59,6 +59,7 @@
 						<option value="5">해주세요</option>
 						<option value="6">기타</option>
 					</select>
+					<div></div>
 					<textarea id="c_board_title" name="c_board_title"></textarea>
 				</div>
 				<!-- 내용 -->
@@ -79,10 +80,10 @@
 				</div>
 				<div class="box4">
 					<ul>
-						<li>- 이미지는 등록 순서대로 첨부되며, 클릭하여 대표 이미지를 변경할 수 있습니다.</li>
+						<li>- 이미지는 등록 순서대로 첨부됩니다.</li>
 						<li>- 최대 5장까지 등록이 가능합니다.</li>
 						<li>- jpg,jpeg,png 확장자만 등록이 가능합니다.</li>
-						<li>- 규정에 위배되는 이미지는 등록시 게시글이 제한 될 수 잇으며 추후 발견시 무통보 삭제 및 제재를 받으실 수 있습니다.</li>
+						<li>- 규정에 위배되는 이미지는 등록시 게시글이 제한 될 수 있으며 추후 발견시 무통보 삭제 및 제재를 받으실 수 있습니다.</li>
 					</ul>
 				</div>
 				</form>
