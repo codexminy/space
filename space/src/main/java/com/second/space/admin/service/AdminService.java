@@ -135,6 +135,16 @@ public interface AdminService {
 	
 	public int getBoardNotifyCount(PageSet ps) throws Exception; // 신고 관리 - 게시물 신고 갯수
 	
+	public int updateBoardHandling(BoardNotifyDTO dto) throws Exception; // 신고 관리 - 장터 게시글 신고 승인 처리
+	
+	public int updateBoardDelete(BoardNotifyDTO dto) throws Exception; // 신고 관리 - 장터 게시글 신고 승인 처리
+	
+	public int updateBoardReported(BoardNotifyDTO dto) throws Exception; // 신고 관리 - 장터 게시글 신고 승인 처리
+	
+	public int updateCommunityBoardDelete(BoardNotifyDTO dto) throws Exception; // 신고 관리 - 커뮤니티 게시글 신고 승인 처리
+
+	public int updateCancelBoardReported(BoardNotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 취소 처리
+	
 }
 
 

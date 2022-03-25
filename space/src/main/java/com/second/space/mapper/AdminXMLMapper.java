@@ -137,6 +137,16 @@ public interface AdminXMLMapper {
 	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps); // 신고 관리 - 게시글 신고 리스트
 	
 	public int getBoardNotifyCount(PageSet ps); // 신고 관리 - 게시물 신고 갯수
+	
+	public int updateBoardHandling(BoardNotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
+	
+	public int updateBoardDelete(BoardNotifyDTO dto); // 신고 관리 - 장터 게시글 신고 승인 처리
+	
+	public int updateBoardReported(BoardNotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
+	
+	public int updateCommunityBoardDelete(BoardNotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 처리
+	
+	public int updateCancelBoardReported(BoardNotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 취소 처리
 }
 
 

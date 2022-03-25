@@ -188,6 +188,58 @@
             </foreach>
         </trim>
     </sql>
+    
+    <!-- 신고 관리 게시물 검색 조건문 -->
+    <sql id="notifyBoardSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							reported like '%'||LOWER(#{keyword})||'%' OR reported like '%'||UPPER(#{keyword})||'%'
+							OR reporter like '%'||LOWER(#{keyword})||'%' OR reporter like '%'||UPPER(#{keyword})||'%'
+							OR nfc_name like '%'||LOWER(#{keyword})||'%' OR nfc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            reported like '%'||LOWER(#{keyword})||'%' OR reported like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            reporter like '%'||LOWER(#{keyword})||'%' OR reporter like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'D'.toString()">
+                            nfc_name like '%'||LOWER(#{keyword})||'%' OR nfc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    
+    <!-- 신고 관리 게시물 검색 조건문 -->
+    <sql id="notifyCmtSearch">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                    	<when test="type == 'A'.toString()">
+							reported like '%'||LOWER(#{keyword})||'%' OR reported like '%'||UPPER(#{keyword})||'%'
+							OR reporter like '%'||LOWER(#{keyword})||'%' OR reporter like '%'||UPPER(#{keyword})||'%'
+							OR nfc_name like '%'||LOWER(#{keyword})||'%' OR nfc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'B'.toString()">
+                            reported like '%'||LOWER(#{keyword})||'%' OR reported like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            reporter like '%'||LOWER(#{keyword})||'%' OR reporter like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                        <when test="type == 'D'.toString()">
+                            nfc_name like '%'||LOWER(#{keyword})||'%' OR nfc_name like '%'||UPPER(#{keyword})||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
 
 	<!-- 홈 - 신고 관리 접수 갯수 -->
 	<select id="getNotificationCount" resultType="java.lang.Integer">
@@ -373,8 +425,6 @@
  		<collection property="acbDTO" resultMap="A_Community_boardDTO"/>
  		<collection property="ccDTO" resultMap="CommunityCategoryDTO"/>
  		<collection property="naDTO" resultMap="Notice_adminDTO"/>
- 		<collection property="nbDTO" resultMap="Notification_boardDTO"/>
- 		<collection property="ncDTO" resultMap="Notification_categoryDTO"/>
  	</resultMap>
 
 	<!-- 홈 - 어드민 안내 리스트 -->
@@ -1173,22 +1223,22 @@
 	
 	<!-- 신고 관리 - 게시글 신고 리스트-->
 	<select id="getBoardNotifyList" resultType="com.second.space.admin.model.BoardNotifyDTO">
-		WITH nb1(dump1, login_id_1, n_notify_date, user_id, board_id, c_board_id) AS
+		WITH nb1(n_id, reported, n_notify_date, user_id, board_id, c_board_id, n_content, n_handling) AS
 		(SELECT
-		    n_id, login_id, n_notify_date, b.user_id, b.board_id, b.board_id
+		    n_id, login_id, n_notify_date, b.user_id, b.board_id, nb.c_board_id, nb.n_content, nb.n_handling
 		FROM
 		    notification_board nb, board b, user_ u, login_id_list lil
 		WHERE
 		    nb.board_id = b.board_id AND b.user_id = u.user_id AND u.user_login_id = lil.user_login_id
 		UNION ALL
 		SELECT
-		    n_id, login_id, n_notify_date, cb.user_id, cb.c_board_id, cb.c_board_id
+		    n_id, login_id, n_notify_date, cb.user_id, nb.board_id, cb.c_board_id, nb.n_content, nb.n_handling
 		FROM
 		    notification_board nb, community_board cb, user_ u, login_id_list lil
 		WHERE
 		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
 		),
-		nb2(dump2, login_id_2) AS
+		nb2(dump2, reporter) AS
 		(SELECT
 		    n_id, login_id
 		FROM
@@ -1219,32 +1269,49 @@
 		WHERE
 		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id
 		)
-		SELECT 
-		    nb1.login_id_1, nb1.n_notify_date, nb1.user_id, nb1.board_id, nb1.c_board_id, nb2.login_id_2, nb3.nfc_name, nb4.user_reported
-		FROM
-		  nb1, nb2, nb3, nb4
-		WHERE
-		    nb1.dump1 = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
+		SELECT
+		    rn, n_id, reported, n_notify_date, user_id, board_id, c_board_id, n_content, n_handling, reporter, nfc_name, user_reported
+		FROM(
+		    SELECT
+		        ROWNUM rn, n_id, reported, n_notify_date, user_id, board_id, c_board_id, n_content, n_handling, reporter, nfc_name, user_reported
+		    FROM(
+		        SELECT 
+		            nb1.n_id, nb1.reported, nb1.n_notify_date, nb1.user_id, nb1.board_id, nb1.c_board_id, nb1.n_content, nb1.n_handling, nb2.reporter, nb3.nfc_name, nb4.user_reported
+		        FROM
+		          nb1, nb2, nb3, nb4
+		        WHERE
+		            nb1.n_id = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
+		        ORDER BY
+		            nb1.n_notify_date DESC
+		    )
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+    	]]>
+        	 <if test="keyword != null">
+                <include refid="notifyBoardSearch"></include> 
+            </if>
 	</select>
 	
 	<!-- 신고 관리 - 게시글 신고 갯수-->
 	<select id="getBoardNotifyCount" resultType="int">
-		WITH nb1(dump1, login_id_1, n_notify_date, user_id, board_id, c_board_id) AS
+		WITH nb1(n_id, reported, n_notify_date, user_id, board_id, c_board_id, n_content, n_handling) AS
 		(SELECT
-		    n_id, login_id, n_notify_date, b.user_id, b.board_id, b.board_id
+		    n_id, login_id, n_notify_date, b.user_id, b.board_id, nb.c_board_id, nb.n_content, nb.n_handling
 		FROM
 		    notification_board nb, board b, user_ u, login_id_list lil
 		WHERE
 		    nb.board_id = b.board_id AND b.user_id = u.user_id AND u.user_login_id = lil.user_login_id
 		UNION ALL
 		SELECT
-		    n_id, login_id, n_notify_date, cb.user_id, cb.c_board_id, cb.c_board_id
+		    n_id, login_id, n_notify_date, cb.user_id, nb.board_id, cb.c_board_id, nb.n_content, nb.n_handling
 		FROM
 		    notification_board nb, community_board cb, user_ u, login_id_list lil
 		WHERE
 		    nb.c_board_id = cb.c_board_id AND cb.user_id = u.user_id AND u.user_login_id = lil.user_login_id
 		),
-		nb2(dump2, login_id_2) AS
+		nb2(dump2, reporter) AS
 		(SELECT
 		    n_id, login_id
 		FROM
@@ -1280,8 +1347,36 @@
 		FROM
 		  nb1, nb2, nb3, nb4
 		WHERE
-		    nb1.dump1 = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
+		    nb1.n_id = nb2.dump2 AND nb2.dump2 = nb3.dump3 AND nb3.dump3 = nb4.dump4
+		    <if test="keyword != null">
+                <include refid="notifyBoardSearch"></include> 
+            </if>
 	</select>
+	
+	<!-- 신고 관리 - 게시글 신고 승인, 반려 처리 -->
+	<update id="updateBoardHandling">
+		UPDATE notification_board SET n_handling = #{n_handling} WHERE n_id = #{n_id}
+	</update>
+
+	<!-- 신고 관리 - 게시글 신고 승인 처리 -->
+	<update id="updateBoardReported">
+		UPDATE user_ SET user_reported = user_reported + 1 WHERE user_id = #{user_id}
+	</update>
+	
+	<!-- 신고 관리 - 장터 게시글 신고 승인 처리 -->
+	<update id="updateBoardDelete">
+		UPDATE board SET board_delete = #{n_handling} WHERE board_id = #{board_id}
+	</update>
+	
+	<!-- 신고 관리 - 커뮤니티 게시글 신고 승인 처리 -->
+	<update id="updateCommunityBoardDelete">
+		UPDATE community_board SET c_board_delete = #{n_handling} WHERE c_board_id = #{c_board_id}
+	</update>
+	
+	<!-- 신고 관리 - 게시글 신고 승인 취소 처리 -->
+	<update id="updateCancelBoardReported">
+		UPDATE user_ SET user_reported = user_reported - 1 WHERE user_id = #{user_id}
+	</update>
 </mapper>
 
 

@@ -325,6 +325,31 @@ public class AdminServiceImpl implements AdminService {
 	public int getBoardNotifyCount(PageSet ps) throws Exception {
 		return mapper.getBoardNotifyCount(ps);
 	}
+
+	@Override
+	public int updateBoardHandling(BoardNotifyDTO dto) throws Exception {
+		return mapper.updateBoardHandling(dto);
+	}
+
+	@Override
+	public int updateBoardDelete(BoardNotifyDTO dto) throws Exception {
+		return mapper.updateBoardDelete(dto);
+	}
+
+	@Override
+	public int updateBoardReported(BoardNotifyDTO dto) throws Exception {
+		return mapper.updateBoardReported(dto);
+	}
+
+	@Override
+	public int updateCommunityBoardDelete(BoardNotifyDTO dto) throws Exception {
+		return mapper.updateCommunityBoardDelete(dto);
+	}
+
+	@Override
+	public int updateCancelBoardReported(BoardNotifyDTO dto) {
+		return mapper.updateCancelBoardReported(dto);
+	}
 }
 
 

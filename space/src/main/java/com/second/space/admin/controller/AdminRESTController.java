@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.BoardNotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
@@ -51,13 +52,37 @@ public class AdminRESTController {
 	}
 	
 	@GetMapping(value = "/admin/notify/notify", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<String, Object>> board(PageSet ps) throws Exception {
+	public ResponseEntity<HashMap<String, Object>> notifyBoard(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 		
 		result.put("list", service.getBoardNotifyList(ps));
-		result.put("count", service.getBoardNotifyCount(ps));
+		result.put("paging", new Paging(service.getBoardNotifyCount(ps), ps));
 		
 		return ResponseEntity.ok(result);
+		
+	}
+	
+	@PutMapping(value = "/admin/notify/notify/{kind}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BoardNotifyDTO> updateNotifyBoard(@PathVariable String kind, @RequestBody BoardNotifyDTO dto) throws Exception {
+
+		if(kind.equals("board-cancel")) {
+			service.updateBoardDelete(dto);
+			service.updateCancelBoardReported(dto);
+		} else if(kind.equals("community-board-cancel")) {
+			service.updateCommunityBoardDelete(dto);
+			service.updateCancelBoardReported(dto);
+		} else if(kind.equals("board")) {
+			service.updateBoardDelete(dto);
+			service.updateBoardReported(dto);
+		} else if(kind.equals("community-board")) {
+			service.updateCommunityBoardDelete(dto);
+			service.updateBoardReported(dto);
+		}
+		
+		// 반려 혹은 반려 취소 요청일 경우 이것만 실행
+		service.updateBoardHandling(dto);
+
+		return ResponseEntity.ok(dto);
 		
 	}
 	
