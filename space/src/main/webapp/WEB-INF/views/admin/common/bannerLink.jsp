@@ -8,6 +8,6 @@
 	<ul>
 		<li><a href="${path }/admin/banner/list">목록</a></li>
 		<li><a href="${path }/admin/banner/create">신규 등록</a></li>
-		<li><a href="#">마감</a></li>
+		<li><a href="${path }/admin/banner/endDate">마감</a></li>
 	</ul>
 </div>

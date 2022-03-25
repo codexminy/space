@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입-정보입력</title>
-</head>
 <link href="${pageContext.request.contextPath}/resources/user_/css/info.css" rel="stylesheet"/>
-	<jsp:include page="../main/header.jsp"/>
+</head>
 <body>
-	<div id="wrap">
+	<jsp:include page="../main/header.jsp"/>
+	<div id="wrapinfo">
         <div class="wrap-login-logo">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
         </div>

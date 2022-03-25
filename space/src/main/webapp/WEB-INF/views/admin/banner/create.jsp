@@ -16,7 +16,7 @@
 	<div class="container home-container">
 		<jsp:include page="../common/bannerLink.jsp"/>
 		<div class="list-wrap">
-			<form id="form" action="${path}/admin/page/banner/create" method="post" encType="multipart/form-data">
+			<form id="form" action="${path}/admin/banner/banner" method="post" encType="multipart/form-data">
 				<table>
 					<tbody class="banner-create banner-table">
 						<tr>
@@ -27,8 +27,9 @@
 										<i class="fa-solid fa-camera"></i>
 										<p>사진 등록</p>
 									</div>
+									<img src="" alt="" style="display: none; height: 250px;"/>
 								</div>
-								<input type="file" id="uploadFile" name="uploadFile" onchange="fileChange(event)"/>
+								<input type="file" id="uploadFile" name="uploadFile"/>
 							</td>
 						</tr>
 						<tr>
@@ -52,54 +53,88 @@
 			</form>
 			<div class="btn-wrap">
 				<ul>
-					<li class="create">등록</li>
-					<li class="cancel">취소</li>
+					<li class="create-btn">등록</li>
+					<li class="cancel-btn">취소</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.create').on('click', () => {
-				const title = $("#na_title").val().trim();
-				const name = $("#na_name").val().trim();
-				const url = $("#na_url").val().trim();
-				const start = $("#na_start_date").val();
-				const end = $("#na_end_date").val();
-				const uploadFile = $("#uploadFile")[0].files[0];
-				
-				var formData = new FormData();
-				
-				formData.append("na_title", title);
-				formData.append("na_name", name);
-				formData.append("na_url", url);
-				formData.append("na_start_date", start);
-				formData.append("na_end_date", end);
-				formData.append("uploadFile", uploadFile);
-				
+		$('.create-btn').on('click', () => {
+			const title = $("#na_title").val().trim();
+			const name = $("#na_name").val().trim();
+			const url = $("#na_url").val().trim();
+			const start = $("#na_start_date").val();
+			const end = $("#na_end_date").val();
+			const uploadFile = $("#uploadFile")[0].files[0];
+
+			if(!uploadFile) {
+				alert('배너를 업로드해주세요!');
+				return;
+			} else if(title === '') {
+				alert('업체명을 입력해주세요!');
+				return;
+			} else if(name === '') {
+				alert('노출 상호명을 입력해주세요!');
+				return;
+			} else if(url === '') {
+				alert('배너 URL을 입력해주세요!');
+				return;
+			} else if(start === '') {
+				alert('시작 날짜를 입력해주세요!');
+				return;
+			} else if(end === '') {
+				alert('종료 날짜를 입력해주세요!');
+				return;
+			}
+
+			var formData = new FormData();
+			
+			formData.append("na_title", title);
+			formData.append("na_name", name);
+			formData.append("na_url", url);
+			formData.append("na_start_date", start);
+			formData.append("na_end_date", end);
+			formData.append("uploadFile", uploadFile);
+			
+			if(confirm('배너를 등록하시겠습니까?')) {
 				$.ajax({
 					enctype : 'multipart/form-data',
 					processData : false,
 					contentType : false,
 					cache : false,
-					url : "${path}/admin/page/banner/create",
+					url : "${path}/admin/banner/banner",
 					data : formData,
 					type : "POST",
 					success : function(res) {
-						alert('게시글 등록 완료');
+						alert('배너 등록이 완료되었습니다.');
 						location.href = '${path}/admin/banner/list';
 					}
 				});
-			})
+			}
+		});
+
+		$('.cancel-btn').on('click', () => {
+			if(confirm('배너 등록을 취소하시겠습니까?')) {
+				location.href = '${path}/admin/banner/list';
+			}
 		});
 		
-		function fileChange(event) {
+		$('#uploadFile').on('change', (e) => {
 			const reader = new FileReader();
-			reader.onload = function(event) {
-				document.querySelector(".picture").innerHTML = '<img src=' + event.target.result + ' width=400>';
+			reader.onload = function(e) {
+				$('.pic-img').css('display', 'none');
+				$('.picture img').css('display', 'block');
+				$('.picture img').attr('src', e.target.result);
 			};
-			reader.readAsDataURL(event.target.files[0]);
-		}
+
+			if(e.target.files[0]) {
+				reader.readAsDataURL(e.target.files[0]);
+			} else {
+				$('.pic-img').css('display', 'block');
+				$('.picture img').css('display', 'none');
+			}
+		});
 
 		function fileClick() {
 			$('input[type="file"]').click();

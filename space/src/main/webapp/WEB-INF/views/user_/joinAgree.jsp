@@ -7,12 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 약관</title>
-</head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user_/css/joinAgree.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/user_/js/joinAgree.js"></script>
+</head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div id="wrap">
+	<div id="wrapjoinAgree">
         <div class="wrap-login-logo">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
         </div>

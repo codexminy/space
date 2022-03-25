@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.BoardNotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
+import com.second.space.admin.model.UserDTO;
 import com.second.space.mapper.AdminXMLMapper;
 
 @Service
@@ -44,8 +47,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int getNotificationAdTotal() throws Exception {
-		return mapper.getNotificationAdTotal();
+	public int getNotificationAdTotal(PageSet ps) throws Exception {
+		return mapper.getNotificationAdTotal(ps);
 	}
 
 	@Override
@@ -57,15 +60,25 @@ public class AdminServiceImpl implements AdminService {
 	public Notification_adDTO getNotificationAdDetail(int na_id) throws Exception {
 		return mapper.getNotificationAdDetail(na_id);
 	}
-
+	
+	@Override
+	public int updateBanner(Notification_adDTO dto) throws Exception {
+		return mapper.updateBanner(dto);
+	}
+	
+	@Override
+	public int deleteBanner(int na_id) throws Exception {
+		return mapper.deleteBanner(na_id);
+	}
+	
 	@Override
 	public List<NoticeDTO> getAllNoticeList(PageSet ps) throws Exception {
 		return mapper.getAllNoticeList(ps);
 	}
 
 	@Override
-	public int getNoticeTotal() throws Exception {
-		return mapper.getNoticeTotal();
+	public int getNoticeTotal(PageSet ps) throws Exception {
+		return mapper.getNoticeTotal(ps);
 	}
 
 	@Override
@@ -77,4 +90,251 @@ public class AdminServiceImpl implements AdminService {
 	public List<Notice_categoryDTO> getNoticeCategory() throws Exception {
 		return mapper.getNoticeCategory();
 	}
+
+	@Override
+	public List<UserDTO> getAllUserList(PageSet ps) throws Exception {
+		return mapper.getAllUserList(ps);
+	}
+
+	@Override
+	public int getUserTotal(PageSet ps) throws Exception {
+		return mapper.getUserTotal(ps);
+	}
+
+	@Override
+	public List<UserDTO> getAllWithdrawalList(PageSet ps) throws Exception {
+		return mapper.getAllWithdrawalList(ps);
+	}
+
+	@Override
+	public int getWithdrawalTotal(PageSet ps) throws Exception {
+		return mapper.getWithdrawalTotal(ps);
+	}
+
+	@Override
+	public List<UserDTO> getAllSaleList(PageSet ps) throws Exception {
+		return mapper.getAllSaleList(ps);
+	}
+
+	@Override
+	public int getSaleTotal(PageSet ps) throws Exception {
+		return mapper.getSaleTotal(ps);
+	}
+
+	@Override
+	public List<UserDTO> getAllCommunityList(PageSet ps) throws Exception {
+		return mapper.getAllCommunityList(ps);
+	}
+
+	@Override
+	public int getCommunityTotal(PageSet ps) throws Exception {
+		return mapper.getCommunityTotal(ps);
+	}
+
+	@Override
+	public List<UserDTO> getAllNoticeAdminList(PageSet ps) throws Exception {
+		return mapper.getAllNoticeAdminList(ps);
+	}
+
+	@Override
+	public int getNoticeAdminTotal() throws Exception {
+		return mapper.getNoticeAdminTotal();
+	}
+
+	@Override
+	public List<UserDTO> getAllContactUsList(PageSet ps) throws Exception {
+		return mapper.getAllContactUsList(ps);
+	}
+
+	@Override
+	public int getContactUsTotal(PageSet ps) throws Exception {
+		return mapper.getContactUsTotal(ps);
+	}
+
+	@Override
+	public int insertNotice(NoticeDTO dto) throws Exception {
+		return mapper.insertNotice(dto);
+	}
+
+	@Override
+	public List<String> getDailyLabel() throws Exception {
+		return mapper.getDailyLabel();
+	}
+	
+	@Override
+	public List<String> getWeeklyLabel() throws Exception {
+		return mapper.getWeeklyLabel();
+	}
+	
+	@Override
+	public List<String> getMonthlyLabel() throws Exception {
+		return mapper.getMonthlyLabel();
+	}
+	
+	@Override
+	public List<Integer> getDailyNewUser() throws Exception {
+		return mapper.getDailyNewUser();
+	}
+
+	@Override
+	public List<Integer> getDailyWithdrawalUser() throws Exception {
+		return mapper.getDailyWithdrawalUser();
+	}
+
+	@Override
+	public List<Integer> getDailyVisit() throws Exception {
+		return mapper.getDailyVisit();
+	}
+
+	@Override
+	public List<Integer> getWeeklyNewUser() throws Exception {
+		return mapper.getWeeklyNewUser();
+	}
+
+	@Override
+	public List<Integer> getWeeklyWithdrawalUser() throws Exception {
+		return mapper.getWeeklyWithdrawalUser();
+	}
+
+	@Override
+	public List<Integer> getWeeklyVisit() throws Exception {
+		return mapper.getWeeklyVisit();
+	}
+
+	@Override
+	public List<Integer> getMonthlyNewUser() throws Exception {
+		return mapper.getMonthlyNewUser();
+	}
+
+	@Override
+	public List<Integer> getMonthlyWithdrawalUser() throws Exception {
+		return mapper.getMonthlyWithdrawalUser();
+	}
+
+	@Override
+	public List<Integer> getMonthlyVisit() throws Exception {
+		return mapper.getMonthlyVisit();
+	}
+	
+	@Override
+	public List<Notification_adDTO> getAllBannerEndDateList(PageSet ps) throws Exception {
+		return mapper.getAllBannerEndDateList(ps);
+	}
+
+	@Override
+	public int getBannerEndDateTotal(PageSet ps) throws Exception {
+		return mapper.getBannerEndDateTotal(ps);
+	}
+
+	@Override
+	public int updateNotice(NoticeDTO dto) throws Exception {
+		return mapper.updateNotice(dto);
+	}
+
+	@Override
+	public int deleteNotice(int notice_id) throws Exception {
+		return mapper.deleteNotice(notice_id);
+	}
+
+	@Override
+	public List<Integer> getDailySaleList() throws Exception {
+		return mapper.getDailySaleList();
+	}
+
+	@Override
+	public List<Integer> getDailyCommunityList() throws Exception {
+		return mapper.getDailyCommunityList();
+	}
+
+	@Override
+	public List<Integer> getWeeklySaleList() throws Exception {
+		return mapper.getWeeklySaleList();
+	}
+
+	@Override
+	public List<Integer> getWeeklyCommunityList() throws Exception {
+		return mapper.getWeeklyCommunityList();
+	}
+
+	@Override
+	public List<Integer> getMonthlySaleList() throws Exception {
+		return mapper.getMonthlySaleList();
+	}
+
+	@Override
+	public List<Integer> getMonthlyCommunityList() throws Exception {
+		return mapper.getMonthlyCommunityList();
+	}
+
+	@Override
+	public List<Integer> getDailyBoardNotifyList() throws Exception {
+		return mapper.getDailyBoardNotifyList();
+	}
+
+	@Override
+	public List<Integer> getDailyCmtNotifyList() throws Exception {
+		return mapper.getDailyCmtNotifyList();
+	}
+
+	@Override
+	public List<Integer> getDailyReviewNotifyList() throws Exception {
+		return mapper.getDailyReviewNotifyList();
+	}
+
+	@Override
+	public List<Integer> getWeeklyBoardNotifyList() throws Exception {
+		return mapper.getWeeklyBoardNotifyList();
+	}
+
+	@Override
+	public List<Integer> getWeeklyCmtNotifyList() throws Exception {
+		return mapper.getWeeklyCmtNotifyList();
+	}
+
+	@Override
+	public List<Integer> getWeeklyReviewNotifyList() throws Exception {
+		return mapper.getWeeklyReviewNotifyList();
+	}
+
+	@Override
+	public List<Integer> getMonthlyBoardNotifyList() throws Exception {
+		return mapper.getMonthlyBoardNotifyList();
+	}
+
+	@Override
+	public List<Integer> getMonthlyCmtNotifyList() throws Exception {
+		return mapper.getMonthlyCmtNotifyList();
+	}
+
+	@Override
+	public List<Integer> getMonthlyReviewNotifyList() throws Exception {
+		return mapper.getMonthlyReviewNotifyList();
+	}
+
+	@Override
+	public int updateHidden(A_boardDTO dto) throws Exception {
+		return mapper.updateHidden(dto);
+	}
+
+	@Override
+	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps) throws Exception {
+		return mapper.getBoardNotifyList(ps);
+	}
+
+	@Override
+	public int getBoardNotifyCount(PageSet ps) throws Exception {
+		return mapper.getBoardNotifyCount(ps);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

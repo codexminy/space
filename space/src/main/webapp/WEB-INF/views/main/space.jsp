@@ -73,32 +73,17 @@
             <div class="blank"></div>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">Slide 1</div>
-                    <div class="swiper-slide">Slide 2</div>
-                    <div class="swiper-slide">Slide 3</div>
-                    <div class="swiper-slide">Slide 4</div>
-                    <div class="swiper-slide">Slide 5</div>
-                    <div class="swiper-slide">Slide 6</div>
-                    <div class="swiper-slide">Slide 7</div>
-                    <div class="swiper-slide">Slide 8</div>
-                    <div class="swiper-slide">Slide 9</div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_01.jpg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_02.jpg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_03.jpg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_04.jpg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div>
+                    <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
             <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script>
-                var swiper = new Swiper(".mySwiper", {
-					navigation: {
-						nextEl: ".swiper-button-next",
-						prevEl: ".swiper-button-prev",
-					},
-                });
-            </script>
-			<!-- Swiper JS -->
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        
-            <!-- Initialize Swiper -->
             <script>
                 var swiper = new Swiper(".mySwiper", {
 					navigation: {
@@ -337,15 +322,7 @@
 	    </footer>
     </div>
 </body>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-	var swiper = new Swiper(".mySwiper", {
-		navigation: {
-			nextEl: ".swiper-button-next",
-			prevEl: ".swiper-button-prev",
-		},
-	});
-	
 	function myFunction() {
 	    document.getElementById("myDropdown").classList.toggle("show");
 	}

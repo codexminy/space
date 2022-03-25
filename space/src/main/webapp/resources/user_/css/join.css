@@ -5,9 +5,10 @@
     box-sizing: border-box;
     text-decoration : none;    
 }
-#wrap{
+#wrapjoin{
     width: 1200px;
     margin: 0 auto;
+    padding: 0 360px 100px 360px;
 }
 .wrap-login-logo{
     margin: 50px 150px 90px 150px;  
@@ -17,32 +18,53 @@
 }
 .wrap-login .login-box .space-login p{
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     margin-bottom: 15px;
 }
 .wrap-login .login-box .space-login #submit{
     width: 450px;
     height: 50px;
     background-color:#22007F;
-    color: white;
     margin-bottom: 100px;  
+	font-size : 25px;
+	border-radius: 5px;
 }
-
+span{
+	color: #fff;
+}
 .wrap-login .login-box .social-login p{
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     margin-bottom: 15px;
 }
 
 .wrap-login .login-box .social-login ul li{
-    width: 450px;
-    height: 50px;
-    padding-bottom: 15px;
-    overflow: hidden;
-    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size :25px;
 
 }
 .wrap-login .login-box .social-login ul li img{
-    width: 450px;
+    width: 24.5px;
+    height: 25px;
+    margin: 0 65px 0 20px;
+}
+.google{
+	color: #fff;
+	background-color: #F46055;
+	width: 450px;
+    height: 50px;
+}
+.naver{
+	color: #fff;
+	background-color: #04CF5C;
+	width: 450px;
+    height: 50px;
+}
+.kakao{
+	color: #fff;
+	background-color: #FFCD00;
+	width: 450px;
     height: 50px;
 }

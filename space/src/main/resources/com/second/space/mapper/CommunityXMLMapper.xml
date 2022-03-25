@@ -31,6 +31,7 @@
 		    community_board
 		    INNER JOIN community_category USING (c_category_id)
 		    INNER JOIN user_ USING (user_id)
+		ORDER BY c_board_date DESC
 	</select>
 	<!-- 커뮤니티 카테고리 리스트 -->
 	<select id="getCommunityCategoryList" resultType="com.second.space.community.model.CommunityCategoryDTO">
@@ -57,7 +58,7 @@
 		FROM
 		    community_comment
 		    INNER JOIN user_ USING (user_id)
-		ORDER BY c_id		    
+		ORDER BY c_date DESC
 	</select>
 	<!-- 커뮤니티 댓글 개수 -->
 	<select id="getCommunityCommentCount" resultType="com.second.space.community.model.CommunityCommentCountDTO">
@@ -102,5 +103,62 @@
 	<!-- 게시물 신고글 꺼내기 -->
 	<select id="getNotificationBoard" resultType="com.second.space.admin.model.Notification_boardDTO">
 		SELECT * from notification_board WHERE n_id=#{n_id}
+	</select>
+	<!-- 댓글 신고하기 -->
+	<insert id="addNotificationCmt">
+		<selectKey keyProperty="nc_id" order="BEFORE" resultType="int">
+			SELECT noti_comment_nc_id_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO
+			notification_cmt(nc_id, c_board_id, c_id, user_id)
+		VALUES
+			(
+				#{nc_id}, #{c_board_id}, #{c_id}, #{user_id}
+			)
+	</insert>
+	<!-- 댓글 신고글 꺼내기 -->
+	<select id="getNotificationCmt" resultType="com.second.space.admin.model.Notification_cmtDTO">
+		SELECT * from notification_cmt WHERE nc_id=#{nc_id}
+	</select>
+	<!-- 커뮤니티 게시글 쓰기 -->
+	<insert id="addCommunityBoard" parameterType="com.second.space.community.model.CommunityBoardDTO">
+		INSERT INTO
+			community_board (c_board_id, c_board_title, c_category_id, c_board_content, user_id)
+		VALUES 
+			(
+				community_board_id_seq.nextval, #{c_board_title}, #{c_category_id}, #{c_board_content}, #{user_id}
+			)
+	</insert>
+	<!-- 커뮤니티 가장 최근 c_board_id GET -->
+	<select id="getCommunityBoardId" resultType="_int">
+		SELECT c_board_id FROM 
+			(
+				SELECT * 
+				FROM community_board
+				WHERE user_id = #{user_id}
+				ORDER BY c_board_date DESC
+			)
+		WHERE ROWNUM = 1
+	</select>
+	<!-- 커뮤니티 보드 image 넣기 -->
+	<insert id="addCommunityBoardImg" parameterType="com.second.space.community.model.CommunityBoardImgDTO">
+		INSERT INTO
+			community_board_img (c_board_img_id, c_board_id, c_originalfilename , c_renamedfilename) 
+		VALUES
+			(
+				c_board_img_id_seq.nextval, #{c_board_id}, #{c_originalfilename}, #{c_renamedfilename}
+			)
+	</insert>
+	<!-- 커뮤니티 보드 image 꺼내기 -->
+	<select id="getCommunityBoardImgList" resultType="com.second.space.community.model.CommunityBoardImgDTO">
+		SELECT
+		    c_board_img_id,
+		    c_board_id,
+		    c_originalfilename,
+		    c_renamedfilename,
+		    c_upload_date
+		FROM
+		    community_board_img
+		ORDER BY c_board_img_id
 	</select>
 </mapper>
