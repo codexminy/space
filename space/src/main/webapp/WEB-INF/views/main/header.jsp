@@ -21,7 +21,7 @@
 	            <div class="navbar-header-right">
 	                <a href="${pageContext.request.contextPath}/admin/home">관리자</a>
 	                <a href="${pageContext.request.contextPath}/user_/login">로그인/회원가입</a>
-	                <a href="#">고객센터</a>
+	                <a href="${pageContext.request.contextPath}/customerService/customer">고객센터</a>
 	            </div>
 	        </nav>
 		</div>           

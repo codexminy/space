@@ -224,7 +224,7 @@
                 <div class="community">
                     <div class="community-title">
                         <h2>커뮤니티</h2>
-                        <p class="text"><a href="#">더보기 ></a></p>
+                        <p class="text"><a href="${pageContext.request.contextPath}/community/main">더보기 ></a></p>
                     </div> 
                     <div class="community-board">
                         <ul>
