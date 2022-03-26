@@ -343,12 +343,41 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request)  {
+	@RequestMapping(value="/uploadSummernoteImageFile/{kind}", produces = "application/json; charset=utf8")
+	public String uploadSummernoteImageFile(@PathVariable String kind, @RequestParam("file") MultipartFile multipartFile, HttpServletRequest request)  {
 		HashMap<String, Object> result = new HashMap<>();
 		
+		String path = "/space/";
 		String contextRoot = request.getSession().getServletContext().getRealPath("");
-		String fileRoot = contextRoot + "resources/images/notice/";
+		String fileRoot = "";
+		String root = "";
+		
+		if(kind.equals("board")) {
+			root = "resources/images/board/";
+		} else if(kind.equals("contact-us")) {
+			root = "resources/images/contact_us/";
+		} else if(kind.equals("main")) {
+			root = "resources/images/main/";
+		} else if(kind.equals("my-space")) {
+			root = "resources/images/mySpace/";
+		} else if(kind.equals("notice")) {
+			root = "resources/images/notice/";
+		} else if(kind.equals("notice-admin")) {
+			root = "resources/images/notice_admin/";
+		} else if(kind.equals("notification-ad")) {
+			root = "resources/images/notification_ad/";
+		} else if(kind.equals("notification-popup")) {
+			root = "resources/images/notification_popup/";
+		} else if(kind.equals("profile")) {
+			root = "resources/images/profile/";
+		} else if(kind.equals("review")) {
+			root = "resources/images/review/";
+		} else if(kind.equals("user")) {
+			root = "resources/images/user_/";
+		}
+		
+		fileRoot = contextRoot + root;
+
 		String originalFileName = multipartFile.getOriginalFilename(); //오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
 		String savedFileName = UUID.randomUUID() + extension; //저장될 파일 명
@@ -358,14 +387,15 @@ public class AdminRESTController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
-			result.put("url", "/space/resources/images/notice/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			result.put("url", path + root + savedFileName);
+			//result.put("url", "/space/resources/images/notice/" + savedFileName);
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); //저장된 파일 삭제
 			e.printStackTrace();
 		}
 		
 		JSONObject jsonObject = new JSONObject(result);
-		
+
 		return jsonObject.toJSONString();
 	}
 	
