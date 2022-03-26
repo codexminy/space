@@ -1,0 +1,81 @@
+const header = '/space';
+
+function getLoad(page) {
+	const tableData = $('.list');
+	const pagenation = $('.paging');
+	const searchArea = $('.search-area');
+
+	$.ajax({
+		url : header + url,
+		data: {
+			pageNum: page,
+			type: $('select[name="type"]').val(),
+			keyword: $('input[name="keyword"]').val(),
+			amount: $('select[name="amount"]').val()
+		},
+		success : function(result) {
+			const list = result['list'];
+			const paging = result['paging'];
+
+			let searchData = createSearch(paging);
+			let listData = createTable(list);
+			let pageData = "";
+
+			if(paging['prev']) {
+				pageData += '<li><a href=javascript:getLoad(' + (paging['startPage'] - 1)  + ')><i class="fa-solid fa-angle-left"></i></a></li>';
+			} else {
+				pageData += '<li><a><i class="fa-solid fa-angle-left"></i></a></li>';
+			}
+			
+			for(let i=paging['startPage']; i<=paging['endPage']; ++i) {
+				if(paging['ps'].pageNum === i) {
+					pageData += '<li><a href=javascript:getLoad(' + i + ') class="pageActive">' + i + '</a></li>';
+				} else {
+					pageData += '<li><a href=javascript:getLoad(' + i + ')>' + i + '</a></li>';
+				}
+			}
+			
+			if(paging['next']) {
+				pageData += '<li><a href=javascript:getLoad(' + (paging['endPage'] + 1)  + ')><i class="fa-solid fa-angle-right"></i></a></li>';
+			} else {
+				pageData += '<li><a><i class="fa-solid fa-angle-right"></i></a></li>';
+			}
+			
+			searchArea.html(searchData);
+			tableData.html(listData);
+			pagenation.html(pageData);
+		}
+	});
+}
+
+function goDetail(id) {
+	const form = $('#form');
+	form.find('#detail').val(id);
+	form.submit();
+}
+
+function formatDate(date) {
+    let d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    let year = d.getFullYear();
+    
+    if (month.length < 2) month = '0' + month; 
+    if (day.length < 2) day = '0' + day; 
+    
+    return [year, month, day].join('-');
+}
+
+function startSearch() {
+	getLoad();
+}
+
+
+
+
+
+
+
+
+
+

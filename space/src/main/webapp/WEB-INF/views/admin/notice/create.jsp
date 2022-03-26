@@ -12,9 +12,9 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
-	<jsp:include page="../common/noticeAside.jsp"/>
+	<jsp:include page="../common/aside.jsp"/>
 	<div class="container home-container">
-		<jsp:include page="../common/noticeLink.jsp"/>
+		<jsp:include page="../common/subLink.jsp"/>
 		<div class="list-wrap">
 			<div class="notice-title-area">
 				<select name="category" id="category">

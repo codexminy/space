@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class Contact_usDTO {
+	private int rn;
 	private int cu_id;
 	private int cs_category_id;
 	private int user_id;
