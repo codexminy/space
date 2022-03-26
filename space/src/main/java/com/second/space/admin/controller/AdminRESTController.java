@@ -359,10 +359,8 @@ public class AdminRESTController {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
 			result.put("url", "/space/resources/images/notice/" + savedFileName); // contextroot + resources + 저장할 내부 폴더명
-			result.put("responseCode", "success");
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); //저장된 파일 삭제
-			result.put("responseCode", "error");
 			e.printStackTrace();
 		}
 		
