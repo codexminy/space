@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.A_boardDTO;
-import com.second.space.admin.model.BoardNotifyDTO;
+import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.PageSet;
@@ -63,27 +63,80 @@ public class AdminRESTController {
 	}
 	
 	@PutMapping(value = "/admin/notify/notify/{kind}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BoardNotifyDTO> updateNotifyBoard(@PathVariable String kind, @RequestBody BoardNotifyDTO dto) throws Exception {
-
+	public ResponseEntity<NotifyDTO> updateNotifyBoard(@PathVariable String kind, @RequestBody NotifyDTO dto) throws Exception {
+		
 		if(kind.equals("board-cancel")) {
 			service.updateBoardDelete(dto);
-			service.updateCancelBoardReported(dto);
+			service.updateCancelReported(dto);
 		} else if(kind.equals("community-board-cancel")) {
 			service.updateCommunityBoardDelete(dto);
-			service.updateCancelBoardReported(dto);
+			service.updateCancelReported(dto);
 		} else if(kind.equals("board")) {
 			service.updateBoardDelete(dto);
-			service.updateBoardReported(dto);
+			service.updateReported(dto);
 		} else if(kind.equals("community-board")) {
 			service.updateCommunityBoardDelete(dto);
-			service.updateBoardReported(dto);
+			service.updateReported(dto);
 		}
 		
 		// 반려 혹은 반려 취소 요청일 경우 이것만 실행
 		service.updateBoardHandling(dto);
-
-		return ResponseEntity.ok(dto);
 		
+		return ResponseEntity.ok(dto);
+	}
+
+	@GetMapping(value = "/admin/notify/notify/cmt", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> notifyCmt(PageSet ps) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		result.put("list", service.getCmtNotifyList(ps));
+		result.put("paging", new Paging(service.getCmtNotifyCount(ps), ps));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@PutMapping(value = "/admin/notify/notify/cmt/{kind}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NotifyDTO> updateNotifyCmt(@PathVariable String kind, @RequestBody NotifyDTO dto) throws Exception {
+		
+		if(kind.equals("cmt-cancel")) {
+			service.updateCmtDelete(dto);
+			service.updateCancelReported(dto);
+		} else if(kind.equals("cmt")) {
+			service.updateCmtDelete(dto);
+			service.updateReported(dto);
+		}
+		
+		// 반려 혹은 반려 취소 요청일 경우 이것만 실행
+		service.updateCmtHandling(dto);
+		
+		return ResponseEntity.ok(dto);
+	}
+	
+	@GetMapping(value = "/admin/notify/notify/review", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> notifyReview(PageSet ps) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		result.put("list", service.getReviewNotifyList(ps));
+		result.put("paging", new Paging(service.getReviewNotifyCount(ps), ps));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@PutMapping(value = "/admin/notify/notify/review/{kind}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NotifyDTO> updateNotifyReview(@PathVariable String kind, @RequestBody NotifyDTO dto) throws Exception {
+		
+		if(kind.equals("review-cancel")) {
+			service.updateReviewDelete(dto);
+			service.updateCancelReported(dto);
+		} else if(kind.equals("review")) {
+			service.updateReviewDelete(dto);
+			service.updateReported(dto);
+		}
+		
+		// 반려 혹은 반려 취소 요청일 경우 이것만 실행
+		service.updateReviewHandling(dto);
+		
+		return ResponseEntity.ok(dto);
 	}
 	
 	@GetMapping(value = "/admin/banner/banner", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -215,7 +268,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(service.deleteNotice(notice_id));
 	}
 	
-	@GetMapping(value = "/admin/page/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/user/user/user", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> userList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -225,7 +278,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/user/withdrawalList", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/user/user/withdrawal", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> userwithdrawalList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -235,7 +288,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/board/sale", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/board/board/sale", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> saleList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -257,7 +310,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	@GetMapping(value = "/admin/page/board/community", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/board/board/community", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> communityList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -267,7 +320,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/admin/list", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/admin/admin", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> adminList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -277,7 +330,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/enquiry/contactUs", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/enquiry/enquiry/contactUs", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> contactUsList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 

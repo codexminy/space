@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="./common/nav.jsp"/>
-	<jsp:include page="./common/homeAside.jsp"/>
+	<jsp:include page="./common/aside.jsp"/>
 	<div class="container home-container">
 		<div class="stats-container">
 			<div class="info-wrap">

@@ -3,12 +3,13 @@ package com.second.space.mapper;
 import java.util.List;
 
 import com.second.space.admin.model.A_boardDTO;
-import com.second.space.admin.model.BoardNotifyDTO;
+import com.second.space.admin.model.Contact_usDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.model.Notification_boardDTO;
+import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.PageSet;
 import com.second.space.admin.model.UserDTO;
 
@@ -76,7 +77,7 @@ public interface AdminXMLMapper {
 	
 	public int getNoticeAdminTotal(); // 관리자 공지 - 목록 갯수
 	
-	public List<UserDTO> getAllContactUsList(PageSet ps); // 문의사항 - 1:1 문의 리스트
+	public List<Contact_usDTO> getAllContactUsList(PageSet ps); // 문의사항 - 1:1 문의 리스트
 	
 	public int getContactUsTotal(PageSet ps); // 문의사항 - 1:1 문의 리스트 갯수
 	
@@ -134,19 +135,36 @@ public interface AdminXMLMapper {
 	
 	public List<Integer> getMonthlyReviewNotifyList(); // 통계 - 월별 댓글 신고 수
 	
-	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps); // 신고 관리 - 게시글 신고 리스트
+	public List<NotifyDTO> getBoardNotifyList(PageSet ps); // 신고 관리 - 게시글 신고 리스트
 	
 	public int getBoardNotifyCount(PageSet ps); // 신고 관리 - 게시물 신고 갯수
 	
-	public int updateBoardHandling(BoardNotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
+	public int updateBoardHandling(NotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
 	
-	public int updateBoardDelete(BoardNotifyDTO dto); // 신고 관리 - 장터 게시글 신고 승인 처리
+	public int updateBoardDelete(NotifyDTO dto); // 신고 관리 - 장터 게시글 신고 승인 처리
 	
-	public int updateBoardReported(BoardNotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
+	public int updateReported(NotifyDTO dto); // 신고 관리 - 게시글 신고 승인 처리
 	
-	public int updateCommunityBoardDelete(BoardNotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 처리
+	public int updateCommunityBoardDelete(NotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 처리
 	
-	public int updateCancelBoardReported(BoardNotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 취소 처리
+	public int updateCancelReported(NotifyDTO dto); // 신고 관리 - 커뮤니티 게시글 신고 승인 취소 처리
+	
+	public List<NotifyDTO> getCmtNotifyList(PageSet ps); // 신고 관리 - 댓글 신고 리스트
+	
+	public int getCmtNotifyCount(PageSet ps); // 신고 관리 - 댓글 신고 갯수
+	
+	public int updateCmtHandling(NotifyDTO dto); // 댓글 신고 승인, 반려 처리
+	
+	public int updateCmtDelete(NotifyDTO dto); // 댓글 신고 승인 처리
+	
+	public List<NotifyDTO> getReviewNotifyList(PageSet ps); // 신고 관리 - 리뷰 신고 리스트
+	
+	public int getReviewNotifyCount(PageSet ps); // 신고 관리 - 댓글 신고 갯수
+	
+	public int updateReviewHandling(NotifyDTO dto); // 신고 관리 - 리뷰 신고 승인, 반려 처리
+	
+	public int updateReviewDelete(NotifyDTO dto); // 신고 관리 - 리뷰 신고 승인 처리
+	
 }
 
 
