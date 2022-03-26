@@ -32,7 +32,7 @@
 			let dDay = new Date(list[i].na_end_date).getDate() - new Date().getDate();
 			listData += "<tr>";
 			listData += "<td>" + list[i].rn + "</td>";
-			listData += "<td><input type=checkbox value=" + list[i].na_id + "/></td>";
+			listData += "<td><input type=checkbox name=chkBox value=" + list[i].na_id + " onclick=checking() /></td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].na_id + ")>" + list[i].na_title + "</a></td>";
 			listData += "<td>" + list[i].na_name + "</td>";
 			listData += "<td>" + list[i].na_url + "</td>";

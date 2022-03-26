@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Contact_usDTO;
+import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
@@ -165,6 +166,7 @@ public interface AdminXMLMapper {
 	
 	public int updateReviewDelete(NotifyDTO dto); // 신고 관리 - 리뷰 신고 승인 처리
 	
+	public int deleteCheck(DeleteCheckDTO dto); // 체크한 항목 삭제
 }
 
 

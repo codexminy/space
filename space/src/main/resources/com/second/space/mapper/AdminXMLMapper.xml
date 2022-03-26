@@ -1581,6 +1581,10 @@
                 <include refid="notifySearch"></include> 
             </if>
 	</select>
+	
+	<delete id="deleteCheck">
+		DELETE FROM ${table} WHERE ${column} = #{id} 
+	</delete>
 </mapper>
 
 

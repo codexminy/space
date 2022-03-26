@@ -33,7 +33,7 @@
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
 			listData += "<td>" + list[i].rn + "</td>";
-			listData += "<td><input type=checkbox value=" + list[i].acbDTO.c_board_id + "/></td>";
+			listData += "<td><input type=checkbox name=chkBox value=" + list[i].acbDTO.c_board_id + " onclick=checking() /></td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
 			listData += "<td>" + list[i].user_nickname + "</td>";
 			listData += "<td>" + list[i].ccDTO.c_category_name + "</td>";

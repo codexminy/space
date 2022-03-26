@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notification_adDTO;
@@ -259,7 +260,9 @@ public class AdminRESTController {
 	
 	@PutMapping(value = "/admin/notice/notice/{notice_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NoticeDTO> updateNotice(@PathVariable int notice_id, @RequestBody NoticeDTO dto) throws Exception {
+
 		service.updateNotice(dto);
+		
 		return ResponseEntity.ok(dto);
 	}
 	
@@ -432,7 +435,24 @@ public class AdminRESTController {
 		
 		return ResponseEntity.ok(result);
 	}
+	
+	@DeleteMapping(value = "/admin/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<DeleteCheckDTO> deleteCheck(@RequestBody DeleteCheckDTO dto) throws Exception {
+		int[] arr = dto.getIdArr();
+		
+		for(int i=0; i<arr.length; ++i) {
+			dto.setId(arr[i]);
+			service.deleteCheck(dto);
+		}
+		
+		return ResponseEntity.ok(dto);
+	}
 }
+
+
+
+
+
 
 
 

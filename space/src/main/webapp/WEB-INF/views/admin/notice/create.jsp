@@ -103,7 +103,10 @@
 			            for (var i = files.length - 1; i >= 0; i--) {
 			            	uploadSummernoteImageFile(files[i], this);
 	           			}
-	            	}
+	            	},
+	            	onInit: function (e) {
+	                    e.editable.html('');
+	                }
 	            }
 	         };
 	

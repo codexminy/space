@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notification_adDTO;
-import com.second.space.admin.model.PageSet;
-import com.second.space.admin.model.Paging;
 import com.second.space.admin.service.AdminService;
 
 @Controller
@@ -27,12 +25,12 @@ public class AdminController {
 	private static String[] bannerMenu = {"목록", "신규 등록", "마감"};
 	private static String[] bannerLink = {"/admin/banner/list", "/admin/banner/create", "/admin/banner/endDate"};
 	private static String[] bannerWidth = {"5%", "10%", "10%", "50%", "10%", "15%"};
-	private static String[] bannerHead = {"번호", "선택", "업체", "노출 상호", "링크", "기간"};
+	private static String[] bannerHead = {"번호", selectAllBox(), "업체", "노출 상호", "링크", "기간"};
 	private static String noticeTitle = "공지사항";
 	private static String[] noticeMenu = {"목록", "신규 등록"};
 	private static String[] noticeLink = {"/admin/notice/list", "/admin/notice/create"};
 	private static String[] noticeWidth = {"5%", "5%", "10%", "70%", "10%"};
-	private static String[] noticeHead = {"번호", "선택", "분류", "제목", "등록일"};
+	private static String[] noticeHead = {"번호", selectAllBox(), "분류", "제목", "등록일"};
 	private static String contactUsTitle = "문의사항";
 	private static String[] contactUsMenu = {"1:1 문의", "광고제의"};
 	private static String[] contactUsLink = {"/admin/enquiry/contactUs", "/admin/enquiry/advertising"};
@@ -40,14 +38,14 @@ public class AdminController {
 	private static String[] boardMenu = {"장터", "커뮤니티"};
 	private static String[] boardLink = {"/admin/board/sale", "/admin/board/community"};
 	private static String[] boardWidth = {"20%", "20%", "20%", "20%", "20%", "20%"};
-	private static String[] boardHead = {"번호", "선택", "아이디", "닉네임", "카테고리", "제목", "등록일", "처리"};
+	private static String[] boardHead = {"번호", selectAllBox(), "아이디", "닉네임", "카테고리", "제목", "등록일", "처리"};
 	private static String adminTitle = "관리자 공지";
 	private static String[] adminMenu = {"목록", "신규등록"};
 	private static String[] adminLink = {"/admin/admin/list", "/admin/admin/create"};
 	private static String statsTitle = "통계";
 	private static String[] statsMenu = {"회원", "게시글", "신고", "광고"};
 	private static String[] statsLink = {"/admin/stats/stats", "/admin/stats/board", "/admin/stats/notification", "#"};
-
+	
 	private static Model settingModel(Model model, String title, String[] menu, String[] link, String[] width, String[] head) {
 		model.addAttribute("title", title);
 		model.addAttribute("menu", menu);
@@ -78,6 +76,14 @@ public class AdminController {
 		return model;
 	}
 	
+	private static String[] notifyHead(String word) {
+		return new String[] {"번호", selectAllBox(), "신고대상", "접수일", "신고자", "사유", "내용", word, "누적신고", "처리"};
+	}
+	
+	private static String selectAllBox() {
+		return "<input type=checkbox class=chkAll onclick=selectAll() />";
+	}
+	
 	@Autowired
 	AdminService service;
 	
@@ -89,26 +95,23 @@ public class AdminController {
 	
 	@GetMapping("/admin/notification/board")
 	public void notificationBoard(Model model) {
-		settingModel(
-			model, notifyTitle, notifyMenu, notifyLink, notifyWidth,
-			new String[] {"번호", "신고대상", "접수일", "신고자", "사유", "내용", "게시글", "누적신고", "처리"}
-		);
+		settingModel(model, notifyTitle, notifyMenu, notifyLink, notifyWidth, notifyHead("게시글"));
+		model.addAttribute("id", "n_id");
+		model.addAttribute("table", "notification_board");
 	}
 	
 	@GetMapping("/admin/notification/cmt")
 	public void notificationCmt(Model model) {
-		settingModel(
-			model, notifyTitle, notifyMenu, notifyLink, notifyWidth,
-			new String[] {"번호", "신고대상", "접수일", "신고자", "사유", "내용", "댓글", "누적신고", "처리"}
-		);
+		settingModel(model, notifyTitle, notifyMenu, notifyLink, notifyWidth, notifyHead("댓글"));
+		model.addAttribute("id", "nc_id");
+		model.addAttribute("table", "notification_cmt");
 	}
 	
 	@GetMapping("/admin/notification/review")
 	public void notificationReview(Model model) {
-		settingModel(
-			model, notifyTitle, notifyMenu, notifyLink, notifyWidth,
-			new String[] {"번호", "신고대상", "접수일", "신고자", "사유", "내용", "리뷰", "누적신고", "처리"}
-		);
+		settingModel(model, notifyTitle, notifyMenu, notifyLink, notifyWidth, notifyHead("리뷰"));
+		model.addAttribute("id", "nr_id");
+		model.addAttribute("table", "notification_review");
 	}
 	
 	@GetMapping("/admin/banner/list")
@@ -116,6 +119,7 @@ public class AdminController {
 		settingModel(model, bannerTitle, bannerMenu, bannerLink, bannerWidth, bannerHead);
 		model.addAttribute("detailUrl", "/admin/banner/detail");
 		model.addAttribute("id", "na_id");
+		model.addAttribute("table", "notification_ad");
 	}
 	
 	@GetMapping("/admin/banner/create")
@@ -138,6 +142,7 @@ public class AdminController {
 		settingModel(model, bannerTitle, bannerMenu, bannerLink, bannerWidth, bannerHead);
 		model.addAttribute("detailUrl", "/admin/banner/detail");
 		model.addAttribute("id", "na_id");
+		model.addAttribute("table", "notification_ad");
 	}
 	
 	@GetMapping("/admin/notice/list")
@@ -145,6 +150,7 @@ public class AdminController {
 		settingModel(model, noticeTitle, noticeMenu, noticeLink, noticeWidth, noticeHead);
 		model.addAttribute("detailUrl", "/admin/notice/detail");
 		model.addAttribute("id", "notice_id");
+		model.addAttribute("table", "notice");
 	}
 	
 	@GetMapping("/admin/notice/create")
@@ -169,10 +175,11 @@ public class AdminController {
 		settingModel(
 			model, userTitle, userMenu, userLink,
 			new String[] {"20", "20%", "20%", "20%", "20%", "20%", "20%", "20%"},
-			new String[] {"번호", "선택", "아이디", "닉네임", "가입일", "주소", "휴대전화", "메일"}
+			new String[] {"번호", selectAllBox(), "아이디", "닉네임", "가입일", "주소", "휴대전화", "메일"}
 		);
 		model.addAttribute("detailUrl", "/admin/user/detail");
 		model.addAttribute("id", "user_id");
+		model.addAttribute("table", "user_");
 	}
 	
 	@GetMapping("/admin/user/withdrawalList")
@@ -180,10 +187,11 @@ public class AdminController {
 		settingModel(
 			model, userTitle, userMenu, userLink,
 			new String[] {"20", "20%", "20%", "20%", "20%", "20%", "20%"},
-			new String[] {"번호", "선택", "아이디", "닉네임", "가입일", "사유", "탈퇴일"}
+			new String[] {"번호", selectAllBox(), "아이디", "닉네임", "가입일", "사유", "탈퇴일"}
 		);
 		model.addAttribute("detailUrl", "/admin/user/detail");
 		model.addAttribute("id", "user_id");
+		model.addAttribute("table", new String[] {"delete_account", "user_"});
 	}
 	
 	@GetMapping("/admin/board/sale")
@@ -191,6 +199,7 @@ public class AdminController {
 		settingModel(model, boardTitle, boardMenu, boardLink, boardWidth, boardHead);
 		model.addAttribute("detailUrl", "#");
 		model.addAttribute("id", "board_id");
+		model.addAttribute("table", "board");
 	}
 	
 	@GetMapping("/admin/board/community")
@@ -198,6 +207,7 @@ public class AdminController {
 		settingModel(model, boardTitle, boardMenu, boardLink, boardWidth, boardHead);
 		model.addAttribute("detailUrl", "/admin/community/c_board");
 		model.addAttribute("id", "c_board_id");
+		model.addAttribute("table", "community_board");
 	}
 	
 	@GetMapping("/admin/admin/list")
@@ -205,6 +215,7 @@ public class AdminController {
 		settingModel(model, adminTitle, adminMenu, adminLink, noticeWidth, noticeHead);
 		model.addAttribute("detailUrl", "/admin/admin/detail");
 		model.addAttribute("id", "notice_admin_id");
+		model.addAttribute("table", "notice_admin");
 	}
 	
 	@GetMapping("/admin/enquiry/contactUs")
@@ -212,6 +223,7 @@ public class AdminController {
 		settingModel(model, contactUsTitle, contactUsMenu, contactUsLink, noticeWidth, noticeHead);
 		model.addAttribute("detailUrl", "/admin/contactUs/detail");
 		model.addAttribute("id", "cu_id");
+		model.addAttribute("table", "contact_us");
 	}
 	
 	@GetMapping("/admin/stats/stats")

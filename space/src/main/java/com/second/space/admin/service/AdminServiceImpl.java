@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Contact_usDTO;
+import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
@@ -390,6 +391,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateReviewDelete(NotifyDTO dto) throws Exception {
 		return mapper.updateReviewDelete(dto);
+	}
+
+	@Override
+	public int deleteCheck(DeleteCheckDTO dto) throws Exception {
+		return mapper.deleteCheck(dto);
 	}
 }
 

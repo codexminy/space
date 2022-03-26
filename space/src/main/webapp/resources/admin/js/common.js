@@ -70,11 +70,58 @@ function startSearch() {
 	getLoad();
 }
 
+function selectAll() {
+	if($(".chkAll").is(":checked")) {
+		$("input[name=chkBox]").prop("checked", true);
+	} else {
+		$("input[name=chkBox]").prop("checked", false);
+	}
+}
 
+function checking() {
+	const total = $("input[name=chkBox]").length;
+	const checked = $("input[name=chkBox]:checked").length;
 
+	if(total != checked) {
+		$(".chkAll").prop("checked", false);
+	} else {
+		$(".chkAll").prop("checked", true); 
+	}
+}
 
-
-
+function deleteCheck(tableName) {
+	const box = document.querySelectorAll('input[name="chkBox"]:checked');
+	const arr = [];
+	
+	box.forEach(val => {
+		arr.push(val.value);
+	});
+	
+	if(confirm('선택된 항목을 삭제하시겠습니까?')) {
+		$.ajax({
+			url : header + '/admin/delete',
+			type: "DELETE",
+			contentType: 'application/json',
+			data: JSON.stringify({
+				table: tableName,
+				column: $('#detail').attr('name'),
+				idArr: arr
+			}),
+			success : function(result) {
+				getLoad();
+				$('.chkAll').prop('checked', false);
+				alert('삭제가 완료되었습니다.');
+			},
+			error : function(result) {
+				getLoad();
+				$('.chkAll').prop('checked', false);
+				alert('error: 삭제 실패');
+			}
+		});
+	}
+	
+	
+}
 
 
 

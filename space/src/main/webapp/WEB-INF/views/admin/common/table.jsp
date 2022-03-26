@@ -12,6 +12,7 @@
 		<option value="40">40개</option>
 		<option value="50">50개</option>
 	</select>
+	<div class="deleteCheck" onclick="deleteCheck('${table}')">삭제</div>
 	<table border="1" class="col5-table">
 		<colgroup>
 			<c:forEach var="width" items="${width }">

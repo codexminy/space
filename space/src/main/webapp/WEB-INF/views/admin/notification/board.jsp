@@ -32,6 +32,7 @@
 		for(let i=0; i<list.length; ++i) {
 			listData += '<tr>';
 			listData += '<td>'+ list[i].rn +'</td>';
+			listData += "<td><input type=checkbox name=chkBox value=" + list[i].n_id + " onclick=checking() /></td>";
 			listData += '<td>'+ list[i].reported +'</td>';
 			listData += '<td>'+ formatDate(list[i].n_notify_date) +'</td>';
 			listData += '<td>'+ list[i].reporter +'</td>';
