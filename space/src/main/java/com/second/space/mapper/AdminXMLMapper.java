@@ -3,6 +3,7 @@ package com.second.space.mapper;
 import java.util.List;
 
 import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.Admin_categoryDTO;
 import com.second.space.admin.model.Contact_usDTO;
 import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
@@ -167,6 +168,16 @@ public interface AdminXMLMapper {
 	public int updateReviewDelete(NotifyDTO dto); // 신고 관리 - 리뷰 신고 승인 처리
 	
 	public int deleteCheck(DeleteCheckDTO dto); // 체크한 항목 삭제
+	
+	public List<Admin_categoryDTO> getNoticeAdminCategory(); // 관리자 공지 - 카테고리
+	
+	public int insertNoticeAdmin(Notice_adminDTO dto); // 관리자 공지 - 관리자 공지 등록
+	
+	public Notice_adminDTO getNoticeAdmin(int notice_admin_id); // 관리자 공지 - 관리자 글 가져오기
+	
+	public int deleteNoticeAdmin(int notice_admin_id); // 관리자 공지 - 관리자 글 삭제하기
+	
+	public int updateNoticeAdmin(Notice_adminDTO dto); // 관리자 공지 - 관리자 글 수정하기
 }
 
 

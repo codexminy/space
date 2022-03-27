@@ -26,11 +26,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.DeleteCheckDTO;
-import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.NoticeDTO;
+import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
+import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.PageSet;
 import com.second.space.admin.model.Paging;
+import com.second.space.admin.model.UserDTO;
 import com.second.space.admin.service.AdminService;
 
 @RestController
@@ -329,6 +331,41 @@ public class AdminRESTController {
 
 		result.put("list", service.getAllNoticeAdminList(ps));
 		result.put("paging", new Paging(service.getNoticeAdminTotal(), ps));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping(value = "/admin/admin/admin/{notice_admin_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> adminList(@PathVariable int notice_admin_id) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("list", service.getNoticeAdmin(notice_admin_id));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping(value = "/admin/admin/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Notice_adminDTO> insertAdmin(@RequestBody Notice_adminDTO dto) throws Exception {
+
+		service.insertNoticeAdmin(dto);
+		
+		return ResponseEntity.ok(dto);
+	}
+	
+	@PutMapping(value = "/admin/admin/admin/{notice_admin_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> updateAdmin(@RequestBody Notice_adminDTO dto) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("list", service.updateNoticeAdmin(dto));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping(value = "/admin/admin/admin/{notice_admin_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> deleteAdmin(@PathVariable int notice_admin_id) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("list", service.deleteNoticeAdmin(notice_admin_id));
 		
 		return ResponseEntity.ok(result);
 	}

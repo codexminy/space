@@ -171,14 +171,10 @@
                     <choose>
                     	<when test="type == 'A'.toString()">
 							ac_name like '%'||LOWER(#{keyword})||'%' OR ac_name like '%'||UPPER(#{keyword})||'%'
-							OR ae_name like '%'||LOWER(#{keyword})||'%' OR ae_name like '%'||UPPER(#{keyword})||'%'
 							OR notice_admin_title like '%'||LOWER(#{keyword})||'%' OR notice_admin_title like '%'||UPPER(#{keyword})||'%'
                         </when>
                         <when test="type == 'B'.toString()">
                             ac_name like '%'||LOWER(#{keyword})||'%' OR ac_name like '%'||UPPER(#{keyword})||'%'
-                        </when>
-                        <when test="type == 'C'.toString()">
-                            ae_name like '%'||LOWER(#{keyword})||'%' OR ae_name like '%'||UPPER(#{keyword})||'%'
                         </when>
                         <when test="type == 'D'.toString()">
                             notice_admin_title like '%'||LOWER(#{keyword})||'%' OR notice_admin_title like '%'||UPPER(#{keyword})||'%'
@@ -763,24 +759,17 @@
 	<!-- 관리자 공지 - 목록 리스트 -->
 	<select id="getAllNoticeAdminList" resultMap="UserDTO">
         SELECT
-        	rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
+        	rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date
         FROM(
 	        SELECT
-	        	ROWNUM rn, user_id, ac_code, ac_name, ae_name, ae_class, notice_admin_id, notice_admin_title, notice_admin_date
+	        	ROWNUM rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date
 	        FROM(
 	        	SELECT
-	        		na.user_id, ac.ac_code, ac.ac_name, ae.ae_name, ae.ae_class, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
+	        		na.user_id, ac.ac_code, ac.ac_name, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
 				FROM
-					user_ u,
-			        admin_category ac,
-			        admin_emp ae,
-			        notice_admin na,
-			        login_id_list lil
+			        admin_category ac, notice_admin na
 				WHERE
-					u.user_id=na.user_id
-			        AND na.ac_id=ac.ac_id
-			        AND ae.ae_id=na.ae_id
-			        AND u.user_login_id=lil.user_login_id
+			        na.ac_id=ac.ac_id
 			        <if test="keyword != null">
 		                <include refid="adminSearch"></include> 
 		            </if>
@@ -799,20 +788,38 @@
 		SELECT
        		COUNT(*)
 		FROM
-			user_ u,
-	        admin_category ac,
-	        admin_emp ae,
-	        notice_admin na,
-	        login_id_list lil
+	        admin_category ac, notice_admin na
 		WHERE
-			u.user_id=na.user_id
-	        AND na.ac_id=ac.ac_id
-	        AND ae.ae_id=na.ae_id
-	        AND u.user_login_id=lil.user_login_id
+	        na.ac_id=ac.ac_id
 	        <if test="keyword != null">
                 <include refid="adminSearch"></include> 
             </if>
 	</select>
+	
+	<!-- 관리자 공지 - 카테고리 -->
+	<select id="getNoticeAdminCategory" resultType="com.second.space.admin.model.Admin_categoryDTO">
+		SELECT * FROM admin_category
+	</select>
+	
+	<!-- 관리자 공지 - 관리자 공지 등록 -->
+	<insert id="insertNoticeAdmin">
+		INSERT INTO notice_admin(notice_admin_id, notice_admin_title, notice_admin_content, ac_id) VALUES(NOTICE_ADMIN_ID_SEQ.nextval, #{notice_admin_title}, #{notice_admin_content}, #{ac_id})
+	</insert>
+	
+	<!-- 관리자 공지 - 관리자 글 가져오기 -->
+	<select id="getNoticeAdmin" resultMap="Notice_adminDTO">
+		SELECT * FROM notice_admin INNER JOIN admin_category USING(ac_id) WHERE notice_admin_id = #{notice_admin_id}
+	</select>
+	
+	<!-- 관리자 공지 - 관리자 글 삭제하기 -->
+	<delete id="deleteNoticeAdmin">
+		DELETE FROM notice_admin WHERE notice_admin_id = #{notice_admin_id}
+	</delete>
+	
+	<!-- 관리자 공지 - 관리자 글 수정하기 -->
+	<update id="updateNoticeAdmin">
+		UPDATE notice_admin SET notice_admin_title = #{notice_admin_title}, notice_admin_content = #{notice_admin_content}, ac_id = #{ac_id} WHERE notice_admin_id = #{notice_admin_id}
+	</update>
 	
 	<!-- 문의사항 - 1:1 문의 리스트 -->
 	<select id="getAllContactUsList" resultMap="Contact_usDTO">

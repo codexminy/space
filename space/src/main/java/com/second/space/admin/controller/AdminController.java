@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.second.space.admin.model.NoticeDTO;
+import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.admin.service.AdminService;
 
@@ -55,27 +56,13 @@ public class AdminController {
 		return model;
 	}
 	
-	private static Model bannerCommon(Model model) {
-		model.addAttribute("title", bannerTitle);
-		model.addAttribute("menu", bannerMenu);
-		model.addAttribute("link", bannerLink);
+	private static Model settingModel(Model model, String title, String[] menu, String[] link) {
+		model.addAttribute("title", title);
+		model.addAttribute("menu", menu);
+		model.addAttribute("link", link);
 		return model;
 	}
-	
-	private static Model noticeCommon(Model model) {
-		model.addAttribute("title", noticeTitle);
-		model.addAttribute("menu", noticeMenu);
-		model.addAttribute("link", noticeLink);
-		return model;
-	}
-	
-	private static Model statsCommon(Model model) {
-		model.addAttribute("title", statsTitle);
-		model.addAttribute("menu", statsMenu);
-		model.addAttribute("link", statsLink);
-		return model;
-	}
-	
+
 	private static String[] notifyHead(String word) {
 		return new String[] {"번호", selectAllBox(), "신고대상", "접수일", "신고자", "사유", "내용", word, "누적신고", "처리"};
 	}
@@ -124,17 +111,17 @@ public class AdminController {
 	
 	@GetMapping("/admin/banner/create")
 	public void bannerCreate(Model model) {
-		bannerCommon(model);
+		settingModel(model, bannerTitle, bannerMenu, bannerLink);
 	}
 	
 	@GetMapping("/admin/banner/detail")
 	public void bannerDetail(@ModelAttribute("dto") Notification_adDTO dto, Model model) {
-		bannerCommon(model);
+		settingModel(model, bannerTitle, bannerMenu, bannerLink);
 	}
 	
 	@GetMapping("/admin/banner/update")
 	public void bannerUpdate(@ModelAttribute("dto") Notification_adDTO dto, Model model) {
-		bannerCommon(model);
+		settingModel(model, bannerTitle, bannerMenu, bannerLink);
 	}
 	
 	@GetMapping("/admin/banner/endDate")
@@ -156,18 +143,18 @@ public class AdminController {
 	@GetMapping("/admin/notice/create")
 	public void noticeCreate(Model model) throws Exception {
 		model.addAttribute("list", service.getNoticeCategory());
-		noticeCommon(model);
+		settingModel(model, noticeTitle, noticeMenu, noticeLink);
 	}
 	
 	@GetMapping("/admin/notice/detail")
 	public void noticeDetail(@ModelAttribute("dto") NoticeDTO dto, Model model) {
-		noticeCommon(model);
+		settingModel(model, noticeTitle, noticeMenu, noticeLink);
 	}
 	
 	@GetMapping("/admin/notice/update")
 	public void noticeUpdate(@ModelAttribute("dto") NoticeDTO dto, Model model) throws Exception {
 		model.addAttribute("list", service.getNoticeCategory());
-		noticeCommon(model);
+		settingModel(model, noticeTitle, noticeMenu, noticeLink);
 	}
 
 	@GetMapping("/admin/user/list")
@@ -218,6 +205,23 @@ public class AdminController {
 		model.addAttribute("table", "notice_admin");
 	}
 	
+	@GetMapping("/admin/admin/create")
+	public void adminCreate(Model model) throws Exception {
+		model.addAttribute("list", service.getNoticeAdminCategory());
+		settingModel(model, adminTitle, adminMenu, adminLink);
+	}
+	
+	@GetMapping("/admin/admin/detail")
+	public void adminDetail(@ModelAttribute("dto") Notice_adminDTO dto, Model model) throws Exception {
+		settingModel(model, adminTitle, adminMenu, adminLink);
+	}
+	
+	@GetMapping("/admin/admin/update")
+	public void adminUpdate(@ModelAttribute("dto") Notice_adminDTO dto, Model model) throws Exception {
+		model.addAttribute("list", service.getNoticeAdminCategory());
+		settingModel(model, adminTitle, adminMenu, adminLink);
+	}
+	
 	@GetMapping("/admin/enquiry/contactUs")
 	public void contactUsList(Model model) {
 		settingModel(model, contactUsTitle, contactUsMenu, contactUsLink, noticeWidth, noticeHead);
@@ -228,17 +232,17 @@ public class AdminController {
 	
 	@GetMapping("/admin/stats/stats")
 	public void statsList(Model model) {
-		statsCommon(model);
+		settingModel(model, statsTitle, statsMenu, statsLink);
 	}
 	
 	@GetMapping("/admin/stats/board")
 	public void statsBoardList(Model model) {
-		statsCommon(model);
+		settingModel(model, statsTitle, statsMenu, statsLink);
 	}
 	
 	@GetMapping("/admin/stats/notification")
 	public void statsNotificationList(Model model) {
-		statsCommon(model);
+		settingModel(model, statsTitle, statsMenu, statsLink);
 	}
 }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.Admin_categoryDTO;
 import com.second.space.admin.model.Contact_usDTO;
 import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
@@ -396,6 +397,31 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int deleteCheck(DeleteCheckDTO dto) throws Exception {
 		return mapper.deleteCheck(dto);
+	}
+
+	@Override
+	public List<Admin_categoryDTO> getNoticeAdminCategory() throws Exception {
+		return mapper.getNoticeAdminCategory();
+	}
+
+	@Override
+	public int insertNoticeAdmin(Notice_adminDTO dto) throws Exception {
+		return mapper.insertNoticeAdmin(dto);
+	}
+
+	@Override
+	public Notice_adminDTO getNoticeAdmin(int notice_admin_id) throws Exception {
+		return mapper.getNoticeAdmin(notice_admin_id);
+	}
+
+	@Override
+	public int deleteNoticeAdmin(int notice_admin_id) throws Exception {
+		return mapper.deleteNoticeAdmin(notice_admin_id);
+	}
+
+	@Override
+	public int updateNoticeAdmin(Notice_adminDTO dto) throws Exception {
+		return mapper.updateNoticeAdmin(dto);
 	}
 }
 
