@@ -93,6 +93,11 @@ function deleteCheck(tableName) {
 	const box = document.querySelectorAll('input[name="chkBox"]:checked');
 	const arr = [];
 	
+	if(box.length === 0) {
+		alert('선택된 항목이 없습니다.');
+		return;
+	}
+	
 	box.forEach(val => {
 		arr.push(val.value);
 	});
