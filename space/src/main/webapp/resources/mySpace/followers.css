@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+.my-space-nav {
+    width: 1140px;
+    height: 80px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.my-space-nav > ul{
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-space-nav > ul > li > a {
+    width: 220px;
+    height: 50px;
+    background-color: white;
+    border: 3px solid #22007F;
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #22007F;
+}
+
+.my-space-nav > ul > li:nth-child(5) > a {
+    background-color: #22007F;
+    color: white;
+    font-weight: bold;
+}
+
+.my-space-nav > ul > li > a:hover {
+    background-color: #22007F;
+    color: white;
+    font-weight: bold;
+}
+
+.followers {
+    width: 1140px;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 150px;
+}
+
+.my-space-nav-title {
+    width: 1140px;
+    height: 50px;
+    border-bottom: 1px solid #D1D1D1;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+}
+
+.my-space-nav-title > h2 {
+    margin-right: 15px;
+}
+
+.my-space-nav-title > p {
+    color: #22007F;
+    font-weight: bold;
+}
+
+.follows-wrap {
+    width: 1140px;
+	clear:both;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.follows-user-profile {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    padding-bottom: 30px;
+}
+
+.follows-user-profile:nth-child(5n) {
+    margin-right: 0px;
+}
+
+.follows-user-profile-photo > img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #707070;
+    border-radius: 11px;
+}
+.follows-user-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.follows-user-profile-info > h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.followbtn {
+    background: url(../../resources/images/mySpace/following_btn.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 170px;
+    height: 40px;
+    border-radius: 11px;
+    /* border: 3px solid #22007F; */
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.followbtn.active {
+    background: url(../../resources/images/mySpace/follow_btn.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 170px;
+    height: 40px;
+    z-index: 9999;
+    border-radius: 11px;
+    border: 3px solid #22007F;
+    image-rendering: -webkit-optimize-contrast;
+}

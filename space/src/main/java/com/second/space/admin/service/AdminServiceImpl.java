@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.second.space.admin.model.A_boardDTO;
-import com.second.space.admin.model.BoardNotifyDTO;
+import com.second.space.admin.model.Contact_usDTO;
+import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notice_categoryDTO;
 import com.second.space.admin.model.Notification_adDTO;
+import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.model.PageSet;
 import com.second.space.admin.model.UserDTO;
 import com.second.space.mapper.AdminXMLMapper;
@@ -142,7 +144,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<UserDTO> getAllContactUsList(PageSet ps) throws Exception {
+	public List<Contact_usDTO> getAllContactUsList(PageSet ps) throws Exception {
 		return mapper.getAllContactUsList(ps);
 	}
 
@@ -317,7 +319,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<BoardNotifyDTO> getBoardNotifyList(PageSet ps) throws Exception {
+	public List<NotifyDTO> getBoardNotifyList(PageSet ps) throws Exception {
 		return mapper.getBoardNotifyList(ps);
 	}
 
@@ -327,28 +329,73 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int updateBoardHandling(BoardNotifyDTO dto) throws Exception {
+	public int updateBoardHandling(NotifyDTO dto) throws Exception {
 		return mapper.updateBoardHandling(dto);
 	}
 
 	@Override
-	public int updateBoardDelete(BoardNotifyDTO dto) throws Exception {
+	public int updateBoardDelete(NotifyDTO dto) throws Exception {
 		return mapper.updateBoardDelete(dto);
 	}
 
 	@Override
-	public int updateBoardReported(BoardNotifyDTO dto) throws Exception {
-		return mapper.updateBoardReported(dto);
+	public int updateReported(NotifyDTO dto) throws Exception {
+		return mapper.updateReported(dto);
 	}
 
 	@Override
-	public int updateCommunityBoardDelete(BoardNotifyDTO dto) throws Exception {
+	public int updateCommunityBoardDelete(NotifyDTO dto) throws Exception {
 		return mapper.updateCommunityBoardDelete(dto);
 	}
 
 	@Override
-	public int updateCancelBoardReported(BoardNotifyDTO dto) {
-		return mapper.updateCancelBoardReported(dto);
+	public int updateCancelReported(NotifyDTO dto) throws Exception {
+		return mapper.updateCancelReported(dto);
+	}
+
+	@Override
+	public List<NotifyDTO> getCmtNotifyList(PageSet ps) throws Exception {
+		return mapper.getCmtNotifyList(ps);
+	}
+
+	@Override
+	public int getCmtNotifyCount(PageSet ps) throws Exception {
+		return mapper.getCmtNotifyCount(ps);
+	}
+
+	@Override
+	public int updateCmtHandling(NotifyDTO dto) throws Exception {
+		return mapper.updateCmtHandling(dto);
+	}
+
+	@Override
+	public int updateCmtDelete(NotifyDTO dto) throws Exception {
+		return mapper.updateCmtDelete(dto);
+	}
+
+	@Override
+	public List<NotifyDTO> getReviewNotifyList(PageSet ps) throws Exception {
+		return mapper.getReviewNotifyList(ps);
+	}
+
+	@Override
+	public int getReviewNotifyCount(PageSet ps) throws Exception {
+		return mapper.getReviewNotifyCount(ps);
+	}
+
+	@Override
+	public int updateReviewHandling(NotifyDTO dto) throws Exception {
+		return mapper.updateReviewHandling(dto);
+	}
+
+	@Override
+	public int updateReviewDelete(NotifyDTO dto) throws Exception {
+		return mapper.updateReviewDelete(dto);
+	}
+
+	@Override
+	public int deleteCheck(DeleteCheckDTO dto) throws Exception {
+		return mapper.deleteCheck(dto);
 	}
 }
 

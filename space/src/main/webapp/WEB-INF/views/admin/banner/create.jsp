@@ -12,9 +12,9 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
-	<jsp:include page="../common/bannerAside.jsp"/>
+	<jsp:include page="../common/aside.jsp"/>
 	<div class="container home-container">
-		<jsp:include page="../common/bannerLink.jsp"/>
+		<jsp:include page="../common/subLink.jsp"/>
 		<div class="list-wrap">
 			<form id="form" action="${path}/admin/banner/banner" method="post" encType="multipart/form-data">
 				<table>

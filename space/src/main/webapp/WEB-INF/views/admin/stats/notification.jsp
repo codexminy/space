@@ -12,9 +12,9 @@
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
-	<jsp:include page="../common/statsAside.jsp"/>
+	<jsp:include page="../common/aside.jsp"/>
 	<div class="container home-container">
-		<jsp:include page="../common/statsLink.jsp"/>
+		<jsp:include page="../common/subLink.jsp"/>
 		<div class="list-wrap">
 			<div class="stats-wrap">
 				<div class="userChart">
