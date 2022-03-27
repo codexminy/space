@@ -391,6 +391,8 @@ public class AdminRESTController {
 		
 		if(kind.equals("board")) {
 			root = "resources/images/board/";
+		} else if(kind.equals("c-board")) {
+			root = "resources/images/c_board/";
 		} else if(kind.equals("contact-us")) {
 			root = "resources/images/contact_us/";
 		} else if(kind.equals("main")) {
