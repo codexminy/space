@@ -87,11 +87,15 @@
 .faqList ul{
     width: 900px;
     height: 414px;
-    overflow: hidden;
     float: left;
     margin-left: 30px;
-    margin-bottom: 26px;    
+    margin-bottom: 26px;
+    overflow: auto;  
 }
 .faqList ul li{
     padding: 11.5px;
+}
+.strong {
+	font-size: 18px;
+	font-weight: bold;
 }
