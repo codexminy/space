@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>우주장터</title>
+	<!-- 삭제 대기
 	<style>
 		.box3 > #postimg {
 			background-image: url('${pageContext.request.contextPath}/resources/images/board/postimg.png');
@@ -12,8 +13,14 @@
 			background-size: cover;
 		}
 	</style>
+	 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board_write.css?ver=1" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board_write.css?ver=2" />
+	<jsp:include page="../summernoteLink.jsp"/>
+	<script type="text/javascript">
+	   const address = "${pageContext.request.contextPath}/uploadSummernoteImageFile/c-board";
+	   console.log(address);
+	</script>
 </head>
 <body>
 	<form id="go_back_main" action="./main"></form>
@@ -64,9 +71,9 @@
 				</div>
 				<!-- 내용 -->
 				<div class="box2">
-					<textarea id="c_board_content" name="c_board_content"></textarea>
+					<textarea class="summernote" id="c_board_content" name="c_board_content"></textarea>
 				</div>
-				<!-- 이미지 등록 -->
+				<!-- 삭제 대기
 				<div class="box3">
 					<div id="postimg">사진추가
 						<input type="file"  id="upload_file" name="upfile" multiple="multiple"  />
@@ -86,6 +93,7 @@
 						<li>- 규정에 위배되는 이미지는 등록시 게시글이 제한 될 수 있으며 추후 발견시 무통보 삭제 및 제재를 받으실 수 있습니다.</li>
 					</ul>
 				</div>
+				 -->
 				</form>
 				<div class="box5">
 					<div>
@@ -100,6 +108,7 @@
 			<div id="empty_box"></div>
 		</div>
 	</main>
-<script src="${pageContext.request.contextPath}/resources/community/js/c_board_write.js?ver=2"></script>
+<script src="${pageContext.request.contextPath}/resources/community/js/c_board_write.js?ver=1"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/js/summernoteForm.js"></script>
 </body>
 </html>

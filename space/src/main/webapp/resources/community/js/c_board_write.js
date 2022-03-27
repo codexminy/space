@@ -19,7 +19,7 @@ if(hello.innerText == ""){
 	document.querySelector('.input_login').classList.remove('active');
 }
 
-/* 이미지 넣기 */
+/* 삭제 대기 
 const postimg = document.getElementById("postimg");
 const upload_file = document.getElementById("upload_file");
 
@@ -78,6 +78,7 @@ function CheckImagefiles(fileName) {
     });
     return result;
 }
+*/
 
 /* 등록,취소 */
 const c_board_create = document.getElementById('c_board_create');

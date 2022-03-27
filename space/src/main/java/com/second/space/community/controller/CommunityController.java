@@ -111,7 +111,8 @@ public class CommunityController {
 			if(result > 0) {
 				// c_board_id 가져오기 
 				c_board_id = community_service.getCommunityBoardId(list.getUser_id());
-				log.info("보드 넣기 성공");
+				System.out.println("글쓰기 성공");
+				/*
 				if(c_board_id != 0) {
 					for(MultipartFile f : upfile) {
 						if(!f.isEmpty()) {
@@ -147,7 +148,8 @@ public class CommunityController {
 						log.info("인서트 실패");
 						System.out.println("실패");
 					}
-				}
+					
+				}*/
 			}
 			
 		} catch (Exception e) {
