@@ -14,15 +14,15 @@
 		<footer class="footer">
 	        <div class="copyright">
 	            <ul>
-	                <li><a href="#">회사소개</a></li>
+	                <li><a href="${pageContext.request.contextPath}/main/company">회사소개</a></li>
 	                <li>|</li>
-	                <li><a href="#">인재채용</a></li>
+	                <li><a href="${pageContext.request.contextPath}/main/recruitment">인재채용</a></li>
 	                <li>|</li>
-	                <li><a href="#">광고문의</a></li>
+	                <li><a href="${pageContext.request.contextPath}/main/ad">광고문의</a></li>
 	                <li>|</li>
-	                <li><a href="#">개인정보처리방침</a></li>
+	                <li><a href="${pageContext.request.contextPath}/main/personal">개인정보처리방침</a></li>
 	                <li>|</li>
-	                <li><a href="#">이용약관</a></li>
+	                <li><a href="${pageContext.request.contextPath}/main/terms">이용약관</a></li>
 	            </ul>
 	        </div>
 	        <div class="copyright-text">Copyright ⓒ <strong>SPACE MARKET</strong> Corp. All rights reserved.</div>  

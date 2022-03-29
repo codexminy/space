@@ -35,7 +35,7 @@
 			listData += "<tr>";
 			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].user_id + " onclick=checking() /></td>";
-			listData += "<td><a href=javascript:goDetail(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
+			listData += "<td><a href=javascript:goTest(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
 			listData += "<td>" + list[i].user_nickname + "</td>";
 			listData += "<td>" + formatDate(list[i].user_join_date) + "</td>";
 			listData += "<td>" + list[i].user_address + "</td>";
@@ -57,6 +57,11 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<jsp:include page="../common/js.jsp"/>
+	<script type="text/javascript">
+		function goTest(id) {
+			window.open("${path }/admin/user/detail", "userDetail", "width = 500, height = 500");
+		}
+	</script>
 </body>
 </html>
 

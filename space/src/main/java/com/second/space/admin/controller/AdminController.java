@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
+import com.second.space.admin.model.UserDTO;
 import com.second.space.admin.service.AdminService;
 
 @Controller
@@ -179,6 +180,11 @@ public class AdminController {
 		model.addAttribute("detailUrl", "/admin/user/detail");
 		model.addAttribute("id", "user_id");
 		model.addAttribute("table", new String[] {"delete_account", "user_"});
+	}
+	
+	@GetMapping("/admin/user/detail")
+	public void userDetail(Model model, @ModelAttribute("dto") UserDTO dto) {
+		
 	}
 	
 	@GetMapping("/admin/board/sale")
