@@ -12,7 +12,7 @@
 <c:when test="${empty val }">
 	<style>
 		.list_${contact_us_list[0].cu_id } a {
-			font-size:18px;
+			font-size:20px;
 			font-weight:bold;
 			color:#22007F;
 		}
@@ -21,7 +21,7 @@
 <c:otherwise>
 	<style>
 		.list_${val } a {
-			font-size:18px;
+			font-size:20px;
 			font-weight:bold;
 			color:#22007F;
 		}
@@ -92,24 +92,16 @@
                 </div>
                 <hr style="border: 0.1px solid  #D1D1D1">
                 <div id='cl_comment'>
-                    <ul>
+                    <ul class='comment_check'>
                         <li style="font-weight:bold;">답변:</li>
-                        <li>
-                        	<c:forEach items="${contact_us_comments_list }" var="contact_us_comments_list">
-                        	<c:choose>
-                        	<c:when test="${(contact_us_comments_list.cu_id eq contact_us_list[0].cu_id)
-                        		and (contact_us_comments_list.cuc_comment_delete eq 'N')}">
+                       	<c:forEach items="${contact_us_comments_list }" var="contact_us_comments_list">
+                       	<c:if test="${(contact_us_comments_list.cu_id eq contact_us_list[0].cu_id)
+                       		and (contact_us_comments_list.cuc_comment_delete eq 'N')}">
+                        	<li>
                         		${contact_us_comments_list.cuc_comment_content }
-                        	</c:when>
-                        	<c:otherwise>
-                        		현재 답변 대기 중 상태입니다.<br>
-                        		신속하게 답변을 드릴 예정이오니, 조금만 더 기다려주세요.<br>
-                        		최선을 다하는 우주마켓 되겠습니다.<br>
-                        		감사합니다.
-                        	</c:otherwise>
-                        	</c:choose>
-                        	</c:forEach>
-                        </li>
+							</li>
+                       	</c:if>
+                       	</c:forEach>
                     </ul>
                     <div></div>
                 </div>
@@ -156,24 +148,16 @@
                 </div>
                 <hr style="border: 0.1px solid  #D1D1D1">
                 <div id='cl_comment'>
-                    <ul>
+                    <ul class="comment_check">
                         <li style="font-weight:bold;">답변:</li>
-                        <li>
-                        	<c:forEach items="${contact_us_comments_list }" var="contact_us_comments_list">
-                        	<c:choose>
-                        	<c:when test="${(contact_us_comments_list.cu_id eq contact_us_list.cu_id)
-                        		and (contact_us_comments_list.cuc_comment_delete eq 'N')}">
+                       	<c:forEach items="${contact_us_comments_list }" var="contact_us_comments_list">
+                       	<c:if test="${(contact_us_comments_list.cu_id eq contact_us_list.cu_id)
+                       		and (contact_us_comments_list.cuc_comment_delete eq 'N')}">
+	                        <li>
                         		${contact_us_comments_list.cuc_comment_content }
-                        	</c:when>
-                        	<c:otherwise>
-                        		현재 답변 대기 중 상태입니다.<br>
-                        		신속하게 답변을 드릴 예정이오니, 조금만 더 기다려주세요.<br>
-                        		최선을 다하는 우주마켓 되겠습니다.<br>
-                        		감사합니다.
-                        	</c:otherwise>
-                        	</c:choose>
-                        	</c:forEach>
-                        </li>
+	                        </li>
+                       	</c:if>
+                       	</c:forEach>
                     </ul>
                     <div></div>
                 </div>
