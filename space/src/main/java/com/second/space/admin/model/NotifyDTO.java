@@ -20,6 +20,10 @@ public class NotifyDTO {
 	private Date nc_notify_date;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date nr_notify_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_notify_start_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_notify_end_date;
 	private int user_id;
 	private int board_id;
 	private int c_board_id;

@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	const address = "${path}/uploadSummernoteImageFile/notice-admin";
 </script>
+<link rel="styleSheet" href="${path }/resources/admin/css/notice.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -43,6 +44,11 @@
 		</div>
 	</div>
 	<script>
+		$('.nav-admin').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-admin i, .nav-admin span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	
 		$.ajax({
 			url : "${path}/admin/admin/admin/${dto.notice_admin_id}",
 			type: "GET",

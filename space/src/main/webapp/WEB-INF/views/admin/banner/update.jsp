@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/banner.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -16,34 +17,42 @@
 		<jsp:include page="../common/subLink.jsp"/>
 		<div class="list-wrap">
 			<form id="form" action="${path}/admin/page/banner/create" method="post" encType="multipart/form-data">
-				<table>
+				<table class="common-table">
+					<colgroup>
+						<col width="15%"/>
+						<col width="85%"/>
+					</colgroup>
 					<tbody class="banner-create banner-table">
 						<tr>
 							<td>업체</td>
-							<td colspan="3">
+							<td>
 								<div class="picture" onclick="fileClick()">
 									<div class="pic-img" style="display: none;">
 										<i class="fa-solid fa-camera"></i>
 										<p>사진 등록</p>
 									</div>
-									<img src="" alt="" style="height: 250px;" class="img"/>
+									<img src="" alt="" class="img" width="600"/>
 								</div>
 								<input type="file" id="uploadFile" name="uploadFile"/>
 							</td>
 						</tr>
 						<tr>
 							<td>배너 URL</td>
-							<td colspan="3"><input type="text" name="na_url" id="na_url"/></td>
+							<td><input type="text" name="na_url" id="na_url"/></td>
 						</tr>
 						<tr>
 							<td>업체명</td>
 							<td><input type="text" name="na_title" id="na_title"/></td>
+						</tr>
+						<tr>
 							<td>노출 상호</td>
 							<td><input type="text" name="na_name" id="na_name"/></td>
 						</tr>
 						<tr>
 							<td>시작 날짜</td>
 							<td><input type="date" name="na_start_date" id="na_start_date"/></td>
+						</tr>
+						<tr>
 							<td>종료 날짜</td>
 							<td><input type="date" name="na_end_date" id="na_end_date"/></td>
 						</tr>
@@ -61,6 +70,11 @@
 	<input type="hidden" name="na_img" id="na_img"/>
 	<input type="hidden" name="na_id" id="na_id" value="${dto.na_id }"/>
 	<script type="text/javascript">
+		$('.nav-banner').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-banner i, .nav-banner span').css('color', '#22007F');
+		$('aside li:first-child').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:first-child .menuHover').css('color', '#22007F');
+	
 		$(document).ready(function() {
 			getLoad();
 		});

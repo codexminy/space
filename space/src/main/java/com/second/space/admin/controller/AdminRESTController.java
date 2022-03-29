@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
+import com.second.space.admin.model.Contact_usDTO;
 import com.second.space.admin.model.DeleteCheckDTO;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
@@ -283,6 +285,16 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
+	@PutMapping(value = "/admin/user/user/user/{user_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> updateUserDetail(@PathVariable int user_id, @RequestBody UserDTO dto) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		dto.setUser_id(user_id);
+		result.put("list", service.updateUserDetail(dto));
+		
+		return ResponseEntity.ok(result);
+	}
+	
 	@GetMapping(value = "/admin/user/user/withdrawal", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> userwithdrawalList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
@@ -311,6 +323,18 @@ public class AdminRESTController {
 		dto.setBoard_hidden(board_hidden);
 		
 		service.updateHidden(dto);
+		
+		return ResponseEntity.ok(dto);
+	}
+	
+	@PutMapping(value = "/admin/board/c-board/{c_board_hidden}/{c_board_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<A_Community_boardDTO> updateCboardHidden(@PathVariable String c_board_hidden, @PathVariable int c_board_id) throws Exception {
+		A_Community_boardDTO dto = new A_Community_boardDTO();
+		
+		dto.setC_board_id(c_board_id);
+		dto.setC_board_hidden(c_board_hidden);
+		
+		service.updateCboardHidden(dto);
 		
 		return ResponseEntity.ok(dto);
 	}
@@ -376,6 +400,43 @@ public class AdminRESTController {
 
 		result.put("list", service.getAllContactUsList(ps));
 		result.put("paging", new Paging(service.getContactUsTotal(ps), ps));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping(value = "/admin/enquiry/enquiry/contactUs/{cu_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> contactUsDetail(@PathVariable int cu_id) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		result.put("list", service.getContactUsDetail(cu_id));
+		result.put("cmt", service.getContactUsCmt(cu_id));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping(value = "/admin/enquiry/enquiry/contactUs/{cu_id}/{cu_state}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> insertContactUsCmt(@PathVariable int cu_id, @PathVariable String cu_state, @RequestBody Contact_usDTO dto) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		
+		dto.setCu_id(cu_id);
+		dto.setCu_state(cu_state);
+		
+		result.put("list", service.insertContactUsCmt(dto));
+		result.put("result", service.updateContactUsState(dto));
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@DeleteMapping(value = "/admin/enquiry/enquiry/contactUs/cmt/{cuc_comment_id}/{cu_state}/{cu_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> deleteContactUsCmt(@PathVariable int cuc_comment_id, @PathVariable String cu_state, @PathVariable int cu_id) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		Contact_usDTO dto = new Contact_usDTO();
+		
+		dto.setCu_state(cu_state);
+		dto.setCu_id(cu_id);
+		
+		result.put("list", service.deleteContactUsCmt(cuc_comment_id));
+		result.put("result", service.updateContactUsState(dto));
 		
 		return ResponseEntity.ok(result);
 	}

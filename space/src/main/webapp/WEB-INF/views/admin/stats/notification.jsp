@@ -27,6 +27,11 @@
 		<div class="monthly">월별통계보기</div>
 	</div>
 	<script type="text/javascript">
+		$('.nav-stats').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-stats i, .nav-stats span').css('color', '#22007F');
+		$('aside li:nth-child(3)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(3) .menuHover').css('color', '#22007F');
+	
 		var userContext = document.getElementById('userChart').getContext('2d');
 		var userChart,list, userConfig;
 		

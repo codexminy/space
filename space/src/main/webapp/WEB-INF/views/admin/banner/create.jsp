@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/banner.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -17,34 +18,42 @@
 		<jsp:include page="../common/subLink.jsp"/>
 		<div class="list-wrap">
 			<form id="form" action="${path}/admin/banner/banner" method="post" encType="multipart/form-data">
-				<table>
+				<table class="common-table">
+					<colgroup>
+						<col width="15%"/>
+						<col width="85%"/>
+					</colgroup>
 					<tbody class="banner-create banner-table">
 						<tr>
 							<td>업체</td>
-							<td colspan="3">
+							<td>
 								<div class="picture" onclick="fileClick()">
 									<div class="pic-img">
 										<i class="fa-solid fa-camera"></i>
 										<p>사진 등록</p>
 									</div>
-									<img src="" alt="" style="display: none; height: 250px;"/>
+									<img src="" alt="" style="display: none;" width="600"/>
 								</div>
 								<input type="file" id="uploadFile" name="uploadFile"/>
 							</td>
 						</tr>
 						<tr>
 							<td>배너 URL</td>
-							<td colspan="3"><input type="text" name="na_url" id="na_url"/></td>
+							<td><input type="text" name="na_url" id="na_url"/></td>
 						</tr>
 						<tr>
 							<td>업체명</td>
 							<td><input type="text" name="na_title" id="na_title"/></td>
+						</tr>
+						<tr>
 							<td>노출 상호</td>
 							<td><input type="text" name="na_name" id="na_name"/></td>
 						</tr>
 						<tr>
 							<td>시작 날짜</td>
 							<td><input type="date" name="na_start_date" id="na_start_date"/></td>
+						</tr>
+						<tr>
 							<td>종료 날짜</td>
 							<td><input type="date" name="na_end_date" id="na_end_date"/></td>
 						</tr>
@@ -60,6 +69,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		$('.nav-banner').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-banner i, .nav-banner span').css('color', '#22007F');
+		$('aside li:nth-child(2)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(2) .menuHover').css('color', '#22007F');
+	
 		$('.create-btn').on('click', () => {
 			const title = $("#na_title").val().trim();
 			const name = $("#na_name").val().trim();
@@ -71,14 +85,14 @@
 			if(!uploadFile) {
 				alert('배너를 업로드해주세요!');
 				return;
+			} else if(url === '') {
+				alert('배너 URL을 입력해주세요!');
+				return;
 			} else if(title === '') {
 				alert('업체명을 입력해주세요!');
 				return;
 			} else if(name === '') {
 				alert('노출 상호명을 입력해주세요!');
-				return;
-			} else if(url === '') {
-				alert('배너 URL을 입력해주세요!');
 				return;
 			} else if(start === '') {
 				alert('시작 날짜를 입력해주세요!');

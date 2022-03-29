@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/banner.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -16,26 +17,33 @@
 		<jsp:include page="../common/subLink.jsp"/>
 		<div>
 			<form id="form" action="${path}/admin/page/banner/create" method="post" encType="multipart/form-data">
-				<table border="0">
-					
+				<table class="common-table">
+					<colgroup>
+						<col width="15%"/>
+						<col width="85%"/>
+					</colgroup>
 					<tbody class="banner-table">
 						<tr>
 							<td>배너</td>
-							<td colspan="3" class="detail-img"><img height="300"/></td>
+							<td class="detail-img"><img width="600"/></td>
 						</tr>
 						<tr>
 							<td>배너 URL</td>
-							<td colspan="3" class="na_url"></td>
+							<td class="na_url"></td>
 						</tr>
 						<tr>
 							<td>업체명</td>
 							<td class="na_title"></td>
+						</tr>
+						<tr>
 							<td>노출 상호</td>
 							<td class="na_name"></td>
 						</tr>
 						<tr>
 							<td>시작 날짜</td>
 							<td class="na_start_date"></td>
+						</tr>
+						<tr>
 							<td>종료 날짜</td>
 							<td class="na_end_date"></td>
 						</tr>
@@ -55,6 +63,11 @@
 		<input type="hidden" name="na_id" value="${dto.na_id }"/>
 	</form>
 	<script type="text/javascript">
+		$('.nav-banner').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-banner i, .nav-banner span').css('color', '#22007F');
+		$('aside li:first-child').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:first-child .menuHover').css('color', '#22007F');
+	
 		$(document).ready(function() {
 			getLoad();
 		});

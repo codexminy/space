@@ -31,13 +31,13 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += '<tr>';
-			listData += '<td>'+ list[i].rn +'</td>';
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].n_id + " onclick=checking() /></td>";
+			listData += '<td>'+ list[i].rn +'</td>';
 			listData += '<td>'+ list[i].reported +'</td>';
 			listData += '<td>'+ formatDate(list[i].n_notify_date) +'</td>';
 			listData += '<td>'+ list[i].reporter +'</td>';
 			listData += '<td>'+ list[i].nfc_name +'</td>';
-			listData += '<td><button type="button">내용보기</button></td>';
+			listData += '<td><button type="button" onclick="goBoardDetail('+ list[i].n_id +')">내용보기</button></td>';
 			
 			if(list[i].board_id === 0) {
 				listData += '<td><button type="button" onclick="goCommunityboard('+ list[i].c_board_id +')">바로가기</button></td>';
@@ -74,6 +74,11 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<script type="text/javascript">
+		$('.nav-notify').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-notify i, .nav-notify span').css('color', '#22007F');
+		$('aside li:first-child').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:first-child .menuHover').css('color', '#22007F');
+		
 		function approval(nId, boardId, cBoardId, userId, nHandling) {
 			const message = '승인 하시겠습니까?';
 			const successMessage = '승인이 완료되었습니다.';
@@ -148,6 +153,15 @@
 		
 		function goCommunityboard(board_id) {
 			location.href = "${path}/community/c_board?c_board_id=" + board_id;
+		}
+		
+		function goBoardDetail(n_id) {
+			var _width = '500';
+		    var _height = '500';
+		    var _left = Math.ceil(( window.screen.width - _width )/2);
+		    var _top = Math.ceil(( window.screen.height - _height )/2); 
+
+			window.open("${path}/admin/notification/boardDetail?n_id=" + n_id, "notifyBoardDetail", "width=" + _width + ",height=" + _height + ",top=" + _top + ",left=" + _left);
 		}
 	</script>
 	<jsp:include page="../common/js.jsp"/>
