@@ -120,22 +120,22 @@
                 
                 
                 <c:forEach items="${contact_us_list }" var="contact_us_list">
-                </c:forEach>
+               	<c:if test="${contact_us_list.cu_id eq val }">
                 <div id='cl_title'>
                     <ul>
                         <li style="font-weight:bold;">제목:</li>
                         <li>[
                         	<c:forEach items="${cs_category_list }" var="cs_category_list">
-                        	<c:if test="${(cs_category_list.cs_category_id eq contact_us_list[0].cs_category_id)}">
+                        	<c:if test="${(cs_category_list.cs_category_id eq contact_us_list.cs_category_id)}">
 								${cs_category_list.cs_name }
 							</c:if>
                         	</c:forEach>
-                        ] ${contact_us_list[0].cu_title } 
+                        ] ${contact_us_list.cu_title } 
                         <c:choose>
-                        <c:when test="${contact_us_list[0].cu_state eq 'Y' }">
+                        <c:when test="${contact_us_list.cu_state eq 'Y' }">
                         	(답변 완료)
                         </c:when>
-                        <c:when test="${contact_us_list[0].cu_state eq 'D' }">
+                        <c:when test="${contact_us_list.cu_state eq 'D' }">
                         	(답변 삭제)
                         </c:when>
                         <c:otherwise>
@@ -144,13 +144,13 @@
                         </c:choose>
                         </li>
                     </ul>
-                    <div><fmt:formatDate value="${contact_us_list[0].cu_date }" pattern="yy.MM.dd a hh:mm"/></div>
+                    <div><fmt:formatDate value="${contact_us_list.cu_date }" pattern="yy.MM.dd a hh:mm"/></div>
                 </div>
                 <hr style="border: 0.1px solid  #D1D1D1">
                 <div id='cl_content'>
                     <ul>
                         <li style="font-weight:bold;">내용:</li>
-                        <li> ${contact_us_list[0].cu_content } </li>
+                        <li> ${contact_us_list.cu_content } </li>
                     </ul>
                     <div></div>
                 </div>
@@ -161,7 +161,7 @@
                         <li>
                         	<c:forEach items="${contact_us_comments_list }" var="contact_us_comments_list">
                         	<c:choose>
-                        	<c:when test="${(contact_us_comments_list.cu_id eq contact_us_list[0].cu_id)
+                        	<c:when test="${(contact_us_comments_list.cu_id eq contact_us_list.cu_id)
                         		and (contact_us_comments_list.cuc_comment_delete eq 'N')}">
                         		${contact_us_comments_list.cuc_comment_content }
                         	</c:when>
@@ -177,6 +177,8 @@
                     </ul>
                     <div></div>
                 </div>
+               	</c:if>
+                </c:forEach>
                 
                 
                 </c:otherwise>
