@@ -7,10 +7,10 @@
 <meta charset="UTF-8">
 <title>고객센터-자주묻는질문</title>
 <style>
-	.cs_category${category_id} {
+	.cs_category${category_id} a {
+		color: #22007F;
 		font-size: 18px;
 		font-weight: bold;
-		color: #22007F;
 	}
 </style>
 <link href="${pageContext.request.contextPath}/resources/customerService/css/faq.css" rel="stylesheet"/>

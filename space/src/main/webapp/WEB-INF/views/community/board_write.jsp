@@ -19,7 +19,6 @@
 	<jsp:include page="../summernoteLink.jsp"/>
 	<script type="text/javascript">
 	   const address = "${pageContext.request.contextPath}/uploadSummernoteImageFile/c-board";
-	   console.log(address);
 	</script>
 </head>
 <body>

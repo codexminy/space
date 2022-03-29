@@ -96,23 +96,22 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/c_board_write/process")
-	public String communityBoardWriteProcess(CommunityBoardDTO list, @RequestParam MultipartFile[] upfile, Model model, HttpServletRequest request) {
+	public String communityBoardWriteProcess(CommunityBoardDTO list, Model model, HttpServletRequest request) {
 		
 		String saveDirection = request.getSession().getServletContext().getRealPath("/resources/upload/c_board");
 		System.out.println(saveDirection);
 				
 		try {
-			System.out.println("보냈다");
 			// 커뮤니티 게시글 insert 후에 c_board_id 가져오기
 			int result = community_service.newCommunityBoard(list);
-			int c_board_id = 0;
+			System.out.println("보냈다");
+			/*
 			List<CommunityBoardImgDTO> imgList = new ArrayList<>();
-			
+			int c_board_id = 0;
 			if(result > 0) {
 				// c_board_id 가져오기 
 				c_board_id = community_service.getCommunityBoardId(list.getUser_id());
 				System.out.println("글쓰기 성공");
-				/*
 				if(c_board_id != 0) {
 					for(MultipartFile f : upfile) {
 						if(!f.isEmpty()) {
@@ -149,9 +148,9 @@ public class CommunityController {
 						System.out.println("실패");
 					}
 					
-				}*/
+				}
 			}
-			
+			*/
 		} catch (Exception e) {
 			System.out.println("안보냈다");
 			e.printStackTrace();

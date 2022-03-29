@@ -8,6 +8,7 @@
 #wrapcs{
     width: 1200px;
     margin: 0 auto;
+    padding-top: 145px;
 }
 .customerService{
     width: 1200px;
@@ -132,4 +133,21 @@
 .FAQ2 div button:hover{
 	background-color: #22007F;
 	color: #fff;
+}
+
+/* 로그인 기능구현 시 삭제 */
+#hello {
+	display:none;
+}
+.hello_login{
+	font-size: 35px;
+	display:none;
+}
+.input_login{
+	display:none;
+}
+/* 로그인 기능구현 시 삭제 */
+
+.active {
+	display: block;
 }

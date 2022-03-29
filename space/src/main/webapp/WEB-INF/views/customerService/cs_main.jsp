@@ -6,11 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터</title>
-<link href="${pageContext.request.contextPath}/resources/customerService/css/cs_main.css?ver=2" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/resources/customerService/css/cs_main.css?ver=1" rel="stylesheet"/>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapcs">
+		<!-- 로그인 기능 구현 시 삭제 -->
+		<div class="input_login">
+			<form id="temp_user" name="createForm" action="./login" method="POST">
+				<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
+				<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
+			</form>
+			<button id="login_btn">확인</button>
+		</div>
+		<div class="hello_login">${user_id }님 반갑습니다.</div>
+		<p id="hello">${user_id }</p>
+		<!-- 로그인 기능 구현 시 삭제 -->
         <div class="customerService">
             <h3>고객센터</h3>
             <p>무엇을 도와드릴까요?</p>
@@ -32,11 +43,14 @@
             <p>찾으시는 서비스가 없으신가요? <br>
             1:1문의를 이용해 보세요.</p>
             <div>
-	            <button type="submit" id="faqBtn01">문의하기</button>
-	            <button type="submit" id="faqBtn02">문의 내역보기</button>
+            	<form id="contact_us" action="./contactUs" method="POST"></form>
+            	<form id="contact_us_list_view" action="./contactUsListView" method="POST"></form>
+	            <button type="submit" id="cu_btn">문의하기</button>
+	            <button type="submit" id="culv_btn">문의 내역보기</button>
             </div>
         </div>
     </div>
     <jsp:include page="../main/footer.jsp"></jsp:include>
+    <script src="${pageContext.request.contextPath}/resources/customerService/js/cs_main.js?ver=3"></script>
 </body>
 </html>

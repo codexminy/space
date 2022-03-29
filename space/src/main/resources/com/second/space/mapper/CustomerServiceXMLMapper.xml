@@ -7,7 +7,29 @@
 	<select id="getCustomerServiceCategoryList" resultType="com.second.space.customerService.model.CsCategoryDTO">
 		SELECT * FROM cs_category
 	</select>
+	<!-- FAQ 리스트 -->
 	<select id="getCustomerServiceList" resultType="com.second.space.customerService.model.CustomerServiceDTO">
 		SELECT * FROM customer_service
+	</select>
+	<!-- 고객센터 문의내역 -->
+	<select id="getContactUs" resultType="com.second.space.customerService.model.ContactUsDTO">
+		SELECT * FROM contact_us ORDER BY cu_id DESC
+	</select>
+	<!-- 고객센터 문의하기 -->
+	<insert id="addContactUs" parameterType="com.second.space.customerService.model.ContactUsDTO">
+		INSERT INTO
+			contact_us (cu_id, cs_category_id, user_id, cu_title, cu_content)
+		VALUES 
+			(
+				contact_us_cu_id_seq.nextval, #{cs_category_id}, #{user_id}, #{cu_title}, #{cu_content}
+			)
+	</insert>
+	<!-- 고객센터 문의글 개수 -->
+	<select id="getContactUsCount" resultType="com.second.space.customerService.model.ContactUsCountDTO">
+		SELECT user_id, count(*) AS total from contact_us GROUP BY user_id
+	</select>
+	<!-- 고객센터 문의 글 답변 -->
+	<select id="getContactUsComments" resultType="com.second.space.customerService.model.ContactUsCommentsDTO">
+		SELECT * FROM contact_us_comments
 	</select>
 </mapper>

@@ -92,7 +92,6 @@ submit_btn.addEventListener('click', () => {
 	
 	if(c_board_create.user_id.value == ""){
 		alert("로그인을 해주세요");
-		/* 커뮤니티 메인으로 돌아가기 추가 */
 		go_back_main.submit();
 	} else if(c_category_select.value == "none") {
 		alert("카테고리를 선택해주세요");

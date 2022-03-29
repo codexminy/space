@@ -8,6 +8,7 @@
 #wrapContentList{
     width: 1200px;
     margin: 0 auto;
+    padding-top: 145px;
 }
 .customerService{
     width: 1200px;
@@ -75,10 +76,18 @@
     padding: 0 30px;
     float: left;
     margin-bottom: 26px;
+    overflow: auto;
 }
 .snb ul li{
     overflow: hidden;
     padding: 11px;
+}
+.snb ul li a {
+	font-size: 16px;
+}
+.snb ul li:hover a{
+	font-weight: bold;
+	color: #22007F;
 }
 .updown {
     border: 1px solid #D1D1D1;
@@ -86,9 +95,27 @@
     height: 414px;
     float: left;
 }
-.contentList table{
-	padding: 10px;
+.contentList {
+	height: 414px;
+	overflow: auto;
 }
-.contentList td{
+.contentList #cl_title,
+.contentList #cl_content,
+.contentList #cl_comment{
+	display: flex;
+	justify-content: space-between;
+}
+.contentList #cl_title ul li,
+.contentList #cl_content ul li,
+.contentList #cl_comment ul li {
+	display: inline-block;
 	padding: 10px;
+	font-size: 16px;
+	vertical-align: top;
+}
+.contentList #cl_title div,
+.contentList #cl_content div,
+.contentList #cl_comment div {
+	padding: 10px;
+	font-size: 13px;
 }
