@@ -31,8 +31,8 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].naDTO.notice_admin_id + " onclick=checking() /></td>";
+			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td>" + list[i].naDTO.acDTO.ac_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].naDTO.notice_admin_id + ")>" + list[i].naDTO.acDTO.ac_code + "&nbsp;" + list[i].naDTO.notice_admin_title + "</a></td>";
 			listData += "<td>" + formatDate(list[i].naDTO.notice_admin_date) + "</td>";
@@ -52,5 +52,11 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<jsp:include page="../common/js.jsp"/>
+	<script type="text/javascript">
+		$('.nav-admin').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-admin i, .nav-admin span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	</script>
 </body>
 </html>

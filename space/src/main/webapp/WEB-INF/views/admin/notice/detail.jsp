@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/notice.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -21,19 +22,24 @@
 				<ul></ul>
 			</div>
 			<div class="notice-content"></div>
-			<div class="btn-wrap">
-				<ul>
-					<li class="notice-update" onclick="goDetail(${dto.notice_id})">수정</li>
-					<li class="notice-delete">삭제</li>
-					<li class="notice-go-list">목록</li>
-				</ul>
-			</div>
+		</div>
+		<div class="btn-wrap">
+			<ul>
+				<li class="notice-update" onclick="goDetail(${dto.notice_id})">수정</li>
+				<li class="notice-delete">삭제</li>
+				<li class="notice-go-list">목록</li>
+			</ul>
 		</div>
 	</div>
 	<form id="form" action="${path }/admin/notice/update" method="get">
 		<input type="hidden" name="notice_id"/>
 	</form>
 	<script type="text/javascript">
+		$('.nav-notice').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-notice i, .nav-notice span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	
 		$(document).ready(function() {
 			getLoad();
 		});

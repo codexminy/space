@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Admin_categoryDTO;
 import com.second.space.admin.model.Contact_usDTO;
@@ -422,6 +423,46 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateNoticeAdmin(Notice_adminDTO dto) throws Exception {
 		return mapper.updateNoticeAdmin(dto);
+	}
+
+	@Override
+	public UserDTO getuserDetail(int user_id) throws Exception {
+		return mapper.getuserDetail(user_id);
+	}
+
+	@Override
+	public int updateUserDetail(UserDTO dto) throws Exception {
+		return mapper.updateUserDetail(dto);
+	}
+
+	@Override
+	public Contact_usDTO getContactUsDetail(int cu_id) throws Exception {
+		return mapper.getContactUsDetail(cu_id);
+	}
+
+	@Override
+	public int insertContactUsCmt(Contact_usDTO dto) throws Exception {
+		return mapper.insertContactUsCmt(dto);
+	}
+
+	@Override
+	public int deleteContactUsCmt(int cuc_comment_id) throws Exception {
+		return mapper.deleteContactUsCmt(cuc_comment_id);
+	}
+
+	@Override
+	public Contact_usDTO getContactUsCmt(int cu_id) throws Exception {
+		return mapper.getContactUsCmt(cu_id);
+	}
+
+	@Override
+	public int updateContactUsState(Contact_usDTO dto) throws Exception {
+		return mapper.updateContactUsState(dto);
+	}
+
+	@Override
+	public int updateCboardHidden(A_Community_boardDTO dto) throws Exception {
+		return mapper.updateCboardHidden(dto);
 	}
 }
 

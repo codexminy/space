@@ -52,6 +52,11 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<script type="text/javascript">
+		$('.nav-banner').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-banner i, .nav-banner span').css('color', '#22007F');
+		$('aside li:nth-child(3)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(3) .menuHover').css('color', '#22007F');
+	
 		getLoad();
 	</script>
 </body>

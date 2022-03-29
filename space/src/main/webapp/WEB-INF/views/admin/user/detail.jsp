@@ -1,76 +1,159 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<jsp:include page="../common/link.jsp"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/user.css">
 </head>
 <body>
-	<input type="text" id="sample4_postcode" placeholder="우편번호">
-<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-<span id="guide" style="color:#999;display:none"></span>
-<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+	<div class="user-detail-container">
+		<table class="common-table user-table">
+			<colgroup>
+				<col width="35%"/>
+				<col width="65%"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th colspan="2">회원상세 정보</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>아이디</td>
+					<td>${list.lilDTO.login_id }</td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td>${list.user_name }</td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td class="user-info">${list.user_nickname }</td>
+					<td class="user-update"><input type="text" name="user_nickname" value="${list.user_nickname }" /></td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td>${list.user_gender }</td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td>${list.user_address }</td>
+				</tr>
+				<tr>
+					<td>가입일</td>
+					<td><fmt:formatDate value="${list.user_join_date }" pattern="yyyy-MM-dd"/></td>
+				</tr>
+				<tr>
+					<td>팔로잉 수</td>
+					<td>${list.user_following }</td>
+				</tr>
+				<tr>
+					<td>팔로워 수</td>
+					<td>${list.user_followed }</td>
+				</tr>
+				<tr>
+					<td>이메일 수신여부</td>
+					<td>${list.user_check_email }</td>
+				</tr>
+				<tr>
+					<td>프로필 공개여부</td>
+					<td >${list.user_public_profile }</td>
+				</tr>
+				<tr>
+					<td>누적 신고 횟수</td>
+					<td>${list.user_reported }</td>
+				</tr>
+				<tr>
+					<td>탈퇴 여부</td>
+					<td>${list.user_delete }</td>
+				</tr>
+				<tr>
+					<td>정지 여부</td>
+					<td class="user-info">${list.user_ban }</td>
+					<td class="user-update">
+						<select name="user_ban">
+							<option value="N">N</option>
+							<option value="Y">Y</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>정지 시작일</td>
+					<td class="user-info"><fmt:formatDate value="${list.user_notify_start_date }" pattern="yyyy-MM-dd"/></td>
+					<td class="user-update"><input type="date" name="user_notify_start_date" value="${list.user_notify_start_date }" /></td>
+				</tr>
+				<tr>
+					<td>정지 종료일</td>
+					<td class="user-info"><fmt:formatDate value="${list.user_notify_end_date }" pattern="yyyy-MM-dd"/></td>
+					<td class="user-update"><input type="date" name="user_notify_end_date" value="${list.user_notify_end_date }" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="user-btn btn-wrap">
+			<ul class="user-info">
+				<li class="update" onclick="goUpdate()">회원정보 수정</li>
+				<li class="delete">회원정보 삭제</li>
+			</ul>
+			<ul class="user-update">
+				<li class="confirm" onclick="confirm()">적용</li>
+				<li class="cancel">취소</li>
+			</ul>
+		</div>
+	</div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
+	$('.user-update').css('display', 'none');
+
+    function cDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                var roadAddr = data.roadAddress;
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
-
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
-                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-                
-                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-                if(roadAddr !== ''){
-                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-                } else {
-                    document.getElementById("sample4_extraAddress").value = '';
-                }
-
-                var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("roadAddress").value = roadAddr;
+                document.getElementById("jibunAddress").value = data.jibunAddress;
             }
         }).open();
     }
+    
+    function goUpdate() {
+    	$('.user-info').css('display', 'none');
+    	$('.user-update').css('display', 'flex');
+    }
+    
+    function confirm() {
+    	const data = {
+   			user_nickname: $('input[name="user_nickname"]').val(),
+   			user_ban: $('select[name="user_ban"]').val(),
+   			user_notify_start_date: $('input[name="user_notify_start_date"]').val(),
+   			user_notify_end_date: $('input[name="user_notify_end_date"]').val()
+    	}
+
+    	$.ajax({
+    		url : '${path}/admin/user/user/user/${user_id}',
+    		type: 'PUT',
+    		data: JSON.stringify(data),
+			contentType: 'application/json',
+    		success : function(result) {
+    			alert('성공!');
+    			opener.parent.location.reload();
+    			window.close();
+    		}
+    	});
+    }
 </script>
 </html>
+
+
+
+
+
+
+

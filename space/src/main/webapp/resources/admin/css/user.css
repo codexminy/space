@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.user-detail-container {
+	padding: 10px;
+}
+
+.common-table td {
+	text-align: left;
+	padding: 10px;
+}
+
+.user-table td:first-child {
+	background-color: #22007F;
+	color: white;
+}
+
+.user_ban {
+	padding: 5px 10px;
+}
+
+input[name="user_nickname"] {
+	width: 100%;
+}
+
+input[name="user_nickname"], .user-update input, select {
+	padding: 8px 10px;
+}

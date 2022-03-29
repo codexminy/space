@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.banner-table td {
+	padding: 15px;
+}
+
+.banner-table td:first-child {
+	background-color: #22007F;
+	color: white;
+}
+
+.banner-table td:last-child {
+	text-align: left;
+}
+
+.banner-table input {
+    width: 100%;
+    padding: 10px;
+}
+
+.banner-table input[type="date"] {
+    width: auto;
+}
+
+.pic-img {
+	padding: 100px;
+    text-align: center;
+    background-color: lightgray;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.pic-img i {
+	font-size: 40px;
+}
+
+.pic-img p {
+	font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+

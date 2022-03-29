@@ -29,14 +29,14 @@
 		let listData = '';
 
 		for(let i=0; i<list.length; ++i) {
-			let dDay = new Date(list[i].na_end_date).getDate() - new Date().getDate();
+			let dDay = Math.ceil((new Date().getTime() - new Date(list[i].na_end_date).getTime()) / (1000*60*60*24));
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].na_id + " onclick=checking() /></td>";
+			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].na_id + ")>" + list[i].na_title + "</a></td>";
 			listData += "<td>" + list[i].na_name + "</td>";
 			listData += "<td>" + list[i].na_url + "</td>";
-			listData += "<td><div style='display: inline-block;'>D-"+ dDay +"</div>" + formatDate(list[i].na_start_date) + " ~ " + formatDate(list[i].na_end_date) + "</td>";
+			listData += "<td><span class='d-day'>D"+ dDay +"</span>" + " " + formatDate(list[i].na_start_date) + " ~ " + formatDate(list[i].na_end_date) + "</td>";
 			listData += "</tr>";
 		}
 		
@@ -53,6 +53,12 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<jsp:include page="../common/js.jsp"/>
+	<script type="text/javascript">
+		$('.nav-banner').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-banner i, .nav-banner span').css('color', '#22007F');
+		$('aside li:first-child').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:first-child .menuHover').css('color', '#22007F');
+	</script>
 </body>
 </html>
 

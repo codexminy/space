@@ -8,6 +8,7 @@ import com.second.space.board.model.PaymentsCategoryDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class UserDTO {
@@ -31,6 +32,10 @@ public class UserDTO {
 	private String user_public_profile;
 	private String user_delete;
 	private int user_reported;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_notify_start_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date user_notify_end_date;
 	private Login_id_listDTO lilDTO;
 	private Delete_accountDTO daDTO;
 	private PaymentsCategoryDTO pcDTO;
@@ -39,5 +44,4 @@ public class UserDTO {
 	private CommunityCategoryDTO ccDTO;
 	private Notice_adminDTO naDTO;
 	private Contact_usDTO cuDTO;
-	
 }

@@ -32,9 +32,9 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].acbDTO.c_board_id + " onclick=checking() /></td>";
-			listData += "<td><a href=javascript:goDetail(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
+			listData += "<td>" + list[i].rn + "</td>";
+			listData += "<td>" + list[i].lilDTO.login_id + "</td>";
 			listData += "<td>" + list[i].user_nickname + "</td>";
 			listData += "<td>" + list[i].ccDTO.c_category_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].acbDTO.c_board_id + ")>" + list[i].acbDTO.c_board_title + "</a></td>";
@@ -62,9 +62,14 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<script type="text/javascript">
-		function hiddenFunc(board_hidden, value, message) {
+		$('.nav-board').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-board i, .nav-board span').css('color', '#22007F');
+		$('aside li:nth-child(2)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(2) .menuHover').css('color', '#22007F');
+	
+		function hiddenFunc(c_board_hidden, value, message) {
 			$.ajax({
-				url : "${path}/admin/board/board/" + board_hidden + "/" + value,
+				url : "${path}/admin/board/c-board/" + c_board_hidden + "/" + value,
 				type: "PUT",
 				success : function(result) {
 					getLoad();

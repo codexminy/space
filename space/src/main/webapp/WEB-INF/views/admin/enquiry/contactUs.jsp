@@ -30,11 +30,18 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].cu_id + " onclick=checking() /></td>";
-			listData += "<td>" + list[i].cscDTO.cs_name + "</td>";
+			listData += "<td>" + list[i].rn + "</td>";
+			listData += "<td>" + list[i].cs_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].cu_id + ")>" + list[i].cu_title + "</a></td>";
 			listData += "<td>" + formatDate(list[i].cu_date) + "</td>";
+			
+			if(list[i].cu_state === 'Y') {
+				listData += "<td>완료</td>";
+			} else if(list[i].cu_state === 'N') {
+				listData += "<td>대기중</td>";
+			}
+			
 			listData += "</tr>";
 		}
 		
@@ -51,5 +58,11 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<jsp:include page="../common/js.jsp"/>
+	<script type="text/javascript">
+		$('.nav-contactUs').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-contactUs i, .nav-contactUs span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	</script>
 </body>
 </html>

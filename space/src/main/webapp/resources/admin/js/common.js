@@ -23,8 +23,6 @@ function getLoad(page) {
 
 			if(paging['prev']) {
 				pageData += '<li><a href=javascript:getLoad(' + (paging['startPage'] - 1)  + ')><i class="fa-solid fa-angle-left"></i></a></li>';
-			} else {
-				pageData += '<li><a><i class="fa-solid fa-angle-left"></i></a></li>';
 			}
 			
 			for(let i=paging['startPage']; i<=paging['endPage']; ++i) {
@@ -37,13 +35,15 @@ function getLoad(page) {
 			
 			if(paging['next']) {
 				pageData += '<li><a href=javascript:getLoad(' + (paging['endPage'] + 1)  + ')><i class="fa-solid fa-angle-right"></i></a></li>';
-			} else {
-				pageData += '<li><a><i class="fa-solid fa-angle-right"></i></a></li>';
 			}
 			
 			searchArea.html(searchData);
 			tableData.html(listData);
 			pagenation.html(pageData);
+			
+			if(list.length === 0) {
+				alert('검색결과가 없습니다.');
+			}
 		}
 	});
 }
@@ -124,8 +124,6 @@ function deleteCheck(tableName) {
 			}
 		});
 	}
-	
-	
 }
 
 

@@ -222,18 +222,18 @@
 	
 	<!-- 홈 - 통계 갯수 -->
 	<select id="getStatsCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM user_
+		SELECT COUNT(*) FROM user_ WHERE user_join_date BETWEEN sysdate-7 AND sysdate
 		UNION ALL
-		SELECT COUNT(*) FROM user_ WHERE user_delete = 'Y'
+		SELECT COUNT(*) FROM contact_us WHERE cu_date BETWEEN sysdate-7 AND sysdate
 		UNION ALL
-		SELECT COUNT(*) FROM board
+		SELECT COUNT(*) FROM board WHERE board_date BETWEEN sysdate-7 AND sysdate
 		UNION ALL
-		SELECT COUNT(*) FROM count_user_date
+		SELECT COUNT(*) FROM delete_account WHERE delete_date BETWEEN sysdate-7 AND sysdate
 	</select>
 	
 	<!-- 홈 - 배너 관리 리스트 -->
 	<select id="getNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
-		SELECT * FROM notification_ad WHERE ROWNUM BETWEEN 1 AND 4 ORDER BY na_end_date
+		SELECT * FROM notification_ad WHERE na_end_date > sysdate-1 ORDER BY na_end_date
 	</select>
 
 	<resultMap type="com.second.space.admin.model.Admin_categoryDTO" id="Admin_categoryDTO">
@@ -333,26 +333,6 @@
 	    <result column="c_board_hidden" property="c_board_hidden"/>
 	</resultMap>
 	
-	<resultMap type="com.second.space.admin.model.Cs_categoryDTO" id="Cs_categoryDTO">
-	    <result column="cs_category_id" property="cs_category_id"/>
-	    <result column="cs_name" property="cs_name"/>
-	</resultMap>
-	
-	<resultMap type="com.second.space.admin.model.Contact_usDTO" id="Contact_usDTO">
-		<result column="rn" property="rn"/>
-	    <result column="cu_id" property="cu_id"/>
-	    <result column="cs_category_id" property="cs_category_id"/>
-	    <result column="user_id" property="user_id"/>
-	    <result column="cu_title" property="cu_title"/>
-	    <result column="cu_content" property="cu_content"/>
-	    <result column="cu_img" property="cu_img"/>
-	    <result column="cu_date" property="cu_date"/>
-	    <result column="cu_state" property="cu_state"/>
-	    <result column="c_board_delete" property="c_board_delete"/>
-	    <result column="c_board_hidden" property="c_board_hidden"/>
-	    <collection property="cscDTO" resultMap="Cs_categoryDTO"/>
-	</resultMap>
-	
 	<resultMap type="com.second.space.admin.model.Notification_boardDTO" id="Notification_boardDTO">
 	    <result column="n_id" property="n_id"/>
 	    <result column="board_id" property="board_id"/>
@@ -389,6 +369,8 @@
  		<result column="user_public_profile" property="user_public_profile"/>
  		<result column="user_delete" property="user_delete"/>
  		<result column="user_reported" property="user_reported"/>
+ 		<result column="user_notify_start_date" property="user_notify_start_date"/>
+ 		<result column="user_notify_end_date" property="user_notify_end_date"/>
  		<collection property="lilDTO" resultMap="Login_id_listDTO"/>
  		<collection property="daDTO" resultMap="Delete_accountDTO"/>
  		<collection property="pcDTO" resultMap="PaymentsCategoryDTO"/>
@@ -419,7 +401,7 @@
 	                    WHERE na_id > 0 <include refid="bannerSearch"></include> 
 	                </if>
 					ORDER BY
-						na_end_date DESC
+						na_end_date
 				)
 		<![CDATA[
 				WHERE
@@ -600,6 +582,21 @@
    		]]>
 	</select>
 	
+	<!-- 회원 관리 - 회원 상세 정보 -->
+	<select id="getuserDetail" resultMap="UserDTO">
+		SELECT * FROM user_ INNER JOIN login_id_list USING(user_login_id) WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 회원 관리 - 회원 상세 정보 수정 -->
+	<update id="updateUserDetail">
+		UPDATE
+			user_
+		SET
+			user_nickname = #{user_nickname}, user_ban = #{user_ban}, user_notify_start_date = #{user_notify_start_date, jdbcType = DATE}, user_notify_end_date = #{user_notify_end_date, jdbcType = DATE}
+		WHERE
+			user_id = #{user_id}
+	</update>
+	
 	<!-- 회원 관리 - 목록 전체 갯수 -->
 	<select id="getUserTotal" resultType="int">
 		SELECT COUNT(*) FROM user_ INNER JOIN login_id_list USING(user_login_id)
@@ -624,6 +621,7 @@
 						delete_account da
 					WHERE
 						u.user_admin = 'N'
+						AND u.user_delete = 'Y'
 						AND u.user_login_id = lil.user_login_id
 						AND u.user_id = da.user_id
 						<if test="keyword != null">
@@ -641,7 +639,7 @@
 	
 	<!-- 회원 관리 - 탈퇴 회원 전체 갯수 -->
 	<select id="getWithdrawalTotal" resultType="int">
-		SELECT COUNT(*) FROM user_ INNER JOIN login_id_list USING(user_login_id) INNER JOIN delete_account USING(user_id)
+		SELECT COUNT(*) FROM user_ INNER JOIN login_id_list USING(user_login_id) INNER JOIN delete_account USING(user_id) WHERE user_delete = 'Y'
 		<if test="keyword != null">
             WHERE user_id > 0 <include refid="userSearch"></include> 
         </if>
@@ -756,6 +754,11 @@
 		UPDATE board SET board_hidden = #{board_hidden} WHERE board_id = #{board_id}
 	</update>
 	
+	<!-- 게시물 관리 - 커뮤니티 게시물 숨김 처리 -->
+	<update id="updateCboardHidden">
+		UPDATE community_board SET c_board_hidden = #{c_board_hidden} WHERE c_board_id = #{c_board_id}
+	</update>
+	
 	<!-- 관리자 공지 - 목록 리스트 -->
 	<select id="getAllNoticeAdminList" resultMap="UserDTO">
         SELECT
@@ -822,22 +825,19 @@
 	</update>
 	
 	<!-- 문의사항 - 1:1 문의 리스트 -->
-	<select id="getAllContactUsList" resultMap="Contact_usDTO">
+	<select id="getAllContactUsList" resultType="com.second.space.admin.model.Contact_usDTO">
 	        SELECT
-	        	rn, cs_name, cu_id, cu_title, cu_date
+	        	rn, cs_name, cu_id, cu_title, cu_date, cu_state
 	        FROM(
 		        SELECT
-		        	ROWNUM rn, cs_name, cu_id, cu_title, cu_date
+		        	ROWNUM rn, cs_name, cu_id, cu_title, cu_date, cu_state
 		        FROM(
 		        	SELECT
-		        		csc.cs_name, cu.cu_id, cu.cu_title, cu.cu_date
+		        		csc.cs_name, cu.cu_id, cu.cu_title, cu.cu_date, cu.cu_state
 					FROM
-						user_ u,
-				        contact_us cu,
-				        cs_category csc
+						user_ u, contact_us cu, cs_category csc
 					WHERE
-						cu.user_id=u.user_id
-	        			AND cu.cs_category_id=csc.cs_category_id
+						cu.user_id=u.user_id AND cu.cs_category_id=csc.cs_category_id
 	        			<if test="keyword != null">
 			                <include refid="contactUsSearch"></include> 
 			            </if>
@@ -858,6 +858,36 @@
             WHERE cu_id > 0 <include refid="contactUsSearch"></include> 
         </if>
 	</select>
+	
+	<!-- 문의사항 - 1:1 문의 상세 -->
+	<select id="getContactUsDetail" resultType="com.second.space.admin.model.Contact_usDTO">
+		SELECT
+		    cu.cu_id, lil.login_id, cu.cu_title, cu.cu_content, cu.cu_date, cu.cu_state, csc.cs_name
+		FROM
+		    user_ u, contact_us cu, cs_category csc, login_id_list lil
+		WHERE
+		    cu.user_id=u.user_id AND cu.cs_category_id=csc.cs_category_id AND u.user_login_id = lil.user_login_id AND cu.cu_id = #{cu_id}
+	</select>
+	
+	<!-- 문의사항 - 1:1 문의 상세 답변 -->
+	<select id="getContactUsCmt" resultType="com.second.space.admin.model.Contact_usDTO">
+		SELECT * FROM contact_us_comments WHERE cu_id = #{cu_id}
+	</select>
+	
+	<!-- 문의사항 - 1:1 문의 답변 추가 -->
+	<insert id="insertContactUsCmt">
+		INSERT INTO contact_us_comments(cuc_comment_id, cu_id, cuc_comment_content, user_id) VALUES(CONTACT_US_CUC_CMT_ID_SEQ.nextval, #{cu_id}, #{cuc_comment_content}, 1)
+	</insert>
+	
+	<!-- 문의사항 - 1:1 문의 답변 삭제 -->
+	<delete id="deleteContactUsCmt">
+		DELETE FROM contact_us_comments WHERE cuc_comment_id = #{cuc_comment_id}
+	</delete>
+	
+	<!-- 문의사항 - 1:1 문의 답변 완료,취소 처리 -->
+	<update id="updateContactUsState">
+		UPDATE contact_us SET cu_state = #{cu_state} WHERE cu_id = #{cu_id}
+	</update>
 	
 	<!-- 통계 - 일일 라벨 -->
 	<select id="getDailyLabel" resultType="java.lang.String">
@@ -1343,7 +1373,22 @@
 
 	<!-- 신고 관리 - 게시글 신고 승인 처리 -->
 	<update id="updateReported">
-		UPDATE user_ SET user_reported = user_reported + 1 WHERE user_id = #{user_id}
+		<selectKey keyProperty="user_reported" order="BEFORE" resultType="int">
+			SELECT user_reported FROM user_ WHERE user_id = #{user_id}
+		</selectKey>
+		UPDATE user_ SET user_reported = user_reported + 1, user_ban = 'Y', user_notify_start_date = sysdate,
+		<choose>
+			<when test="user_reported == 0">
+				user_notify_end_date = sysdate+7
+			</when>
+			<when test="user_reported == 1">
+				user_notify_end_date = sysdate+30
+			</when>
+			<when test="user_reported == 2">
+				user_notify_end_date = '9999-12-31'
+			</when>
+		</choose>
+		WHERE user_id = #{user_id}
 	</update>
 	
 	<!-- 신고 관리 - 장터 게시글 신고 승인 처리 -->
@@ -1358,7 +1403,7 @@
 	
 	<!-- 신고 관리 - 게시글 신고 승인 취소 처리 -->
 	<update id="updateCancelReported">
-		UPDATE user_ SET user_reported = user_reported - 1 WHERE user_id = #{user_id}
+		UPDATE user_ SET user_reported = user_reported - 1, user_ban = 'N', user_notify_start_date = null, user_notify_end_date = null WHERE user_id = #{user_id}
 	</update>
 	
 	<!-- 신고 관리 - 댓글 신고 승인, 반려 처리 -->
