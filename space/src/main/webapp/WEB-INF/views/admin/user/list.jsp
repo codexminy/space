@@ -33,9 +33,9 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].user_id + " onclick=checking() /></td>";
-			listData += "<td><a href=javascript:goTest(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
+			listData += "<td>" + list[i].rn + "</td>";
+			listData += "<td><a href=javascript:goUserDetail(" + list[i].user_id + ")>" + list[i].lilDTO.login_id + "</a></td>";
 			listData += "<td>" + list[i].user_nickname + "</td>";
 			listData += "<td>" + formatDate(list[i].user_join_date) + "</td>";
 			listData += "<td>" + list[i].user_address + "</td>";
@@ -58,8 +58,18 @@
 	</div>
 	<jsp:include page="../common/js.jsp"/>
 	<script type="text/javascript">
-		function goTest(id) {
-			window.open("${path }/admin/user/detail", "userDetail", "width = 500, height = 500");
+		$('.nav-user').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-user i, .nav-user span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	
+		function goUserDetail(id) {
+			var _width = '700';
+		    var _height = '800';
+		    var _left = Math.ceil(( window.screen.width - _width )/2);
+		    var _top = Math.ceil(( window.screen.height - _height )/2); 
+
+			window.open("${path }/admin/user/detail?user_id=" + id, "userDetail", "width=" + _width + ",height=" + _height + ",top=" + _top + ",left=" + _left);
 		}
 	</script>
 </body>

@@ -2,6 +2,7 @@ package com.second.space.mapper;
 
 import java.util.List;
 
+import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Admin_categoryDTO;
 import com.second.space.admin.model.Contact_usDTO;
@@ -178,8 +179,23 @@ public interface AdminXMLMapper {
 	public int deleteNoticeAdmin(int notice_admin_id); // 관리자 공지 - 관리자 글 삭제하기
 	
 	public int updateNoticeAdmin(Notice_adminDTO dto); // 관리자 공지 - 관리자 글 수정하기
+	
+	public UserDTO getuserDetail(int user_id); // 회원 관리 - 회원 상세 정보
+	
+	public int updateUserDetail(UserDTO dto); // 회원 관리 - 회원 상세 정보 수정
+	
+	public Contact_usDTO getContactUsDetail(int cu_id); // 문의사항 - 1:1 문의 상세
+	
+	public int insertContactUsCmt(Contact_usDTO dto); // 문의사항 - 1:1 문의 답변 추가
+	
+	public int deleteContactUsCmt(int cuc_comment_id); // 문의사항 - 1:1 문의 답변 삭제
+	
+	public Contact_usDTO getContactUsCmt(int cu_id); // 문의사항 - 1:1 문의 상세 답변
+	
+	public int updateContactUsState(Contact_usDTO dto); // 문의사항 - 1:1 문의 답변 완료,취소 처리
+	
+	public int updateCboardHidden(A_Community_boardDTO dto); // 게시물 관리 - 커뮤니티 게시물 숨김 처리
 }
-
 
 
 

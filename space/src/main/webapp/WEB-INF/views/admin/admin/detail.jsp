@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/notice.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -34,6 +35,11 @@
 		<input type="hidden" name="notice_admin_id"/>
 	</form>
 	<script type="text/javascript">
+		$('.nav-admin').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-admin i, .nav-admin span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	
 		$(document).ready(function() {
 			getLoad();
 		});

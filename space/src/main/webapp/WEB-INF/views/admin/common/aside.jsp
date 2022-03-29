@@ -7,12 +7,15 @@
 	String[] menu = (String[])request.getAttribute("menu");
 %>
 <aside>
+	<div class="img" style="padding: 25px 40px; height: 100px;">
+		<img src="${path }/resources/admin/space_white_logo.png" alt="우주장터 로고" style="width: 170px;"/>
+	</div>
 	<ul>
 		<% for(int i=0; i<link.length; ++i) { %>
 			<li>
 				<a href="${path }<%=link[i] %>">
-					<span><%=menu[i] %></span>
-					<span><i class="fa-solid fa-angle-right"></i></span>
+					<span class="menuHover"><%=menu[i] %></span>
+					<span><i class="fa-solid fa-angle-right menuHover"></i></span>
 				</a>
 			</li>
 		<% } %>

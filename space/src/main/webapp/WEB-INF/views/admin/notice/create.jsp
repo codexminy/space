@@ -10,6 +10,7 @@
 <jsp:include page="../common/link.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="../common/noticeFileLink.jsp"/>
+<link rel="styleSheet" href="${path }/resources/admin/css/notice.css">
 </head>
 <body>
 	<jsp:include page="../common/nav.jsp"/>
@@ -41,6 +42,11 @@
 		</div>
 	</div>
 	<script>
+		$('.nav-notice').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-notice i, .nav-notice span').css('color', '#22007F');
+		$('aside li:nth-child(2)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(2) .menuHover').css('color', '#22007F');
+	
 		$('.notice-create').on('click', () => {
 			const data = {
 				notice_title: $('input[name="notice_title"]').val(),

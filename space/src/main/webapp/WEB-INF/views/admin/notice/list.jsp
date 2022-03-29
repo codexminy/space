@@ -30,8 +30,8 @@
 
 		for(let i=0; i<list.length; ++i) {
 			listData += "<tr>";
-			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td><input type=checkbox name=chkBox value=" + list[i].notice_id + " onclick=checking() /></td>";
+			listData += "<td>" + list[i].rn + "</td>";
 			listData += "<td>" + list[i].ncDTO.noc_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].notice_id + ")>" + list[i].notice_title + "</a></td>";
 			listData += "<td>" + formatDate(list[i].notice_date) + "</td>";
@@ -51,6 +51,12 @@
 		<jsp:include page="../common/table.jsp"/>
 	</div>
 	<jsp:include page="../common/js.jsp"/>
+	<script type="text/javascript">
+		$('.nav-notice').css('backgroundColor', 'rgb(240,240,240)');
+		$('.nav-notice i, .nav-notice span').css('color', '#22007F');
+		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
+		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
+	</script>
 </body>
 </html>
 

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.answer-wrap {
+	margin: 20px 0;
+}
+
+.answer-wrap h2 {
+	margin-bottom: 10px;
+}
+
+.answer {
+	background-color: rgb(240,240,240);
+}
+
+.answer > div > ul {
+	display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.pa {
+	padding: 4px 0;
+}
+
+.answer-date {
+	display: flex;
+}
+
+.answer-date li {
+	padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
