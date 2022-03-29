@@ -1,0 +1,107 @@
+@charset "UTF-8";
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#wrapChat{
+	width: 1200px;
+	margin: 0 auto;
+}
+.chat{
+	width: 570px;
+    height: 745px;
+    border: 1.1px solid #000;
+    border-radius: 5px;
+}
+.header{
+    width: 570px;
+    height: 65px;
+    position: sticky;
+    padding: 7px;
+    text-align: center;
+}
+.header > *{
+    /* 가운데 정렬 */
+    line-height: 50px;
+    vertical-align: middle;
+}
+.header h1{
+    font-size: 16px;
+    padding-left: 5px;
+    color: #22007F;
+    font-weight: bold;
+    display: inline;
+}
+.main li:hover{
+    background-color: #E9EDFF;
+}
+a:visited, a:link{
+    color: gray;
+    text-decoration: none;
+}
+.main ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    list-style: none;
+}
+.main li{
+    flex-basis: 80px;
+    flex-shrink: 0;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+li > a{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin: 0px;
+}
+.img-box{
+    width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile-img{
+    object-fit: cover;
+}
+.main li .talk{
+    margin-left: 15px; 
+    flex-grow: 1;
+}
+.talk > *, time{
+    margin: 5px 0;
+}
+.friend-name{
+    font-weight: bold;
+    font-size: 14px;
+}
+.chat-content{
+    color: gray;
+    font-size: 12px;
+}
+.chat-status{
+    text-align: right;
+    vertical-align: top;
+}
+time{
+    display: block;
+    color: #707070;
+    font-size: 10px;
+}
+.chat-balloon{
+    /* 안읽은 메세지 표시 스타일 지정 */    
+    display:inline-block;
+    border: 1px solid red;
+    background-color: red;
+    border-radius: 10px;
+    font-size: 3px;
+    color: white;
+    font-weight: bold;
+    padding: 2px 6px;
+}

@@ -19,4 +19,25 @@ public class MainController {
 	public void footer() {
 		
 	}
+	@GetMapping("/company")
+	public void company() {
+		
+	}
+	@GetMapping("/recruitment")
+	public void recruitment() {
+		
+	}
+	@GetMapping("/ad")
+	public void ad() {
+		
+	}
+	@GetMapping("/personal")
+	public void personal() {
+		
+	}
+	@GetMapping("/terms")
+	public void terms() {
+		
+	}
+	
 }
