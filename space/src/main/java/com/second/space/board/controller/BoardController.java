@@ -31,11 +31,30 @@ public class BoardController {
 	
 	@Autowired
 	BoardServiceImpl boardService;
+		
+	@RequestMapping("/board/boardList")
+	public void boardList() {
+		
+	}
 	
+	@RequestMapping("/board/auctionPost")
+	public void auctionPost() {
+		
+	}
+	
+	@RequestMapping("/board/auctionView")
+	public void auctionView() {
+
+	}
 	
 	@RequestMapping("/board/boardIndex")
 	public void boardIndex(Model model) {
 		
+	}
+	
+	@RequestMapping("/board/boardVieww")
+	public void boardVieww() {
+//		★★★보드뷰가 안 먹혀서 임의로 하나 팠어요ㅠㅠ 뒤에 W 하나 더 있어요!!
 	}
 	
 	@RequestMapping("/board/boardPost")

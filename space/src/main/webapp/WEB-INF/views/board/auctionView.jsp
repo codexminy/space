@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반 상품 보기</title>
+<title>경매 상품 보기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/boardView.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/auctionView.css">
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -31,7 +31,11 @@
                         <h3>입력한 제목</h3>
                     </div>
                     <div class="product-price">
-                        <h3>가격</h3>
+                        <h3>최소 입찰가</h3>
+                        <h3>입력한 가격</h3>                                                    
+                        <h3>즉시 구매가</h3>
+                        <h3>입력한 가격</h3>                                                    
+                        <h3>현재 입찰가</h3>
                         <h3>입력한 가격</h3>                                                    
                     </div>
                     <div class="product-location">
@@ -116,6 +120,10 @@
         </div>
         <div class="buttons">
             <input type="button" value="목록" id="cancle"/>
+            <div class="bid">
+                <input type="text" name="auction_price" class="entry-auction-price" id="entry-auction-price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"/>
+                <input type="button" value="입찰하기" id="action-bid"/>
+            </div>
         </div>
     </form>
 </div>
@@ -154,5 +162,18 @@
         });
     }
 
+    function inputNumberFormat(obj) {
+        obj.value = comma(uncomma(obj.value));
+    }
+
+    function comma(str) {
+        str = String(str);
+        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    }
+
+    function uncomma(str) {
+        str = String(str);
+        return str.replace(/[^\d]+/g, '');
+    }
 </script>
 </html>

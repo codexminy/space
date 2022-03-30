@@ -30,180 +30,170 @@
             <div class="hot-items">
                 <div class="hot-items-text">
                     <h2>인기매물</h2>
-                    <p class="text"><a href="#">더보기 ></a></p>
+                    <p class="text"><a href="${pageContext.request.contextPath}/board/boardList">더보기 ></a></p>
                 </div>
             </div>
             <div class="cards-wrap">
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article> 
                 <article class="card">	                   
-                    <div class="card-photobox">
-                        <div class="card-photo">
-                            <div class="card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
-                            <div class="card-heart"><img src="${pageContext.request.contextPath}/resources/images/main/heart_full.png"></div>
-                        </div>
-                        <div class="card-textbox">
-                            <div class="card-text">
-                                <div class="card-title">상품이름</div>
-                                <div class="card-info">
-                                    <div class="card-price">10,000원</div>
-                                    <div class="card-region-name">경기도 구리시</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>            
+            		<div class="card-photobox">
+                		<div class="card-photo">
+                    		<div class="card-heart"></div>
+                		</div>
+                		<div class="card-textbox">
+                    		<div class="card-text">
+                        		<div class="card-title">상품이름</div>
+                        		<div class="card-info">
+                            		<div class="card-price">10,000원</div>
+                            		<div class="card-region-name">경기도 구리시</div>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+        		</article>                             
             </div>
             <div class="bottom-contents">
                 <div class="notice">
@@ -265,5 +255,25 @@
 	    }
 	  }
 	}
+	
+	let like = document.querySelectorAll(".card-heart");
+
+    for (let i=0; i < like.length; i++) {
+        like[i].addEventListener('click', function() {
+        this.classList.toggle('active');
+        });
+    }
+
+    function checkOnlyOne(element) {
+  
+  const checkboxes 
+      = document.querySelectorAll(".sort-by");
+  
+  checkboxes.forEach((cb) => {
+    cb.checked = false;
+  })
+  
+  element.checked = true;
+}
 </script>
 </html>

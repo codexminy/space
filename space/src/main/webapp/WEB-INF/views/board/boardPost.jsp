@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
@@ -7,277 +6,107 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board Post</title>
+<title>일반 상품 등록하기</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/boardPost.css">
 </head>
-<style>
-.top {
-	width: 1200px;
-	height: 200px;
-}
-.board_wrapper {
-	width: 1200px;
-	height : 1000px;
-	/* background-color: red; */
-
-}
-body {
-	display: flex;
-	justify-content: center; /*가로에서 가우데에 요소를 배치*/
-}
-.board_p {
-	width: 1200px;
-}
-.board_top {
-	display : flex;
-	width: 1200px;
-	height: 300px;
-	flex-flow: row wrap;
-	align-content: flex-start;
-}
-.board_img {
-	width: 25%;
-	height: 300px;
-	margin : 0 ;
-	flex-basis: auto; /* 기본값 */
-	cursor: pointer;
-	
-}
-.board_img > img {
-	width: 200px;
-	height: 200px;
-	margin-right: 0;
-	border-radius: 5px;
-	border : 1px solid gray;
-}
-.board_tag {
-	width: 15%;
-	flex-basis: auto; /* 기본값 */
-	margin-right: 0;
-}
-.board_tag > ul  {
-	margin-top: 43%;
-}
-.board_tag > ul > li {
-	margin-top: 30%;
-	font-size: 18px;
-	line-height: 18px;
-}
-ul { 
-	list-style: none;
-	text-align: center
-}
-li {
-	text-decoration: none;
-}
-.board_input {
-	width: 60%;
-}
-/* .board_input > form {
-	margin-top: 10%;
-} */
-/* .board_input> form > ul > li{
-	margin-top: 5%;
-	height: 30px;
-} */
-.board_input > ul > li{
-	margin-top: 5%;
-	height: 30px;
-}
-.category {
-	width: 30%;
-	height: 30px;
-	border-radius: 5px;
-	border : 1px solid gray;
-	text-align: center;
-	float: left;
-
-}
-.title {
-	width: 65%;
-	height: 25px;
-	border-radius: 5px;
-	border : 1px solid gray;
-	
-}
-.price {
-	width: 55%;
-	height: 25px;
-	border-radius: 5px;
-	border : 1px solid gray;
-	float: left;
-}
-#address {
-	width: 55%;
-	height: 25px;
-	border-radius: 5px;
-	border : 1px solid gray;
-	float: left;
-}
-.radio{
-	float: left;
-}
-.label {
-	float: left;
-}
-.board_middle {
-	width: 1200px;
-	height: 100px;
-	display: flex;
-}
-.img_div {
-	width: 80px;
-	height: 80px;
-	margin-right: 10px;
-	border : 1px solid gray;
-	border-radius: 5px;
-	background-color: #FFF092;
-}
-#upload_file {
-  	display: none; 
-}
-.upload_img{
-	width: 80px;
-	height: 80px;
-	border : 1px solid gray;
-	border-radius: 5px;
-	cursor: pointer;
-}
-.img_info {
-	display: flex;
-}
-.img_info > ul {
-	float: left;
-	padding-left: 0;
-}
-.img_info > ul > li {
-	text-align: left;
-	font-size: 10px;
-}
-.img_span {
-	width: 80px;
-	height: 80px;
-	border : 1px solid gray;
-	border-radius: 5px;
-	z-index: 999;
-}
-#star_p {
-	position: absolute;
-}
-.board_end {
-	display: left;
-	width: 1200px;
-	border-top: 1px solid gray;
-}
-.content {
-	width: 100%;
-	float: left;
-	display: left;
-	padding-left: 0;
-}
-.content > li{
-	text-align: left;
-}
-.content > li > textarea {
-	width: 100%;
-	text-align: left;
-	color: gray;
-	resize: none;
-}
-input::placeholder {
-	color : gray;
-	opacity: 1;
-	text-align: left;
-}
-</style>
 <body>
-	<div>
-		<div class="top">top영역</div>
-		<div class="board_wrapper">
-			<p class="board_p">● 일반상품 등록하기</p>
-			<form action="./boardView" method="post" id="board_form" enctype="multipart/form-data">
-			<!-- ★★★★★★user_id 가져와서 value에 넣어줘야함 !! ★★★★★★★★★-->
-			<input type="hidden" name="user_id" value="2" />
-			<div class="board_top">
-				<div class="board_img">
-					<p>기본정보</p>
-					<img alt="첨부파일이미지" src="${pageContext.request.contextPath}/resources/images/board/post.png" id="postimg" />
-					<input type="file"  id="upload_file" name="upfile" multiple="multiple"  />
-					<input type="hidden" name="main_img" id="main_img"/>
-				</div>
-				<div class="board_tag">
-					<ul>
-						<li>제목</li>
-						<li>가격</li>
-						<li>거래지역</li>
-					</ul>
-				</div>
-				<div class="board_input">
-
-						<ul>
-							<li>
-								<select name="p_category_id" id="p_category_id" class="category">
-									<option>카테고리</option>
-									<c:forEach items="${categoryList }" var="list">
-										<option value="${list.p_category_id}">${list.p_category_name }</option>
-									</c:forEach>
-								</select>
-								<input type="text" name="board_title" class="title"/>
-							</li>
-							<li>
-								<input type="text" name="board_price" class="price" id="price"  pattern="[0-9]+"/>
-								<div>
-									<input type="checkbox" name="board_trade_type" value="give_away" class="radio" id="give_away"/>
-									<label for="board_trade_type" class="label" >무료나눔</label>
-								</div>
-							</li>
-							<li>
-								<input type="text" value="${address }" id="address" />
-								<input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery"/>
-								<label for="board_trade_type" class="label" >택배</label>
-								<input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" />
-								<label for="board_trade_type" class="label" >직거래</label>
-							</li>
-						</ul>
-				</div>
-			</div>
-			<div class="board_middle">
-				<div class="img_div" id="img_div1"></div>
-				<div class="img_div" id="img_div2"></div>
-				<div class="img_div" id="img_div3"></div>
-				<div class="img_div" id="img_div4"></div>
-				<div class="img_div" id="img_div5"></div>
-				<div class="img_div" id="img_div6"></div>
-			</div>
-			<div class="img_info">
-				<ul>
-					<li>- 이미지는 등록 순서대로 첨부되며, 클릭하여 대표 이미지를 변경할 수 있습니다.</li>
-					<li>- 최대 6장까지 등록이 가능합니다.</li>
-					<li>- jpg,jpeg,png 확장자만 등록이 가능합니다.</li>
-					<li>- 규정에 위배되는 이미지는 등록시 게시글이 제한 될 수 잇으며 추후 발견시 무통보 삭제 및 제재를 받으실 수 있습니다.</li>
-				</ul>
-			</div>
-			<div class="board_end">
-				<ul class="content">
-					<li>상품 설명</li>
-					<li>
-						<textarea rows="20"  name="board_content" id="board_content" 
-						placeholder="상품 설명을 입력해주세요.&#10;상품에 대한 자세한 설명은 빠른 거래에 도움을 줍니다.&#10;가품 및 온라인 거래 금지 품목 거래시 게시가 제한 될 수 있으며,&#10;현행법에 의거하여 처벌 받으실 수 있습니다.&#10;자세한 사항은 공지사항을 확인해주세요!"></textarea>
-					</li>
-				</ul>				
-			</div>
-			<div>
-				<input type="button" value="등록" id="submit_btn"/>
-						<button>취소</button>
-			</div>
-					</form>
-		</div>
-		<div>
-			푸터영역
-		</div>
+<jsp:include page="../main/header.jsp"/>
+<div class="board-wrapper">
+	<h2>● 일반 상품 등록하기</h2>
+	<form action="./boardView" method="post" id="board_form" enctype="multipart/form-data">
+	    <input type="hidden" name="user_id" value="2" />
+	    <div class="board-top">
+	        <h2>기본 정보</h2>
+	        <div class="prouct-info">
+	            <div class="board-img"  id="postimg">
+	                <img src="${pageContext.request.contextPath}/resources/images/board/camera.png" alt="첨부파일이미지">
+	                <p>이미지 등록</p>
+	                <input type="file"  id="upload_file" name="upfile" multiple="multiple"  />
+		<input type="hidden" name="main_img" id="main_img"/>
+	            </div>
+	            <div class="board-input">
+	                <div class="product-title">
+	                    <h3>제목</h3>
+	                        <select name="p_category_id" id="p_category_id" class="category">
+	                            <option>카테고리</option>
+	                            <c:forEach items="${categoryList }" var="list">
+	                                <option value="${list.p_category_id}">${list.p_category_name }</option>
+	                            </c:forEach>
+	                        </select>
+	                    <input type="text" name="board_title" class="title"/>
+	                </div>
+	                <div class="product-price">
+	                    <h3>가격</h3>
+	                    <input type="text" name="board_price" class="price" id="price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"/>
+	                    <div class="chkbox">
+	                        <input type="checkbox" name="board_trade_type" value="give_away" class="radio" id="give_away"/>
+	                        <label for="give_away" class="label" >무료나눔</label>
+	                    </div>
+	                </div>
+	                <div class="product-location">
+	                    <h3>거래 지역</h3>
+	                    <input type="text" value="${address }" id="address" />
+	                        <div class="chkbox">
+	                            <input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery"/>
+	                            <label for="delivery" class="label" >택배</label>
+	                            <input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" />
+	                            <label for="direct" class="label" >직거래</label>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="board-middle">
+	            <div class="img_div" id="img_div1"></div>
+	            <div class="img_div" id="img_div2"></div>
+	            <div class="img_div" id="img_div3"></div>
+	            <div class="img_div" id="img_div4"></div>
+	            <div class="img_div" id="img_div5"></div>
+	            <div class="img_div" id="img_div6"></div>
+	            <div id="star_p"><img src="${pageContext.request.contextPath}/resources/images/board/star_full.png"></div>
+	        </div>
+	        <div class="img_info">
+	            <ul>
+	                <li>- 이미지는 등록 순서대로 첨부되며, 클릭하여 대표 이미지를 변경할 수 있습니다.</li>
+	                <li>- 최대 6장까지 등록이 가능합니다.</li>
+	                <li>- JPG, JPEG, PNG 확장자만 등록이 가능합니다.</li>
+	                <li>- 규정에 위배되는 이미지는 등록시 게시글이 제한 될 수 있으며 추후 발견시 무통보 삭제 및 제재를 받으실 수 있습니다.</li>
+	            </ul>
+	        </div>
+	        <div class="board_end">
+	            <h2>상품 설명</h2>
+	            <div class="content">
+	                <textarea rows="20"  name="board_content" id="board_content" 
+	                placeholder="상품 설명을 입력해주세요.
+	                &#10;상품에 대한 자세한 설명은 빠른 거래에 도움을 줍니다.&#10;가품 및 온라인 거래 금지 품목 거래시 게시가 제한 될 수 있으며,&#10;현행법에 의거하여 처벌 받으실 수 있습니다.
+	                &#10;자세한 사항은 공지사항을 확인해주세요!"></textarea>
+	            </div>
+	            <div class="buttons">
+	                <input type="button" value="등록" id="submit_btn"/>
+	                <input type="button" value="취소" id="cancle" onclick="location.href='${pageContext.request.contextPath}/board/boardList'"/>
+	            </div>
+	        </div>
+	    </form>
 	</div>
-
+<jsp:include page="../main/footer.jsp"/>
 </body>
 <script type="text/javascript">
+
+/*가격 천 단위 콤마(,) 설정*/
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
 
 /*체크박스 설정*/
 const give_away = document.getElementById("give_away");
@@ -457,8 +286,5 @@ submit_btn.addEventListener('click', (e) => {
 	}
 	
 });
-
-
-
 </script>
 </html>
