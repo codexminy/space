@@ -33,12 +33,7 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapContentList">
         <div class="customerService">
-            <h3>고객센터</h3>
-            <p>무엇을 도와드릴까요?${val }</p>
-            <div class="cs-search">
-                <input class="search-bar-input" type="search">  
-                <i class="fas fa-search"></i>
-            </div>
+        	<img src="${pageContext.request.contextPath}/resources/images/customerService/cs_banner.png" width="1200px"/>
         </div>
         <div class="client">
             <h3 style="font-size: 22px; font-weight:bold;">1:1 문의하기</h3>

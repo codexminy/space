@@ -19,12 +19,7 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapFAQ">
         <div class="customerService">
-            <h3>고객센터</h3>
-            <p>무엇을 도와드릴까요?</p>
-            <div class="cs-search">
-                <input class="search-bar-input" type="search">  
-                <i class="fas fa-search"></i>
-            </div>
+        	<img src="${pageContext.request.contextPath}/resources/images/customerService/cs_banner.png" width="1200px"/>
         </div>
         <div class="FAQ">
             <h3>자주 묻는 질문</h3>
