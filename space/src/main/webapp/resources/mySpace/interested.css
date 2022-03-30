@@ -78,8 +78,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .myspace-card:nth-child(5n) {
@@ -89,13 +90,36 @@
 .myspace-card-photo {
     width: 220px;
     height: 220px;
+    background-image: url('../../resources/images/board/product_image.png');
+    background-size: cover;
     border: 1px solid #707070;
     border-radius: 25px;
+    position: relative;
 }
 
-.myspace-card-photo-img > img{
-    width: 220px;
-    height: 220px;
+.card-heart {
+    position: absolute;
+    width: 30px;
+    height: 27px;
+    background-image: url('../../resources/images/board/heart_full.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.card-heart.active {
+    position: absolute;
+    width: 30px;
+    height: 27px;
+    background-image: url('../../resources/images/board/heart_empty.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    right: 10px;
+    bottom: 10px;
 }
 
 .myspace-card-textbox {

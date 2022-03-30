@@ -50,6 +50,8 @@
 		$('aside li:nth-child(1)').css('backgroundColor', 'rgb(240,240,240)');
 		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
 	
+		
+		
 		$(document).ready(function() {
 			getLoad();
 			getCmt();
@@ -60,12 +62,17 @@
 				cu_id: id,
 				cuc_comment_content: $('textarea[name="cuc_comment_content"]').val(),
 			};
-
+			
+			if($('.answer').html() != '') {
+				alert('답변은 1개만 등록할 수 있습니다.');
+				return;
+			}
+			
 			if($('.summernote').summernote('isEmpty')) {
 				alert('내용을 입력해주세요!');
 				return;
 			}
-			
+
 			if(confirm('답변을 등록하시겠습니까?')) {
 				$.ajax({
 					url : "${path}/admin/enquiry/enquiry/contactUs/" + id + "/Y",

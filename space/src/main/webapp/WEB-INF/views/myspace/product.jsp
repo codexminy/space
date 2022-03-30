@@ -30,7 +30,7 @@
 	<div class="myspace-cards-wrap">
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -44,7 +44,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -58,7 +58,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -72,7 +72,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -86,7 +86,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -100,7 +100,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">
@@ -114,7 +114,7 @@
 	    </article>                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"><img src="/space/mainpage/images/images/jpg" alt="상품사진"></div>
+	            <div class="myspace-card-photo-img"></div>
 	        </div>
 	        <div class="myspace-card-textbox">
 	            <div class="myspace-card-text">

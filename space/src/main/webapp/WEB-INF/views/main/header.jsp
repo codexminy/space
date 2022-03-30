@@ -21,7 +21,7 @@
 	            <div class="navbar-header-right">
 	                <a href="${pageContext.request.contextPath}/admin/home">관리자</a>
 	                <a href="${pageContext.request.contextPath}/user_/login">로그인/회원가입</a>
-	                <a href="${pageContext.request.contextPath}/customerService/customer">고객센터</a>
+	                <a href="${pageContext.request.contextPath}/customerService/main">고객센터</a>
 	            </div>
 	        </nav>
 		</div>           
@@ -31,18 +31,18 @@
 					<div class="dropdown">
                        <img src="${pageContext.request.contextPath}/resources/images/main/menu.png" class="dropbtn" onclick="dropdowmMenu()"></img>
                           <div id="dropMenu" class="dropdown-content">
-                              <div class="category-box"><a href="#">인기매물</a></div>
-                              <div class="category-box"><a href="#">디지털</a></div>
-                              <div class="category-box"><a href="#">가전</a></div>
-                              <div class="category-box"><a href="#">가구</a></div>
-                              <div class="category-box"><a href="#">패션</a></div>
-                              <div class="category-box"><a href="#">스포츠</a></div>
-                              <div class="category-box"><a href="#">문화</a></div>
-                              <div class="category-box"><a href="#">취미</a></div>
-                              <div class="category-box"><a href="#">미용</a></div>
-                              <div class="category-box"><a href="#">반려동물</a></div>
-                              <div class="category-box"><a href="#">기타</a></div>
-                              <div class="category-box"><a href="#">커뮤니티</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">인기매물</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">디지털</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">가전</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">가구</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">패션</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">스포츠</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">문화</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">취미</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">미용</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">반려동물</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">기타</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">커뮤니티</a></div>
                           </div>
 					</div>
 					<div class="space-logo"><a href="${pageContext.request.contextPath}/main/space"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px"></a></div>
@@ -57,8 +57,8 @@
                                 <li><img src="${pageContext.request.contextPath}/resources/images/main/board.png" class="dropbtn" onclick="dropdownSell()"></li>
                                 <li class="dropbtn" onclick="dropdownSell()">판매하기</li>
                                 <div id="dropSell" class="dropdown-content">
-                                    <div class="category-box"><a href="#">일반 상품</a></div>
-                                    <div class="category-box"><a href="#">경매 상품</a></div>
+                                    <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardPost">일반 상품</a></div>
+                                    <div class="category-box"><a href="${pageContext.request.contextPath}/board/auctionPost">경매 상품</a></div>
                                 </div>
                             </div>
 	  	                    <div class="gnb-button-store" href="${pageContext.request.contextPath}/myspace/product">

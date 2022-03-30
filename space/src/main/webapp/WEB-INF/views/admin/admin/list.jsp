@@ -36,6 +36,7 @@
 			listData += "<td>" + list[i].naDTO.acDTO.ac_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].naDTO.notice_admin_id + ")>" + list[i].naDTO.acDTO.ac_code + "&nbsp;" + list[i].naDTO.notice_admin_title + "</a></td>";
 			listData += "<td>" + formatDate(list[i].naDTO.notice_admin_date) + "</td>";
+			listData += "<td>" + list[i].naDTO.notice_admin_view + "</td>";
 			listData += "</tr>";
 		}
 		

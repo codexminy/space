@@ -77,6 +77,10 @@ aside li a span, aside li a span i {
 	color: white;
 }
 
+aside i {
+	float: right;
+}
+
 .nav {
 	display: flex;
     justify-content: space-between;
@@ -127,6 +131,7 @@ aside li a span, aside li a span i {
 
 .title {
 	font-size: 25px;
+	margin-top: 25px;
 	margin-bottom: 20px;
 }
 
@@ -202,7 +207,7 @@ table tr:hover {
 }
 
 .common-table td {
-	padding: 5px;
+	padding: 10px 5px;
 	text-align: center;
 }
 

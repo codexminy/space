@@ -22,13 +22,13 @@
 				<ul></ul>
 			</div>
 			<div class="notice-content"></div>
-		</div>
-		<div class="btn-wrap">
-			<ul>
-				<li class="notice-update" onclick="goDetail(${dto.notice_id})">수정</li>
-				<li class="notice-delete">삭제</li>
-				<li class="notice-go-list">목록</li>
-			</ul>
+			<div class="btn-wrap">
+				<ul>
+					<li class="notice-update" onclick="goDetail(${dto.notice_id})">수정</li>
+					<li class="notice-delete">삭제</li>
+					<li class="notice-go-list">목록</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<form id="form" action="${path }/admin/notice/update" method="get">

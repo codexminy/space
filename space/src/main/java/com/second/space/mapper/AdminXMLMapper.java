@@ -195,6 +195,10 @@ public interface AdminXMLMapper {
 	public int updateContactUsState(Contact_usDTO dto); // 문의사항 - 1:1 문의 답변 완료,취소 처리
 	
 	public int updateCboardHidden(A_Community_boardDTO dto); // 게시물 관리 - 커뮤니티 게시물 숨김 처리
+	
+	public int updateNoticeAdminView(int notice_admin_id); // 관리자 공지 - 조회수 증가
+	
+	public int deleteUser(int user_id); // 회원 관리 - 회원 삭제
 }
 
 

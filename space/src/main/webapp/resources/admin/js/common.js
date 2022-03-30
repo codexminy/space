@@ -40,10 +40,6 @@ function getLoad(page) {
 			searchArea.html(searchData);
 			tableData.html(listData);
 			pagenation.html(pageData);
-			
-			if(list.length === 0) {
-				alert('검색결과가 없습니다.');
-			}
 		}
 	});
 }
