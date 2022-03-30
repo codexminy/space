@@ -66,13 +66,15 @@
 						 -->
 						<p class='c_board_content'>${c_board_list.c_board_content }</p>
 					</div>
+					<hr />
 					<ul class='c_board_option'>
 						<!-- 
 						<li class='view_report'>신고하기
 							<p class='data_board_id'>${c_board_list.c_board_id }</p>
 						</li>
 						 -->
-						<li class='view_comment'>댓글보기(
+						<li><img src="${pageContext.request.contextPath}/resources/images/community/empathy.png "width="20px" height="18px">공감하기</li>
+						<li class='view_comment'><img src="${pageContext.request.contextPath}/resources/images/community/spacetalk.png" width="20px" height="18px">댓글
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
 							<c:when test="${c_comment_count.c_board_id eq c_board_list.c_board_id }">
@@ -80,7 +82,7 @@
 							</c:when>
 							</c:choose>	
 							</c:forEach>
-						)</li>
+						</li>
 					</ul>
 					<div class='c_comment'>
 						<hr />

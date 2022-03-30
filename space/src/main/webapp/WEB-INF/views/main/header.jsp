@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>header.jsp</title>
 <script src="https://kit.fontawesome.com/ff32eb5689.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/reset.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/header.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 		<div id="navbar-box">
 			<nav class="navbar">
 				<div class="navbar-header-left">
-	                <a href="#">북마크</a>
+	                <a href="javascript:bookMark('타이틀', 'http://localhost:8090/space/main/space')">북마크</a>
 	            </div>
 	            <div class="navbar-header-right">
 	                <a href="${pageContext.request.contextPath}/admin/home">관리자</a>
@@ -115,5 +115,32 @@ window.onclick = function(event) {
     }
   }
 }
+</script>
+<script type="text/javascript">
+function bookMark(title,url) { 
+   // Internet Explorer
+   if(document.all)
+   {
+       window.external.AddFavorite(url, title); 
+   }
+   // Google Chrome
+   else if(window.chrome){
+      alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+   }
+   // Firefox
+   else if (window.sidebar) // firefox 
+   {
+       window.sidebar.addPanel(title, url, ""); 
+   }
+   // Opera
+   else if(window.opera && window.print)
+   { // opera 
+      var elem = document.createElement('a'); 
+      elem.setAttribute('href',url); 
+      elem.setAttribute('title',title); 
+      elem.setAttribute('rel','sidebar'); 
+      elem.click(); 
+   }
+} 
 </script>
 </html>

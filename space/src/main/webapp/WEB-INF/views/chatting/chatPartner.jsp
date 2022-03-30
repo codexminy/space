@@ -15,7 +15,13 @@
                 <ul id="profile-detail01">
                     <li class="profile-detail01-title">판매상품</li>
                     <span>219</span>
-                    <span>★★★★☆</span>
+                    <span>
+                    	<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_full.png" width="13px" height="13px">
+                    	<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_full.png" width="13px" height="13px">
+                    	<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_full.png" width="13px" height="13px">
+                    	<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_full.png" width="13px" height="13px">
+                    	<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_empty.png" width="13px" height="13px">
+                    </span>
                     <li class="more"><a href="">></a></li>
                 </ul>
                 <ul id="profile-detail02">

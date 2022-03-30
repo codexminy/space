@@ -38,8 +38,8 @@ body{
 main {
 	width:1200px;
 	background-color: #fff;
-          height: 100%;
-          margin: 0 auto;
+    height: 100%;
+    margin: 0 auto;
 }
 #hello {
 	display:none;
@@ -145,8 +145,8 @@ main {
 }
 .c_board > .c_board_option {
 	font-size: 16px;
-	margin: 20px;
-	text-align: right;
+	margin: 20px 0;
+	text-align: left;
 }
 .c_board > .c_board_option > li {
 	display:inline-block;

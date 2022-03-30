@@ -139,8 +139,8 @@ main {
 */
 .c_board > .c_board_option {
 	font-size: 16px;
-	margin: 20px;
-	text-align: right;
+	margin: 20px 0;
+	text-align: left;
 }
 .c_board > .c_board_option > li {
 	display:inline-block;
@@ -234,7 +234,7 @@ main {
 	float: left;
 	margin: 0 10px 10px 20px;
 	border: 1px solid #999;
-	border-radius: 9999px;
+	border-radius: 5px;
 	text-align: center;
 	line-height: 60px;
 	overflow:hidden;
@@ -246,6 +246,7 @@ main {
 	border: 1px solid #555;
 	float:right;
 	margin-right: 20px;
+	border:none;
 }
 .reply_btn,
 .rereply_btn {
@@ -254,7 +255,15 @@ main {
 	height: 30px;
 	border: 1px solid #555;
 	float:right;
+	border:none;
 }
 .active {
 	display: block;
+}
+.reply_form > .reply_write_form >.reply_textarea,
+.rereply_form > .rereply_write_form > .reply_textarea,
+.mycomment > .c_comment_write > .c_comment_textarea{
+	border:2px solid #22007F;
+	outline-color:#22007F;
+	border-radius: 5px;
 }
