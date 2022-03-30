@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="chart-wrap">
 			<div class="chartTitle">
-				<h2>일일 방문자&amp;게시물 수</h2>
+				<h2>일일 방문자&amp;게시물</h2>
 			</div>
 			<div class="visitChart">
 				<canvas id="visitChart"></canvas>
@@ -94,7 +94,7 @@
 			var visitChart, visitConfig;
 
 			$.ajax({
-				url : "${path}/admin/page/stats/stats",
+				url : "${path}/admin/stats/stats/stats",
 				type : "GET",
 				success : function(re) {
 					list = [
@@ -173,7 +173,7 @@
 			const statsContent = ["신규 회원", "탈퇴 회원", "신규 게시물", "오늘 방문자수"];
 			
 			$.ajax({
-				url : "${path}/admin/page/home",
+				url : "${path}/admin/home/home",
 				type : "GET",
 				success : function(result) {
 					const notify = result['notify'];

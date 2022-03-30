@@ -32,8 +32,8 @@ public class AdminController {
 	private static String noticeTitle = "공지사항";
 	private static String[] noticeMenu = {"목록", "신규 등록"};
 	private static String[] noticeLink = {"/admin/notice/list", "/admin/notice/create"};
-	private static String[] noticeWidth = {"3%", "3%", "10%", "60%", "10%"};
-	private static String[] noticeHead = {selectAllBox(), "번호", "분류", "제목", "등록일"};
+	private static String[] noticeWidth = {"3%", "3%", "10%", "60%", "10%", "5%"};
+	private static String[] noticeHead = {selectAllBox(), "번호", "분류", "제목", "등록일", "조회수"};
 	private static String contactUsTitle = "문의사항";
 	private static String[] contactUsMenu = {"1:1 문의"};
 	private static String[] contactUsLink = {"/admin/enquiry/contactUs"};

@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>정지 여부</td>
-					<td class="user-info">${list.user_ban }</td>
+					<td class="user-info user-ban-info">${list.user_ban }</td>
 					<td class="user-update">
 						<select name="user_ban">
 							<option value="N">N</option>
@@ -86,23 +86,23 @@
 				<tr>
 					<td>정지 시작일</td>
 					<td class="user-info"><fmt:formatDate value="${list.user_notify_start_date }" pattern="yyyy-MM-dd"/></td>
-					<td class="user-update"><input type="date" name="user_notify_start_date" value="${list.user_notify_start_date }" /></td>
+					<td class="user-update"><input type="date" name="user_notify_start_date" value="<fmt:formatDate value="${list.user_notify_start_date }" pattern="yyyy-MM-dd"/>"/></td>
 				</tr>
 				<tr>
 					<td>정지 종료일</td>
 					<td class="user-info"><fmt:formatDate value="${list.user_notify_end_date }" pattern="yyyy-MM-dd"/></td>
-					<td class="user-update"><input type="date" name="user_notify_end_date" value="${list.user_notify_end_date }" /></td>
+					<td class="user-update"><input type="date" name="user_notify_end_date" value="<fmt:formatDate value="${list.user_notify_end_date }" pattern="yyyy-MM-dd"/>"/></td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="user-btn btn-wrap">
 			<ul class="user-info">
 				<li class="update" onclick="goUpdate()">회원정보 수정</li>
-				<li class="delete">회원정보 삭제</li>
+				<li class="delete" onclick="goDelete()">회원정보 삭제</li>
 			</ul>
 			<ul class="user-update">
-				<li class="confirm" onclick="confirm()">적용</li>
-				<li class="cancel">취소</li>
+				<li class="confirm" onclick="applyUserInfo()">적용</li>
+				<li class="cancel" onclick="cancel()">취소</li>
 			</ul>
 		</div>
 	</div>
@@ -126,27 +126,81 @@
     function goUpdate() {
     	$('.user-info').css('display', 'none');
     	$('.user-update').css('display', 'flex');
+    	$('select[name="user_ban"]').val($('.user-ban-info').text());
     }
     
-    function confirm() {
+    function goDelete() {
+    	if(confirm('회원정보를 삭제하시겠습니까?')) {
+	    	$.ajax({
+	    		url : '${path}/admin/user/user/user/${user_id}',
+	    		type: 'DELETE',
+	    		success : function(result) {
+	    			alert('회원정보 삭제가 완료되었습니다.');
+	    			opener.parent.location.reload();
+	    			window.close();
+	    		}
+	    	});
+    	}
+    }
+    
+    function applyUserInfo() {
     	const data = {
    			user_nickname: $('input[name="user_nickname"]').val(),
    			user_ban: $('select[name="user_ban"]').val(),
    			user_notify_start_date: $('input[name="user_notify_start_date"]').val(),
    			user_notify_end_date: $('input[name="user_notify_end_date"]').val()
     	}
+    	
+    	if(data.user_nickname === '') {
+    		alert('닉네임을 입력해주세요.');
+    		return;
+    	}
+    	
+    	if(data.user_ban === 'N' && (data.user_notify_start_date != '' || data.user_notify_end_date != '')) {
+    		alert('정지 날짜를 설정할 경우 정지 여부를 Y로 변경해야 합니다.');
+    		return;
+    	}
+    	
+    	if(data.user_ban === 'Y' && data.user_notify_start_date === '') {
+    		alert('시작 날짜를 설정해주세요.');
+    		return;
+    	} else if(data.user_ban === 'Y' && data.user_notify_end_date === '') {
+    		alert('종료 날짜를 설정해주세요.');
+    		return;
+    	}
+    	
+    	if(data.user_ban === 'Y' && data.user_notify_start_date > data.user_notify_end_date) {
+    		alert('시작 날짜는 종료 날짜보다 먼저 시작해야 합니다.');
+    		return;
+    	}
 
-    	$.ajax({
-    		url : '${path}/admin/user/user/user/${user_id}',
-    		type: 'PUT',
-    		data: JSON.stringify(data),
-			contentType: 'application/json',
-    		success : function(result) {
-    			alert('성공!');
-    			opener.parent.location.reload();
-    			window.close();
-    		}
-    	});
+    	if(confirm('회원정보를 수정하시겠습니까?')) {
+	    	$.ajax({
+	    		url : '${path}/admin/user/user/user/${user_id}',
+	    		type: 'PUT',
+	    		data: JSON.stringify(data),
+				contentType: 'application/json',
+	    		success : function(result) {
+	    			alert('회원정보 수정이 완료되었습니다.');
+	    			opener.parent.location.reload();
+	    			$('.user-info').css('display', 'block');
+	    	    	$('.user-update').css('display', 'none');
+	    	    	location.reload();
+	    		}
+	    	});
+    	}
+    }
+    
+    function cancel() {
+    	if(confirm('회원정보 수정을 취소하시겠습니까?')) {
+    		$('input[name="user_nickname"]').val("${list.user_nickname }"),
+   			$('select[name="user_ban"]').val("${list.user_ban }"),
+   			$('input[name="user_notify_start_date"]').val("${list.user_notify_start_date }"),
+   			$('input[name="user_notify_end_date"]').val("${list.user_notify_end_date }")
+
+    		$('.user-info').css('display', 'flex');
+	    	$('.user-update').css('display', 'none');
+    	}
     }
 </script>
 </html>

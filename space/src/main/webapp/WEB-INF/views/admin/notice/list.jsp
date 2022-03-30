@@ -35,6 +35,7 @@
 			listData += "<td>" + list[i].ncDTO.noc_name + "</td>";
 			listData += "<td><a href=javascript:goDetail(" + list[i].notice_id + ")>" + list[i].notice_title + "</a></td>";
 			listData += "<td>" + formatDate(list[i].notice_date) + "</td>";
+			listData += "<td>" + list[i].notice_view + "</td>";
 			listData += "</tr>";
 		}
 		

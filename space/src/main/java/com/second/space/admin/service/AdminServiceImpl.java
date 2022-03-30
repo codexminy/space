@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.exception.FailToCreateException;
 import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Admin_categoryDTO;
@@ -26,12 +27,12 @@ public class AdminServiceImpl implements AdminService {
 	AdminXMLMapper mapper;
 
 	@Override
-	public List<Integer> getNotificationCount() throws Exception {
+	public List<Integer> getNotificationCount() throws Exception { // 홈 - 신고 관리 접수 갯수
 		return mapper.getNotificationCount();
 	}
 
 	@Override
-	public List<Integer> getStatsCount() throws Exception {
+	public List<Integer> getStatsCount() throws Exception { // 홈 - 통계 갯수
 		return mapper.getStatsCount();
 	}
 
@@ -463,6 +464,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateCboardHidden(A_Community_boardDTO dto) throws Exception {
 		return mapper.updateCboardHidden(dto);
+	}
+
+	@Override
+	public int updateNoticeAdminView(int notice_admin_id) throws Exception {
+		return mapper.updateNoticeAdminView(notice_admin_id);
+	}
+
+	@Override
+	public int deleteUser(int user_id) throws Exception {
+		return mapper.deleteUser(user_id);
 	}
 }
 

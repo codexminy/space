@@ -137,6 +137,9 @@
 			} else if(!uploadFile && !$(".picture img").hasClass("img")) {
 				alert('배너를 업로드해주세요!');
 				return;
+			} else if(start > end) {
+				alert('시작 날짜는 종료 날짜보다 일찍 시작해야 합니다.');
+				return;
 			}
 
 			var formData = new FormData();

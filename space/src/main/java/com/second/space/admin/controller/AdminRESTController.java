@@ -43,10 +43,9 @@ public class AdminRESTController {
 	@Autowired
 	AdminService service;
 
-	@GetMapping(value = "/admin/page/home", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/home/home", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> home() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
-		
 		result.put("notify", service.getNotificationCount());
 		result.put("stats", service.getStatsCount());
 		result.put("banner", service.getNotificationAdList());
@@ -295,6 +294,15 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
+	@DeleteMapping(value = "/admin/user/user/user/{user_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<String, Object>> deleteUser(@PathVariable int user_id) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+
+		result.put("list", service.deleteUser(user_id));
+		
+		return ResponseEntity.ok(result);
+	}
+	
 	@GetMapping(value = "/admin/user/user/withdrawal", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> userwithdrawalList(PageSet ps) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
@@ -363,6 +371,7 @@ public class AdminRESTController {
 	public ResponseEntity<HashMap<String, Object>> adminList(@PathVariable int notice_admin_id) throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
+		result.put("cnt", service.updateNoticeAdminView(notice_admin_id));
 		result.put("list", service.getNoticeAdmin(notice_admin_id));
 		
 		return ResponseEntity.ok(result);
@@ -507,7 +516,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(dto);
 	}
 	
-	@GetMapping(value = "/admin/page/stats/stats", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/stats/stats/stats", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> monthlyUser() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 		
@@ -527,7 +536,7 @@ public class AdminRESTController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/stats/board", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/stats/stats/board", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> statsBoardUser() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 
@@ -538,13 +547,13 @@ public class AdminRESTController {
 		result.put("sWeekN", service.getWeeklySaleList());
 		result.put("cWeekN", service.getWeeklyCommunityList());
 		result.put("monthL", service.getMonthlyLabel());
-		result.put("sMonthW", service.getMonthlySaleList());
-		result.put("cMonthV", service.getMonthlyCommunityList());
+		result.put("sMonthN", service.getMonthlySaleList());
+		result.put("cMonthN", service.getMonthlyCommunityList());
 		
 		return ResponseEntity.ok(result);
 	}
 	
-	@GetMapping(value = "/admin/page/stats/notification", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/admin/stats/stats/notification", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> statsNotificationUser() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
 

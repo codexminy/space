@@ -605,6 +605,11 @@
         </if>
 	</select>
 	
+	<!-- 회원 관리 - 회원 삭제 -->
+	<delete id="deleteUser">
+		DELETE FROM user_ WHERE user_id = #{user_id}
+	</delete>
+	
 	<!-- 회원 관리 - 탈퇴 회원 리스트 -->
 	<select id="getAllWithdrawalList" resultMap="UserDTO">
 			SELECT
@@ -762,13 +767,13 @@
 	<!-- 관리자 공지 - 목록 리스트 -->
 	<select id="getAllNoticeAdminList" resultMap="UserDTO">
         SELECT
-        	rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date
+        	rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date, notice_admin_view
         FROM(
 	        SELECT
-	        	ROWNUM rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date
+	        	ROWNUM rn, user_id, ac_code, ac_name, notice_admin_id, notice_admin_title, notice_admin_date, notice_admin_view
 	        FROM(
 	        	SELECT
-	        		na.user_id, ac.ac_code, ac.ac_name, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date
+	        		na.user_id, ac.ac_code, ac.ac_name, na.notice_admin_id, na.notice_admin_title, na.notice_admin_date, na.notice_admin_view
 				FROM
 			        admin_category ac, notice_admin na
 				WHERE
@@ -822,6 +827,11 @@
 	<!-- 관리자 공지 - 관리자 글 수정하기 -->
 	<update id="updateNoticeAdmin">
 		UPDATE notice_admin SET notice_admin_title = #{notice_admin_title}, notice_admin_content = #{notice_admin_content}, ac_id = #{ac_id} WHERE notice_admin_id = #{notice_admin_id}
+	</update>
+	
+	<!-- 관리자 공지 - 조회수 증가 -->
+	<update id="updateNoticeAdminView">
+		UPDATE notice_admin SET notice_admin_view = notice_admin_view + 1 WHERE notice_admin_id = #{notice_admin_id}
 	</update>
 	
 	<!-- 문의사항 - 1:1 문의 리스트 -->

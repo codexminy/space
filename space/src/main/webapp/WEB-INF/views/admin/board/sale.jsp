@@ -41,9 +41,9 @@
 			listData += "<td>" + formatDate(list[i].abDTO.board_date) + "</td>";
 			
 			if(list[i].abDTO.board_hidden === 'N') {
-				listData += '<td><button type="button" class="hiddenBtn" onclick="hiddenBtn('+ list[i].abDTO.board_id +')">숨기기<i class="fa-solid fa-angle-right"></i></button></td>';
+				listData += '<td><button type="button" class="hiddenBtn" onclick="hiddenBtn('+ list[i].abDTO.board_id +')">숨기기</button></td>';
 			} else {
-				listData += '<td><button type="button" class="visibleBtn" onclick="visibleBtn('+ list[i].abDTO.board_id +')">숨겨짐<i class="fa-solid fa-angle-right"></i></button></td>';
+				listData += '<td><button type="button" class="visibleBtn" onclick="visibleBtn('+ list[i].abDTO.board_id +')">숨겨짐</button></td>';
 			}
 			
 			listData += "</tr>";
