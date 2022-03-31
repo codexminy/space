@@ -1,4 +1,5 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,176 +35,35 @@
                 </div>
             </div>
             <div class="cards-wrap">
+            <c:if test="${not empty mainList}">
+            <c:forEach var="m" items="${mainList}">
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'"
+                    		style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.originalfilename}')"></div>
+                    		<c:if test="${userLoggedIn != null }">
+                    			<c:if test="${userLoggedIn.user_id eq m.user_id }">
+                    				<div class="card-heart-actice"></div>
+                    			</c:if>
+                    		</c:if>
+                    		<c:if test="${userLoggedIn == null }">
+                    			<div class="card-heart"></div>
+                    		</c:if>
                 		</div>
                 		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
+                        		<div class="card-title">${m.board_title}</div>
                         		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
+                            		<div class="card-price">${m.board_price}</div>
+                            		<div class="card-region-name">${m.user_address }</div>
                         		</div>
                     		</div>
                 		</div>
             		</div>
         		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
-                <article class="card">	                   
-            		<div class="card-photobox">
-                		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-                    		<div class="card-heart"></div>
-                		</div>
-                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-                    		<div class="card-text">
-                        		<div class="card-title">상품이름</div>
-                        		<div class="card-info">
-                            		<div class="card-price">10,000원</div>
-                            		<div class="card-region-name">경기도 구리시</div>
-                        		</div>
-                    		</div>
-                		</div>
-            		</div>
-        		</article>                                            
+             </c:forEach>     
+             </c:if>                         
             </div>
             <div class="bottom-contents">
                 <div class="notice">
@@ -213,11 +73,11 @@
                     </div>    
                     <div class="notice-board">
                         <ul>
-                            <li><a href="#">공지사항 1</a></li>
-                            <li><a href="#">공지사항 2</a></li>
-                            <li><a href="#">공지사항 3</a></li>
-                            <li><a href="#">공지사항 4</a></li>
-                            <li><a href="#">공지사항 5</a></li>
+                          <c:if test="${not empty noticeList }">
+                        	<c:forEach var="n" items="${noticeList}">
+                            	<li><a href="#">${n.notice_title }</a></li>
+                       		</c:forEach>
+                          </c:if>
                         </ul>
                     </div>
                 </div>
@@ -228,11 +88,11 @@
                     </div> 
                     <div class="community-board">
                         <ul>
-                            <li><a href="#">커뮤니티 게시글1</a></li>
-                            <li><a href="#">커뮤니티 게시글2</a></li>
-                            <li><a href="#">커뮤니티 게시글3</a></li>
-                            <li><a href="#">커뮤니티 게시글4</a></li>
-                            <li><a href="#">커뮤니티 게시글5</a></li>
+                          <c:if test="${not empty communityList }">
+                       		 <c:forEach var="c" items="${communityList}">
+                            	<li><a href="#">${c.c_board_title}</a></li>
+                       		 </c:forEach>
+                        </c:if>
                         </ul>
 					</div>       
 				</div>

@@ -32,5 +32,12 @@
 	
 	<resources location="/resources/" mapping="/resources/**"/>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/"/>
+			<beans:bean id="authenticationInterceptor" class="com.second.space.user_.interceptor.AuthenticationInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	
 </beans:beans>

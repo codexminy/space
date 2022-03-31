@@ -3,4 +3,112 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.UserXMLMapper">
+
+<select id="userableId" resultType="string" >
+	SELECT login_id from user_ INNER JOIN login_id_list USING(user_login_id) WHERE login_id = #{userId}
+</select>
+
+<insert id="insertLoginId" parameterType="com.second.space.user_.model.LoginIdListDTO">
+	INSERT INTO login_id_list
+	(user_login_id, login_id, user_login_type)
+	VALUES
+	(lid_list_user_login_id_seq.nextval, #{login_id}, #{user_login_type})
+</insert>
+
+<select id="chkNickName" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM user_ WHERE user_nickname = #{nickName}
+</select>
+
+<select id="getUserLoginId" parameterType="string" resultType="int">
+	SELECT user_login_id FROM login_id_list WHERE login_id = #{login_id}
+</select>
+
+<insert id="insertUser" parameterType="com.second.space.user_.model.UserDTO">
+	INSERT INTO user_
+	(user_id, user_phone, user_password, user_admin, user_nickname,  user_login_id, user_address, 
+	user_gender, user_name, user_join_date, user_profile, user_following, user_followed, user_check_email, 
+	user_public_profile, user_delete, user_reported, user_birth, user_email)
+	VALUES
+	(user_user_id_seq.nextval, #{user_phone}, #{user_password}, #{user_admin}, #{user_nickname},#{user_login_id}, #{user_address},
+	#{user_gender}, #{user_name},  sysdate , #{user_profile,jdbcType=VARCHAR}, #{user_following}, #{user_followed}, #{user_check_email},
+	#{user_public_profile}, #{user_delete}, #{user_reported}, #{user_birth}, #{user_email})
+</insert>
+
+<select id="chkLoginId" parameterType="string" resultType="int">
+	SELECT user_login_id FROM login_id_list WHERE login_id = #{login_id}
+</select>
+
+<select id="chkLoginPwd" resultType="com.second.space.user_.model.UserDTO">
+	SELECT * FROM user_ WHERE user_login_id = #{user_login_id}
+</select>
+
+<select id="getBoardList" resultType="com.second.space.board.model.BoardDTO" parameterType="string">
+	SELECT b.* FROM board b , user_ u WHERE u.user_address = #{user_address} AND b.user_id = u.user_id ORDER BY b.board_view DESC
+</select>
+
+<select  id="getImgList" resultType="com.second.space.board.model.BoardImgDTO">
+	SELECT i.* FROM board b , user_ u , board_img i WHERE u.user_address = #{user_address} AND b.user_id = u.user_id AND
+	i.board_id = b.board_id
+</select>
+
+<update id="keepLogin">
+	UPDATE user_ SET sessionKey = #{sessionId} , sessionLimit = #{sessionLimit} WHERE user_login_id = #{user_login_id}
+</update>
+
+<select id="checkUserWithSessionKey" resultType="com.second.space.user_.model.UserDTO">
+	SELECT * FROM user_ WHERE sessionKey = #{sessionId} and sessionLimit > sysdate
+</select>
+
+<insert id="insertGoogleUser" parameterType="com.second.space.user_.model.UserDTO">
+	INSERT INTO user_
+	(user_id, user_phone, user_admin, user_nickname,  user_login_id, user_address, 
+	user_gender, user_name, user_join_date, user_profile, user_following, user_followed, user_check_email, 
+	user_public_profile, user_delete, user_reported, user_birth, user_email)
+	VALUES
+	(user_user_id_seq.nextval, #{user_phone}, #{user_admin}, #{user_nickname},#{user_login_id}, #{user_address},
+	#{user_gender}, #{user_name},  sysdate , #{user_profile,jdbcType=VARCHAR}, #{user_following}, #{user_followed}, #{user_check_email},
+	#{user_public_profile}, #{user_delete}, #{user_reported}, #{user_birth}, #{user_email})
+</insert>
+
+<select id="selectUser" resultType="com.second.space.user_.model.UserDTO">
+	SELECT * FROM user_ WHERE user_login_id = #{user_login_id}
+</select>
+
+<select id="getMainList" resultType="com.second.space.user_.model.MainInfoDTO">
+	SELECT board_id, i.originalfilename, b.board_title,  b.board_price, u.user_address, b.board_view, ul.user_id
+	FROM user_ u INNER JOIN board b USING(user_id)
+	FULL OUTER JOIN (SELECT board_id, COUNT(*) AS board_like FROM board_like GROUP BY board_id)l USING(board_id)
+	FULL OUTER JOIN
+	(SELECT board_id, CASE user_id WHEN 3 THEN 3 ELSE 0 END AS user_id FROM board_like) ul USING(board_id)
+	INNER JOIN board_img i USING(board_id) 
+	WHERE u.user_address = #{user_address} AND i.main_img = 'Y' AND ROWNUM <![CDATA[<=]]> 10
+	ORDER BY b.board_view DESC, l.board_like ASC
+</select>
+
+<select id="getNoticeList" resultType="com.second.space.admin.model.NoticeDTO">
+	SELECT notice_id, notice_title FROM notice WHERE ROWNUM <![CDATA[<=]]> 5 ORDER BY notice_date DESC
+</select>
+
+<select id="getCommunityList" resultType="com.second.space.community.model.CommunityBoardDTO">
+	SELECT c_board_id, c_board_title FROM community_board c INNER JOIN user_ u USING(user_id)
+	WHERE u.user_address = #{user_address} AND ROWNUM <![CDATA[<=]]> 5 ORDER BY c_board_date DESC
+</select>
+
+<select id="getMain" resultType="com.second.space.user_.model.MainInfoDTO">
+	SELECT board_id, i.originalfilename, b.board_title,  b.board_price, u.user_address, b.board_view, ul.user_id
+	FROM user_ u INNER JOIN board b USING(user_id)
+	FULL OUTER JOIN (SELECT board_id, COUNT(*) AS board_like FROM board_like GROUP BY board_id)l USING(board_id)
+	FULL OUTER JOIN
+	(SELECT board_id, CASE user_id WHEN 3 THEN 3 ELSE 0 END AS user_id FROM board_like) ul USING(board_id)
+	INNER JOIN board_img i USING(board_id) 
+	WHERE i.main_img = 'Y' AND ROWNUM <![CDATA[<=]]> 10
+	ORDER BY b.board_view DESC, l.board_like ASC
+</select>
+
+<select id="getCommunity" resultType="com.second.space.community.model.CommunityBoardDTO">
+	SELECT c_board_id, c_board_title FROM community_board c INNER JOIN user_ u USING(user_id)
+	WHERE ROWNUM <![CDATA[<=]]> 5 ORDER BY c_board_date DESC
+</select>
+
+
 </mapper>

@@ -1,6 +1,17 @@
+<%@page import="com.second.space.user_.model.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%
+	if(session.getAttribute("userLoggedIn") != null){
+		UserDTO userLoggedIn = (UserDTO)session.getAttribute("userLoggedIn");
+		System.out.println(userLoggedIn.getUser_name());
+	}
+
+	if(session.getAttribute("loginType") != null){
+		String loginType = (String)session.getAttribute("loginType");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +30,22 @@
 	                <a href="javascript:bookMark('타이틀', 'http://localhost:8090/space/main/space')">북마크</a>
 	            </div>
 	            <div class="navbar-header-right">
-	                <a href="${pageContext.request.contextPath}/admin/home">관리자</a>
+	             <c:if test="${userLoggedIn != null}">
+	            	 <c:if test="${userLoggedIn.user_id eq '1'}">
+	              		  <a href="${pageContext.request.contextPath}/admin/home">관리자</a>
+	                 </c:if>
+	             </c:if>
+	             <c:if test="${userLoggedIn == null}">
 	                <a href="${pageContext.request.contextPath}/user_/login">로그인/회원가입</a>
+	             </c:if>
+	             <c:if test="${userLoggedIn != null}">
+						<c:if test="${loginType eq 'general' }">	                
+	                		<a href="${pageContext.request.contextPath}/user_/logout">로그아웃</a>
+	                	</c:if>
+	                	<c:if test="${loginType eq 'google' }">	                
+	                		<a id="googlLogout" href="${pageContext.request.contextPath}/user_/googleLogout?token=${token}">로그아웃</a>
+	                	</c:if>
+	              </c:if>
 	                <a href="${pageContext.request.contextPath}/customerService/main">고객센터</a>
 	            </div>
 	        </nav>

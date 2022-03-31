@@ -20,10 +20,10 @@
                 <form action="#" method="POST" id="loginform" >
                     <div class="login">
                         <div class="login-input-box">
-                            <input type="text" name="아이디" placeholder="아이디" id="userId">
+                            <input type="text" name="login_id" placeholder="아이디" id="userId">
                         </div>
                         <div class="login-input-box">
-                            <input type="password" name="비밀번호" placeholder="비밀번호" id="userPassword">
+                            <input type="password" name="user_password" placeholder="비밀번호" id="userPassword">
                         </div>
                     </div>
                     <div class="login-status">
@@ -42,7 +42,7 @@
                     </ul>  
                 </div>
                 <div class="social-login">
-                    <div class="google">
+                    <div class="google" id="google">
                         <div class="google-icon"></div>
                         <h2>구글로 로그인하기</h2>
                     </div>
@@ -60,4 +60,34 @@
     </div>
 <jsp:include page="../main/footer.jsp"></jsp:include> 
 </body>
+
+<script type="text/javascript">
+var autoLogin = document.getElementById("login-status-id");
+autoLogin.addEventListener('click', (e) => {
+	if(autoLogin.checked){
+		autoLogin.value = "yes";
+	}else {
+	autoLogin.value = "no";
+	}
+});
+
+var google = document.getElementById("google");
+const sendGoogle = new XMLHttpRequest();
+
+sendGoogle.addEventListener('readystatechange', (e) => {
+	const readyState = e.target.readyState;
+	const status = e.target.status;
+	
+ 	const randomString = e.target.responseText;
+	console.log(randomString);
+	location.href = randomString; 
+	
+}); 
+
+google.addEventListener('click', (e) => {
+	sendGoogle.open('get', `${pageContext.request.contextPath}/login/getGoogleAuthUrl`);
+	sendGoogle.setRequestHeader('content-type', 'application/json');
+	sendGoogle.send();
+});
+</script>
 </html>

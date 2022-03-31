@@ -17,15 +17,15 @@
 	<img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png">
 	<div class="wrap-join">
 	    <div class="join-box">
-	        <form action="" method="POST" id="join" >
+	        <form action="./joinAgree" method="POST" id="join" >
 	            <div class="space-join">
 	                <p>우주장터 간편 회원가입</p>
-	                <button type="button" id="submit" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/user_/joinAgree'"><span>회원가입</span></button>
+	                <button type="submit" id="submit" value="회원가입" ><span>회원가입</span></button>
 	            </div>
             </form>   
             <div class="social-join">
                 <p>SNS 계정으로 간편 회원가입</p>
-                <div class="google">
+                <div class="google" id="google">
                     <div class="google-icon"></div>
                     <h2>구글 계정으로 회원가입</h2>
                 </div>
@@ -43,4 +43,26 @@
 </div>
 <jsp:include page="../main/footer.jsp"></jsp:include>
 </body>
+<script type="text/javascript">
+var google = document.getElementById("google");
+const sendGoogle = new XMLHttpRequest();
+
+sendGoogle.addEventListener('readystatechange', (e) => {
+	const readyState = e.target.readyState;
+	const status = e.target.status;
+	
+ 	const randomString = e.target.responseText;
+	console.log(randomString);
+	location.href = randomString; 
+	
+}); 
+
+google.addEventListener('click', (e) => {
+	sendGoogle.open('get', `${pageContext.request.contextPath}/login/getGoogleAuthUrl`);
+	sendGoogle.setRequestHeader('content-type', 'application/json');
+	sendGoogle.send();
+});
+
+
+</script>
 </html>

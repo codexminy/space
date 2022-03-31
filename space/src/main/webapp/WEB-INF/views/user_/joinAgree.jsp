@@ -20,7 +20,7 @@
 	<div class="joinAgree-box">
 	    <p class="joinAgree-text">우리 주위의 장터 : 우주장터 <br>
 	    회원가입을 위한 서비스 약관에 동의해 주세요.</p>
-	    <form action="#" method="POST" id="join-agreement"> 
+	    <form action="./info" method="POST" id="join-agreement"> 
 	        <ul class="join-box">
 	            <div class="join-top">
 	                <li class="checkAllBtn">
@@ -61,10 +61,36 @@
 	                </li>                   
 	            </div>
 	        </ul>
-	        <button type="button" class="btn" name="동의" onclick="location.href='${pageContext.request.contextPath}/user_/info'">동의</button> 
+	        <button type="button" class="btn" name="동의" id="submitBtn" >동의</button> 
 	        </form>
 	    </div>
 	</div>
 <jsp:include page="../main/footerJoin.jsp"></jsp:include>
 </body>
+<script>
+const input = document.getElementsByName("chktxt");
+var submitBtn = document.getElementById("submitBtn");
+var joinFrm = document.getElementById("join-agreement");
+submitBtn.addEventListener('click', (e) => {
+	var confirm  = true;
+	
+	for(var i = 0; i < input.length-2; i++){
+		if(input[0].checked == false){
+			alert("만14세 이상만 가입이 가능합니다.");
+			confirm = false;
+			break;
+		}else if(input[i].checked == false){
+			alert("필수 항목을 모두 체크해주세요");
+			confirm = false;
+			break;
+		}else {
+			confirm = true;
+		}
+	}
+	
+	if(confirm){
+		joinFrm.submit();
+	}
+});
+</script>
 </html>
