@@ -8,7 +8,7 @@
 %>
 <aside>
 	<div class="img" style="padding: 25px 40px; height: 100px;">
-		<img src="${path }/resources/admin/space_white_logo.png" alt="우주장터 로고" style="width: 170px;"/>
+		<a href="${path }/main/space"><img src="${path }/resources/admin/space_white_logo.png" alt="우주장터 로고" style="width: 170px;"/></a>
 	</div>
 	<ul>
 		<% for(int i=0; i<link.length; ++i) { %>
