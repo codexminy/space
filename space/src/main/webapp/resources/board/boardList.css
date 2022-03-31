@@ -85,11 +85,16 @@ input[type="checkbox"]:checked + label{
 }
 
 .card-photo {
+	width: 228px;
+    height: 228px;
+    position: relative;
+}
+
+.card-photo-img {
     width: 228px;
     height: 228px;
     /* background-color: #D1D1D1; */
-    border-radius: 25px;
-    position: relative;
+    border-radius: 25px;    
     background-image: url('../../resources/images/board/product_image.png');
     background-size: cover;
     border: 1px solid #707070;

@@ -7,11 +7,19 @@
     margin-top: 145px;
 }
 
-h2 {
+.board-wrapper > h2 {
     font-size: 20px;
     font-weight: bold;
     padding-top: 30px;
     color: #22007F;
+}
+
+.board-top > h2 {
+	font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+    color: #22007F;
+    font-weight: bold;
 }
 
 .prouct-info {
@@ -249,6 +257,14 @@ select::-ms-expand {
 .board_end {
     width: 1200px;
     height: auto;
+}
+
+.board_end > h2 {
+	font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+    color: #22007F;
+    font-weight: bold;
 }
 
 textarea {

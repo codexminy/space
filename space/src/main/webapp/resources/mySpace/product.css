@@ -87,6 +87,11 @@
 }
 
 .myspace-card-photo {
+	width: 220px;
+    height: 220px;
+}
+
+.myspace-card-photo-img {
     width: 220px;
     height: 220px;
     background-image: url('../../resources/images/board/product_image.png');

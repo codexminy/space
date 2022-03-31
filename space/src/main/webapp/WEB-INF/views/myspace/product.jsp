@@ -30,9 +30,9 @@
 	<div class="myspace-cards-wrap">
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -41,12 +41,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -55,12 +55,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -69,12 +69,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -83,12 +83,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -97,12 +97,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -111,12 +111,12 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                   
+	    </article>                                   
 		<article class="myspace-card">	                   
 	        <div class="myspace-card-photo">
-	            <div class="myspace-card-photo-img"></div>
+	            <div class="myspace-card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
 	        </div>
-	        <div class="myspace-card-textbox">
+	        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
 	            <div class="myspace-card-text">
 	                <div class="myspace-card-title">상품이름</div>
 	                <div class="myspace-card-info">
@@ -125,7 +125,7 @@
 	                </div>
 	            </div>
 	        </div>
-	    </article>                 
+	    </article>                                   
 	</div>
 </div>
 <jsp:include page="../main/footer.jsp"/>

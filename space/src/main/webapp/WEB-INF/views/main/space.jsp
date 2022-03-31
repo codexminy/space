@@ -37,9 +37,10 @@
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -49,13 +50,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -65,13 +67,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -81,13 +84,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -97,13 +101,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -113,13 +118,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -129,13 +135,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -145,13 +152,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -161,13 +169,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -177,13 +186,14 @@
                     		</div>
                 		</div>
             		</div>
-        		</article> 
+        		</article>                                            
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
+                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
                     		<div class="card-heart"></div>
                 		</div>
-                		<div class="card-textbox">
+                		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
                         		<div class="card-title">상품이름</div>
                         		<div class="card-info">
@@ -193,7 +203,7 @@
                     		</div>
                 		</div>
             		</div>
-        		</article>                             
+        		</article>                                            
             </div>
             <div class="bottom-contents">
                 <div class="notice">

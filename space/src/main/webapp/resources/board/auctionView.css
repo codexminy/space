@@ -9,18 +9,26 @@
 }
 
 .category-view {
-    /* width: 130px; */
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-h2 {
     font-size: 20px;
     font-weight: bold;
     padding-top: 30px;
+}
+
+.category-view > h2:last-child {
     color: #22007F;
-    margin-right: 10px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.board-top > h2 {
+	font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+    color: #22007F;
+    font-weight: bold;
 }
 
 .prouct-info {
@@ -285,7 +293,10 @@ h2 {
 }
 
 .board-end-left > h2 {
-    padding-top: 0px;
+	font-size: 20px;
+    font-weight: bold;
+    color: #22007F;
+    font-weight: bold;
 }
 
 .report {
@@ -420,7 +431,17 @@ textarea:focus{
 }
 
 .board-end-right {
+	min-height: 435px;
+    margin-top: 30px;
     padding-left: 30px;
+}
+
+
+.board-end-right > h2 {
+	font-size: 20px;
+    font-weight: bold;
+    color: #22007F;
+    font-weight: bold;
 }
 
 .store-profile {

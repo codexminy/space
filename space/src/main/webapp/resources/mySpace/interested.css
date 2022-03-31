@@ -87,13 +87,18 @@
 }
 
 .myspace-card-photo {
+	width: 220px;
+    height: 220px;
+    position: relative;
+}
+
+.myspace-card-photo-img {
     width: 220px;
     height: 220px;
     background-image: url('../../resources/images/board/product_image.png');
     background-size: cover;
     border: 1px solid #707070;
     border-radius: 25px;
-    position: relative;
 }
 
 .card-heart {
