@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board.css?ver=2" />
 </head>
 <body>
-	<div>
+	<jsp:include page="../main/header.jsp"/>
+	<div id='wrap_cm'>
 		<header>
 			<div class="input_login">
 				<form id="temp_user" name="createForm" action="./login" method="POST">
@@ -69,7 +70,7 @@
 					</div>
 					<hr />
 					<ul class='c_board_option'>
-						<li><img src="${pageContext.request.contextPath}/resources/images/community/empathy.png" width="20px" height="18px">공감하기</li>
+						<!-- <li><img src="${pageContext.request.contextPath}/resources/images/community/empathy.png" width="20px" height="18px">공감하기</li> -->
 						<li><img src="${pageContext.request.contextPath}/resources/images/community/spacetalk.png" width="20px" height="18px">댓글
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
@@ -98,7 +99,7 @@
 									</ul>
 									<div class='c_comment_content'>${c_comment_list.c_content }</div>
 									<ul class='c_comment_option'>
-										<li><img src="${pageContext.request.contextPath}/resources/images/community/c_heart.png" alt="좋아요" width="15px" height="13px" />좋아요</li>
+										<!-- <li><img src="${pageContext.request.contextPath}/resources/images/community/c_heart.png" alt="좋아요" width="15px" height="13px" />좋아요</li> -->
 										<li class='comment_report'>신고하기
 											<p class='data_board_id2'>${c_comment_list.c_board_id }</p>
 											<p class='data_comment_id'>${c_comment_list.c_id }</p>
@@ -129,7 +130,7 @@
 										</ul>
 										<div class='c_comment_content'>${c_comment_list2.c_content }</div>
 										<ul class='c_comment_option'>
-											<li><img src="${pageContext.request.contextPath}/resources/images/community/c_heart.png" alt="좋아요" width="15px" height="13px" />좋아요</li>
+											<!-- <li><img src="${pageContext.request.contextPath}/resources/images/community/c_heart.png" alt="좋아요" width="15px" height="13px" />좋아요</li> -->
 											<li class='comment_report'>신고하기
 												<p class='data_board_id2'>${c_comment_list2.c_board_id }</p>
 												<p class='data_comment_id'>${c_comment_list2.c_id }</p>
@@ -194,6 +195,7 @@
 			</c:forEach>
 		</main>
 	</div>
+	<jsp:include page="../main/footer.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/resources/community/js/c_board.js?ver=3"></script>
 </body>
 </html>

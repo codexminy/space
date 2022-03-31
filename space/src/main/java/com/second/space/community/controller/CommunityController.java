@@ -177,7 +177,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/comment_write")
-	public String communityCommentWrite(CommunityCommentDTO list, Model model) {
+	public String communityCommentWrite(HttpServletRequest request, CommunityCommentDTO list, Model model) {
 		try {
 			System.out.println("보냈다");
 			model.addAttribute(community_service.newCommunityComment(list));
@@ -187,11 +187,11 @@ public class CommunityController {
 			e.printStackTrace();
 			log.info("Error");
 		}
-		return "redirect:/community/main";
+		return "redirect:/community/c_board?c_board_id="+request.getParameter("c_board_id");
 	}
 	
 	@PostMapping("/reply_write")
-	public String communityReplyWrite(CommunityCommentDTO list, Model model) {
+	public String communityReplyWrite(HttpServletRequest request, CommunityCommentDTO list, Model model) {
 		try {
 			System.out.println("보냈다");
 			model.addAttribute(community_service.newCommunityCommentReply(list));
@@ -201,7 +201,7 @@ public class CommunityController {
 			e.printStackTrace();
 			log.info("Error");
 		}
-		return "redirect:/community/main";
+		return "redirect:/community/c_board?c_board_id="+request.getParameter("c_board_id");
 	}
 	
 	@GetMapping("/board_report")

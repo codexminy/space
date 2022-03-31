@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/community.css?ver=3" />
 </head>
 <body>
-	<div>
+	<jsp:include page="../main/header.jsp"/>
+	<div id='wrap_cm'>
 		<header>
 			<div class="input_login">
 				<form id="temp_user" name="createForm" action="./login" method="POST">
@@ -71,7 +72,7 @@
 							<p class='data_board_id'>${c_board_list.c_board_id }</p>
 						</li>
 						 -->
-						<li class='view_comment'>댓글보기(
+						<li class='view_comment'><img src="${pageContext.request.contextPath}/resources/images/community/spacetalk.png" width="20px" height="18px">댓글보기
 							<c:forEach items="${c_comment_count }" var="c_comment_count">
 							<c:choose>
 							<c:when test="${c_comment_count.c_board_id eq c_board_list.c_board_id }">
@@ -79,7 +80,7 @@
 							</c:when>
 							</c:choose>	
 							</c:forEach>
-						)</li>
+						</li>
 					</ul>
 					<div class='c_comment'>
 						<hr />
@@ -188,6 +189,7 @@
 			</c:forEach>
 		</main>
 	</div>
+	<jsp:include page="../main/footer.jsp"></jsp:include>
 <script src="${pageContext.request.contextPath}/resources/community/js/community.js?ver=3"></script>
 </body>
 </html>

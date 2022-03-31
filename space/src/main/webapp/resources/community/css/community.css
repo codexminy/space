@@ -3,6 +3,19 @@ body{
 	height: 100%;
 	margin: 0 auto;
 }
+#wrap_cm {
+	padding-top: 160px;
+}
+#login_btn {
+	border: 1px solid #000;
+	padding: 5px;
+	margin: 5px;
+	cursor: pointer;
+}
+#login_btn:hover{
+	background-color: #000;
+	color:#fff;
+}
 #community_category {
 	display: flex;
 	align-items: center;
