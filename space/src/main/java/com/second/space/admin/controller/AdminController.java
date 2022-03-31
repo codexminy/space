@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.admin.model.Notice_adminDTO;
 import com.second.space.admin.model.Notification_adDTO;
-import com.second.space.admin.model.NotifyDTO;
 import com.second.space.admin.service.AdminService;
 
 @Controller
@@ -75,11 +74,11 @@ public class AdminController {
 	
 	@Autowired
 	AdminService service;
-	
+
 	@GetMapping("/admin/home")
 	public void home(Model model) {
 		model.addAttribute("menu", homeMenu);
-		model.addAttribute("link", homeLink);	
+		model.addAttribute("link", homeLink);
 	}
 	
 	@GetMapping("/admin/notification/board")
@@ -95,7 +94,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/notification/cmtDetail")
-	public void notificationDetailCmt(Model model, @RequestParam int nc_id) {
+	public void notificationDetailCmt(Model model, @RequestParam int nc_id) throws Exception {
 		model.addAttribute("nc_id", nc_id);
 	}
 	

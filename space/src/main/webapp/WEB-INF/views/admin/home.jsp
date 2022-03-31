@@ -226,6 +226,9 @@
 					outUser.html(outUserData);
 					bannerInfo.html(bannerData);
 					adminInfo.html(adminData);
+				},
+				error : function(result) {
+					alert(result.responseJSON.code + "\n" + result.responseJSON.message);
 				}
 			});
 		}

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.second.space.admin.exception.FailToCreateException;
 import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Contact_usDTO;
@@ -46,11 +47,12 @@ public class AdminRESTController {
 	@GetMapping(value = "/admin/home/home", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HashMap<String, Object>> home() throws Exception {
 		HashMap<String, Object> result = new HashMap<>();
+
 		result.put("notify", service.getNotificationCount());
 		result.put("stats", service.getStatsCount());
 		result.put("banner", service.getNotificationAdList());
 		result.put("admin", service.getNoticeAdminList());
-		
+
 		return ResponseEntity.ok(result);
 		
 	}
