@@ -1,116 +1,213 @@
 @charset "UTF-8";
+
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration : none;    
+	color: #707070;
+	font-family: 'NanumSquare', sans-serif;
 }
+
 #wrapinfo{
-    width: 1200px;
+	width: 1200px;
+	height : 100%;
     margin: 0 auto;
-    padding: 0 360px 100px 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 150px;
 }
+
 .wrap-login-logo{
-	width:1200px;
-    margin: 50px 225px 30px 225px;  
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 .info{
-    border: 1px solid;
-    border-radius: 5px;
+    border: 1px solid #707070;
+    border-radius: 11px;
     width: 600px;
     height: 770px;  
 }
 .inputinfo #userId{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 450px;
     height: 50px;
     margin: 40px 75px 15px 75px;
+	padding: 10px;
 }
 .inputinfo #userPassword{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 450px;
     height: 50px;
     margin: 0 75px 5px 75px;
+    padding: 10px;
 }
 .inputinfo #userPasswordcheck{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 450px;
     height: 50px;
     margin: 0 75px 15px 75px;
+    padding: 10px;
 }
 .inputinfo #userName{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 295px;
     height: 50px;
     margin: 0 10px 15px 75px;
+    padding: 10px;
 }
+
+select::-ms-expand {
+    display: none;
+}
+
+input:focus {
+	outline: none;
+}
+
+#userGender, #userYear, #userMonth, #userDay, #userEmail2, #userAgency, #userPhone:focus {
+	outline: none;
+}
+
 .inputinfo #userGender{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
-    height: 50px;
-    
+    height: 50px;   
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
+
 .inputinfo #userYear{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
     height: 50px;
     margin: 0 10px 15px 75px;
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 .inputinfo #userMonth{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
     height: 50px;
     margin-right: 10px;
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 .inputinfo #userDay{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
     height: 50px;
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 .inputinfo #userEmail{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 295px;
     height: 50px;
     margin: 0 10px 15px 75px;
+    padding: 10px;
 }
 .inputinfo #userEmail2{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
     height: 50px;
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 .inputinfo #userAgency{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 140px;
     height: 50px;
     margin: 0 10px 5px 75px;
+    padding: 10px;
+    background: url('../../../resources/images/board/arrow.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 .inputinfo #userPhone{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 295px;
     height: 50px;
+    padding: 10px;
 }
 .inputinfo #userNumber{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 295px;
     height: 50px;
     margin: 0 10px 15px 75px;
+    padding: 10px;
 }
 .inputinfo .number{
     width: 140px;
     height: 50px;
     background-color: #22007F;
+    border-radius: 11px;
     color: #fff;
-    font-weight: 700;
+    font-weight: bold;
+    cursor: pointer;
 }
 .inputinfo #userAddress{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 450px;
     height: 50px;
-    margin: 0 75px 5px 75px;    
+    margin: 0 75px 5px 75px; 
+    padding: 10px;   
 }
 .inputinfo #userPostcode{
+	border: 1px solid #707070;
+    border-radius: 11px;
     width: 295px;
     height: 50px;
     margin: 0 10px 30px 75px;
+    padding: 10px;
 }
 .inputinfo .address{
     width: 140px;
     height: 50px;
     background-color:#22007F;
+    border-radius: 11px;
     color: #fff;
-    font-weight: 700;
+    font-weight: bold;
+    cursor: pointer;
+   
 }
 .inputinfo .join{
     width: 450px;
     height: 50px;
     background-color:#22007F;
+    border-radius: 11px;
     color: #fff;
-    font-weight: 700;
+    font-weight: bold;
+    cursor: pointer;
     margin: 0 75px 0 75px;
 }

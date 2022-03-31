@@ -1,14 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입-정보입력</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link href="${pageContext.request.contextPath}/resources/user_/css/info.css" rel="stylesheet"/>
 </head>
 <body>
-	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapinfo">
         <div class="wrap-login-logo">
             <a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px" height="37.54px"></a>
@@ -66,11 +68,11 @@
                     <input type="text" name="주소" placeholder="주소" id="userAddress">
                     <input type="text" name="주소" id="userPostcode">
                     <button type="submit" class="address" name="주소">우편번호 검색</button>
-                    <button type="submit" class="join" name="가입">가입하기</button>
+                    <button type="button" class="join" name="가입" onclick="location.href='${pageContext.request.contextPath}/user_/joinFinish'">가입하기</button>
                 </div>
             </form>
         </div>
     </div>
-    <jsp:include page="../main/footer.jsp"></jsp:include>
+    <jsp:include page="../main/footerJoin.jsp"></jsp:include>
 </body>
 </html>
