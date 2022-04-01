@@ -67,7 +67,8 @@
                               <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">미용</a></div>
                               <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">반려동물</a></div>
                               <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">기타</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">커뮤니티</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/community/main">커뮤니티</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/notice/notice">공지사항</a></div>
                           </div>
 					</div>
 					<div class="space-logo"><a href="${pageContext.request.contextPath}/main/space"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px"></a></div>
@@ -153,13 +154,11 @@ function bookMark(title,url) {
       alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
    }
    // Firefox
-   else if (window.sidebar) // firefox 
-   {
+   else if (window.sidebar) {
        window.sidebar.addPanel(title, url, ""); 
    }
    // Opera
-   else if(window.opera && window.print)
-   { // opera 
+   else if(window.opera && window.print) {
       var elem = document.createElement('a'); 
       elem.setAttribute('href',url); 
       elem.setAttribute('title',title); 

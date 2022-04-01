@@ -58,7 +58,7 @@
             </div>
             <div class="product-contact">
                 <div class="interested"></div>
-                <div class="space-talk-button"></div>
+                <button type="button" class="space-talk-button" onclick="location.href='${pageContext.request.contextPath}/chatting/chatPartner'" />
             </div>
         </div>           
         <div class="board_end">
@@ -115,7 +115,7 @@
             </div>
         </div>
         <div class="buttons">
-            <input type="button" value="목록" id="cancle"/>
+            <input type="button" value="목록" id="cancle" onclick="location.href='${pageContext.request.contextPath}/board/boardList'"/>
         </div>
     </form>
 </div>

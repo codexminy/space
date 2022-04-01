@@ -69,7 +69,7 @@
                 <div class="notice">
                     <div class="notice-title">
                         <h2>공지사항</h2>
-                        <p class="text"><a href="#">더보기 ></a></p>
+                        <p class="text"><a href="${pageContext.request.contextPath}/notice/notice">더보기 ></a></p>
                     </div>    
                     <div class="notice-board">
                         <ul>

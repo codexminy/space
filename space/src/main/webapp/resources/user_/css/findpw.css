@@ -1,0 +1,48 @@
+@charset "UTF-8";
+#wrappw{
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+#wrappw h3{
+    margin: 20px;
+}
+#wrappw p{
+    margin: 0 20px 20px 20px;
+}
+.findPw{
+    width: 100%;
+}
+.pw-confirm{
+    width: 1200px;
+    height: 500px;
+}
+#form1{
+    margin: 20px;
+}
+#confirm-method{
+    display: block;
+    color: #22007F;
+    font-weight: bold;
+}
+#confirm-code{
+    display: block;
+    color: #22007F;
+    font-weight: bold;
+}
+.btn_find_id{
+    background: #22007F;
+    color: #fff;
+    border-radius: 5px;
+}
+#btn_confirm{
+    margin: 20px;
+    width: 150px;
+    height: 50px;
+    padding: 5px;
+    background: #22007F;
+    color: #fff;
+    line-height: 43px;
+    border-radius: 5px;
+}

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+#wrappw{
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+#wrappw h3{
+    margin: 20px;
+}
+#wrappw p{
+    margin: 0 20px 20px 20px;
+}
+.findPw{
+    width: 100%;
+}
+.pw-confirm{
+    width: 1200px;
+    height: 500px;
+}
+.pw-confirm h4{
+    height: 45px;
+    padding-left: 30px;
+    background: #22007F;
+    color: #fff;
+    line-height: 43px;
+}
+.findPw .box-confirm{
+    padding: 30px;
+}
+.box-confirm > h5{
+    text-align: center;
+    margin: 120px 0 20px 0;
+}
+#form1{
+    text-align: center;
+}
+.btn_find_id{
+    background: #22007F;
+    color: #fff;
+    border-radius: 5px;
+}

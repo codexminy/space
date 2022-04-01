@@ -1,0 +1,68 @@
+@charset "UTF-8";
+#wrapid{
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+#wrapid h3{
+    margin: 20px;
+}
+#wrapid p{
+    margin: 0 20px 20px 20px;
+}
+.findId{
+    width: 100%;
+}
+.id-confirm{
+    width: 1200px;
+    height: 500px;
+}
+.id-confirm h4{
+    height: 45px;
+    padding-left: 30px;
+    background: #22007F;
+    color: #fff;
+    line-height: 43px;
+}
+.findId .box-confirm{
+    padding: 30px;
+}
+.box-confirm > h5{
+    text-align: center;
+    margin-bottom: 50px;
+}
+.confirm-type .type1_ipin{
+    width: 49%;
+    float: left;
+}
+.confirm-type .type1_ipin h5{
+    text-align: center;
+}
+.confirm-type .type1_ipin p{
+    text-align: center;
+}
+#btn_find_ipin{
+    background-color: #22007F;
+    border-radius: 5px;
+    color: #fff;
+    padding: 3px 20px;
+    margin: 0 195px;
+}
+.confirm-type .type2_cellphone{
+    width: 49%;
+    float: right;
+}
+.confirm-type .type2_cellphone h5{
+    text-align: center;
+}
+.confirm-type .type2_cellphone p{
+    text-align: center;
+}
+#btn_find_nice{
+    background-color: #22007F;
+    border-radius: 5px;
+    color: #fff;
+    padding: 3px 20px;
+    margin: 0 195px;
+}
