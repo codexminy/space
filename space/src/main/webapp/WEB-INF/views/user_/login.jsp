@@ -44,15 +44,15 @@
                 <div class="social-login">
                     <div class="google" id="google">
                         <div class="google-icon"></div>
-                        <h2>구글로 로그인하기</h2>
+                        <h2>구글 계정으로 로그인하기</h2>
                     </div>
                     <div class="naver">
                         <div class="naver-icon"></div>
-                        <h2>네이버로 로그인하기</h2>
+                        <h2>네이버 계정으로 로그인하기</h2>
                     </div>
                     <div class="kakao">
                         <div class="kakao-icon"></div>
-                        <h2>카카오로 로그인하기</h2>
+                        <h2>카카오 계정으로 로그인하기</h2>
                     </div>
                 </div>
             </div> 

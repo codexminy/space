@@ -30,7 +30,7 @@
     margin-bottom: 130px;
 }
 
-p {
+.space-join > p {
     font-size: 16px;
     margin-bottom: 20px;
 }
@@ -66,7 +66,13 @@ span{
     margin-bottom: 29px;
 }
 
-h2 {
+
+.social-join > p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.social-join h2 {
     font-size: 20px;
     font-weight: bold;
     color: #fff;

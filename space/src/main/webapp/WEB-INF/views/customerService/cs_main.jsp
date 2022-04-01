@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link href="${pageContext.request.contextPath}/resources/customerService/css/cs_main.css?ver=1" rel="stylesheet"/>
 </head>
 <body>
@@ -23,8 +24,8 @@
 				</c:forEach>
             </ul>
         </div>
-        <hr id='faq_hr' />
         <div class="FAQ2">
+        	<h3>1:1 문의하기</h3>
             <p>찾으시는 서비스가 없으신가요? <br>
             1:1문의를 이용해 보세요.</p>
             <div>
