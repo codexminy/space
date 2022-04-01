@@ -4,17 +4,7 @@ body{
 	margin: 0 auto;
 }
 #wrap_cm {
-	padding-top: 160px;
-}
-#login_btn {
-	border: 1px solid #000;
-	padding: 5px;
-	margin: 5px;
-	cursor: pointer;
-}
-#login_btn:hover{
-	background-color: #000;
-	color:#fff;
+	padding-top: 180px;
 }
 #community_category {
 	display: flex;
@@ -28,25 +18,27 @@ body{
 	display: flex;
 	justify-content: space-between;
 }
-#community_category > ul > a{
-	display: inline-block;
+#community_category > ul a{
+	display: block;
+	color: #22007F;
+	line-height: 36px;
+	font-size: 16px;
+	font-weight: bold;
 }
 #community_category > ul li {
 	width:120px;
-	height:40px;
-	font-size: 16px;
-	font-weight: bold;
+	height:40px;	
 	background-color: #fff;
-	text-align: center;
-	line-height: 36px;
-	color: #22007F;
+	text-align: center;		
 	border: 2px solid #22007F;
 	border-radius: 9999px;
+	cursor:pointer;
 }
 #community_category > ul li:hover {
-	color: #FFFFFF;
-	border: 2px solid #22007F;
 	background-color: #22007F;
+}
+#community_category > ul li:hover a {
+	color: #FFFFFF;
 }
 main {
 	width:1200px;

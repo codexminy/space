@@ -16,22 +16,12 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id='wrap_cm'>
 		<form id="go_back_main" action="./main"></form>
-		<header>
-			<div class="input_login">
-				<form id="temp_user" name="createForm" action="./login" method="POST">
-					<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
-					<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
-				</form>
-				<button id="login_btn">확인</button>
-			</div>
-			<div class="hello_login">${user_id }님 반갑습니다.</div>
-			<p id="hello">${user_id }</p>
-		</header>
+		<p id="hello">${userLoggedIn.user_id }</p>
 		<div id="community_category">
 			<ul>
-				<a href="main"><li>전체보기</li></a>
+				<li><a href="main">전체보기</a></li>
 				<c:forEach items="${c_category_list }" var="c_category_list">
-					<a href="category?id=${c_category_list.c_category_id }"><li>${c_category_list.c_category_name }</li></a>
+					<li><a href="category?id=${c_category_list.c_category_id }">${c_category_list.c_category_name }</a></li>
 				</c:forEach>
 			</ul>		
 		</div>
@@ -46,7 +36,7 @@
 				<!-- 메인 내용물 박스 -->
 				<div id="main_box">
 					<form id="c_board_create" name="c_board_create_form" action="./c_board_write/process" method="POST" enctype="multipart/form-data">
-					<input type="hidden" id="user_id" name="user_id" value="${user_id }" />
+					<input type="hidden" id="user_id" name="user_id" value="${userLoggedIn.user_id }" />
 					<!-- 카테고리 제목 -->
 					<div class="box1">
 						<select id="c_category_select" name="c_category_id">

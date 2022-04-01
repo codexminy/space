@@ -1,12 +1,6 @@
 package com.second.space.community.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,14 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.admin.model.Notification_cmtDTO;
-import com.second.space.common.util.Utils;
 import com.second.space.community.model.CommunityBoardDTO;
-import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.community.service.CommunityService;
 
@@ -50,20 +40,6 @@ public class CommunityController {
 			log.info("Error");
 			e.printStackTrace();
 		}
-	}
-	
-	@PostMapping("/login")
-	public String communityMainLogin(HttpServletRequest request, Model model) {
-		String temp_id = request.getParameter("temp_id");
-		String temp_pw = request.getParameter("temp_pw");
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("user_id", temp_id);
-		session.setAttribute("user_pw", temp_pw);
-		
-		System.out.println("아이디: "+session.getAttribute("user_id"));
-		System.out.println("비밀번호: "+session.getAttribute("user_pw"));
-		return "redirect:/community/main";
 	}
 	
 	@GetMapping("/c_board")

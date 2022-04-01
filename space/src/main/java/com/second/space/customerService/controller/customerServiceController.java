@@ -37,24 +37,6 @@ public class customerServiceController {
 		return "/customerService/cs_main";
 	}
 	
-	
-	// 로그인 기능구현 시 삭제
-	@PostMapping("/login")
-	public String communityMainLogin(HttpServletRequest request, Model model) {
-		String temp_id = request.getParameter("temp_id");
-		String temp_pw = request.getParameter("temp_pw");
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("user_id", temp_id);
-		session.setAttribute("user_pw", temp_pw);
-		
-		System.out.println("아이디: "+session.getAttribute("user_id"));
-		System.out.println("비밀번호: "+session.getAttribute("user_pw"));
-		return "redirect:/customerService/main";
-	}
-	// 로그인 기능구현시 삭제
-	
-	
 	@RequestMapping("/category")
 	public String csCategory(HttpServletRequest request, Model model) {
 		System.out.println("자주 묻는 질문 cs_category_id : "+request.getParameter("id")+"(으)로 이동");

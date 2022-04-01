@@ -18,7 +18,7 @@
 		<form id="report" name="reportForm" action="./comment_report/process" method="POST">
 			<input type="hidden" name="c_id" value="${c_id }" />
 			<input type="hidden" name="c_board_id" value="${c_board_id }" />
-			<input type="hidden" name="user_id" value="${user_id }" />
+			<input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
 			<p>신고유저: 
 				<c:forEach items="${c_board_list }" var="c_board_list">
 				<c:if test="${c_board_list.c_board_id eq c_board_id}">

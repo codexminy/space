@@ -40,7 +40,7 @@
             <div class="snb">
                 <ul id="snb_check">
                		<c:forEach items="${contact_us_list }" var="contact_us_list">
-					<c:if test="${contact_us_list.user_id eq user_id }">
+					<c:if test="${contact_us_list.user_id eq userLoggedIn.user_id }">
 						<li class="list_${contact_us_list.cu_id }"><a href="./contactUsListView?val=${contact_us_list.cu_id }">${contact_us_list.cu_title}</a></li>
 					</c:if>
 					</c:forEach>

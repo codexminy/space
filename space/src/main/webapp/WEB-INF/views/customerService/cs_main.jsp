@@ -11,17 +11,7 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapcs">
-		<!-- 로그인 기능 구현 시 삭제 -->
-		<div class="input_login">
-			<form id="temp_user" name="createForm" action="./login" method="POST">
-				<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
-				<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
-			</form>
-			<button id="login_btn">확인</button>
-		</div>
-		<div class="hello_login">${user_id }님 반갑습니다.</div>
-		<p id="hello">${user_id }</p>
-		<!-- 로그인 기능 구현 시 삭제 -->
+		<p id="hello">${userLoggedIn.user_id }</p>
         <div class="customerService">
         	<img src="${pageContext.request.contextPath}/resources/images/customerService/cs_banner.png" width="1200px"/>
         </div>

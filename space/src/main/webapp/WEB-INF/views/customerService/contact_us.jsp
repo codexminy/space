@@ -22,7 +22,7 @@
             <h3>1:1 문의하기</h3>
             <div id="main_box">
 				<form id="contact_us_create" name="contact_us_create_form" action="./contactUs/process" method="POST" enctype="multipart/form-data">
-				<input type="hidden" id="user_id" name="user_id" value="${user_id }" />
+				<input type="hidden" id="user_id" name="user_id" value="${userLoggedIn.user_id }" />
 				<!-- 카테고리 제목 -->
 				<div class="box1">
 					<select id="cs_category_select" name="cs_category_id">

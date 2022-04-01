@@ -11,22 +11,12 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrap_cm">
-		<header>
-			<div class="input_login">
-				<form id="temp_user" name="createForm" action="./login" method="POST">
-					<input type="text" name="temp_id" placeholder="아이디를 입력하세요." autocomplete="off" />
-					<input type="password" name="temp_pw" placeholder="비밀번호를 입력하세요." autocomplete="off" />
-				</form>
-				<button id="login_btn">확인</button>
-			</div>
-			<div class="hello_login">${user_id }님 반갑습니다.</div>
-			<p id="hello">${user_id }</p>
-		</header>
+		<p id="hello">${userLoggedIn.user_id }</p>
 		<div id="community_category">
 			<ul>
-				<a href="main"><li>전체보기</li></a>
+				<li><a href="main">전체보기</a></li>
 				<c:forEach items="${c_category_list }" var="c_category_list">
-					<a href="category?id=${c_category_list.c_category_id }"><li>${c_category_list.c_category_name }</li></a>
+					<li><a href="category?id=${c_category_list.c_category_id }">${c_category_list.c_category_name }</a></li>
 				</c:forEach>
 			</ul>		
 		</div>
@@ -94,11 +84,11 @@
 									</ul>
 								</div>
 								<div class='reply_form'>
-									<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="30px"/></div>
+									<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${userLoggedIn.user_id }.png" width="30px"/></div>
 									<form class='reply_write_form' name="replyForm" action="./reply_write" method="POST">
 										<textarea class='reply_textarea' name="c_content" style="width:87%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 										<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
-										<input type="hidden" name="user_id" value="${user_id }" />
+										<input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
 										<input type="hidden" name="c_depth" value="1" />
 										<input type="hidden" name="c_group_id" value="${c_comment_list.c_id }" />
 										<input type="hidden" name="c_group_order_id" value="${c_comment_list.c_id }" />
@@ -123,11 +113,11 @@
 										</ul>
 									</div>
 									<div class='rereply_form'>
-										<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="30px"/></div>
+										<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${userLoggedIn.user_id }.png" width="30px"/></div>
 										<form class='rereply_write_form' name="rereplyForm" action="./reply_write" method="POST">
 											<textarea class='reply_textarea' name="c_content" style="width:87%;height:30px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 											<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
-											<input type="hidden" name="user_id" value="${user_id }" />
+											<input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
 											<input type="hidden" name="c_depth" value="2" />
 											<input type="hidden" name="c_group_id" value="${c_comment_list2.c_id }" />
 											<input type="hidden" name="c_group_order_id" value="${c_comment_list.c_id }" />
@@ -159,13 +149,13 @@
 						</c:choose>
 						</c:forEach>
 						<c:choose>
-						<c:when test="${not empty user_id}">
+						<c:when test="${not empty userLoggedIn.user_id}">
 							<div class='mycomment'>
-								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${user_id }.png" width="50px"/></div>
+								<div class='c_comment_myprofile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${userLoggedIn.user_id }.png" width="50px"/></div>
 								<form class='c_comment_write' name="commentForm" action="./comment_write" method="POST">
 									<textarea class='c_comment_textarea' name="c_content" style="width:80%;height:50px;border:1;overflow:visible;text-overflow:ellipsis;"></textarea>
 									<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
-									<input type="hidden" name="user_id" value="${user_id }" />
+									<input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
 									<input class='c_comment_btn' type="submit" value="등록"/>
 								</form>
 							</div>			
