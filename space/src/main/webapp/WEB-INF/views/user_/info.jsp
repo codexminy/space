@@ -62,7 +62,7 @@
                     <input type="hidden" name="user_email" id="email"/>
                     <br>
                     <select name="agency" id="userAgency" onchange="checkAgency(this.options[this.selectedIndex].text);">
-                        <option value="no">통신사 선택</option>
+                        <option value="no">통신사</option>
                         <option value="SKT">SKT</option>
                         <option value="KT">KT</option>
                         <option value="LG">U+</option>  
@@ -197,7 +197,7 @@ chkId.addEventListener('click', (e) => {
  
  pwd.addEventListener("change", (e) => {
 	 const img = document.createElement("img");
-	 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/greencheck.png`);
+	 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/pass.png`);
 	 img.setAttribute("id", "greenchk");
 	 img.style.marginTop = '9px';
 	 /* img.style.left = "1080px"; */
@@ -217,7 +217,7 @@ chkId.addEventListener('click', (e) => {
 		 if(redchk != null){
 			 redchk.remove();
 		 }
-		 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/greencheck.png`);
+		 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/pass.png`);
 		 img.setAttribute("id", "greenchk2");
 		 /* img.style.left = "1080px"; */
 		 pwdChk.after(img);
@@ -233,7 +233,7 @@ chkId.addEventListener('click', (e) => {
 			 if(greenchk2 != null){
 				 greenchk2.remove();
 			 }
-			 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/redcheck.png`);
+			 img.setAttribute("src", `${pageContext.request.contextPath}/resources/images/emoji/fail.png`);
 			 img.setAttribute("id", "redchk");
 			 img.style.left = "1080px";
 			 pwdChk.after(img);
