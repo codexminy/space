@@ -29,6 +29,7 @@ public class CommunityController {
 	public void communityMain(Model model) {
 		System.out.println("community main으로 이동");
 		try {
+			model.addAttribute("c_user_list", community_service.getUserList());
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
@@ -47,6 +48,7 @@ public class CommunityController {
 		System.out.println("community board로 이동");
 		try {
 			community_service.PutCommunityBoardViewCount(list);
+			model.addAttribute("c_user_list", community_service.getUserList());
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
@@ -139,6 +141,7 @@ public class CommunityController {
 		System.out.println("community category_id : "+request.getParameter("id")+"(으)로 이동");
 		request.setAttribute("category_id", request.getParameter("id"));
 		try {
+			model.addAttribute("c_user_list", community_service.getUserList());
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());

@@ -9,8 +9,11 @@ import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
+import com.second.space.community.model.CommunityUserDTO;
 
 public interface CommunityService {
+	
+	public List<CommunityUserDTO> getUserList() throws Exception;
 	
 	public int getCommunityBoardCount() throws Exception;
 	public CommunityBoardDTO getCommunityBoardList(CommunityBoardDTO list) throws Exception;

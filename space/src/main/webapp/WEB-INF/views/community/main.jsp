@@ -33,7 +33,20 @@
 						<input type="hidden" name="c_board_id" value="${c_board_list.c_board_id }" />
 					</form>
 					<div class='c_category'>${c_board_list.c_category_name }</div>
-					<div class='c_board_profile'><img src="${pageContext.request.contextPath}/resources/images/profile/profile${c_board_list.user_id }.png" width="60px"/></div>
+					<div class='c_board_profile'>
+						<c:forEach items="${c_user_list }" var="c_user_list">
+						<c:if test="${c_board_list.user_id eq c_user_list.user_id}">
+							<c:choose>
+							<c:when test="${not empty c_user_list.user_profile }">
+								<img src="${pageContext.request.contextPath}/resources/${c_user_list.user_profile }" width="60px"/>
+							</c:when>
+							<c:otherwise>
+								<img src="${pageContext.request.contextPath}/resources/images/profile/null.png" width="60px"/>
+							</c:otherwise>
+							</c:choose>
+						</c:if>
+						</c:forEach>
+					</div>
 					<ul class='c_board_writer'>
 						<li>작성자&nbsp;&nbsp;${c_board_list.user_nickname }</li>
 						<li><fmt:formatDate value="${c_board_list.c_board_date }" pattern="yy.MM.dd a hh:mm"/></li>
@@ -61,6 +74,9 @@
 							</c:forEach>
 						</li>
 					</ul>
+					
+					
+					<!-- 
 					<div class='c_comment'>
 						<hr />
 						<c:forEach items="${c_comment_list }" var="c_comment_list">
@@ -75,11 +91,11 @@
 									</ul>
 									<div class='c_comment_content'>${c_comment_list.c_content }</div>
 									<ul class='c_comment_option'>
+										<li class='reply_write'>답글쓰기
+										</li>
 										<li class='comment_report'>신고하기
 											<p class='data_board_id2'>${c_comment_list.c_board_id }</p>
 											<p class='data_comment_id'>${c_comment_list.c_id }</p>
-										</li>
-										<li class='reply_write'>답글쓰기
 										</li>
 									</ul>
 								</div>
@@ -105,11 +121,11 @@
 										</ul>
 										<div class='c_comment_content'>${c_comment_list2.c_content }</div>
 										<ul class='c_comment_option'>
+											<li class='rereply_write'>답글쓰기</li>
 											<li class='comment_report'>신고하기
 												<p class='data_board_id2'>${c_comment_list2.c_board_id }</p>
 												<p class='data_comment_id'>${c_comment_list2.c_id }</p>
 											</li>
-											<li class='rereply_write'>답글쓰기</li>
 										</ul>
 									</div>
 									<div class='rereply_form'>
@@ -160,9 +176,11 @@
 								</form>
 							</div>			
 						</c:when>
-						</c:choose>	
-						
+						</c:choose>							
 					</div>
+					 -->
+					
+					
 				</div>
 			</c:forEach>
 		</main>

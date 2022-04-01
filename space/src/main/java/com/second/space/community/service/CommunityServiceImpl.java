@@ -12,6 +12,7 @@ import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
+import com.second.space.community.model.CommunityUserDTO;
 import com.second.space.mapper.CommunityXMLMapper;
 
 @Service
@@ -140,5 +141,11 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int PutCommunityBoardViewCount(CommunityBoardDTO list) throws Exception {
 		return community_mapper.communityBoardViewCount(list);
+	}
+	
+	/* 유저 리스트 GET */
+	@Override
+	public List<CommunityUserDTO> getUserList() throws Exception {
+		return community_mapper.getUserList();
 	}
 }

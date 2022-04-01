@@ -9,8 +9,11 @@ import com.second.space.community.model.CommunityBoardImgDTO;
 import com.second.space.community.model.CommunityCategoryDTO;
 import com.second.space.community.model.CommunityCommentCountDTO;
 import com.second.space.community.model.CommunityCommentDTO;
+import com.second.space.community.model.CommunityUserDTO;
 
 public interface CommunityXMLMapper {
+	
+	public List<CommunityUserDTO> getUserList();
 	
 	public CommunityBoardDTO getCommunityBoard(int pk);
 	public List<CommunityBoardDTO> getCommunityBoardList();
