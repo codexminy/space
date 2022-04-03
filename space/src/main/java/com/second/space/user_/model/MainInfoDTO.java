@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class MainInfoDTO {
 	private int board_id;
 	private String originalfilename;
+	private String renamedfilename;
 	private String board_title;
 	private String board_price;
 	private String user_address;
