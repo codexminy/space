@@ -110,5 +110,9 @@
 	WHERE ROWNUM <![CDATA[<=]]> 5 ORDER BY c_board_date DESC
 </select>
 
+<select id="getBoardLikeList" resultType="com.second.space.board.model.BoardLikeDTO">
+	SELECT * FROM board_like WHERE user_id = #{user_id}
+</select>
+
 
 </mapper>

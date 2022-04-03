@@ -30,6 +30,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
+import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.user_.model.LoginDTO;
 import com.second.space.user_.model.LoginIdListDTO;
@@ -88,10 +89,24 @@ public class User_Controller {
 				List<NoticeDTO> noticeList = userService.getNoticeList();
 				//커뮤니티
 				List<CommunityBoardDTO> communityList = userService.getCommunityList(user.getUser_address());
+				//찜
+				List<BoardLikeDTO> likeList = userService.getBoardLikeList(user.getUser_id());
+				for(int i = 0; i < mainList.size(); i++) {
+					for(int j = 0; j < likeList.size(); j++) {
+						if(mainList.get(i).getBoard_id() == likeList.get(j).getBoard_id()) {
+							mainList.get(i).setBoard_like("Y");
+							break;
+						}
+					}
+				}
+				
+				
 				
 				model.addAttribute("mainList", mainList);
 				model.addAttribute("noticeList", noticeList);
 				model.addAttribute("communityList", communityList);
+				
+				
 				
 				
 				//자동로그인
@@ -120,10 +135,10 @@ public class User_Controller {
 				
 				
 			}else {
-				returnURL = "redirect/user_/login";
+				returnURL = "redirect:/user_/login";
 			}
 		}else {
-			returnURL = "redirect/user_/login";
+			returnURL = "redirect:/user_/login";
 		}
 
 		return returnURL;

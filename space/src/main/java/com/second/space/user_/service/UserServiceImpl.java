@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
+import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.mapper.UserXMLMapper;
 import com.second.space.user_.model.LoginIdListDTO;
@@ -135,5 +136,9 @@ public class UserServiceImpl implements UserService{
 
 	public List<CommunityBoardDTO> getCommunity() {
 		return userMapper.getCommunity();
+	}
+	
+	public List<BoardLikeDTO> getBoardLikeList(Integer user_id) {
+		return userMapper.getBoardLikeList(user_id);
 	}
 }

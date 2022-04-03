@@ -6,7 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Data
 public class AuctionDTO {
@@ -20,4 +22,7 @@ public class AuctionDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date auction_date;
 	private Integer auction_price;
+	private Integer purchase_price;
+	private Integer min_price;
+	
 }

@@ -10,12 +10,20 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/boardPost.css">
 </head>
+<style>
+#star_p {
+	width: 37px;
+	height: 36px;
+}
+</style>
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="board-wrapper">
 	<h2>● 일반 상품 등록하기</h2>
 	<form action="./boardView" method="post" id="board_form" enctype="multipart/form-data">
-	    <input type="hidden" name="user_id" value="2" />
+		<c:if test="${userLoggedIn != null }">
+		    <input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
+		</c:if>
 	    <div class="board-top">
 	        <h2>기본 정보</h2>
 	        <div class="prouct-info">
@@ -23,7 +31,7 @@
 	                <img src="${pageContext.request.contextPath}/resources/images/board/camera.png" alt="첨부파일이미지">
 	                <p>이미지 등록</p>
 	                <input type="file"  id="upload_file" name="upfile" multiple="multiple"  />
-		<input type="hidden" name="main_img" id="main_img"/>
+					<input type="hidden" name="main_img" id="main_img"/>
 	            </div>
 	            <div class="board-input">
 	                <div class="product-title">
@@ -64,7 +72,6 @@
 	            <div class="img_div" id="img_div4"></div>
 	            <div class="img_div" id="img_div5"></div>
 	            <div class="img_div" id="img_div6"></div>
-	            <div id="star_p"><img src="${pageContext.request.contextPath}/resources/images/board/star_full.png"></div>
 	        </div>
 	        <div class="img_info">
 	            <ul>
@@ -187,12 +194,16 @@ function readFile(e) {
 					
 					const img = e.target;
 					img.style.position = "relative";
-					const star_p = document.createElement("p");
+					const star_p = document.createElement("div");
 					star_p.setAttribute("id", "star_p");
-					star_p.innerText = "⭐";
+				 	star_p.style.position = "abosolute"; 
+					const star_img = document.createElement("img");
+					star_img.src = "/space/resources/images/board/star_full.png";
+					/* star_p.innerText = "⭐"; */
+					star_p.append(star_img);
 					
-					star_p.style.top = img.getBoundingClientRect().top + window.pageYOffset +"px";
-					
+					/* star_p.style.top = img.getBoundingClientRect().top + window.pageYOffset +"px"; */
+					star_p.style.top = "10px";
 					img.parentNode.appendChild(star_p);
 				});
 	
@@ -262,7 +273,7 @@ submit_btn.addEventListener('click', (e) => {
 	const board_trade_type = document.getElementsByName("board_trade_type");
 	
 	console.log(board_trade_type[0].checked);
-	let check =  /^[0-9]+$/;
+	let check =  /^[0-9,]+$/;
 
 	
 	if(select.value == "카테고리"){

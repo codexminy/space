@@ -14,6 +14,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<section>
+	
 		<div class="blank"></div>
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
@@ -36,20 +37,29 @@
             </div>
             <div class="cards-wrap">
             <c:if test="${not empty mainList}">
-            <c:forEach var="m" items="${mainList}">
+            <c:forEach var="m" items="${mainList}" varStatus="status">
+            	<c:if test="${status.first }">
+            		<input type="hidden" id="user_id" value="${user_id }">
+            	</c:if>
                 <article class="card">	                   
             		<div class="card-photobox">
                 		<div class="card-photo">
-                    		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'"
-                    		style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
-                    		<c:if test="${userLoggedIn != null }">
-                    			<c:if test="${userLoggedIn.user_id eq m.user_id }">
-                    				<div class="card-heart-actice"></div>
-                    			</c:if>
+                			<c:if test="${m.auction_id eq null }">
+                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'"
+                    			style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
                     		</c:if>
-                    		<c:if test="${userLoggedIn == null }">
-                    			<div class="card-heart"></div>
+                    		<c:if test="${m.auction_id ne null }">
+                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/auctionView?board_id=${m.board_id}&auction_id=${m.auction_id}'"
+                    			style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
                     		</c:if>
+                    		
+                    		<c:if test="${m.board_like eq 'Y'}">
+                    			<div class="card-heart active" id="heart${status.count}" value="${m.board_id}"></div>
+                    		</c:if>
+                    		<c:if test="${m.board_like eq null }">
+                    			<div class="card-heart" id="heart${status.count}" value="${m.board_id}"></div>
+                    		</c:if>
+                    		
                 		</div>
                 		<div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
                     		<div class="card-text">
@@ -69,7 +79,7 @@
                 <div class="notice">
                     <div class="notice-title">
                         <h2>공지사항</h2>
-                        <p class="text"><a href="${pageContext.request.contextPath}/notice/notice">더보기 ></a></p>
+                        <p class="text"><a href="#">더보기 ></a></p>
                     </div>    
                     <div class="notice-board">
                         <ul>
@@ -90,7 +100,7 @@
                         <ul>
                           <c:if test="${not empty communityList }">
                        		 <c:forEach var="c" items="${communityList}">
-                            	<li><a href="${pageContext.request.contextPath}/community/c_board?c_board_id=${c.c_board_id}">${c.c_board_title}</a></li>
+                            	<li><a href="#">${c.c_board_title}</a></li>
                        		 </c:forEach>
                         </c:if>
                         </ul>
@@ -127,10 +137,33 @@
 	}
 	
 	let like = document.querySelectorAll(".card-heart");
+	const sendLike = new XMLHttpRequest();
 
     for (let i=0; i < like.length; i++) {
-        like[i].addEventListener('click', function() {
-        this.classList.toggle('active');
+        like[i].addEventListener('click', function(e) {
+        	
+       		 this.classList.toggle('active');
+       		 
+       		 
+       		var user_id = document.getElementById("user_id");
+       
+       		if(user_id != null && user_id.value != ""){
+	       		if(this.classList.contains("active")){
+	       			const params = {user_id : user_id.value, board_id : this.getAttribute("value")};
+	    			sendLike.open('POST', `${pageContext.request.contextPath}/board/like`);
+	    			sendLike.setRequestHeader('content-type', 'application/json');
+	    			sendLike.send(JSON.stringify(params));
+	       		}else {
+	    			const params = {user_id : user_id.value, board_id : this.getAttribute("value")};
+	    			sendLike.open('POST', `${pageContext.request.contextPath}/board/unlike`);
+	    			sendLike.setRequestHeader('content-type', 'application/json');
+	    			sendLike.send(JSON.stringify(params));
+	    		} 
+       		}else {
+       			alert("로그인 후 이용가능 합니다.");
+        		location.href = `${pageContext.request.contextPath}/user_/login`; 
+        		console.log(${userLoggedIn.user_id});
+       		}
         });
     }
 

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.second.space.admin.model.NoticeDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
+import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.user_.model.LoginIdListDTO;
 import com.second.space.user_.model.MainInfoDTO;
@@ -50,6 +51,8 @@ public interface UserXMLMapper {
 	List<MainInfoDTO> getMain();
 
 	List<CommunityBoardDTO> getCommunity();
+
+	List<BoardLikeDTO> getBoardLikeList(Integer user_id);
 
 	
 

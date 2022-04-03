@@ -49,5 +49,61 @@
 	<select id="getCategoryName" parameterType="_int" resultType="string">
 		SELECT p_category_name FROM payments_category WHERE p_category_id = #{p_category_id}
 	</select>
+	
+	<select id="getUserByUserId" resultType="com.second.space.user_.model.UserDTO">
+		SELECT * FROM user_ WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="getFollower" resultType="_int">
+		SELECT COUNT(*) FROM follower WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="getBoardCnt" resultType="_int">
+		SELECT COUNT(*) FROM board WHERE user_id = #{user_id}
+	</select>
+	
+	<insert id="insertAcution" parameterType="com.second.space.board.model.AuctionDTO">
+		INSERT INTO auction (auction_id, user_id, board_id, auction_start_date, auction_end_date, purchase_price, min_price)
+		VALUES
+		(auction_auction_id_seq.nextval, #{user_id}, #{board_id}, #{auction_start_date}, #{auction_end_date}, #{purchase_price}, #{min_price})
+	</insert>
+	
+	<select id="getAuctionId" resultType="_int">
+		SELECT auction_id FROM auction WHERE board_id = #{board_id}
+	</select>
+	
+	<select id="getAuctionDTO" resultType="com.second.space.board.model.AuctionDTO">
+		SELECT * FROM auction WHERE auction_id = #{auction_id}
+	</select>
+	
+	<select id="getFollowing2" parameterType="com.second.space.board.model.FollowingDTO"  resultType="_int" >
+		SELECT COUNT(*) FROM following_ WHERE user_id = #{user_id} AND user_login_id = #{user_login_id}
+	</select>
+	
+	<insert id="insertFollowing" parameterType="com.second.space.board.model.FollowingDTO" >
+		INSERT INTO following_ 
+		(following_id, user_id, user_login_id)
+		VALUES
+		(following_following_id_seq.nextval, #{user_id} , #{user_login_id})
+	</insert>
+	
+	<delete id="deleteFollowing" parameterType="com.second.space.board.model.FollowingDTO" >
+		DELETE FROM following_ WHERE user_id = #{user_id} AND user_login_id = #{user_login_id}
+	</delete>
+	
+	<select id="getBoardLike" parameterType="com.second.space.board.model.BoardLikeDTO" resultType="_int">
+		SELECT COUNT(*) FROM board_like WHERE user_id = #{user_id} AND board_id = #{board_id}
+	</select>
+	
+	<insert id="insertBoardLike" parameterType="com.second.space.board.model.BoardLikeDTO">
+		INSERT INTO board_like
+		(board_like_id, board_id, user_id)
+		VALUES
+		(board_like_id_seq.nextval , #{board_id}, #{user_id})
+	</insert>
+	
+	<delete id="deleteBoardLike" parameterType="com.second.space.board.model.BoardLikeDTO">
+		DELETE FROM board_like WHERE user_id = #{user_id} AND board_id = #{board_id}
+	</delete>
 
 </mapper>

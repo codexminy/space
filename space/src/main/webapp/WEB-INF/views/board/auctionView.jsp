@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/auctionView.css">
 </head>
+<style>
+.img_div > img {
+	width: 120px;
+	height: 120px;
+	border: 1px solid #707070;
+	border-radius: 11px;
+}
+</style>
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="board-wrapper">
@@ -18,34 +26,58 @@
         <h2>카테고리</h2>
     </div>
     <form action="./boardView" method="post" id="board_form" enctype="multipart/form-data">
-        <input type="hidden" name="user_id" value="2" />
+    	<c:if test="${userLoggedIn ne null }">
+    		<input type="hidden" id="user_id" value="${userLoggedIn.user_id }" />
+    	</c:if>
+    	<c:if test="${userLoggedIn eq null }">
+    		<input type="hidden" id="user_id"  />
+    	</c:if>
+        <input type="hidden" name="user_id" value="${board.user_id }" />
         <div class="board-top">
             <h2>기본 정보</h2>
             <div class="prouct-info">
                 <div class="board-img"  id="postimg">
-                    <img src="${pageContext.request.contextPath}/resources/images/board/product_image.png" alt="대표이미지">
+                     <c:forEach var="b" items="${boardImgList }" >
+                     	<c:if test="${b.main_img eq 'Y' }">
+                     		<img src="<c:url value='/resources/upload/board/${b.renamedfilename}' />" />
+                    	</c:if> 
+                    </c:forEach>
                 </div>
                 <div class="board-input">
                     <div class="product-title">
                         <h3>제목</h3>
-                        <h3>입력한 제목</h3>
+                        <h3>${board.board_title }</h3>
                     </div>
                     <div class="product-price">
                         <h3>최소 입찰가</h3>
-                        <h3>입력한 가격</h3>                                                    
+                        <h3>${auction.min_price }</h3>                                                    
                         <h3>즉시 구매가</h3>
-                        <h3>입력한 가격</h3>                                                    
+                        <h3>${auction.purchase_price }</h3>                                                    
                         <h3>현재 입찰가</h3>
-                        <h3>입력한 가격</h3>                                                    
+                        <h3>${auction.min_price }</h3>                                                    
                     </div>
                     <div class="product-location">
                         <h3>거래 지역</h3>
-                        <h3>입력한 거래 지역</h3>
+                        <h3>${user.user_address }</h3>
                         <div class="chkbox">
-                            <input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery"/>
-                            <label for="delivery" class="label" >택배</label>
-                            <input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" />
-                            <label for="direct" class="label" >직거래</label>
+                             <c:if test="${board.board_trade_type eq 'both' }">
+	                            <input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery" checked="checked"/>
+	                            <label for="delivery" class="label" >택배</label>
+	                            <input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" checked="checked"/>
+	                            <label for="direct" class="label" >직거래</label>
+	                        </c:if>
+	                        <c:if test="${board.board_trade_type eq 'direct' }">
+	                       		<input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery" />
+	                            <label for="delivery" class="label" >택배</label>
+	                            <input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" checked="checked"/>
+	                            <label for="direct" class="label" >직거래</label>
+	                         </c:if>
+	                        <c:if test="${board.board_trade_type eq 'delivery' }">
+	                       		<input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery" checked="checked" />
+	                            <label for="delivery" class="label" >택배</label>
+	                            <input type="checkbox" name="board_trade_type" value="direct"  class="radio" id="direct" />
+	                            <label for="direct" class="label" >직거래</label>
+	                         </c:if>
                         </div>
                     </div>
                 </div>
@@ -53,23 +85,46 @@
         </div>
         <div class="board-middle">
             <div class="img_divs">
-                <div class="img_div" id="img_div1"></div>
-                <div class="img_div" id="img_div2"></div>
-                <div class="img_div" id="img_div3"></div>
-                <div class="img_div" id="img_div4"></div>
-                <div class="img_div" id="img_div5"></div>
-                <div class="img_div" id="img_div6"></div>
+              <c:forEach var="b" items="${boardImgList }" varStatus="status">
+                <div class="img_div" id="img_div${status.count}">
+                	<img src="${pageContext.request.contextPath}/resources/upload/board/${b.renamedfilename}">
+                </div>
+                <c:if test="${status.last }">
+                	<c:forEach var="i" begin="${status.count + 1}"  end="6">
+                		<div class="img_div" id="img_div${i}"></div>
+                	</c:forEach>
+                </c:if>
+            </c:forEach>
             </div>
             <div class="product-contact">
-                <div class="interested"></div>
-                <div class="space-talk-button"></div>
+             <c:if test="${userLoggedIn ne null }">
+            <c:if test="${userLoggedIn.user_id ne board.user_id}">
+            	<c:if test="${boardLike ne 0}">
+                	<div class="interested active" id="like"></div>
+                </c:if>
+                <c:if test="${boardLike eq 0 }">
+                   		<div class="interested" id="like"></div>
+                </c:if>
+            </c:if>    
+            </c:if>
+            <c:if test="${userLoggedIn eq null }">
+                	<div class="interested " id="like"></div>
+            </c:if>
+            <c:if test="${userLoggedIn ne null }">
+            	<c:if test="${userLoggedIn.user_id ne board.user_id}">
+                 	<div class="space-talk-button"></div>
+                </c:if>
+            </c:if>
+            <c:if test="${userLoggedIn eq null }">
+            	<div class="space-talk-button"></div>
+            </c:if>
             </div>
         </div>           
         <div class="board_end">
             <div class="board-end-left">
                 <h2>상품 설명</h2>
                 <div class="content">
-                    <p>상품 설명 길이가 길어도 박스 사이즈에 맞춰서 늘어납니다</p>
+                    <p>${board.board_content }</p>
                 </div>
                 <input type="button" value="이 게시글 신고하기 >"id="show"></input>
                 <div class="background">
@@ -111,10 +166,15 @@
                 <div class="store-profile">
                     <img src="${pageContext.request.contextPath}/resources/images/board/store_basic.png">
                     <div class="store-info">
-                        <h3>유저닉네임최대열글자</h3>
-                        <p>상품 000 | 팔로워 000</p>
+                        <h3>${nickname }</h3>
+                        <p>상품 ${boardCnt } | 팔로워 ${follower }</p>
                     </div>
-                    <div class="follow"></div>
+                    <c:if test="${following ne null }">
+                    	<div class="follow active" ></div>
+                    </c:if>
+                       <c:if test="${following eq null }">
+                    	<div class="follow" ></div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -146,19 +206,44 @@
 
 
     let interest = document.querySelectorAll(".interested");
+    const sendLike = new XMLHttpRequest();
 
     for (let i=0; i < interest.length; i++) {
         interest[i].addEventListener('click', function() {
-        this.classList.toggle('active');
+       		this.classList.toggle('active');
+       		var like = document.getElementById("like");
+    		if(like.classList.contains("active")){
+    			const params = {user_id : user_id.value, board_id :  ${board.board_id}};
+    			sendLike.open('POST', `${pageContext.request.contextPath}/board/like`);
+    			sendLike.setRequestHeader('content-type', 'application/json');
+    			sendLike.send(JSON.stringify(params));
+    		}else {
+    			const params = {user_id : user_id.value, board_id :  ${board.board_id}};
+    			sendLike.open('POST', `${pageContext.request.contextPath}/board/unlike`);
+    			sendLike.setRequestHeader('content-type', 'application/json');
+    			sendLike.send(JSON.stringify(params));
+    		}
+       	 
+        
         });
     }
 
     let follow = document.querySelectorAll(".follow");
     // follow.classList.toggle("active");
+    const sendFollow = new XMLHttpRequest();
 
     for (let i=0; i < follow.length; i++) {
         follow[i].addEventListener('click', function() {
-        this.classList.toggle('active');
+       	 this.classList.toggle('active');
+       	 var user_id = document.getElementById("user_id");
+       		if(user_id != null){
+	    		var user_login_id = ${user.user_login_id};
+	    		console.log(user_id);
+        	} else {
+        		alert("로그인 후 이용가능 합니다.");
+        		location.href = `${pageContext.request.contextPath}/user_/login`;
+        	}
+       	 
         });
     }
 
@@ -175,5 +260,8 @@
         str = String(str);
         return str.replace(/[^\d]+/g, '');
     }
+    
+    
+   
 </script>
 </html>

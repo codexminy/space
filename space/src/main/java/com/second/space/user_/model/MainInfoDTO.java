@@ -15,4 +15,6 @@ public class MainInfoDTO {
 	private String board_price;
 	private String user_address;
 	private Integer user_id;
+	private Integer auction_id;
+	private String board_like;
 }

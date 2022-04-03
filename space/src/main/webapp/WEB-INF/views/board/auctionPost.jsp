@@ -10,12 +10,21 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/auctionPost.css">
 </head>
+<style>
+#star_p {
+	width: 37px;
+	height: 36px;
+}
+</style>
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="board-wrapper">
 	<h2>● 경매 상품 등록하기</h2>
-	<form action="./boardView" method="post" id="board_form" enctype="multipart/form-data">
-	    <input type="hidden" name="user_id" value="2" />
+	<form action="./boardAuction" method="post" id="board_form" enctype="multipart/form-data">
+	   <input type="hidden" name="auction_state" value="Y"/>
+	   <c:if test="${userLoggedIn != null }">
+	    	<input type="hidden" name="user_id" value="${userLoggedIn.user_id }" />
+	   </c:if>
 	    <div class="board-top">
 	        <h2>기본 정보</h2>
 	        <div class="prouct-info">
@@ -23,7 +32,7 @@
 	                <img src="${pageContext.request.contextPath}/resources/images/board/camera.png" alt="첨부파일이미지">
 	                <p>이미지 등록</p>
 	                <input type="file"  id="upload_file" name="upfile" multiple="multiple"  />
-		<input type="hidden" name="main_img" id="main_img"/>
+					<input type="hidden" name="main_img" id="main_img"/>
 	            </div>
 	            <div class="board-input">
 	                <div class="product-title">
@@ -38,9 +47,9 @@
 	                </div>
 	                <div class="product-price">
 	                    <h3>가격</h3>
-	                    <input type="text" name="board_price" class="min_price" id="min_price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"
+	                    <input type="text" name="min_price" class="min_price" id="min_price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"
 	                    placeholder="최소입찰가"/>
-	                    <input type="text" name="board_price" class="price" id="price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"
+	                    <input type="text" name="purchase_price" class="price" id="price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"
 	                    placeholder="즉시구매가"/>
 	                    <div class="chkbox">
 	                        <input type="checkbox" name="board_trade_type" value="give_away" class="radio" id="give_away"/>
@@ -49,11 +58,11 @@
 	                <div class="product-location">
 	                    <h3>거래 지역</h3>
 	                        <input type="text" value="${address }" id="address" />
-	                            <select name="p_category_id" id="p_category_id" class="category">
+	                            <select name="a_date" id="p_category_id" class="category">
 	                                <option disabled selected>등록기간</option>
-	                                <option value="">3일</option>
-	                                <option value="">7일</option>
-	                                <option value="">14일</option>
+	                                <option value="3">3일</option>
+	                                <option value="7">7일</option>
+	                                <option value="14">14일</option>
 	                            </select>
 	                            <div class="chkbox">
 	                                <input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery"/>
@@ -72,7 +81,6 @@
 	            <div class="img_div" id="img_div4"></div>
 	            <div class="img_div" id="img_div5"></div>
 	            <div class="img_div" id="img_div6"></div>
-	            <div id="star_p"><img src="${pageContext.request.contextPath}/resources/images/board/star_full.png"></div>
 	        </div>
 	        <div class="img_info">
 	            <ul>
@@ -99,4 +107,211 @@
 	</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
+<script type="text/javascript">
+
+/*가격 천 단위 콤마(,) 설정*/
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+
+/*체크박스 설정*/
+const give_away = document.getElementById("give_away");
+const delivery = document.getElementById("delivery");
+const direct = document.getElementById("direct");
+var price = document.getElementById("price");
+give_away.addEventListener('click', (e)=> {
+	
+	price.value= 0;
+	if(delivery.checked  || direct.checked ){
+		delivery.checked = false;
+		direct.checked = false;
+	}
+});
+
+delivery.addEventListener('click', (e)=> {
+	if(give_away.checked) {
+		give_away.checked = false;
+		price.value= "";
+	} else if(direct.checked) {
+		delivery.vlaue = "both";
+		direct.value = "both";
+	} else {
+		delivery.vlaue = "delivery";
+		direct.value = "direct"
+	}
+});
+
+direct.addEventListener('click', (e)=> {
+	if(give_away.checked) {
+		price.value= "";
+		give_away.checked = false;
+	} else if(delivery.checked) {
+		delivery.vlaue = "both";
+		direct.value = "both";
+	} else {
+		delivery.vlaue = "delivery";
+		direct.value = "direct"
+	}
+});
+
+/*이미지설정*/
+const postimg = document.getElementById("postimg");
+const upload_file = document.getElementById("upload_file");
+
+postimg.addEventListener('click', (e)=> {
+	upload_file.click();
+});
+
+
+function readFile(e) {
+		
+		for(var image of e.files){
+			var cnt = 1;
+			var reader = new FileReader();
+			
+			reader.onload = e => {
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				img.setAttribute("class", "upload_img");
+				img.setAttribute("id", "upload_img"+cnt);
+				img.setAttribute("alt", cnt-1);
+	
+				document.querySelector("div#img_div"+cnt).appendChild(img);
+				
+				
+				img.addEventListener("click", (e) => {
+					var p = document.getElementById("star_p");
+					if(p != null){
+						p.remove();
+					}
+					var main_img = document.getElementById("main_img");
+					var file = document.getElementById("upload_file").files[e.target.alt].name;
+
+					main_img.setAttribute("value", file);
+					console.log(e.target.alt);
+					console.log(file);
+					
+					const img = e.target;
+					img.style.position = "relative";
+					const star_p = document.createElement("div");
+					star_p.setAttribute("id", "star_p");
+				 	star_p.style.position = "abosolute"; 
+					const star_img = document.createElement("img");
+					star_img.src = "/space/resources/images/board/star_full.png";
+					/* star_p.innerText = "⭐"; */
+					star_p.append(star_img);
+					
+					 star_p.style.top = img.getBoundingClientRect().top + window.pageYOffset +"px"; 
+					/* star_p.style.top = "10px"; */
+					img.parentNode.appendChild(star_p);
+				});
+	
+				cnt++;
+			};
+		reader.readAsDataURL(image);
+	}
+
+
+};
+
+upload_file.addEventListener("change", e => {
+	const div_img = document.getElementsByClassName("img_div");
+	for(var i = 0; i < div_img.length; i++){
+		if(div_img.item(i).hasChildNodes()){
+			div_img[i].firstChild.remove();
+			var p = document.getElementById("star_p");
+			if(p != null){
+				p.remove();
+			}
+		}
+	};
+	if(e.target.files.length > 6){
+		upload_file.value = "";
+		
+		alert("최대 6장까지 등록이 가능합니다.");
+	}else {
+		var reuslt = false;
+		for(var image of e.target.files){
+			console.log(image.name);
+			result = CheckImagefiles(image.name);
+		}
+		if(result){
+		readFile(e.target);
+		} else {
+
+			alert("jpg,jpeg,png 확장자만 등록이 가능합니다.");
+		}
+	}
+});
+
+function CheckImagefiles(fileName) {
+    var result = false;
+    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+    if(!ext){
+        return result;
+    }
+    var imgs = ['png', 'jpg', 'jpeg'];
+    ext = ext.toLocaleLowerCase();
+    imgs.forEach( function(element) {
+        if(ext == element){
+            result = true;
+        }
+    });
+    return result;
+}
+
+/*전송*/
+
+var submit_btn = document.getElementById('submit_btn');
+submit_btn.addEventListener('click', (e) => {
+	
+	var select = document.getElementById("p_category_id");
+	var price = document.getElementById("price");
+	var min_price = document.getElementById("min_price");
+	var main_img = document.getElementById("main_img");
+	var board_content = document.getElementById("board_content");
+	const board_trade_type = document.getElementsByName("board_trade_type");
+	
+	console.log(board_trade_type[0].checked);
+	let check =  /^[0-9,]+$/;
+
+	
+	if(select.value == "카테고리"){
+		alert("카테고리를 선택해주세요");
+	} else if(!check.test(price.value) || !check.test(min_price.value)) {
+		alert("가격에는 숫자만 입력 가능합니다.");
+		price.value="";
+	} else if(upload_file.value == "") {
+		alert("상품 사진을 등록해주세요.");
+	} else if(main_img.value == "") {
+		alert("메인 이미지를 선택해주세요");
+	} else if(board_content.value == ""){
+		alert("상품 설명을 입력해주세요");
+	} else if(board_trade_type.value == ""){
+		alert("거래방식을 선택해주세요");
+	} else if(board_trade_type[0].checked == false && board_trade_type[1].checked == false && board_trade_type[2].checked == false){
+		alert("거래방식을 선택해주세요");
+	}else{
+		var regex = /[^0-9]/g;	
+		var temp_price = price.value;
+		var temp_price2 = min_price.value;
+		price.value = temp_price.replace(regex, "");
+		min_price.value = temp_price2.replace(regex, "");
+		
+		var board_form = document.getElementById("board_form");
+		board_form.submit();
+	}
+	
+});
+</script>
 </html>
