@@ -13,9 +13,14 @@
 <body>
 	<div class="error-wrap">
 		<p><i class="fa-solid fa-triangle-exclamation"></i></p>
-		<p>${code }&nbsp;${errorName }</p>
-		<p>${message }</p>
-		<button type="button" onclick="javascript:history.back();">이전페이지로</button>
+		<p>${error.STATUS_CODE }&nbsp;${error.NAME }</p>
+		<p>${error.MESSAGE }</p>
+		<button type="button" onclick="goHome()">홈으로</button>
 	</div>
 </body>
+<script type="text/javascript">
+	function goHome() {
+		location.href= "${path}/main/space";
+	}
+</script>
 </html>

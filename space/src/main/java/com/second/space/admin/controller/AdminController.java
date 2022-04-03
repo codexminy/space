@@ -1,5 +1,9 @@
 package com.second.space.admin.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -275,6 +279,13 @@ public class AdminController {
 	@GetMapping("/admin/stats/notification")
 	public void statsNotificationList(Model model) {
 		settingModel(model, statsTitle, statsMenu, statsLink);
+	}
+	
+	@GetMapping("/admin/logout")
+	public String logout(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+		session.removeAttribute("userLoggedIn");
+		session.invalidate();
+		return "redirect:/main/space";
 	}
 }
 

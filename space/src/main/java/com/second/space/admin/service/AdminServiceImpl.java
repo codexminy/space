@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.second.space.admin.exception.ErrorMessage;
-import com.second.space.admin.exception.FailToCreateException;
 import com.second.space.admin.model.A_Community_boardDTO;
 import com.second.space.admin.model.A_boardDTO;
 import com.second.space.admin.model.Admin_categoryDTO;
@@ -59,13 +57,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int createNotificationAd(Notification_adDTO dto) throws Exception {
-		int result = mapper.createNotificationAd(dto);
-		
-		if(result == 0) {
-			throw new FailToCreateException(ErrorMessage.SERVER_ERROR_MSG);
-		}
-		
-		return result;
+		return mapper.createNotificationAd(dto);
 	}
 
 	@Override

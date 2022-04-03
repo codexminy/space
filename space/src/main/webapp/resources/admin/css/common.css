@@ -81,6 +81,21 @@ aside i {
 	float: right;
 }
 
+.admin-logout {
+	position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0px;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+}
+
+aside .admin-logout div:hover {
+	background-color: transparent;
+	cursor: pointer;
+}
+
 .nav {
 	display: flex;
     justify-content: space-between;
