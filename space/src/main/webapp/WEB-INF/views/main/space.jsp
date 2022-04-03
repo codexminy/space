@@ -41,7 +41,7 @@
             		<div class="card-photobox">
                 		<div class="card-photo">
                     		<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'"
-                    		style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.originalfilename}')"></div>
+                    		style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
                     		<c:if test="${userLoggedIn != null }">
                     			<c:if test="${userLoggedIn.user_id eq m.user_id }">
                     				<div class="card-heart-actice"></div>
