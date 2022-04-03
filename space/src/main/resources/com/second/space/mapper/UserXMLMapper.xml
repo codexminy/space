@@ -95,7 +95,7 @@
 </select>
 
 <select id="getMain" resultType="com.second.space.user_.model.MainInfoDTO">
-	SELECT board_id, i.originalfilename, b.board_title,  b.board_price, u.user_address, b.board_view, ul.user_id
+	SELECT board_id, i.originalfilename, i.renamedfilename, b.board_title,  b.board_price, u.user_address, b.board_view, ul.user_id
 	FROM user_ u INNER JOIN board b USING(user_id)
 	FULL OUTER JOIN (SELECT board_id, COUNT(*) AS board_like FROM board_like GROUP BY board_id)l USING(board_id)
 	FULL OUTER JOIN
