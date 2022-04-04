@@ -180,6 +180,30 @@
         </div>
         <div class="buttons">
             <input type="button" value="목록" id="cancle"/>
+            <input type="button" value="후기 작성" id="review"/>
+            <div class="review-background">
+                <div class="review-window">
+                    <div class="review-popup">
+                        <h3>리뷰작성</h3>
+                        <div class="star-rating">
+                            <span class="star-cb-group">
+                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+                                <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+                                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+                                <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+                                <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                                <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+                            </span>
+                        </div>
+                        <textarea rows="20"  name="review-write" id="review-write" 
+                                    placeholder="후기를 입력해주세요."></textarea>
+                        <div class="review-write-buttons">
+                            <input type="button" value="등록" id="send-review"/>
+                            <input type="button" value="취소" id="close_review"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="bid">
                 <input type="text" name="auction_price" class="entry-auction-price" id="entry-auction-price"  pattern="[0-9]+" onkeyup="inputNumberFormat(this)"/>
                 <input type="button" value="입찰하기" id="action-bid"/>
@@ -203,6 +227,19 @@
     document.querySelector("#close").addEventListener('click', close);
 
 
+    
+    /* 리뷰 작성 팝업 */
+    function review () {
+        document.querySelector(".review-background").className = "review-background review";
+    }
+
+    function close_review () { 
+    	document.querySelector(".review-background").className = "review-background";
+    }
+
+    document.querySelector("#review").addEventListener('click', review);
+    document.querySelector("#close_review").addEventListener('click', close_review);
+    
 
 
     let interest = document.querySelectorAll(".interested");

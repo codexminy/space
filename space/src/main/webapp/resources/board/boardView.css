@@ -171,19 +171,21 @@
 .chkbox > label{
     margin-left: 15px;
 }
-
-.chkbox input[type=checkbox] { 
+ 
+input[type=checkbox] { 
     display:none; 
 }
-
-.chkbox input[type=checkbox] + label { 
+  
+input[type=checkbox] + label { 
     cursor: pointer; 
     line-height: 22px; 
     padding-left: 25px; 
+    margin-top: 20px;
+    font-size: 16px;
     background: url('../../resources/images/board/checkbox.png') no-repeat; 
 }
-
-.chkbox input[type=checkbox]:checked + label { 
+  
+input[type=checkbox]:checked + label { 
     background: url('../../resources/images/board/checkbox_checked.png') no-repeat; 
 }
 
@@ -356,22 +358,6 @@
     transform: translate(-50%, -50%);
     transition: all .5s;
 }
-  
-input[type=checkbox] { 
-    display:none; 
-}
-  
-input[type=checkbox] + label { 
-    cursor: pointer; 
-    line-height: 22px; 
-    padding-left: 25px; 
-    margin-top: 20px;
-    background: url('../../resources/images/board/checkbox.png') no-repeat; 
-}
-  
-input[type=checkbox]:checked + label { 
-    background: url('../../resources/images/board/checkbox_checked.png') no-repeat; 
-}
 
 .popup > h3 {    
     width: 350px;
@@ -474,6 +460,10 @@ textarea:focus{
     color: #22007F;
 }
 
+.store-info > p {
+	font-size: 16px;
+}
+
 .follow {
     background: url('../../resources/images/board/store_follow.png');
     background-size: cover;
@@ -501,7 +491,161 @@ textarea:focus{
 }
 
 .buttons {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 50px;
+}
+
+.review-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;  
+    /* 숨기기 */
+    z-index: -1;
+    opacity: 0;
+}
+    
+.review {
+    opacity: 1;
+    z-index: 1000;
+    transition: all .5s;
+}
+    
+.review-window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+    
+.review-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+    /* 임시 지정 */
+    width: 450px;
+    height: 650px;
+    border-radius: 11px;
+    
+    /* 초기에 약간 아래에 배치 */
+    transform: translate(-50%, -40%);
+}
+    
+.review .review-popup {
+    transform: translate(-50%, -50%);
+    transition: all .5s;
+}
+
+.review-popup > h3 {
+    width: 350px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D1D1D1;
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #22007F;
+}
+
+.star-rating {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.star-cb-group {
+    font-size: 0;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.star-cb-group * {
+    font-size: 1rem;
+}
+
+.star-cb-group > input {
+    display: none;
+}
+
+.star-cb-group > input + label {
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 9999px;
+    width: 1em;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.star-cb-group > input + label:before {
+    display: inline-block;
+    text-indent: -9999px;
+    content: url('../../resources/images/board/star_rating_empty.png');
+}
+
+.star-cb-group > input:checked ~ label:before, 
+.star-cb-group > input + label:hover ~ label:before, 
+.star-cb-group > input + label:hover:before {
+    content: url('../../resources/images/board/star_rating_full.png');
+}
+
+.star-cb-group > .star-cb-clear + label {
+    text-indent: -9999px;
+    width: 0.5em;
+}
+
+.star-cb-group > .star-cb-clear + label:before {
+    width: 0.5em;
+}
+
+.star-cb-group:hover > input + label:before {
+    content: url('../../resources/images/board/star_rating_empty.png');
+}
+
+.star-cb-group:hover > input + label:hover ~ label:before, 
+.star-cb-group:hover > input + label:hover:before {
+    content: url('../../resources/images/board/star_rating_full.png');
+}
+
+:root {
+    font-size: 2em;
+}
+ 
+#review-write {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 380px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.review-write-buttons {
+    width: 350px;
+    height: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 50px;
+}
+
+.review-write-buttons > input[type="button"] {
+    width: 165px;
+    height: 50px;
+    border-radius: 11px;
+    border: 3px solid white;
+    color: white;
+    background-color: #22007F;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 input[type="button"] {
@@ -516,10 +660,13 @@ input[type="button"] {
     cursor: pointer;
 }
 
-#submit_btn {
+.buttons > input[type="button"]:hover {
+    width: 130px;
+    height: 50px;
+    border-radius: 11px;
     color: white;
     background-color: #22007F;
     font-size: 20px;
     font-weight: bold;
-    margin-right: 15px;
+    cursor: pointer;
 }
