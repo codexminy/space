@@ -39,6 +39,18 @@
 			<mapping path="/"/>
 			<beans:bean id="authenticationInterceptor" class="com.second.space.user_.interceptor.AuthenticationInterceptor"/>
 		</interceptor>
+        
+		<interceptor>
+			<mapping path="/community/**"/>
+			<beans:bean id="communityInterceptor" class="com.second.space.main.interceptor.MainInterceptor"/>
+		</interceptor>
+        
+		<interceptor>
+			<mapping path="/board/**"/>
+			<beans:bean id="boardInterceptor" class="com.second.space.main.interceptor.MainInterceptor"/>
+		</interceptor>
+		
+		
 	</interceptors>
 	
 	

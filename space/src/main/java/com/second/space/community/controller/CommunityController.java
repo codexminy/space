@@ -33,7 +33,6 @@ public class CommunityController {
 		HttpSession session = request.getSession();
 		UserDTO user = (UserDTO) session.getAttribute("userLoggedIn");
 		try {
-			if (user != null) {
 				model.addAttribute("c_user_list", community_service.getUserList());
 				model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
 				model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
@@ -42,7 +41,6 @@ public class CommunityController {
 				model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 				model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 				model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
-			}
 		} catch (Exception e) {
 			log.info("Error");
 			e.printStackTrace();
