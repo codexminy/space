@@ -68,19 +68,20 @@ input[type="text"] {
    border: none;
    font-size: 16px;
 }
-
 input[type="text"]:focus {
     outline: none;
 }
-
 
 input[type="password"] {
     width: 350px;
     height: 35px;
     border: none;   
     font-size: 16px;
+   	font-family : '맑은 고딕' ,'malgun gothic';
 }
-
+input[type="password"]::placeholder {
+	font-family :NanumSquare;
+}
 input[type="password"]:focus {
     outline: none;
 }
