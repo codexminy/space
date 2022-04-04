@@ -8,7 +8,7 @@
 <html>
 <head>
 	<title>신고하기</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/report.css?ver=3" />
 </head>
 <body>

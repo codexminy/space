@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>우주장터</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/common.css?ver=1" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/community/css/c_board_write.css?ver=2" />
 	<jsp:include page="../summernoteLink.jsp"/>
 	<script type="text/javascript">

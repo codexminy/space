@@ -104,7 +104,7 @@
 
 .card-heart {
     position: absolute;
-    width: 30px;
+    width: 32px;
     height: 27px;
     background-image: url('../../resources/images/board/heart_empty.png');
     background-size: cover;
@@ -117,7 +117,7 @@
 
 .card-heart.active {
     position: absolute;
-    width: 30px;
+    width: 32px;
     height: 27px;
     background-image: url('../../resources/images/board/heart_full.png');
     background-size: cover;
