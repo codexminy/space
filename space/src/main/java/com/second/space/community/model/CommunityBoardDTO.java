@@ -20,6 +20,7 @@ public class CommunityBoardDTO {
 	private Integer c_board_view;
 	private String c_board_delete;
 	private String user_nickname;
+	private String user_address;
 	
 	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date c_board_date;

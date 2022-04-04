@@ -37,8 +37,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public List<CommunityBoardDTO> getCommunityBoardList() throws Exception {
-		return community_mapper.getCommunityBoardList();
+	public List<CommunityBoardDTO> getCommunityBoardList(String user_address) throws Exception {
+		return community_mapper.getCommunityBoardList(user_address);
 	}
 
 	@Override
@@ -148,4 +148,5 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityUserDTO> getUserList() throws Exception {
 		return community_mapper.getUserList();
 	}
+
 }

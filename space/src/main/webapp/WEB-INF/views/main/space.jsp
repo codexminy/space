@@ -100,7 +100,7 @@
                         <ul>
                           <c:if test="${not empty communityList }">
                        		 <c:forEach var="c" items="${communityList}">
-                            	<li><a href="#">${c.c_board_title}</a></li>
+                            	<li><a href="${pageContext.request.contextPath}/community/c_board?c_board_id=${c.c_board_id}">${c.c_board_title}</a></li>
                        		 </c:forEach>
                         </c:if>
                         </ul>

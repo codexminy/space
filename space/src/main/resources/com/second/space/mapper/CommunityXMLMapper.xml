@@ -44,6 +44,7 @@
 		    community_board
 		    INNER JOIN community_category USING (c_category_id)
 		    INNER JOIN user_ USING (user_id)
+		WHERE user_address = #{user_address}
 		ORDER BY c_board_date DESC
 	</select>
 	<!-- 커뮤니티 카테고리 리스트 -->

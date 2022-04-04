@@ -1,6 +1,7 @@
 package com.second.space.community.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import com.second.space.admin.model.Notification_cmtDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.community.model.CommunityCommentDTO;
 import com.second.space.community.service.CommunityService;
+import com.second.space.user_.model.UserDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,17 +28,21 @@ public class CommunityController {
 	CommunityService community_service;
 	
 	@GetMapping("/main")
-	public void communityMain(Model model) {
+	public void communityMain(Model model, HttpServletRequest request) {
 		System.out.println("community main으로 이동");
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO) session.getAttribute("userLoggedIn");
 		try {
-			model.addAttribute("c_user_list", community_service.getUserList());
-			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
-			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
-			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
-			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
-			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
-			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
-			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+			if (user != null) {
+				model.addAttribute("c_user_list", community_service.getUserList());
+				model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
+				model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
+				model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
+				model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+				model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
+				model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
+				model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+			}
 		} catch (Exception e) {
 			log.info("Error");
 			e.printStackTrace();
@@ -46,16 +52,20 @@ public class CommunityController {
 	@GetMapping("/c_board")
 	public void communityBoard(HttpServletRequest request, CommunityBoardDTO list, Model model) {
 		System.out.println("community board로 이동");
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
 		try {
+			if (user != null) {
 			community_service.PutCommunityBoardViewCount(list);
 			model.addAttribute("c_user_list", community_service.getUserList());
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
-			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+			}
 		} catch (Exception e) {
 			log.info("Error");
 			e.printStackTrace();
@@ -140,15 +150,19 @@ public class CommunityController {
 	public String community1(HttpServletRequest request, Model model) {
 		System.out.println("community category_id : "+request.getParameter("id")+"(으)로 이동");
 		request.setAttribute("category_id", request.getParameter("id"));
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
 		try {
+			if (user != null) {
 			model.addAttribute("c_user_list", community_service.getUserList());
 			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
-			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
 			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -184,9 +198,13 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/board_report")
-	public String communityBoardReportWrite(Model model) {
+	public String communityBoardReportWrite(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
 		try {
-			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			if(user != null) {
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -206,10 +224,14 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/comment_report")
-	public String communityCommentReportWrite(Model model) {
+	public String communityCommentReportWrite(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
 		try {
-			model.addAttribute("c_board_list", community_service.getCommunityBoardList());
+			if (user != null) {
+			model.addAttribute("c_board_list", community_service.getCommunityBoardList(user.getUser_address()));
 			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

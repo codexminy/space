@@ -16,7 +16,7 @@ public interface CommunityXMLMapper {
 	public List<CommunityUserDTO> getUserList();
 	
 	public CommunityBoardDTO getCommunityBoard(int pk);
-	public List<CommunityBoardDTO> getCommunityBoardList();
+	public List<CommunityBoardDTO> getCommunityBoardList(String user_address);
 	public int getCommunityBoardCount();
 	
 	public CommunityCategoryDTO getCommunityCategory(int pk);
