@@ -88,8 +88,8 @@
                                 </div>
                             </div>
 	  	                    <div class="gnb-button-store" href="${pageContext.request.contextPath}/myspace/product">
-	  	                        <li><a href="${pageContext.request.contextPath}/myspace/product"><img src="${pageContext.request.contextPath}/resources/images/main/store.png"></a></li>
-	                            <li><a href="${pageContext.request.contextPath}/myspace/product">나의 우주</a></li>
+	  	                        <li><a href="${pageContext.request.contextPath}/myspace/product?user_id=${userLoggedIn.user_id}&pageNum=1&amount=10"><img src="${pageContext.request.contextPath}/resources/images/main/store.png"></a></li>
+	                            <li><a href="${pageContext.request.contextPath}/myspace/product?user_id=${userLoggedIn.user_id}&pageNum=1&amount=10">나의 우주</a></li>
 	  	                    </div>
 	  	                    <div class="gnb-button-talk">
 	  	                        <li><a href="#"><img src="${pageContext.request.contextPath}/resources/images/main/spacetalk.png"></a></li>

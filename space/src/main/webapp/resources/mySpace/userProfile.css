@@ -29,6 +29,12 @@
     border: 1px solid #D1D1D1;
     border-radius: 11px;
     margin-right: 30px;
+    text-align: center;
+}
+
+.user-profile-photo i {
+	font-size: 200px;
+    line-height: 250px;
 }
 
 .user-profile-info {
