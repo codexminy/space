@@ -17,6 +17,6 @@ public class BoardInfoDTO {
 	private String board_state;
 	private String board_hidden;
 	private String originalfilename;
-	private String renamefilename;
+	private String renamedfilename;
 	private String user_address;
 }
