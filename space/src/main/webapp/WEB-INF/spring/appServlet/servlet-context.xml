@@ -37,7 +37,7 @@
 		
 		<interceptor>
             <mapping path="/myspace/**"/>
-            <beans:bean id="myspaceInterceptor" class="com.second.space.admin.interceptor.MySpaceInterceptor"/>
+            <beans:bean id="myspaceInterceptor" class="com.second.space.mySpace.interceptor.MySpaceInterceptor"/>
         </interceptor>
 		
 		<interceptor>
