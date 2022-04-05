@@ -168,6 +168,13 @@ main {
 	color: #fff;
 	background-color: #22007F; 
 }
+.fa-search{
+	cursor:pointer;
+}
+.hidden{
+	display: none;
+}
+
 .active {
 	display: block;
 }

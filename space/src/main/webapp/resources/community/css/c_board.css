@@ -266,6 +266,13 @@ main {
 	float:right;
 	border:none;
 }
+.fa-search{
+	cursor:pointer;
+}
+.hidden{
+	display: none;
+}
+
 .active {
 	display: block;
 }

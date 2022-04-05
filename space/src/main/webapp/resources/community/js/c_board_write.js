@@ -5,6 +5,14 @@ if(hello.innerText == ""){
 	console.log("로그인 중")
 }
 
+const search_bar = document.querySelector('.search-bar');
+search_bar.innerHTML = "<form id=\"board_search\" name=\"search_form\" method=\"post\" action=\"search\"><input class=\"search-bar-input\" type=\"search\" name=\"keyword\"><input class=\"hidden\" type=\"submit\" value=\"확인\"></input></form><i class=\"fas fa-search\"></i>";
+const board_search = document.getElementById('board_search');
+const fa_search = document.querySelector('.fa-search');
+fa_search.addEventListener('click', () =>{
+	board_search.submit();
+});
+
 /* 삭제 대기 
 const postimg = document.getElementById("postimg");
 const upload_file = document.getElementById("upload_file");
