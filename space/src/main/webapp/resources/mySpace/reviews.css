@@ -125,3 +125,19 @@
     font-size: 16px;
     line-height: 25px;
 }
+
+.paging {
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.paging li a {
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.pageActive {
+	background-color: #22007F;
+	color: white;
+}

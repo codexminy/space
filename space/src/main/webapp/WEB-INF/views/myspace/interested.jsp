@@ -44,13 +44,13 @@
 	<div class="pagenation">
 		<ul class="paging">
 			<c:if test="${paging.prev }">
-				<li><a href="${path }/myspace/product?user_id=${ps.user_id}&pageNum=${paging.startPage - 1 }&amount=10" class="go"><i class="fa-solid fa-angle-left"></i></a></li>
+				<li><a href="${path }/myspace/interested?user_id=${ps.user_id}&pageNum=${paging.startPage - 1 }&amount=10" class="go"><i class="fa-solid fa-angle-left"></i></a></li>
 			</c:if>
 			<c:forEach var="num" begin="${paging.startPage }" end="${paging.endPage }">
-				<li><a href="${path }/myspace/product?user_id=${ps.user_id}&pageNum=${num}&amount=10" class="go ${paging.ps.pageNum == num ? 'active' : '' }">${num }</a></li>
+				<li><a href="${path }/myspace/interested?user_id=${ps.user_id}&pageNum=${num}&amount=10" class="go ${paging.ps.pageNum == num ? 'pageActive' : '' }">${num }</a></li>
 			</c:forEach>
 			<c:if test="${paging.next }">
-				<li><a href="${path }/myspace/product?user_id=${ps.user_id}&pageNum=${paging.endPage + 1 }&amount=10" class="go"><i class="fa-solid fa-angle-right"></i></a></li>
+				<li><a href="${path }/myspace/interested?user_id=${ps.user_id}&pageNum=${paging.endPage + 1 }&amount=10" class="go"><i class="fa-solid fa-angle-right"></i></a></li>
 			</c:if>
 		</ul>
 	</div>
@@ -59,16 +59,16 @@
 </body>
 <script>
 
-	let like = document.querySelectorAll(".card-heart");
+// 	let like = document.querySelectorAll(".card-heart");
 	
-	for (let i=0; i < like.length; i++) {
-	    like[i].addEventListener('click', function() {
-	    	this.classList.toggle('active');
-	    });
-	}
+// 	for (let i=0; i < like.length; i++) {
+// 	    like[i].addEventListener('click', function() {
+// 	    	this.classList.toggle('active');
+// 	    });
+// 	}
 
 	function deleteLike(id) {
-		if(confirm('선택된 찜을 삭제하시겠습니까?')) {
+		if(confirm('선택한 찜을 삭제하시겠습니까?')) {
 			$.ajax({
 				url : "${path}/myspace/myspace/interested/" + id,
 				type: "DELETE",

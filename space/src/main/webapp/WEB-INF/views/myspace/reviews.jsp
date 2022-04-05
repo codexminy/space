@@ -53,7 +53,7 @@
 				<li><a href="${path }/myspace/reviews?user_id=${ps.user_id}&pageNum=${paging.startPage - 1 }&amount=10" class="go"><i class="fa-solid fa-angle-left"></i></a></li>
 			</c:if>
 			<c:forEach var="num" begin="${paging.startPage }" end="${paging.endPage }">
-				<li><a href="${path }/myspace/reviews?user_id=${ps.user_id}&pageNum=${num}&amount=10" class="go ${paging.ps.pageNum == num ? 'active' : '' }">${num }</a></li>
+				<li><a href="${path }/myspace/reviews?user_id=${ps.user_id}&pageNum=${num}&amount=10" class="go ${paging.ps.pageNum == num ? 'pageActive' : '' }">${num }</a></li>
 			</c:forEach>
 			<c:if test="${paging.next }">
 				<li><a href="${path }/myspace/reviews?user_id=${ps.user_id}&pageNum=${paging.endPage + 1 }&amount=10" class="go"><i class="fa-solid fa-angle-right"></i></a></li>
