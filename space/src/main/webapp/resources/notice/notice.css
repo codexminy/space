@@ -7,12 +7,13 @@
 }
 .notice-top h3{
 	font-size: 20px;
-	font-weight: 700;
+	font-weight: bold;
     margin: 30px 30px 10px 30px;
     color: #22007F;
 }
 .notice-top p{
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 22px;
     margin: 0 30px 30px 30px;
     padding: 0 23px;
 }
@@ -20,21 +21,24 @@ ul{
     list-style: none;
 }
 .notice-content{
-    width: 1200px;
-    margin: 0 30px;
-    padding: 0 20px;
+    width: 1140px;
+    height: 380px;
+    margin-left: 30px;
 }
 .notice-content ul li{
     text-align: right;
-    padding: 10px;
+    padding: 10px 30px;
 }
 .notice-content ul li a{
     float: left;
     text-decoration: none;
 }
+
 .page {
+    margin: 0 auto;
     text-align: center; 
-    margin: 100px auto;
+    width: 50%;
+    margin-top: 60px;
 }
 
 .pagination {
@@ -55,7 +59,7 @@ ul{
     float: left;
     display: block;
     text-decoration: none;
-    padding: 10px;
+    margin: 10px;
     color: #707070;
     font-size: 16px;
     line-height: 15px;
@@ -68,40 +72,15 @@ ul{
 .pagination a.active {
     color: #ffffff;
     background-color: #22007F;
-    border-radius: 50%;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagination a:active {
     outline: none;
-}
-
-.modal .num {
-    margin-left: 3px;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    -moz-border-radius: 100%;
-    -webkit-border-radius: 100%;
-    border-radius: 100%;
-    align-items: center;
-}
-
-.modal .num:hover {
-    background-color: #22007F;
-    color: #ffffff;
-}
-
-.modal .num.active, .modal .num:active {
-    background-color: #22007F;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.arrow-left {
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right:10px solid #22007F; 
 }

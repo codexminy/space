@@ -32,7 +32,7 @@
             </div>
             <hr style="border: 0.1px solid  #D1D1D1">
         </div>
-        <button class="btn_notice"><a href="${path }/notice/notice">목록</a></button>
+        <input type="button" value="목록" id="list" onclick="location.href='${pageContext.request.contextPath}/notice/notice'"/>
     </div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>
