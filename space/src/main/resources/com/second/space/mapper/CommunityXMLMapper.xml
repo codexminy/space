@@ -39,6 +39,7 @@
 		    community_board.c_board_view,
 		    community_board.c_board_date,
 		    community_board.c_board_delete,
+		    community_board.c_board_hidden,
 		    user_.user_nickname
 		FROM
 		    community_board
@@ -60,6 +61,7 @@
 		    community_board.c_board_view,
 		    community_board.c_board_date,
 		    community_board.c_board_delete,
+		    community_board.c_board_hidden,
 		    user_.user_nickname
 		FROM
 		    community_board

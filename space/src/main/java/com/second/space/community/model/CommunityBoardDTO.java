@@ -19,6 +19,7 @@ public class CommunityBoardDTO {
 	private String c_board_img;
 	private Integer c_board_view;
 	private String c_board_delete;
+	private String c_board_hidden;
 	private String user_nickname;
 	private String user_address;
 	private String keyword;

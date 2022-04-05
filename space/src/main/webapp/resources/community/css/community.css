@@ -95,6 +95,13 @@ main {
 	border-radius: 9999px;
 	color:#fff;
 }
+.c_board > .alert {
+	display:inline-block;
+	margin: 10px 0 10px;
+	padding: 5px 10px;
+	color:red;
+}
+
 .c_board > .c_board_profile {
 	display:inline-block;
 	width: 60px;
