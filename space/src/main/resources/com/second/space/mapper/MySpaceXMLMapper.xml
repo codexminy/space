@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.second.space.mapper.MySpaceXMLMapper">
+	
+	<!-- 유저 정보 -->
+	<select id="getUserInfo" resultType="com.second.space.mySpace.model.InfoDTO">
+		SELECT
+			user_nickname, user_profile, (SELECT TRUNC(AVG(NVL(stars, 0))) FROM review r, board b WHERE r.board_id = b.board_id AND b.user_id = #{user_id}) stars
+		FROM
+			user_
+		WHERE
+			user_id = #{user_id}
+	</select>
+	
+	<!-- 유저 판매글 정보 리스트 -->
+	<select id="getBoardInfoList" resultType="com.second.space.mySpace.model.BoardInfoDTO">
+		SELECT
+			*
+		FROM(
+			SELECT
+				ROWNUM rn, t.*
+			FROM(
+				SELECT
+					*
+				FROM
+					board INNER JOIN board_img USING(board_id) INNER JOIN user_ USING(user_id)
+				WHERE
+					user_id = #{user_id} AND main_img = 'Y'
+				ORDER BY
+					board_date DESC
+			) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<!-- 유저 판매글 정보 리스트 총 갯수 -->
+	<select id="getBoardInfoCount" resultType="int">
+		SELECT COUNT(*) FROM board WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 거래 후기 리스트 -->
+	<select id="getReviewInfoList" resultType="com.second.space.mySpace.model.ReviewInfoDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            r.board_id, u.user_nickname, u.user_profile, r.stars, r.review_content, r.review_date
+		        FROM
+		            review r, board b, user_ u
+		        WHERE
+		            r.board_id = b.board_id AND r.user_id = u.user_id AND b.user_id = #{user_id}
+		        ORDER BY
+		            review_date DESC
+		    ) t
+		)
+	    <![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<!-- 거래 후기 리스트 총 갯수 -->
+	<select id="getReviewInfoCount" resultType="int">
+		SELECT COUNT(*) FROM review r, board b, user_ u WHERE r.board_id = b.board_id AND r.user_id = u.user_id AND b.user_id = #{user_id}
+	</select>
+	
+	<!-- 찜한 상품 리스트 -->
+	<select id="getLikeInfoList" resultType="com.second.space.mySpace.model.LikeInfoDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            bl.board_like_id, bl.board_id, b.board_title, b.board_price, u.user_address, bi.renamedfilename
+		        FROM
+		            board b, board_like bl, board_img bi, user_ u
+		        WHERE
+		            b.board_id = bl.board_id AND b.board_id = bi.board_id AND b.user_id = u.user_id AND bl.user_id = #{user_id} AND main_img = 'Y'
+		    ) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<!-- 찜한 상품 리스트 총 갯수 -->
+	<select id="getLikeInfoCount" resultType="int">
+		SELECT COUNT(*) FROM board_like WHERE user_id = #{user_id}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

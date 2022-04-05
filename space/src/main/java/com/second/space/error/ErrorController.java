@@ -33,6 +33,7 @@ public class ErrorController {
 		map.put("REQUEST_URI", request.getAttribute("javax.servlet.error.request_uri"));
 		map.put("EXCEPTION_TYPE", request.getAttribute("javax.servlet.error.exception_type"));
 		map.put("EXCEPTION", request.getAttribute("javax.servlet.error.exception"));
+		map.put("CAUSE", request.getAttribute("javax.servlet.error.message"));
 		map.put("SERVLET_NAME", request.getAttribute("javax.servlet.error.servlet_name"));
 	
 		try {
@@ -74,16 +75,16 @@ public class ErrorController {
 			map.put("NAME", name);
 		}
 	
-		if(map.isEmpty() == false ) {
-			Iterator<Entry<String, Object>> iterator = map.entrySet().iterator();
-			Entry<String, Object> entry = null;
-			
-			while(iterator.hasNext()) {
-				entry = iterator.next();
-				System.out.println(entry.getKey() + " : " + entry.getValue());
-			}
-		}
-	
+//		if(map.isEmpty() == false ) {
+//			Iterator<Entry<String, Object>> iterator = map.entrySet().iterator();
+//			Entry<String, Object> entry = null;
+//			
+//			while(iterator.hasNext()) {
+//				entry = iterator.next();
+//				System.out.println(entry.getKey() + " : " + entry.getValue());
+//			}
+//		}
+		
 		mnv.addObject("error", map);
 		
 		return mnv;
