@@ -74,7 +74,7 @@
 					<div class="space-logo"><a href="${pageContext.request.contextPath}/main/space"><img src="${pageContext.request.contextPath}/resources/images/main/space_logo.png" width="150px"></a></div>
 					</div>
 					<div class="search-bar">
-						<input class="search-bar-input" type="search">  
+						<input class="search-bar-input" type="search">
 	  	                <i class="fas fa-search"></i>
 					</div>
 					<nav>

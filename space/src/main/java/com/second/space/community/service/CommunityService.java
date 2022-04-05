@@ -18,6 +18,7 @@ public interface CommunityService {
 	public int getCommunityBoardCount() throws Exception;
 	public CommunityBoardDTO getCommunityBoardList(CommunityBoardDTO list) throws Exception;
 	public List<CommunityBoardDTO> getCommunityBoardList(String user_address) throws Exception;
+	public List<CommunityBoardDTO> getCommunitySearchList(String keyword) throws Exception;
 	
 	public CommunityCategoryDTO getCommunityCategoryList(CommunityCategoryDTO list) throws Exception;
 	public List<CommunityCategoryDTO> getCommunityCategoryList() throws Exception;

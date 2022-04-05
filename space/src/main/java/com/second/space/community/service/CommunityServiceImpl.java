@@ -25,20 +25,27 @@ public class CommunityServiceImpl implements CommunityService {
 	public int getCommunityBoardCount() throws Exception {
 		return community_mapper.getCommunityBoardCount();
 	}
-
+	
 	@Override
 	public CommunityBoardDTO getCommunityBoardList(CommunityBoardDTO list) throws Exception {
 		return community_mapper.getCommunityBoard(list.getC_board_id());
 	}
-
+	
 	@Override
 	public CommunityCategoryDTO getCommunityCategoryList(CommunityCategoryDTO list) throws Exception {
 		return community_mapper.getCommunityCategory(list.getC_category_id());
 	}
 
+	// 커뮤니티 게시글 리스트
 	@Override
 	public List<CommunityBoardDTO> getCommunityBoardList(String user_address) throws Exception {
 		return community_mapper.getCommunityBoardList(user_address);
+	}
+	
+	// 커뮤니티 게시글 검색 리스트
+	@Override
+	public List<CommunityBoardDTO> getCommunitySearchList(String keyword) throws Exception {
+		return community_mapper.getCommunitySearchList(keyword);
 	}
 
 	@Override

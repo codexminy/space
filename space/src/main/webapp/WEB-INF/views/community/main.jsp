@@ -22,6 +22,13 @@
 		</div>
 		<main>
 			<div class="flex-end">
+				<div>
+					<form name="board_search_form" method="post" action="search">
+						<input class="search-bar-input" type="search" name="keyword">
+						<input type="submit" value="확인"></input>
+					</form>
+					<i class="fas fa-search"></i>
+				</div>
 				<div id="board_write">글쓰기
 					<form id="board_write_on" action="./c_board_write" method="POST">
 					</form>

@@ -2,6 +2,8 @@ package com.second.space.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.second.space.admin.model.Notification_boardDTO;
 import com.second.space.admin.model.Notification_cmtDTO;
 import com.second.space.community.model.CommunityBoardDTO;
@@ -17,6 +19,7 @@ public interface CommunityXMLMapper {
 	
 	public CommunityBoardDTO getCommunityBoard(int pk);
 	public List<CommunityBoardDTO> getCommunityBoardList(String user_address);
+	public List<CommunityBoardDTO> getCommunitySearchList(String keyword);
 	public int getCommunityBoardCount();
 	
 	public CommunityCategoryDTO getCommunityCategory(int pk);

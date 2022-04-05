@@ -28,10 +28,10 @@ public class CommunityController {
 	CommunityService community_service;
 	
 	@GetMapping("/main")
-	public void communityMain(Model model, HttpServletRequest request) {
+	public String communityMain(Model model, HttpServletRequest request) {
 		System.out.println("community main으로 이동");
-		HttpSession session = request.getSession();
-		UserDTO user = (UserDTO) session.getAttribute("userLoggedIn");
+		UserDTO user = (UserDTO) request.getSession().getAttribute("userLoggedIn");
+		
 		try {
 			if (user != null) {
 				model.addAttribute("c_user_list", community_service.getUserList());
@@ -42,11 +42,32 @@ public class CommunityController {
 				model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
 				model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
 				model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
+			} else {
+				return "redirect:/user_/login";
 			}
 		} catch (Exception e) {
 			log.info("Error");
 			e.printStackTrace();
 		}
+		return "community/main";
+
+	}
+	
+	@PostMapping("/search")
+	public String communitySearch(String keyword, Model model, HttpServletRequest request) {
+		System.out.println("검색 중..");
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
+		String user_address = user.getUser_address();
+		System.out.println(user_address);
+		
+		System.out.println(keyword);
+		try {
+			model.addAttribute("c_board_list", community_service.getCommunitySearchList(keyword));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/community/main";
 	}
 	
 	@GetMapping("/c_board")
@@ -92,53 +113,6 @@ public class CommunityController {
 		try {
 			// 커뮤니티 게시글 insert 후에 c_board_id 가져오기
 			int result = community_service.newCommunityBoard(list);
-			System.out.println("보냈다");
-			/*
-			List<CommunityBoardImgDTO> imgList = new ArrayList<>();
-			int c_board_id = 0;
-			if(result > 0) {
-				// c_board_id 가져오기 
-				c_board_id = community_service.getCommunityBoardId(list.getUser_id());
-				System.out.println("글쓰기 성공");
-				if(c_board_id != 0) {
-					for(MultipartFile f : upfile) {
-						if(!f.isEmpty()) {
-							//파일명 
-							String originalFileName = f.getOriginalFilename();
-							String renamedFileName = Utils.getRenamedFileName2(originalFileName);
-							
-							//실제서버 저장
-							try {
-								f.transferTo(new File(saveDirection+"/"+renamedFileName));
-							} catch (IllegalStateException | IOException e) {
-								e.printStackTrace();
-							}
-							
-							//List 작성
-							CommunityBoardImgDTO c_board_img = new CommunityBoardImgDTO();
-							c_board_img.setC_board_id(c_board_id);
-							c_board_img.setC_originalfilename(originalFileName);
-							c_board_img.setC_renamedfilename(renamedFileName);
-							imgList.add(c_board_img);							
-						}
-					}
-					//List Insert
-					try {
-						result = community_service.newCommunityBoardImg(imgList);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					if(result > 0) {
-						log.info("인서트 성공");
-						System.out.println("성공");
-					}else {
-						log.info("인서트 실패");
-						System.out.println("실패");
-					}
-					
-				}
-			}
-			*/
 		} catch (Exception e) {
 			System.out.println("안보냈다");
 			e.printStackTrace();

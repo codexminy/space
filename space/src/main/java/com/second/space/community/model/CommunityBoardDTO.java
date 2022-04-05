@@ -21,6 +21,7 @@ public class CommunityBoardDTO {
 	private String c_board_delete;
 	private String user_nickname;
 	private String user_address;
+	private String keyword;
 	
 	@DateTimeFormat(pattern = "yy-MM-dd")
 	private Date c_board_date;
