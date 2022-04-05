@@ -44,8 +44,8 @@ ul{
     text-decoration: none;
     margin: 0 50px;
 }
-button{
-    border: 2px solid #22007F;
+.btn_notice{
+    border: 3px solid #22007F;
     border-radius: 5px;
     color: #22007F;
     background-color: #fff;
@@ -54,4 +54,5 @@ button{
     margin-bottom: 30px;
     width: 89px;
     height: 30px;
+    font-weight: 700;
 }
