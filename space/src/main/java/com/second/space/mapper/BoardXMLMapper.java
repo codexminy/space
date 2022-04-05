@@ -6,8 +6,10 @@ import com.second.space.board.model.AuctionDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
+import com.second.space.board.model.FollowerDTO;
 import com.second.space.board.model.FollowingDTO;
 import com.second.space.board.model.PaymentsCategoryDTO;
+import com.second.space.board.model.WinningBidDTO;
 import com.second.space.user_.model.UserDTO;
 
 public interface BoardXMLMapper {
@@ -55,4 +57,16 @@ public interface BoardXMLMapper {
 	int insertBoardLike(BoardLikeDTO b);
 
 	int deleteBoardLike(BoardLikeDTO b);
+	
+	int getUserIdByLoginId(Integer user_login_id);
+
+	int getUserLoginIdByUserId(Integer user_id);
+
+	int insertFollower(FollowerDTO fwer);
+
+	int deleteFollower(FollowerDTO fwer);
+
+	int insertWinning(WinningBidDTO win);
+
+	Integer getMaxWin(Integer auction_id);
 }

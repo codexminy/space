@@ -316,5 +316,12 @@
         });
     }
     
+ 	var talk = document.getElementById("talk");
+    
+    talk.addEventListener('click', (e) => {
+    	
+    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
+    });
+    
 </script>
 </html>

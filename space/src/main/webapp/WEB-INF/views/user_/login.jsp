@@ -11,6 +11,18 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link href="${pageContext.request.contextPath}/resources/user_/css/login.css" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/resources/user_/js/login.js" rel="stylesheet"/> 
+<style>
+#submitBtn{
+    background-color:#22007F;
+    width: 370px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;  
+    border-radius: 11px;  
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+</style>
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="wraplogin">
@@ -30,7 +42,7 @@
                         <input type="checkbox" onclick="loginChkOnclick()" id="login-status-id">
                         <label for="login-status-id">로그인 상태 유지</label>
                     </div>
-                    <button type="submit" id="submit" name="로그인"><span>로그인</span></button>
+                    <button type="submit" id="submitBtn" name="로그인"><span>로그인</span></button>
                 </form>   
                 <div class="login-option">
                     <ul>
@@ -88,6 +100,23 @@ google.addEventListener('click', (e) => {
 	sendGoogle.open('get', `${pageContext.request.contextPath}/login/getGoogleAuthUrl`);
 	sendGoogle.setRequestHeader('content-type', 'application/json');
 	sendGoogle.send();
+});
+
+var submitBtn = document.getElementById("submitBtn");
+var user_id = document.getElementById("userId");
+var pwd = document.getElementById("userPassword");
+var form = document.getElementById("loginform");
+submitBtn.addEventListener('click', (e) => {
+	
+	if(user_id.value == "" || user_id.value == null){
+		alert("아이디를 입력해주세요.");
+	}else if(pwd.value == "" || pwd.value == null){
+		alert("비밀번호를 입력해주세요.")
+	}else{
+	
+		form.submit();
+	}
+	
 });
 </script>
 </html>

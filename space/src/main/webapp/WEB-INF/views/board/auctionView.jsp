@@ -54,7 +54,12 @@
                         <h3>즉시 구매가</h3>
                         <h3>${auction.purchase_price }</h3>                                                    
                         <h3>현재 입찰가</h3>
-                        <h3>${auction.min_price }</h3>                                                    
+                         <c:if test="${winPrice eq null }">
+                        	<h3 id ="bid-price" >${auction.min_price }</h3>   
+                        </c:if>    
+                        <c:if test="${winPrice ne null }">
+                        	<h3 id ="bid-price" >${winPrice}</h3>   
+                        </c:if>                                                       
                     </div>
                     <div class="product-location">
                         <h3>거래 지역</h3>
@@ -112,11 +117,11 @@
             </c:if>
             <c:if test="${userLoggedIn ne null }">
             	<c:if test="${userLoggedIn.user_id ne board.user_id}">
-                 	<div class="space-talk-button"></div>
+                 	<div class="space-talk-button" id="talk"></div>
                 </c:if>
             </c:if>
             <c:if test="${userLoggedIn eq null }">
-            	<div class="space-talk-button"></div>
+            	<div class="space-talk-button" id="talk"></div>
             </c:if>
             </div>
         </div>           
@@ -303,6 +308,54 @@
         return str.replace(/[^\d]+/g, '');
     }
     
+var talk = document.getElementById("talk");
+    
+    talk.addEventListener('click', (e) => {
+    	
+    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
+    });
+    
+    var auctionBid = document.getElementById("action-bid");
+    var auctionPrice = document.getElementById("entry-action-price");
+    var minPrice = ${auction.min_price} + "";
+    var purchasePrice = ${auction.purchase_price} + "";
+    var bidPrice = document.getElementById("bid-price");
+    
+    const bidding = new XMLHttpRequest();
+    
+    bidding.addEventListener('readystatechange', (e) => {
+    	var regex = /[^0-9]/g;	
+		bidPrice.innerHTML = "";
+		bidPrice.innerHTML = e.target.responseText.replace(regex,"");
+		console.log(e.target);
+	});
+    
+    
+    auctionBid.addEventListener('click', (e) => {
+    	 var auctionPrice = document.getElementById("entry-auction-price").value;
+    	var regex = /[^0-9]/g;	
+    	var auctionprice = auctionPrice.replace(regex,"");
+    	var minprice = minPrice.replace(regex,"");
+    	var purchaseprice = purchasePrice.replace(regex, "");
+    	
+    	if(minprice > auctionprice.value){
+    		alert("최소 경매 금액보다 큰 금액을 입력하세요");
+    	}else if (purchaseprice <= auctionprice){
+    		alert("축하합니다. 경매에 당첨되셨습니다.");
+    		var param = {auction_price : auctionprice, auction_id : ${auction.auction_id} , board_id : ${board.board_id}};
+    		bidding.open('post', `${pageContext.request.contextPath}/board/win`);
+        	bidding.setRequestHeader('content-type', 'application/json');
+        	bidding.send(JSON.stringify(param));
+    	}else {
+    		var param = {auction_price : auctionprice, auction_id : ${auction.auction_id} , board_id : ${board.board_id}};
+    		bidding.open('post', `${pageContext.request.contextPath}/board/biding`);
+        	bidding.setRequestHeader('content-type', 'application/json');
+        	bidding.send(JSON.stringify(param));
+    	}
+    	
+    	
+    	
+    });
     
    
 </script>

@@ -9,6 +9,8 @@ import com.second.space.admin.model.NoticeDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
+import com.second.space.chatting.model.ChatContentDTO;
+import com.second.space.chatting.model.ChatRoomDTO;
 import com.second.space.community.model.CommunityBoardDTO;
 import com.second.space.user_.model.LoginIdListDTO;
 import com.second.space.user_.model.MainInfoDTO;
@@ -54,6 +56,30 @@ public interface UserXMLMapper {
 
 	List<BoardLikeDTO> getBoardLikeList(Integer user_id);
 
-	
+	String getLoginId(Integer user_login_id);
+
+	List<ChatContentDTO> getChatRoom(String user_id);
+
+	BoardDTO getBoard(Integer board_id);
+
+	BoardImgDTO getBoardImg(Integer board_id);
+
+	ChatRoomDTO getChatRoom2(ChatRoomDTO room);
+
+	int insertChatRoom(ChatRoomDTO room);
+
+	List<ChatContentDTO> getChatContents(int room_id);
+
+	ChatRoomDTO getChatRoomById(String room_id);
+
+	int insertChatContent(ChatContentDTO content);
+
+	int updateChatRead(int room_id);
+
+	String getNickName(String user_id);
+
+	Integer cntStatus(Integer room_id);
+
+	List<Integer> getBuyerId(ChatRoomDTO temp);
 
 }

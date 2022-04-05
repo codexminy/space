@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,11 @@
 <title>채팅</title>
 <link href="${pageContext.request.contextPath}/resources/chatting/css/chat.css" rel="stylesheet"/>
 </head>
+<style>
+.chat{
+margin-top: 193px;
+}
+</style>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="wrapChat">
@@ -17,63 +24,30 @@
 	        <hr>
 	        <div class="main">
 	            <ul>
+	            	
+	            <c:if test="${content ne null }">
+	            <c:forEach var="c" items="${content }">
 	                <li>
-	                    <a href="${pageContext.request.contextPath}/chatting/chatPartner">
+	                    <a href="${pageContext.request.contextPath}/chatting/chatPartner?board_id=${c.board_id}&buyer_id=${c.buyer_id}">
 	                        <div class="img-box">
 	                            <img src="${pageContext.request.contextPath}/resources/images/chatting/chat_basic_profile.png" class="profile-img" alt="스트릿market">
 	                        </div>
 	                        <div class="talk">
-	                            <p class="friend-name">스트릿market</p>
-	                            <p class="chat-content">아직 안팔렸습니다!</p>
+	                            <p class="friend-name">${c.nickname }</p>
+	                            <p class="chat-content">${c.chat_contents }</p>
 	                        </div>
 	                        <div class="chat-status">
-	                            <time datetime="11:39:00+09:00">오전 11:39</time>
+	                            <time datetime="11:39:00+09:00"><fmt:formatDate value="${c.chat_createat }" pattern="MM월HH일" /></time>
+	                        	<c:if test="${c.cnt_status ne 0 && c.send_id ne user.user_id }">
+	                        		<span class="chat-balloon">1</span>
+	                        	</c:if>
 	                        </div>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="#">
-	                        <div class="img-box">
-	                            <img src="${pageContext.request.contextPath}/resources/images/profile/profile1.png" class="profile-img" alt="중고컴매입은컴닷">
-	                        </div>
-	                        <div class="talk">
-	                            <p class="friend-name">중고컴매입은컴닷</p>
-	                            <p class="chat-content">컴퓨터 고가로 매입합니다. 상점 팔로우시 택배비 지...</p>
-	                        </div>
-	                        <div class="chat-status">
-	                            <time datetime="11:21:00+09:00">오전 11:21</time>
-	                                <span class="chat-balloon">1</span>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="#">
-	                        <div class="img-box">
-	                            <img src="${pageContext.request.contextPath}/resources/images/profile/profile2.png" class="profile-img" alt="후기에진심인사람">
-	                        </div>
-	                        <div class="talk">
-	                            <p class="friend-name">후기에진심인사람</p>
-	                            <p class="chat-content">저 이제 1번 출구 앞이에요!</p>
-	                        </div>
-	                        <div class="chat-status">
-	                            <time datetime="2022-03-12">03월 12일</time>
-	                        </div>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="#">
-	                        <div class="img-box">
-	                            <img src="${pageContext.request.contextPath}/resources/images/chatting/chat_basic_profile.png" class="profile-img" alt="공기팡">
-	                        </div>
-	                        <div class="talk">
-	                            <p class="friend-name">공기팡</p>
-	                            <p class="chat-content">네고 가능한가요?ㅠ</p>
-	                        </div>
-	                        <div class="chat-status">
-	                            <time datetime="2022-03-03">03월 03일</time>
-	                        </div>
-	                    </a>
-	                </li>
+	            </c:forEach>
+	            </c:if>
+	    
+	
 	            </ul>
 	        </div>
 	    </div>

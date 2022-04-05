@@ -50,8 +50,8 @@ public class MessageController {
 		String randomString = Integer.toString(randomint);
 		log.info(randomString);
 		request.setContent("인증번호는["+randomint+"]입니다.");
-//		SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
-//		ResponseEntity.ok().body(data);
+		SmsResponse data = smsService.sendSms(request.getRecipientPhoneNumber(), request.getContent());
+		ResponseEntity.ok().body(data);
         return randomString;
     }
 }

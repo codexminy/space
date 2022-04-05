@@ -9,8 +9,10 @@ import com.second.space.board.model.AuctionDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
+import com.second.space.board.model.FollowerDTO;
 import com.second.space.board.model.FollowingDTO;
 import com.second.space.board.model.PaymentsCategoryDTO;
+import com.second.space.board.model.WinningBidDTO;
 import com.second.space.mapper.BoardXMLMapper;
 import com.second.space.user_.model.UserDTO;
 
@@ -142,6 +144,29 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.deleteBoardLike(b);
 	}
 
+	public int getUserIdByLoginId(Integer user_login_id) {
+		return boardMapper.getUserIdByLoginId(user_login_id);
+	}
+
+	public int getUserLoginIdByUserId(Integer user_id) {
+		return boardMapper.getUserLoginIdByUserId(user_id);
+	}
+
+	public int insertFollower(FollowerDTO fwer) {
+		return boardMapper.insertFollower(fwer);
+	}
+
+	public int deleteFollower(FollowerDTO fwer) {
+		return boardMapper.deleteFollower(fwer);
+	}
+
+	public int insertWinning(WinningBidDTO win) {
+		return boardMapper.insertWinning(win);
+	}
+
+	public Integer getMaxWin(Integer auction_id) {
+		return boardMapper.getMaxWin(auction_id);
+	}
 
 	
 }

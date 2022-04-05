@@ -114,5 +114,69 @@
 	SELECT * FROM board_like WHERE user_id = #{user_id}
 </select>
 
+<select id="getLoginId" resultType="string">
+	SELECT login_id FROM login_id_list WHERE user_login_id = #{user_login_id} 
+</select>
 
+<select id="getChatRoom" resultType="com.second.space.chatting.model.ChatContentDTO">
+	SELECT * 
+	FROM (
+	SELECT room_id, chat_contents, send_id, chat_createat, seller_id, buyer_id,chat_status,board_id,
+	RANK()OVER(PARTITION BY room_id order by to_char(chat_createat, 'YYYYMMDD HH24:MI:SS')DESC) AS rnk
+	FROM chat_content c FULL OUTER JOIN chat_room r USING(room_id) 
+	WHERE r.seller_id = #{user_id} OR r.buyer_id = #{user_id}
+	)
+	WHERE rnk = '1'
+	ORDER BY chat_createat DESC
+</select>
+
+<select id="getBoard" resultType="com.second.space.board.model.BoardDTO">
+	SELECT * FROM board WHERE board_id = #{board_id}
+</select>
+
+<select id="getBoardImg" resultType="com.second.space.board.model.BoardImgDTO">
+	SELECT * FROM board_img WHERE board_id = #{board_id} AND main_img = 'Y'
+</select>
+
+<select id="getChatRoom2" resultType="com.second.space.chatting.model.ChatRoomDTO" parameterType="com.second.space.chatting.model.ChatRoomDTO">
+	SELECT * FROM chat_room WHERE board_id = #{board_id} AND seller_id = #{seller_id} AND buyer_id = #{buyer_id}
+</select>
+
+<insert id="insertChatRoom" parameterType="com.second.space.chatting.model.ChatRoomDTO">
+	INSERT INTO chat_room 
+	(room_id, seller_id, buyer_id, board_id, room_createat, room_updateat, room_status)
+	VALUES
+	(chat_room_room_id_seq.nextval , #{seller_id}, #{buyer_id}, #{board_id}, sysdate, sysdate, 'N')
+</insert>
+
+<select id="getChatContents" resultType="com.second.space.chatting.model.ChatContentDTO">
+	SELECT * FROM chat_content WHERE room_id = #{roomd_id}
+</select>
+
+<select id="getChatRoomById" resultType="com.second.space.chatting.model.ChatRoomDTO">
+	SELECT *  FROM chat_room WHERE room_id = #{room_id}
+</select>
+
+<insert id="insertChatContent" parameterType="com.second.space.chatting.model.ChatContentDTO">
+	INSERT INTO chat_content 
+	(chat_id, room_id, chat_contents, send_id, chat_createat, chat_updateat, chat_status)
+	VALUES
+	(chat_content_chat_id_seq.nextval, #{room_id}, #{chat_contents}, #{send_id}, sysdate, sysdate, 'N')
+</insert>
+
+<update id="updateChatRead" >
+	UPDATE chat_content SET chat_status = 'Y' WHERE room_id = #{roomd_id}
+</update>
+
+<select  id="getNickName" resultType="string" >
+	SELECT user_nickname FROM user_ WHERE user_id = #{user_id}
+</select>
+
+<select id="cntStatus" resultType="_integer">
+	SELECT COUNT(*) FROM chat_content WHERE room_id = #{room_id} AND chat_status = 'N'
+</select>
+
+<select id="getBuyerId" parameterType="com.second.space.chatting.model.ChatRoomDTO">
+	SELECT buyer_id  FROM chat_room WHERE seller_id = #{seller_id} AND board_id = #{board_id}
+</select>
 </mapper>

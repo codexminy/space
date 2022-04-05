@@ -30,6 +30,7 @@ import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.board.model.FollowingDTO;
+import com.second.space.board.model.WinningBidDTO;
 import com.second.space.board.service.BoardServiceImpl;
 import com.second.space.common.util.Utils;
 import com.second.space.user_.model.UserDTO;
@@ -402,6 +403,49 @@ public class BoardController {
 		int result = boardService.deleteBoardLike(b);
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/board/biding" )
+	public Integer insertBid(@RequestBody Map<String, String> param, HttpServletRequest reqeust) {
+		HttpSession session = reqeust.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
+		Integer winning_price = Integer.parseInt(param.get("auction_price"));
+		Integer auction_id = Integer.parseInt(param.get("auction_id"));
+		Integer board_id =Integer.parseInt( param.get("board_id"));
+		WinningBidDTO win  = new WinningBidDTO();
+		win.setAuction_id(auction_id);
+		win.setBoard_id(board_id);
+		win.setUser_id(user.getUser_id());
+		win.setWinning_price(winning_price);
+		win.setWin_status("N");
+		log.info(win);
+		int result = boardService.insertWinning(win);
+		
+		
+		return winning_price;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/board/win")
+	public Integer insertWin(@RequestBody Map<String, String> param, HttpServletRequest reqeust) {
+		HttpSession session = reqeust.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
+		Integer winning_price = Integer.parseInt(param.get("auction_price"));
+		Integer auction_id = Integer.parseInt(param.get("auction_id"));
+		Integer board_id =Integer.parseInt( param.get("board_id"));
+		WinningBidDTO win  = new WinningBidDTO();
+		win.setAuction_id(auction_id);
+		win.setBoard_id(board_id);
+		win.setUser_id(user.getUser_id());
+		win.setWinning_bid(winning_price);
+		win.setWin_status("Y");
+		
+		int result = boardService.insertWinning(win);
+		
+		
+		return winning_price;
 	}
 	
 }

@@ -16,4 +16,6 @@ public class WinningBidDTO {
 	private Integer board_id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date winning_date;
+	private Integer user_id;
+	private String win_status;
 }

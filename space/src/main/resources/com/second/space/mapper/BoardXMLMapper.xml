@@ -105,5 +105,35 @@
 	<delete id="deleteBoardLike" parameterType="com.second.space.board.model.BoardLikeDTO">
 		DELETE FROM board_like WHERE user_id = #{user_id} AND board_id = #{board_id}
 	</delete>
+	
+	<select id="getUserIdByLoginId" resultType="_int">
+		SELECT user_id FROM user_ WHERE user_login_id = #{user_login_id}
+	</select>
+	
+	<select id="getUserLoginIdByUserId" resultType="_int">
+		SELECT user_login_id FROM user_ WHERE user_id = #{user_id}
+	</select>
+	
+	<insert id="insertFollower" parameterType="com.second.space.board.model.FollowerDTO">
+		INSERT INTO follower
+		(follower_id, user_id, user_login_id)
+		VALUES
+		(follower_follower_id_seq.nextval, #{user_id} , #{user_login_id})
+	</insert>
+	
+	<delete id="deleteFollower"  parameterType="com.second.space.board.model.FollowerDTO">
+		DELETE FROM follower WHERE user_id = #{user_id} AND user_login_id = #{user_login_id}
+	</delete>
+	
+	<insert id="insertWinning" parameterType="com.second.space.board.model.WinningBidDTO">
+		INSERT INTO winning_bid 
+		(winning_id, auction_id, winning_price, board_id, winning_date, user_id, win_status)
+		VALUES
+		(winning_bid_winning_id_seq.nextval, #{auction_id},#{winning_price}, #{board_id}, sysdate, #{user_id}, #{win_status})
+	</insert>
+	
+	<select id="getMaxWin" resultType="integer">
+		SELECT MAX(winning_price) FROM winning_bid WHERE auction_id = #{auction_id}
+	</select>
 
 </mapper>
