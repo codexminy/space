@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>공지사항 - 내용</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/notice/notice_view.css">
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
@@ -19,19 +22,17 @@
         <div class="notice-board">
             <hr style="border: 0.1px solid  #D1D1D1">
             <ul class="notice-board-top">
-                <li class="title">우리 주위의 장터 : 우주장터</li>
-                    <span class="day">2022/03/17</span>     
+                <li class="title">${list.notice_title }</li>
+                    <span class="day"><fmt:formatDate value="${list.notice_date }" pattern="yyyy/MM/dd"/></span>     
                 </li>
             </ul>
             <hr style="border: 0.1px solid  #D1D1D1">
             <div class="notice-board-view">
-                <p>우리 주위의 장터 : 우주장터의 다양한 서비스를 이용해보세요.</p>
-                <a href="#">중고 거래 안내 ></a> <br>
-                <a href="#">커뮤니티 안내 ></a>
+                <p>${list.notice_content }</p>
             </div>
             <hr style="border: 0.1px solid  #D1D1D1">
         </div>
-        <button>목록</button>
+        <a href="${path }/notice/notice">목록</a>
     </div>
 	<jsp:include page="../main/footer.jsp"/>
 </body>

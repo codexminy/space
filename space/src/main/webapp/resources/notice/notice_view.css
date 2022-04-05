@@ -1,8 +1,9 @@
 @charset "UTF-8";
 #wrapNotice{
     width: 1200px;
-    height: 700px;
+/*     height: 700px; */
     margin: 0 auto;
+    padding-top: 150px;
 }
 .notice-top h3{
 	font-size: 20px;
@@ -31,10 +32,10 @@ ul{
    float: right;
    padding-right: 50px;
 }
-.notice-board-view{
-    width: 1064px;
-    height: 500px;
-}
+/* .notice-board-view{ */
+/*     width: 1064px; */
+/*     height: 500px; */
+/* } */
 .notice-board-view p{
     margin: 0 50px;
     padding: 20px 0;

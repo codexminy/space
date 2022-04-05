@@ -79,13 +79,13 @@
                 <div class="notice">
                     <div class="notice-title">
                         <h2>공지사항</h2>
-                        <p class="text"><a href="#">더보기 ></a></p>
+                        <p class="text"><a href="${pageContext.request.contextPath}/notice/notice">더보기 &gt;</a></p>
                     </div>    
                     <div class="notice-board">
                         <ul>
                           <c:if test="${not empty noticeList }">
                         	<c:forEach var="n" items="${noticeList}">
-                            	<li><a href="#">${n.notice_title }</a></li>
+                            	<li><a href="${pageContext.request.contextPath}/notice/notice_view?notice_id=${n.notice_id}">${n.notice_title }</a></li>
                        		</c:forEach>
                           </c:if>
                         </ul>
@@ -94,7 +94,7 @@
                 <div class="community">
                     <div class="community-title">
                         <h2>커뮤니티</h2>
-                        <p class="text"><a href="${pageContext.request.contextPath}/community/main">더보기 ></a></p>
+                        <p class="text"><a href="${pageContext.request.contextPath}/community/main">더보기 &gt;</a></p>
                     </div> 
                     <div class="community-board">
                         <ul>

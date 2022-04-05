@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>공지사항</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/notice/notice.css">
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
@@ -18,97 +21,26 @@
         </div>
         <div class="notice-content">
             <ul>
-                <li>
-                    <a href="#">[안내] 서버 점검 안내입니다.(2022/03/21 am 03:00 ~ 05:00)</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">[TIP] 직거래시 유의하세요!</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">[TIP] 중고거래 불가능한 품목 안내(2022/03/11)</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">안내] 우주 장터 이용시 주의사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">[안내] 새로운 커뮤니티가 여러분을 찾아옵니다.</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">우리 주의의 장터: 우주장터</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">
-                <li>
-                    <a href="#">공지사항</a>
-                    <span class="day">2022/03/17</span>
-                </li>
-                <hr style="border: 0.1px solid  #D1D1D1">    
+            	<c:forEach var="list" items="${list }">
+	                <li>
+	                    <a href="${path }/notice/notice_view?notice_id=${list.notice_id}">[${list.ncDTO.noc_name }]&nbsp;${list.notice_title }</a>
+	                    <span class="day"><fmt:formatDate value="${list.notice_date }" pattern="yyyy/MM/dd"/></span>
+	                </li>
+	                <hr style="border: 0.1px solid  #D1D1D1">
+            	</c:forEach>
             </ul>
         </div>
         <div class="page">
             <ul class="pagination modal">
-                <li><a href="#" class="arrow left"><<</a></li>
-                <li><a href="#" class="active num">1</a></li>
-                <li><a href="#" class="num">2</a></li>
-                <li><a href="#" class="num">3</a></li>
-                <li><a href="#" class="num">4</a></li>
-                <li><a href="#" class="num">5</a></li>
-                <li><a href="#" class="num">6</a></li>
-                <li><a href="#" class="num">7</a></li>
-                <li><a href="#" class="num">8</a></li>
-                <li><a href="#" class="num">9</a></li>
-                <li><a href="#" class="num">10</a></li>
-                <li><a href="#" class="arrow right">>></a></li>
+            	<c:if test="${paging.prev }">
+	                <li><a href="${path }/notice/notice?pageNum=${paging.startPage - 1}" class="arrow left">&lt;&lt;</a></li>
+            	</c:if>
+                <c:forEach var="num" begin="${paging.startPage }" end="${paging.endPage }">
+                	<li><a href="${path }/notice/notice?pageNum=${num}" class="${paging.ps.pageNum == num ? 'active' : '' }">${num }</a></li>
+                </c:forEach>
+                <c:if test="${paging.next }">
+	                <li><a href="${path }/notice/notice?pageNum=${paging.endPage + 1}" class="arrow right">&gt;&gt;</a></li>
+                </c:if>
             </ul>
         </div>
     </div>
