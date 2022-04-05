@@ -43,8 +43,7 @@ ul{
 
 .notice-board-view {
 	width: 1140px;
-    height: 338px;
-    
+    min-height: 338px;
 }	
 
 .notice-board-view p{

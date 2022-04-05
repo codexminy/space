@@ -22,7 +22,7 @@ ul{
 }
 .notice-content{
     width: 1140px;
-    height: 380px;
+    min-height: 380px;
     margin-left: 30px;
 }
 .notice-content ul li{
