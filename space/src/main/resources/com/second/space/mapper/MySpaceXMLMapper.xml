@@ -98,6 +98,11 @@
 	<select id="getLikeInfoCount" resultType="int">
 		SELECT COUNT(*) FROM board_like WHERE user_id = #{user_id}
 	</select>
+	
+	<!-- 찜한 상품 삭제 -->
+	<delete id="deleteLike">
+		DELETE FROM board_like WHERE board_like_id = #{board_like_id}
+	</delete>
 </mapper>
 
 

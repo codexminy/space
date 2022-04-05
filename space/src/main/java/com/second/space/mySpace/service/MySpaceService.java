@@ -23,4 +23,6 @@ public interface MySpaceService {
 	public List<LikeInfoDTO> getLikeInfoList(PageSet ps); // 찜한 상품 리스트
 	
 	public int getLikeInfoCount(int user_id); // 찜한 상품 리스트 총 갯수
+	
+	public int deleteLike(int board_like_id); // 찜한 상품 삭제
 }

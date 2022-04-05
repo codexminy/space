@@ -52,5 +52,10 @@ public class MySpaceServiceImpl implements MySpaceService {
 	public int getLikeInfoCount(int user_id) { // 찜한 상품 리스트 총 갯수
 		return mapper.getLikeInfoCount(user_id);
 	}
+
+	@Override
+	public int deleteLike(int board_like_id) { // 찜한 상품 삭제
+		return mapper.deleteLike(board_like_id);
+	}
 	
 }

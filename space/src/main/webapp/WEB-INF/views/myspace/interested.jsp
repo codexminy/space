@@ -8,6 +8,7 @@
 <title>나의 우주</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/mySpace/interested.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
@@ -26,7 +27,7 @@
 		        	 <div class="myspace-card-photo-img" onclick="location.href='${path}/board/boardVieww?board_id=${list.board_id }'">
 		            	<img src="${path}/resources/upload/board/${list.renamedfilename}" alt="" width="90%"/>
 		            </div>
-		        	<div class="card-heart"></div>
+		        	<div class="card-heart" onclick="deleteLike(${list.board_like_id})"></div>
 		        </div>
 		        <div class="myspace-card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${list.board_id }'">
 		            <div class="myspace-card-text">
@@ -62,9 +63,31 @@
 	
 	for (let i=0; i < like.length; i++) {
 	    like[i].addEventListener('click', function() {
-	    this.classList.toggle('active');
+	    	this.classList.toggle('active');
 	    });
 	}
 
+	function deleteLike(id) {
+		if(confirm('선택된 찜을 삭제하시겠습니까?')) {
+			$.ajax({
+				url : "${path}/myspace/myspace/interested/" + id,
+				type: "DELETE",
+				success : function(result) {
+					alert('삭제가 완료되었습니다.');
+					location.reload();
+				}
+			});
+		}
+	}
+	
 </script>
 </html>
+
+
+
+
+
+
+
+
+

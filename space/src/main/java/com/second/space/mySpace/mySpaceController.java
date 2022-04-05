@@ -5,7 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.second.space.admin.model.PageSet;
 import com.second.space.admin.model.Paging;
@@ -57,6 +60,15 @@ public class mySpaceController {
 		}
 	}
 	
+	@ResponseBody
+	@DeleteMapping("/myspace/myspace/interested/{board_like_id}")
+	public String deleteLike(@PathVariable int board_like_id) {
+		
+		service.deleteLike(board_like_id);
+		
+		return "success";
+	}
+	
 	@GetMapping("/myspace/followings")
 	public void follwing() {
 
@@ -67,3 +79,13 @@ public class mySpaceController {
 
 	}
 }
+
+
+
+
+
+
+
+
+
+
