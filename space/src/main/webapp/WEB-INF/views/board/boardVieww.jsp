@@ -114,11 +114,11 @@
             </c:if>
             <c:if test="${userLoggedIn ne null }">
             	<c:if test="${userLoggedIn.user_id ne board.user_id}">
-                 	<div class="space-talk-button"></div>
+                 	<div class="space-talk-button" id="talk"></div>
                 </c:if>
             </c:if>
             <c:if test="${userLoggedIn eq null }">
-            	<div class="space-talk-button"></div>
+            	<div class="space-talk-button" id="talk"></div>
             </c:if>
             </div>
         </div>           
