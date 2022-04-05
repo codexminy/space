@@ -901,13 +901,19 @@
 	
 	<!-- 통계 - 일일 라벨 -->
 	<select id="getDailyLabel" resultType="java.lang.String">
-		<![CDATA[
-			SELECT
-	    		TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') - 6 + LEVEL - 1
-			FROM
-			    dual 
-			CONNECT BY LEVEL <= (TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') + 6 - TO_CHAR(TRUNC(sysdate, 'DD'), 'DD') + 1)
-		]]>
+		SELECT TO_CHAR(sysdate-6, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-5, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-4, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-3, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-2, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate-1, 'MM/DD') FROM dual
+		UNION ALL
+		SELECT TO_CHAR(sysdate, 'MM/DD') FROM dual
 	</select>
 	
 	<!-- 통계 - 주별 라벨 -->

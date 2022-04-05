@@ -56,9 +56,9 @@
 				<div class="userChart">
 					<canvas id="userChart"></canvas>
 				</div>
-				<div class="userChart">
-					<canvas id="visitChart"></canvas>
-				</div>
+<!-- 				<div class="userChart"> -->
+<%-- 					<canvas id="visitChart"></canvas> --%>
+<!-- 				</div> -->
 			</div>
 		</div>
 	</div>
@@ -69,60 +69,60 @@
 		$('aside li:nth-child(1) .menuHover').css('color', '#22007F');
 	
 		var userContext = document.getElementById('userChart').getContext('2d');
-		var visitContext = document.getElementById('visitChart').getContext('2d');
+// 		var visitContext = document.getElementById('visitChart').getContext('2d');
 		var userChart, visitChart, list, userConfig, visitConfig;
 		
 		$('.dailyChart').on('click', () => {
-			updateChart(list[0], list[1], list[2], list[3]);
+			updateChart(list[0], list[1], list[2]);
 		});
 		
 		$('.weeklyChart').on('click', () => {
-			updateChart(list[4], list[5], list[6], list[7]);
+			updateChart(list[3], list[4], list[5]);
 		});
 
 		$('.monthlyChart').on('click', () => {
-			updateChart(list[8], list[9], list[10], list[11]);
+			updateChart(list[6], list[7], list[8]);
 		});
 
-		function updateChart(list1, list2, list3, list4) {
+		function updateChart(list1, list2, list3) {
 			var userDataset = userConfig.data.datasets;
-			var visitDataset = visitConfig.data.datasets;
+// 			var visitDataset = visitConfig.data.datasets;
 			
 			userConfig.data.labels = list1;
 			userDataset[0].data = list2;
 			userDataset[1].data = list3;
 			
 			visitConfig.data.labels = list1;
-			visitDataset[0].data = list4;
+// 			visitDataset[0].data = list4;
 			
 			userChart.update();
-			visitChart.update();
+// 			visitChart.update();
 		}
 
-		function tableData(userCounts, label, data1, data2, data3) {
+		function tableData(userCounts, label, data1, data2) {
 			let userCount = userCounts;
 			let userData = '';
 			
 			let newUser = 0;
 			let withUser = 0;
-			let visit = 0;
+// 			let visit = 0;
 			
 			for(let i=0; i<label.length; ++i) {
 				newUser += data1[i];
 				withUser += data2[i];
-				visit += data3[i];
+// 				visit += data3[i];
 			}
 			
 			userData += '<tr>';
 			userData += '<td>신규 회원</td>';
 			userData += '<td>탈퇴 회원</td>';
-			userData += '<td>방문자수</td>';
+// 			userData += '<td>방문자수</td>';
 			userData += '</tr>';
 			
 			userData += '<tr>';
 			userData += '<td>'+ newUser +'</td>';
 			userData += '<td>'+ withUser +'</td>';
-			userData += '<td>'+ visit +'</td>';
+// 			userData += '<td>'+ visit +'</td>';
 			userData += '</tr>';
 			
 			userCount.html(userData);
@@ -133,13 +133,13 @@
 			type : "GET",
 			success : function(re) {
 				list = [
-					re['dayL'], re['dayN'], re['dayW'], re['dayV'], re['weekL'], re['weekN'],
-					re['weekW'], re['weekV'], re['monthL'], re['monthN'], re['monthW'], re['monthV']
+					re['dayL'], re['dayN'], re['dayW'], re['weekL'], re['weekN'],
+					re['weekW'], re['monthL'], re['monthN'], re['monthW'],
 				];
 
-				tableData($('.dailyCnt tbody'), re['dayL'], re['dayN'], re['dayW'], re['dayV']);
-				tableData($('.weeklyCnt tbody'), re['weekL'], re['weekN'], re['weekW'], re['weekV']);
-				tableData($('.monthlyCnt tbody'), re['monthL'], re['monthN'], re['monthW'], re['monthV']);
+				tableData($('.dailyCnt tbody'), re['dayL'], re['dayN'], re['dayW']);
+				tableData($('.weeklyCnt tbody'), re['weekL'], re['weekN'], re['weekW']);
+				tableData($('.monthlyCnt tbody'), re['monthL'], re['monthN'], re['monthW']);
 
 				userConfig = {
 					type: 'bar',
@@ -208,7 +208,7 @@
 				}
 
 				userChart = new Chart(userContext, userConfig);
-				visitChart = new Chart(visitContext, visitConfig);
+// 				visitChart = new Chart(visitContext, visitConfig);
 			}
 		});
 	</script>

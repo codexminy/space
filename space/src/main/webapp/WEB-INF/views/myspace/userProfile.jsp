@@ -30,7 +30,6 @@
 				<c:forEach begin="${info.stars }" end="4">
             		<img src="${pageContext.request.contextPath}/resources/images/mySpace/star_empty.png">
             	</c:forEach>
-            	<span>${info.stars }</span>
         	</div>
 	    </div>
 	</div>

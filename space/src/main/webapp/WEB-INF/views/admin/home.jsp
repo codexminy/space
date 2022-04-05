@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="chart-wrap">
 			<div class="chartTitle">
-				<h2>일일 방문자&amp;게시물</h2>
+				<h2>신규 게시물</h2>
 			</div>
 			<div class="visitChart">
 				<canvas id="visitChart"></canvas>
@@ -106,15 +106,15 @@
 					    data: { 
 					        labels: list[0],
 					        datasets: [
-					            {
-					                label: '오늘 방문자수',
-					                lineTension: 0,
-					                fill: false,
-					                data: list[1],
-					                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-					                borderColor: 'rgba(54, 162, 235, 0.2)',
-					                borderWidth: 1
-					            },
+// 					            {
+// 					                label: '오늘 방문자수',
+// 					                lineTension: 0,
+// 					                fill: false,
+// 					                data: list[1],
+// 					                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+// 					                borderColor: 'rgba(54, 162, 235, 0.2)',
+// 					                borderWidth: 1
+// 					            },
 					            {
 					                label: '신규 게시물수',
 					                lineTension: 0,

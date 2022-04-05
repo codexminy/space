@@ -210,7 +210,7 @@ public class AdminController {
 	@GetMapping("/admin/board/sale")
 	public void saleList(Model model) {
 		settingModel(model, boardTitle, boardMenu, boardLink, boardWidth, boardHead);
-		model.addAttribute("detailUrl", "#");
+		model.addAttribute("detailUrl", "/board/boardVieww");
 		model.addAttribute("id", "board_id");
 		model.addAttribute("table", "board");
 	}
@@ -218,7 +218,7 @@ public class AdminController {
 	@GetMapping("/admin/board/community")
 	public void communityList(Model model) {
 		settingModel(model, boardTitle, boardMenu, boardLink, boardWidth, boardHead);
-		model.addAttribute("detailUrl", "/admin/community/c_board");
+		model.addAttribute("detailUrl", "/community/c_board");
 		model.addAttribute("id", "c_board_id");
 		model.addAttribute("table", "community_board");
 	}
