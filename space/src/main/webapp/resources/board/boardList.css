@@ -97,6 +97,13 @@ input[type="checkbox"]:checked + label{
     border-radius: 25px;    
 /*     background-image: url('../../resources/images/board/product_image.png'); */
 /*     background-size: cover; */
+/*    border: 1px solid #707070;*/
+}
+
+.card-photo-img > img {
+	width: 228px;
+    height: 228px;
+    border-radius: 25px;
     border: 1px solid #707070;
 }
 
