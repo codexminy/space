@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class PageSet {
+	private int p_category_id;
+	private String sort;
 	private int user_id;
 	private int pageNum;
 	private int amount;

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.second.space.admin.model.PageSet;
 import com.second.space.board.model.AuctionDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
@@ -166,6 +167,31 @@ public class BoardServiceImpl implements BoardService {
 
 	public Integer getMaxWin(Integer auction_id) {
 		return boardMapper.getMaxWin(auction_id);
+	}
+
+	@Override
+	public List<BoardDTO> getCategoryBoardList(PageSet ps) {
+		return boardMapper.getCategoryBoardList(ps);
+	}
+
+	@Override
+	public int getCategoryBoardTotal(PageSet ps) {
+		return boardMapper.getCategoryBoardTotal(ps);
+	}
+
+	@Override
+	public String getPCategoryName(PageSet ps) {
+		return boardMapper.getPCategoryName(ps);
+	}
+
+	@Override
+	public List<BoardDTO> getAllBoardList(PageSet ps) {
+		return boardMapper.getAllBoardList(ps);
+	}
+
+	@Override
+	public int getAllBoardTotal() {
+		return boardMapper.getAllBoardTotal();
 	}
 
 	

@@ -2,10 +2,10 @@ package com.second.space.board.service;
 
 import java.util.List;
 
+import com.second.space.admin.model.PageSet;
 import com.second.space.board.model.AuctionDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
-import com.second.space.board.model.FollowingDTO;
 import com.second.space.board.model.PaymentsCategoryDTO;
 import com.second.space.user_.model.UserDTO;
 
@@ -40,4 +40,14 @@ public interface BoardService {
 	AuctionDTO getAuctionDTO(Integer auction_id);
 
 	Integer getFollowing(int user_id, int user_login_id);
+	
+	List<BoardDTO> getCategoryBoardList(PageSet ps);
+	
+	public int getCategoryBoardTotal(PageSet ps);
+	
+	public String getPCategoryName(PageSet ps);
+	
+	List<BoardDTO> getAllBoardList(PageSet ps);
+	
+	public int getAllBoardTotal();
 }

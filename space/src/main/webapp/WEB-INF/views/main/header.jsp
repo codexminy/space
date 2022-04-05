@@ -56,17 +56,17 @@
 					<div class="dropdown">
                        <img src="${pageContext.request.contextPath}/resources/images/main/menu.png" class="dropbtn" onclick="dropdowmMenu()"></img>
                           <div id="dropMenu" class="dropdown-content">
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">인기매물</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">디지털</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">가전</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">가구</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">패션</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">스포츠</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">문화</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">취미</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">미용</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">반려동물</a></div>
-                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList">기타</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?sort=board_date desc">인기매물</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=1&sort=board_date desc">디지털</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=2&sort=board_date desc">가전</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=3&sort=board_date desc">가구</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=4&sort=board_date desc">문화</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=5&sort=board_date desc">스포츠</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=6&sort=board_date desc">패션</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=7&sort=board_date desc">취미</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=8&sort=board_date desc">미용</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=9&sort=board_date desc">반려동물</a></div>
+                              <div class="category-box"><a href="${pageContext.request.contextPath}/board/boardList?p_category_id=10&sort=board_date desc">기타</a></div>
                               <div class="category-box"><a href="${pageContext.request.contextPath}/community/main">커뮤니티</a></div>
                               <div class="category-box"><a href="${pageContext.request.contextPath}/notice/notice">공지사항</a></div>
                           </div>

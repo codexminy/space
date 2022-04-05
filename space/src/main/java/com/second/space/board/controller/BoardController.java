@@ -2,7 +2,6 @@ package com.second.space.board.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,16 +14,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.second.space.admin.model.PageSet;
+import com.second.space.admin.model.Paging;
 import com.second.space.board.model.AuctionDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
@@ -45,7 +43,16 @@ public class BoardController {
 	BoardServiceImpl boardService;
 		
 	@RequestMapping("/board/boardList")
-	public void boardList() {
+	public void boardList(PageSet ps, Model model) throws Exception {
+		
+		if(ps.getP_category_id() == 0) {
+			model.addAttribute("list", boardService.getAllBoardList(ps));
+			model.addAttribute("paging", new Paging(boardService.getAllBoardTotal(), ps));
+		} else {
+			model.addAttribute("list", boardService.getCategoryBoardList(ps));
+			model.addAttribute("paging", new Paging(boardService.getCategoryBoardTotal(ps), ps));
+			model.addAttribute("name", boardService.getPCategoryName(ps));
+		}
 		
 	}
 	

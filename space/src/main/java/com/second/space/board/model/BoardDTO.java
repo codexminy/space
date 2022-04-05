@@ -27,5 +27,8 @@ public class BoardDTO {
 	private String board_delete ;
 	private String board_state;
 	private String auction_state;
+	private String renamedfilename;
+	private String user_address;
+	private int auction_id;
 
 }

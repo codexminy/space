@@ -32,7 +32,7 @@
             <div class="hot-items">
                 <div class="hot-items-text">
                     <h2>인기매물</h2>
-                    <p class="text"><a href="${pageContext.request.contextPath}/board/boardList">더보기 ></a></p>
+                    <p class="text"><a href="${pageContext.request.contextPath}/board/boardList?sort=board_date desc">더보기 ></a></p>
                 </div>
             </div>
             <div class="cards-wrap">

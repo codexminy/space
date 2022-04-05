@@ -9,6 +9,7 @@
 <title>상품 목록 보기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/reset.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/boardList.css">
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -16,379 +17,92 @@
 	<div class="category-page">
 		<div class="category-page-top">
 		    <div class="board-category">
-		        <h2>전체 > </h2>
-		        <h2>카테고리</h2>
+		        <h2>전체 &gt;</h2>
+		        <c:choose>
+			        <c:when test="${paging.ps.p_category_id == 0 }">
+			        	<h2>인기매물</h2>
+			        </c:when>
+		        	<c:otherwise>
+		        		<h2>${name }</h2>
+		        	</c:otherwise>
+		        </c:choose>
 		    </div>
 		    <div class="sort">
-		        <input type="checkbox" class="sort-by" id="sort-by-recent" checked="on" onclick='checkOnlyOne(this)'>
-		        <label for="sort-by-recent">최신순</label>
-		        <p>|</p>
-		        <input type="checkbox" class="sort-by" id="sort-by-high" onclick='checkOnlyOne(this)'>
-		        <label for="sort-by-high">높은 가격순</label>
-		        <p>|</p>
-		        <input type="checkbox" class="sort-by" id="sort-by-low" onclick='checkOnlyOne(this)'>
+		    	<c:if test="${paging.ps.sort eq 'board_date desc' }">
+			        <input type="checkbox" class="sort-by" id="sort-by-recent" checked onclick='checkOnlyOne(this, "board_date desc")'>
+			        <label for="sort-by-recent">최신순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-high" onclick='checkOnlyOne(this, "board_price desc")'>
+			        <label for="sort-by-high">높은 가격순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-low" onclick='checkOnlyOne(this, "board_price")'>
 		            <label for="sort-by-low">낮은 가격순</label>
-		        </div>
-		    </div>
-		</div>
-	    <div class="cards-wrap">
-	        <article class="card">	                   
+		    	</c:if>
+		    	<c:if test="${paging.ps.sort eq 'board_price desc' }">
+			        <input type="checkbox" class="sort-by" id="sort-by-recent" onclick='checkOnlyOne(this, "board_date desc")'>
+			        <label for="sort-by-recent">최신순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-high" checked onclick='checkOnlyOne(this, "board_price desc")'>
+			        <label for="sort-by-high">높은 가격순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-low" onclick='checkOnlyOne(this, "board_price")'>
+		            <label for="sort-by-low">낮은 가격순</label>
+		    	</c:if>
+		    	<c:if test="${paging.ps.sort eq 'board_price' }">
+			        <input type="checkbox" class="sort-by" id="sort-by-recent" onclick='checkOnlyOne(this, "board_date desc")'>
+			        <label for="sort-by-recent">최신순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-high" onclick='checkOnlyOne(this, "board_price desc")'>
+			        <label for="sort-by-high">높은 가격순</label>
+			        <p>|</p>
+			        <input type="checkbox" class="sort-by" id="sort-by-low" checked onclick='checkOnlyOne(this, "board_price")'>
+		            <label for="sort-by-low">낮은 가격순</label>
+		    	</c:if>
+	        </div>
+	    </div>
+	</div>
+    <div class="cards-wrap">
+    	<c:forEach var="list" items="${list }">
+	        <article class="card">
 	            <div class="card-photobox">
 	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
+	            		<c:choose>
+	            			<c:when test="${list.auction_state eq 'Y' }">
+				                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/auctionView?board_id=${list.board_id }&auction_id=${list.auction_id }'">
+				                	<img src="${pageContext.request.contextPath}/resources/upload/board/${list.renamedfilename}" alt="" width="100%"/>
+				                </div>
+	            			</c:when>
+	            			<c:when test="${list.auction_state eq 'N' }">
+				                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${list.board_id }'">
+				                	<img src="${pageContext.request.contextPath}/resources/upload/board/${list.renamedfilename}" alt="" width="100%"/>
+				                </div>
+	            			</c:when>
+	            		</c:choose>
 		                <div class="card-heart"></div>
 		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
+	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${list.board_id }'">
 	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
+	                        <div class="card-title">${list.board_title }</div>
 	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
+	                            <div class="card-price">${list.board_price }</div>
+	                            <div class="card-region-name">${list.user_address }</div>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	        <article class="card">	                   
-	            <div class="card-photobox">
-	            	<div class="card-photo">
-		                <div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'"></div>
-		                <div class="card-heart"></div>
-		            </div>
-	                <div class="card-textbox" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww'">
-	                    <div class="card-text">
-	                        <div class="card-title">상품이름</div>
-	                        <div class="card-info">
-	                            <div class="card-price">10,000원</div>
-	                            <div class="card-region-name">경기도 구리시</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </article> 
-	         
-	        
-	
+	        </article>
+    	</c:forEach>
 	    <div class="page">
 	        <ul class="pagination modal">
-	            <li><a href="#" class="arrow left"><<</a></li>
-	            <li><a href="#" class="active num">1</a></li>
-	            <li><a href="#" class="num">2</a></li>
-	            <li><a href="#" class="num">3</a></li>
-	            <li><a href="#" class="num">4</a></li>
-	            <li><a href="#" class="num">5</a></li>
-	            <li><a href="#" class="num">6</a></li>
-	            <li><a href="#" class="num">7</a></li>
-	            <li><a href="#" class="num">8</a></li>
-	            <li><a href="#" class="num">9</a></li>
-	            <li><a href="#" class="num">10</a></li>
-	            <li><a href="#" class="arrow right">>></a></li>
+	        	<c:if test="${paging.prev }">
+	                <li><a href="${path }/board/boardList?p_category_id=${paging.ps.p_category_id }&sort=${paging.ps.sort }&pageNum=${paging.startPage - 1}" class="arrow left">&lt;&lt;</a></li>
+            	</c:if>
+                <c:forEach var="num" begin="${paging.startPage }" end="${paging.endPage }">
+                	<li><a href="${path }/board/boardList?p_category_id=${paging.ps.p_category_id }&sort=${paging.ps.sort }&pageNum=${num}" class="${paging.ps.pageNum == num ? 'active' : '' }">${num }</a></li>
+                </c:forEach>
+                <c:if test="${paging.next }">
+	                <li><a href="${path }/board/boardList?p_category_id=${paging.ps.p_category_id }&sort=${paging.ps.sort }&pageNum=${paging.endPage + 1}" class="arrow right">&gt;&gt;</a></li>
+                </c:if>
 	        </ul>
 	    </div>
 	</div>
@@ -405,16 +119,17 @@
         });
     }
 
-    function checkOnlyOne(element) {
+    function checkOnlyOne(element, sort) {
   
-  const checkboxes 
-      = document.querySelectorAll(".sort-by");
-  
-  checkboxes.forEach((cb) => {
-    cb.checked = false;
-  })
-  
-  element.checked = true;
-}
+	  const checkboxes = document.querySelectorAll(".sort-by");
+	  
+	  checkboxes.forEach((cb) => {
+	    cb.checked = false;
+	  })
+	  
+	  element.checked = true;
+	  
+	  location.href = "${pageContext.request.contextPath}/board/boardList?p_category_id=${paging.ps.p_category_id}&sort="+sort+"";
+	}
 </script>
 </html>

@@ -3,6 +3,66 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.BoardXMLMapper">
+	<select id="getCategoryBoardList" resultType="com.second.space.board.model.BoardDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            b.board_id, b.board_title, b.p_category_id, b.board_content, b.board_price, b.board_trade_type, b.user_id, b.board_view,
+		            b.board_date, b.board_delete, b.board_state, b.auction_state, bi.renamedfilename, u.user_address, a.auction_id
+		        FROM
+		            board b, board_img bi, user_ u, auction a
+		        WHERE
+		            b.board_id = bi.board_id AND b.user_id = u.user_id AND b.board_id = a.board_id(+) AND board_hidden = 'N' AND main_img = 'Y' AND p_category_id = #{p_category_id}
+		        ORDER BY
+		            ${sort}
+		    ) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<select id="getAllBoardList" resultType="com.second.space.board.model.BoardDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            b.board_id, b.board_title, b.p_category_id, b.board_content, b.board_price, b.board_trade_type, b.user_id, b.board_view,
+		            b.board_date, b.board_delete, b.board_state, b.auction_state, bi.renamedfilename, u.user_address, a.auction_id
+		        FROM
+		            board b, board_img bi, user_ u, auction a
+		        WHERE
+		            b.board_id = bi.board_id AND b.user_id = u.user_id AND b.board_id = a.board_id(+) AND board_hidden = 'N' AND main_img = 'Y'
+		        ORDER BY
+		            ${sort}
+		    ) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+
+	<select id="getCategoryBoardTotal" resultType="int">
+		SELECT COUNT(*) FROM board WHERE board_hidden = 'N' AND p_category_id = #{p_category_id}
+	</select>
+	
+	<select id="getAllBoardTotal" resultType="int">
+		SELECT COUNT(*) FROM board WHERE board_hidden = 'N'
+	</select>
+	
+	<select id="getPCategoryName" resultType="java.lang.String">
+		SELECT p_category_name FROM payments_category WHERE p_category_id = #{p_category_id}
+	</select>
+	
 	<select  id="getPaymentsCategory" resultType="com.second.space.board.model.PaymentsCategoryDTO">
 		SELECT * FROM payments_category
 	</select>

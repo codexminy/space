@@ -17,7 +17,7 @@
 		    		<i class="fa-solid fa-user"></i>
 	    		</c:when>
 	    		<c:when test="${info.user_profile != null}">
-			    	<img src="${pageContext.request.contextPath}/resources/${info.user_profile }" alt="프로필사진" />
+			    	<img src="${pageContext.request.contextPath}/resources/${info.user_profile }" alt="프로필사진" width="100%"/>
 	    		</c:when>
 	    	</c:choose>
 	    </div>
