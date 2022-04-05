@@ -19,7 +19,7 @@ public interface CommunityXMLMapper {
 	
 	public CommunityBoardDTO getCommunityBoard(int pk);
 	public List<CommunityBoardDTO> getCommunityBoardList(String user_address);
-	public List<CommunityBoardDTO> getCommunitySearchList(String keyword);
+	public List<CommunityBoardDTO> getCommunitySearchList(@Param("user_address")String user_address, @Param("keyword")String keyword);
 	public int getCommunityBoardCount();
 	
 	public CommunityCategoryDTO getCommunityCategory(int pk);

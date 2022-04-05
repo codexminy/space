@@ -267,6 +267,15 @@ main {
 	border: 1px solid #555;
 	float:right;
 }
+
+
+.fa-search{
+	cursor:pointer;
+}
+.hidden{
+	display: none;
+}
+
 .active {
 	display: block;
 }

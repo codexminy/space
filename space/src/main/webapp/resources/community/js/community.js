@@ -29,6 +29,15 @@ for(let i=0; i<c_board.length; ++i) {
     });
 }
 
+const search_bar = document.querySelector('.search-bar');
+search_bar.innerHTML = "<form id=\"board_search\" name=\"search_form\" method=\"post\" action=\"search\"><input class=\"search-bar-input\" type=\"search\" name=\"keyword\"><input class=\"hidden\" type=\"submit\" value=\"확인\"></input></form><i class=\"fas fa-search\"></i>";
+const board_search = document.getElementById('board_search');
+const fa_search = document.querySelector('.fa-search');
+fa_search.addEventListener('click', () =>{
+	board_search.submit();
+});
+
+
 /* 댓글보기 토글 */
 /* 
 const view_comment = document.querySelectorAll('.view_comment');

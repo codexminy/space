@@ -44,8 +44,8 @@ public class CommunityServiceImpl implements CommunityService {
 	
 	// 커뮤니티 게시글 검색 리스트
 	@Override
-	public List<CommunityBoardDTO> getCommunitySearchList(String keyword) throws Exception {
-		return community_mapper.getCommunitySearchList(keyword);
+	public List<CommunityBoardDTO> getCommunitySearchList(String user_address, String keyword) throws Exception {
+		return community_mapper.getCommunitySearchList(user_address, keyword);
 	}
 
 	@Override

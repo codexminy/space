@@ -62,12 +62,19 @@ public class CommunityController {
 		System.out.println(user_address);
 		
 		System.out.println(keyword);
-		try {
-			model.addAttribute("c_board_list", community_service.getCommunitySearchList(keyword));
+		try {			
+			model.addAttribute("c_user_list", community_service.getUserList());
+			model.addAttribute("c_category_list", community_service.getCommunityCategoryList());
+			model.addAttribute("c_board_list", community_service.getCommunitySearchList(user_address, keyword));
+			model.addAttribute("c_board_img_list", community_service.getCommunityBoardImgList());
+			model.addAttribute("c_comment_list", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list2", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_list3", community_service.getCommunityCommentList());
+			model.addAttribute("c_comment_count", community_service.getCommunityCommentCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/community/main";
+		return "/community/main";
 	}
 	
 	@GetMapping("/c_board")
