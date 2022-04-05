@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.second.space.admin.model.PageSet;
 import com.second.space.mapper.MySpaceXMLMapper;
 import com.second.space.mySpace.model.BoardInfoDTO;
+import com.second.space.mySpace.model.FollowInfoDTO;
 import com.second.space.mySpace.model.InfoDTO;
 import com.second.space.mySpace.model.LikeInfoDTO;
 import com.second.space.mySpace.model.ReviewInfoDTO;
@@ -57,5 +58,40 @@ public class MySpaceServiceImpl implements MySpaceService {
 	public int deleteLike(int board_like_id) { // 찜한 상품 삭제
 		return mapper.deleteLike(board_like_id);
 	}
-	
+
+	@Override
+	public List<FollowInfoDTO> getFollowingList(PageSet ps) { // 팔로잉 리스트
+		return mapper.getFollowingList(ps);
+	}
+
+	@Override
+	public int getFollowingCount(int user_id) { // 팔로잉 리스트 총 갯수
+		return mapper.getFollowingCount(user_id);
+	}
+
+	@Override
+	public int deleteFollowing(FollowInfoDTO dto) { // 팔로잉 삭제
+		return mapper.deleteFollowing(dto);
+	}
+
+	@Override
+	public List<FollowInfoDTO> getFollowerList(PageSet ps) { // 팔로워 리스트
+		return mapper.getFollowerList(ps);
+	}
+
+	@Override
+	public int getFollowerCount(int user_id) { // 팔로워 리스트 총 갯수
+		return mapper.getFollowerCount(user_id);
+	}
+
+	@Override
+	public List<Integer> getFollowerCheck(int user_id) { // 팔로워 리스트 팔로잉 확인
+		return mapper.getFollowerCheck(user_id);
+	}
+
+	@Override
+	public int insertFollowing(FollowInfoDTO dto) {
+		return mapper.insertFollowing(dto);
+	}
+
 }

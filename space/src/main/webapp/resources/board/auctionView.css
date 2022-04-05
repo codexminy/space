@@ -173,14 +173,15 @@
     margin-left: 15px;
 }
 
-.chkbox input[type=checkbox] { 
+input[type=checkbox] { 
     display:none; 
 }
 
 input[type=checkbox] + label { 
     cursor: pointer; 
     line-height: 22px; 
-    padding-left: 25px; 
+    padding-left: 25px;
+    margin-top: 20px;
     font-size: 16px;
     background: url('../../resources/images/board/checkbox.png') no-repeat; 
 }
@@ -435,6 +436,7 @@ textarea:focus{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-bottom: 290px;
 }
 
 .store-profile > img {
@@ -485,7 +487,6 @@ textarea:focus{
     cursor: pointer;
     width: 145px;
     height: 50px;
-    z-index: 9999;
     border-radius: 11px;
     image-rendering: -webkit-optimize-contrast;
 }
@@ -519,7 +520,13 @@ textarea:focus{
 }
 
 #review {
-    margin-left: 20px;
+    width: auto;
+    height: auto;
+    border: none;
+    border-radius: 0px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #707070;
 }
     
 .review-window {
@@ -654,7 +661,7 @@ textarea:focus{
 }
 
 input[type="button"] {
-    width: 130px;
+    width: 150px;
     height: 50px;
     border-radius: 11px;
     border: 3px solid #22007F;
@@ -665,8 +672,8 @@ input[type="button"] {
     cursor: pointer;
 }
 
-.buttons > input[type="button"]:hover {
-    width: 130px;
+.buttons-left > input[type="button"]:hover {
+    width: 150px;
     height: 50px;
     border-radius: 11px;
     color: white;

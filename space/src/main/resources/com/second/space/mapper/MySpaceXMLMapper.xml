@@ -103,6 +103,84 @@
 	<delete id="deleteLike">
 		DELETE FROM board_like WHERE board_like_id = #{board_like_id}
 	</delete>
+	
+	<!-- 팔로잉 리스트 -->
+	<select id="getFollowingList" resultType="com.second.space.mySpace.model.FollowInfoDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            f.following_id, u.user_nickname, u.user_login_id, f.user_id, u.user_profile, COUNT(board_id) cnt
+		        FROM
+		            user_ u, following_ f, board b
+		        WHERE
+		            f.user_login_id = u.user_login_id AND b.user_id(+) = u.user_id AND f.user_id = #{user_id}
+		        GROUP BY
+		            f.user_login_id, f.following_id, u.user_nickname, u.user_login_id, u.user_profile, f.user_id
+		        ORDER BY
+		        	u.user_nickname
+		    ) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<!-- 팔로잉 리스트 총 갯수 -->
+	<select id="getFollowingCount" resultType="int">
+		SELECT COUNT(*) FROM following_ WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 팔로잉 삭제 -->
+	<delete id="deleteFollowing">
+		DELETE FROM following_ WHERE user_id = #{user_id} AND user_login_id = #{user_login_id}
+	</delete>
+	
+	<!-- 팔로워 리스트 -->
+	<select id="getFollowerList" resultType="com.second.space.mySpace.model.FollowInfoDTO">
+		SELECT
+		    *
+		FROM(
+		    SELECT
+		        ROWNUM rn, t.*
+		    FROM(
+		        SELECT
+		            f.following_id, u.user_nickname, u.user_id, f.user_login_id, u.user_profile, COUNT(board_id) cnt
+		        FROM
+		            user_ u, following_ f, board b
+		        WHERE
+		            b.user_id(+) = f.user_id AND f.user_id = u.user_id AND f.user_login_id = #{user_id}
+		        GROUP BY
+		            f.following_id, u.user_nickname, u.user_id, u.user_profile, f.user_login_id
+	            ORDER BY
+		        	u.user_nickname
+		    ) t
+		)
+		<![CDATA[
+        WHERE
+        	rn > (#{pageNum}-1) * #{amount} AND rn <= #{pageNum} * #{amount}
+   		]]>
+	</select>
+	
+	<!-- 팔로워 리스트 총 갯수 -->
+	<select id="getFollowerCount" resultType="int">
+		SELECT COUNT(*) FROM following_ WHERE user_login_id = #{user_id}
+	</select>
+	
+	<!-- 팔로워 리스트 팔로잉 확인 -->
+	<select id="getFollowerCheck" resultType="java.lang.Integer">
+		SELECT user_login_id FROM following_ WHERE user_id = #{user_id}
+	</select>
+
+	<!-- 팔로잉 추가 -->
+	<insert id="insertFollowing">
+		INSERT INTO following_ VALUES(FOLLOWING_FOLLOWING_ID_SEQ.nextval, #{user_id}, #{user_login_id})
+	</insert>
+
 </mapper>
 
 

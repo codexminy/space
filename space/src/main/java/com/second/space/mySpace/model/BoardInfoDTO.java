@@ -10,7 +10,7 @@ import lombok.Data;
 public class BoardInfoDTO {
 	private int board_id;
 	private String board_title;
-	private int board_price;
+	private String board_price;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date board_date;
 	private String board_delete;
