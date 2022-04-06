@@ -210,8 +210,10 @@
         <div class="buttons">
         	<div class="buttons-left">
 	            <input type="button" value="목록" id="cancle"/>
-	            <input type="button" value="수정" id="modify"/>
-	            <input type="button" value="삭제" id="delete"/>
+	            <c:if test="${board.user_id eq userLoggedIn.user_id }">
+		            <input type="button" value="수정" id="modify"/>
+		            <input type="button" value="삭제" id="delete"/>
+	            </c:if>
         	</div>
 	        
             <div class="bid">
@@ -308,13 +310,6 @@
         return str.replace(/[^\d]+/g, '');
     }
     
-var talk = document.getElementById("talk");
-    
-    talk.addEventListener('click', (e) => {
-    	
-    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
-    });
-    
     var auctionBid = document.getElementById("action-bid");
     var auctionPrice = document.getElementById("entry-action-price");
     var minPrice = ${auction.min_price} + "";
@@ -340,7 +335,7 @@ var talk = document.getElementById("talk");
     	
     	if(minprice > auctionprice.value){
     		alert("최소 경매 금액보다 큰 금액을 입력하세요");
-    	}else if (purchaseprice <= auctionprice){
+    	}else if (purchaseprice <= auctionprice.value){
     		alert("축하합니다. 경매에 당첨되셨습니다.");
     		var param = {auction_price : auctionprice, auction_id : ${auction.auction_id} , board_id : ${board.board_id}};
     		bidding.open('post', `${pageContext.request.contextPath}/board/win`);
@@ -354,9 +349,38 @@ var talk = document.getElementById("talk");
     	}
     	
     	
-    	
     });
     
+    
+ 	var talk = document.getElementById("talk");
+ 	if(talk != null){
+ 	 	
+ 	    talk.addEventListener('click', (e) => {
+ 	    	
+ 	    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
+ 	    });
+ 	 }
+ 	
+ 	  var cancle = document.getElementById("cancle");
+      cancle.addEventListener('click' , (e) => {
+     	location.href = `${pageContext.request.contextPath}/board/boardList?sort=board_date desc`; 
+      });
+      
+     
+      
+      var modify = document.getElementById("modify");
+      if(modify != null){
+      modify.addEventListener('click', (e) => {
+     	 location.href = `${pageContext.request.contextPath}/board/boardUpdate?board_id=${board.board_id}`; 
+      });
+      }
+      
+      var delete_ = document.getElementById("delete");
+      if(delete_ != null){
+      delete_.addEventListener('click', (e) => {
+     	 location.href = `${pageContext.request.contextPath}/board/delete?board_id=${board.board_id}`; 
+      });
+      }
    
 </script>
 </html>

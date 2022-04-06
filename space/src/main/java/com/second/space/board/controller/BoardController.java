@@ -435,7 +435,7 @@ public class BoardController {
 		win.setAuction_id(auction_id);
 		win.setBoard_id(board_id);
 		win.setUser_id(user.getUser_id());
-		win.setWinning_bid(winning_price);
+		win.setWinning_price(winning_price);
 		win.setWin_status("Y");
 		
 		int result = boardService.insertWinning(win);

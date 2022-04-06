@@ -330,7 +330,7 @@
  	
  	  var cancle = document.getElementById("cancle");
       cancle.addEventListener('click' , (e) => {
-     	location.href = `${pageContext.request.contextPath}/board/boardList`; 
+     	location.href = `${pageContext.request.contextPath}/board/boardList?sort=board_date desc`; 
       });
       
      
