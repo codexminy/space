@@ -73,10 +73,10 @@
 	
 	<insert id="insertBoard" parameterType="com.second.space.board.model.BoardDTO">
 		INSERT INTO board (board_id, board_title, p_category_id, board_content, board_price, board_trade_type, user_id, board_view, 
-		board_date, board_delete, board_state, auction_state)
+		board_date, board_delete, board_state, auction_state, board_hidden)
 		VALUES 
 		(board_board_id_seq.nextval,  #{board_title}, #{p_category_id}, #{board_content}, #{board_price}, #{board_trade_type},
-		#{user_id}, 0, sysdate, 'N', 'N', 'N')
+		#{user_id}, 0, sysdate, 'N', 'N', #{auction_state}, 'N')
 	</insert>
 	
 	<select id="getBoardId" resultType="_int">
@@ -103,7 +103,7 @@
 	</select>
 	
 	<select id="getBoardImgDto" resultType="com.second.space.board.model.BoardImgDTO" parameterType="_int">
-		SELECT * FROM board_img WHERE board_id = #{board_id}
+		SELECT * FROM board_img WHERE board_id = #{board_id} AND status = 'N'
 	</select>
 	
 	<select id="getCategoryName" parameterType="_int" resultType="string">
@@ -195,5 +195,22 @@
 	<select id="getMaxWin" resultType="integer">
 		SELECT MAX(winning_price) FROM winning_bid WHERE auction_id = #{auction_id}
 	</select>
+	
+		<update id="deleteBoard">
+		UPDATE board SET board_delete = 'Y' WHERE board_id = #{board_id}
+	</update>
+	
+	<update id="deleteBoardImg">
+		UPDATE board_img status = 'Y' WHERE board_id = #{board_id}
+	</update>
+	
+	<update id="updateBoard" parameterType="com.second.space.board.model.BoardDTO">
+	UPDATE board SET board_title = #{board_title} , p_category_id = #{p_category_id}, board_content = #{board_content},
+	board_price = #{board_price} , board_trade_type = #{board_trade_type} where board_id = #{board_id}
+	</update>
+	
+	<update id="updateBoardImg">
+		UPDATE board_img SET status = 'Y' WHERE board_id = #{board_id}
+	</update>
 
 </mapper>

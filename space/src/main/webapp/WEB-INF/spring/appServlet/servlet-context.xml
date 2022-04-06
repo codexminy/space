@@ -51,10 +51,12 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/"/>
+			<mapping path="/chatting/**" />
 			<beans:bean id="authenticationInterceptor" class="com.second.space.user_.interceptor.AuthenticationInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
+	
 	
 	
 </beans:beans>

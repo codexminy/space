@@ -80,4 +80,14 @@ public interface BoardXMLMapper {
 	List<BoardDTO> getAllBoardList(PageSet ps);
 	
 	public int getAllBoardTotal();
+	
+	int deleteBoard(Integer board_id);
+
+	int deleteBoardImg(Integer board_id);
+
+	int updateBoard(BoardDTO board);
+
+	int updateBoardImg(Integer board_id);
+	
+	
 }

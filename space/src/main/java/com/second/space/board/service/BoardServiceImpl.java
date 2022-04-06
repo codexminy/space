@@ -193,6 +193,23 @@ public class BoardServiceImpl implements BoardService {
 	public int getAllBoardTotal() {
 		return boardMapper.getAllBoardTotal();
 	}
+	
+	
+	public int deleteBoard(Integer board_id) {
+		return boardMapper.deleteBoard(board_id);
+	}
 
+	public int deleteBoardImg(Integer board_id) {
+		return boardMapper.deleteBoardImg(board_id);
+	}
+
+	public int updateBoard(BoardDTO board) {
+		return boardMapper.updateBoard(board);
+	}
+
+	public int updateBoardImg(Integer board_id) {
+		return boardMapper.updateBoardImg(board_id);
+	}
+	
 	
 }

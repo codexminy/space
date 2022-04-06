@@ -39,7 +39,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter{
 				}
 			}
 			
-			response.sendRedirect("/space/main/space");
+			response.sendRedirect("/space/user_/login");
 			return false;
 		}
 		

@@ -77,12 +77,9 @@ public class BoardController {
 			ModelAndView mav, @RequestParam MultipartFile[] upfile, String main_img, HttpServletRequest request) {
 		String saveDirection = request.getSession().getServletContext().getRealPath("/resources/upload/board");
 		
-		log.info(board);
-		log.info(a_date);
-		log.info(auction);
 		
 		board.setBoard_price(auction.getPurchase_price()+"");
-		
+		board.setAuction_state("Y");
 		// trade_type 조정
 		if(board.getBoard_trade_type().contains("both")) {
 			board.setBoard_trade_type("both");
@@ -154,13 +151,7 @@ public class BoardController {
 			             mav.setViewName("common/loc");
 			             mav.addObject("loc", "/board/auctionView?board_id="+board_id+"&auction_id="+ auction_id );
 					}
-					//보드 정보 가져오기
-//					BoardDTO boardDto = boardService.getBoardDto(board_id);
-//					//이미지 정보 가져오기
-//					List<BoardImgDTO> boardimgList = boardService.getBoardImgDto(board_id);
-//					model.addAttribute("boardImgList", boardimgList);
-//					model.addAttribute("board", boardDto);
-//					model.addAttribute("category", boardService.getCategoryName(board.getP_category_id()));
+
 				}else {
 					log.info("인서트 실패");
 					 mav.addObject("msg", "게시글 작성 실패");
@@ -224,21 +215,19 @@ public class BoardController {
 		
 		//보드 정보 가져오기
 		BoardDTO boardDto = boardService.getBoardDto(board_id);
-		log.info("[1]" + boardDto );
 		log.info(boardDto.getUser_id());
 		
 		//이미지 정보 가져오기
 		List<BoardImgDTO> boardimgList = boardService.getBoardImgDto(board_id);
-		log.info("[2]" +boardimgList);
 		// 나의 닉네임
 		UserDTO user = boardService.getUserByUserId(boardDto.getUser_id());
-		log.info("[3]" + user);
+		
 		// 나를 추가한 사람 총 수 
 		int follower = boardService.getFollower(boardDto.getUser_id());
-		log.info("[4]" +follower);
+
 		// 내가 총 올린 삼품 수 
 		int boardCnt = boardService.getBoardCnt(boardDto.getUser_id());
-		log.info("[5]" + boardCnt);
+		
 		// 팔로우 
 		Integer following = null;
 		FollowingDTO f = new FollowingDTO();
@@ -301,7 +290,7 @@ public class BoardController {
 		if(board.getBoard_trade_type().contains("both")) {
 			board.setBoard_trade_type("both");
 		}
-		
+		board.setAuction_state("N");
 		//게시글 insert 후에 board_id 가져오기
 		int result = boardService.insertBoard(board);
 		int board_id = 0;
@@ -455,4 +444,111 @@ public class BoardController {
 		return winning_price;
 	}
 	
+	@RequestMapping("/board/delete")
+	public ModelAndView deleteBoard(@RequestParam("board_id") Integer board_id, ModelAndView mav) {
+		
+		//board_delete Y
+		int result = boardService.deleteBoard(board_id);
+		
+		if(result > 0) {
+			result = boardService.deleteBoardImg(board_id);
+			
+			 mav.addObject("msg", "게시글 삭제");
+			 mav.setViewName("common/msg");
+             mav.addObject("loc", "/board/boardList");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/board/boardUpdate")
+	public void boardUpdate(@RequestParam("board_id") Integer board_id, Model model, 
+			HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
+		
+		//보드 이미지 
+		List<BoardImgDTO> imgList = boardService.getBoardImgDto(board_id);
+		
+		//보드 내용
+		BoardDTO board = boardService.getBoardDto(board_id);
+		
+		
+		
+		model.addAttribute("categoryList",boardService.getPaymentsCategory());
+		model.addAttribute("board", board);
+		model.addAttribute("img", imgList);
+		model.addAttribute("address", user.getUser_address());
+	}
+	
+	@RequestMapping("/board/boardUpdateFinish")
+	public ModelAndView boardUpdateFinish(BoardDTO board,@RequestParam MultipartFile[] upfile, ModelAndView mav, String main_img, HttpServletRequest request) { 
+		String saveDirection = request.getSession().getServletContext().getRealPath("/resources/upload/board");
+
+		// trade_type 조정
+		if(board.getBoard_trade_type().contains("both")) {
+			board.setBoard_trade_type("both");
+		}
+		board.setAuction_state("N");
+		
+		//게시글 insert 후에 board_id 가져오기
+		int result = boardService.updateBoard(board);
+		result = boardService.updateBoardImg(board.getBoard_id());
+		int board_id = 0;
+		List<BoardImgDTO> imgList = new ArrayList<>();
+		
+		
+		if(result > 0) {
+			//board_id 가져오기 
+			board_id = board.getBoard_id();
+			
+			if(board_id != 0) {
+				for(MultipartFile f : upfile) {
+					if(!f.isEmpty()) {
+						//파일명 
+						String originalFileName = f.getOriginalFilename();
+						String renamedFileName = Utils.getRenamedFileName(originalFileName);
+						
+						//실제서버 저장
+						try {
+							f.transferTo(new File(saveDirection+"/"+renamedFileName));
+						} catch (IllegalStateException | IOException e) {
+							e.printStackTrace();
+						}
+						
+						
+						
+						//List 작성
+						BoardImgDTO board_img = new BoardImgDTO();
+						board_img.setBoard_id(board.getBoard_id());
+						board_img.setOriginalfilename(originalFileName);
+						board_img.setRenamedfilename(renamedFileName);
+						board_img.setStatus("N");
+						if(main_img.equals(originalFileName)) {
+							board_img.setMain_img("Y");
+						}else {
+							board_img.setMain_img("N");
+						}
+						imgList.add(board_img);
+						
+					}
+				}
+				
+				//List Insert
+				result = boardService.insertBoardImg(imgList);
+				if(result > 0) {
+					log.info("인서트 성공");
+		             mav.setViewName("common/loc");
+		             mav.addObject("loc", "/board/boardVieww?board_id="+board_id);
+
+				}else {
+					log.info("인서트 실패");
+					 mav.addObject("msg", "게시글 작성 실패");
+					 mav.setViewName("common/msg");
+		             mav.addObject("loc", "/board/boardUpdate?board_id="+board.getBoard_id());
+				}
+			}
+		}
+		return mav;
+	}
 }
