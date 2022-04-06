@@ -62,6 +62,7 @@
                         <h3>거래 지역</h3>
                         <h3>${user.user_address }</h3>
                         <div class="chkbox">
+
 	                        <c:if test="${board.board_trade_type eq 'both' }">
 	                            <input type="checkbox" name="board_trade_type" value="delivery"  class="radio"  id="delivery" checked="checked"/>
 	                            <label for="delivery" class="label" >택배</label>
@@ -212,8 +213,10 @@
         <div class="buttons">
             <div class="buttons-left">
 	            <input type="button" value="목록" id="cancle"/>
-	            <input type="button" value="수정" id="modify"/>
-	            <input type="button" value="삭제" id="delete"/>
+	             <c:if test="${board.user_id eq userLoggedIn.user_id }">
+		            <input type="button" value="수정" id="modify"/>
+		            <input type="button" value="삭제" id="delete"/>
+	            </c:if>
         	</div>
             
         </div>
@@ -317,11 +320,33 @@
     }
     
  	var talk = document.getElementById("talk");
-    
-    talk.addEventListener('click', (e) => {
-    	
-    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
-    });
-    
+ 	if(talk != null){
+ 	 	
+ 	    talk.addEventListener('click', (e) => {
+ 	    	
+ 	    	location.href = `${pageContext.request.contextPath}/chatting/chatPartner?board_id=${board.board_id}&buyer_id=${user.user_id}`
+ 	    });
+ 	 	}
+ 	
+ 	  var cancle = document.getElementById("cancle");
+      cancle.addEventListener('click' , (e) => {
+     	location.href = `${pageContext.request.contextPath}/board/boardList`; 
+      });
+      
+     
+      
+      var modify = document.getElementById("modify");
+      if(modify != null){
+      modify.addEventListener('click', (e) => {
+     	 location.href = `${pageContext.request.contextPath}/board/boardUpdate?board_id=${board.board_id}`; 
+      });
+      }
+      
+      var delete_ = document.getElementById("delete");
+      if(delete_ != null){
+      delete_.addEventListener('click', (e) => {
+     	 location.href = `${pageContext.request.contextPath}/board/delete?board_id=${board.board_id}`; 
+      });
+      }
 </script>
 </html>
