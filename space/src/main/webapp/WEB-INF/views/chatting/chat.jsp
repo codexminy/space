@@ -28,7 +28,7 @@ margin-top: 193px;
 	            <c:if test="${content ne null }">
 	            <c:forEach var="c" items="${content }">
 	                <li>
-	                    <a href="${pageContext.request.contextPath}/chatting/chatPartner?board_id=${c.board_id}&buyer_id=${c.buyer_id}">
+	                    <a onclick="window.open('${pageContext.request.contextPath}/chatting/chatPartner?board_id=${c.board_id}&buyer_id=${c.buyer_id}','우주톡','width=600, height=800')">
 	                        <div class="img-box">
 	                            <img src="${pageContext.request.contextPath}/resources/images/chatting/chat_basic_profile.png" class="profile-img" alt="스트릿market">
 	                        </div>
