@@ -25,8 +25,8 @@
 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div>
 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div>
 			</div>
-			    <div class="swiper-button-next"></div>
-			    <div class="swiper-button-prev"></div>
+<!-- 			    <div class="swiper-button-next"></div> -->
+<!-- 			    <div class="swiper-button-prev"></div> -->
 		</div>
             
             <div class="hot-items">
@@ -114,10 +114,10 @@
 </body>
 <script>
     var swiper = new Swiper(".mySwiper", {
-		navigation: {
-			nextEl: ".swiper-button-next",
-			prevEl: ".swiper-button-prev",
-		},
+// 		navigation: {
+// 			nextEl: ".swiper-button-next",
+// 			prevEl: ".swiper-button-prev",
+// 		},
     });
 
 	function myFunction() {

@@ -81,7 +81,7 @@
 	FULL OUTER JOIN
 	(SELECT board_id, CASE user_id WHEN 3 THEN 3 ELSE 0 END AS user_id FROM board_like) ul USING(board_id)
 	INNER JOIN board_img i USING(board_id) 
-	WHERE u.user_address = #{user_address} AND i.main_img = 'Y' AND ROWNUM <![CDATA[<=]]> 10
+	WHERE u.user_address = #{user_address} AND i.main_img = 'Y' AND ROWNUM <![CDATA[<=]]> 10 AND board_hidden = 'N'
 	ORDER BY b.board_view DESC, l.board_like ASC
 </select>
 
@@ -91,7 +91,7 @@
 
 <select id="getCommunityList" resultType="com.second.space.community.model.CommunityBoardDTO">
 	SELECT c_board_id, c_board_title FROM community_board c INNER JOIN user_ u USING(user_id)
-	WHERE u.user_address = #{user_address} AND ROWNUM <![CDATA[<=]]> 5 ORDER BY c_board_date DESC
+	WHERE u.user_address = #{user_address} AND ROWNUM <![CDATA[<=]]> 5 AND c_board_hidden = 'N' ORDER BY c_board_date DESC
 </select>
 
 <select id="getMain" resultType="com.second.space.user_.model.MainInfoDTO">
