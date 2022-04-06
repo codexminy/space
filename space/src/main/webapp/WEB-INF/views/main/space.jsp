@@ -18,17 +18,17 @@
 		<div class="blank"></div>
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
-				<c:forEach var="list" items="${banner }">
-					<div class="swiper-slide">
-						<img src="${pageContext.request.contextPath}/resources/${list.na_img}" onclick="goUrl('${list.na_url}')" style="cursor: pointer;">
-					</div>
-				</c:forEach>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_01.jpg"></div> --%>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_02.jpg"></div> --%>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_03.jpg"></div> --%>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_04.jpg"></div> --%>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div> --%>
-<%-- 				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div> --%>
+<%-- 				<c:forEach var="list" items="${banner }"> --%>
+<!-- 					<div class="swiper-slide"> -->
+<%-- 						<img src="${pageContext.request.contextPath}/resources/${list.na_img}" onclick="goUrl('${list.na_url}')" style="cursor: pointer;"> --%>
+<!-- 					</div> -->
+<%-- 				</c:forEach> --%>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_01.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_02.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_03.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_04.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_05.jpg"></div>
+				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main/ad_06.jpg"></div>
 			</div>
 <!-- 			    <div class="swiper-button-next"></div> -->
 <!-- 			    <div class="swiper-button-prev"></div> -->
