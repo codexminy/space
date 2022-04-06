@@ -68,12 +68,12 @@
 // 	    }
 // 	}
 	function deleteFollowing(user_id, user_login_id) {
-		if(confirm('언팔로우 하시겠습니까?')) {
+		if(confirm('팔로우를 해제하시겠습니까?')) {
 			$.ajax({
 				url : "${path}/myspace/myspace/followings/" + user_id + "/" + user_login_id,
 				type: "DELETE",
 				success : function(result) {
-					alert('언팔로우가 완료되었습니다.');
+					alert('팔로우 해제가 완료되었습니다.');
 					location.reload();
 				}
 			});

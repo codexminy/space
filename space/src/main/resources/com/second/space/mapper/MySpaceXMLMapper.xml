@@ -7,9 +7,9 @@
 	<!-- 유저 정보 -->
 	<select id="getUserInfo" resultType="com.second.space.mySpace.model.InfoDTO">
 		SELECT
-			user_nickname, user_profile, (SELECT TRUNC(AVG(NVL(stars, 0))) FROM review r, board b WHERE r.board_id = b.board_id AND b.user_id = #{user_id}) stars
+			t.*, (SELECT TRUNC(AVG(NVL(stars, 0))) FROM review r, board b WHERE r.board_id = b.board_id AND b.user_id = #{user_id}) stars
 		FROM
-			user_
+			user_ t
 		WHERE
 			user_id = #{user_id}
 	</select>

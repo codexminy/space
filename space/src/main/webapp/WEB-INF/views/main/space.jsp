@@ -45,12 +45,14 @@
             		<div class="card-photobox">
                 		<div class="card-photo">
                 			<c:if test="${m.auction_id eq null }">
-                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'"
-                    			style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
+                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/boardVieww?board_id=${m.board_id}'">
+                    				<img src="${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}" alt="" />
+                    			</div>
                     		</c:if>
                     		<c:if test="${m.auction_id ne null }">
-                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/auctionView?board_id=${m.board_id}&auction_id=${m.auction_id}'"
-                    			style="background-image : url('${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}')"></div>
+                    			<div class="card-photo-img" onclick="location.href='${pageContext.request.contextPath}/board/auctionView?board_id=${m.board_id}&auction_id=${m.auction_id}'">
+                    				<img src="${pageContext.request.contextPath}/resources/upload/board/${m.renamedfilename}" alt="" />
+                    			</div>
                     		</c:if>
                     		
                     		<c:if test="${m.board_like eq 'Y'}">

@@ -25,7 +25,7 @@
 			<article class="myspace-card">	                   
 		        <div class="myspace-card-photo">
 		        	 <div class="myspace-card-photo-img" onclick="location.href='${path}/board/boardVieww?board_id=${list.board_id }'">
-		            	<img src="${path}/resources/upload/board/${list.renamedfilename}" alt="" width="90%"/>
+		            	<img src="${path}/resources/upload/board/${list.renamedfilename}" alt="" width="100%"/>
 		            </div>
 		        	<div class="card-heart" onclick="deleteLike(${list.board_like_id})"></div>
 		        </div>

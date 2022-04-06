@@ -73,7 +73,7 @@
 	clear:both;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+/*     justify-content: space-between; */
     flex-wrap: wrap;
     margin: 0 auto;
 }
@@ -84,6 +84,7 @@
     align-items: center;
     margin-bottom: 15px;
     cursor: pointer;
+    padding-right: 10px;
 }
 
 .card-photo {
@@ -97,9 +98,14 @@
     height: 228px;
     /* background-color: #D1D1D1; */
     border-radius: 25px;  
-    background-image: url('../../resources/images/board/product_image.png');
-    background-size: cover;
+/*     background-image: url('../../resources/images/board/product_image.png'); */
+/*     background-size: cover; */
     border: 1px solid #707070;
+    display: flex;
+    overflow: hidden;
+}
+.card-photo-img img {
+	width: 100%;
 }
 
 .card-heart {
