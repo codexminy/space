@@ -10,6 +10,7 @@ import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.board.model.FollowerDTO;
 import com.second.space.board.model.FollowingDTO;
 import com.second.space.board.model.PaymentsCategoryDTO;
+import com.second.space.board.model.ReviewDTO;
 import com.second.space.board.model.WinningBidDTO;
 import com.second.space.user_.model.UserDTO;
 
@@ -88,6 +89,8 @@ public interface BoardXMLMapper {
 	int updateBoard(BoardDTO board);
 
 	int updateBoardImg(Integer board_id);
+
+	int insertReview(ReviewDTO review);
 	
 	
 }

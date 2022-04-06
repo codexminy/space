@@ -212,5 +212,13 @@
 	<update id="updateBoardImg">
 		UPDATE board_img SET status = 'Y' WHERE board_id = #{board_id}
 	</update>
+	
+	<insert id="insertReview"  parameterType="com.second.space.board.model.ReviewDTO">
+		INSERT INTO review
+		(review_id, board_id, stars, review_date, review_content, user_id, r_delete)
+		VALUES
+		(review_review_id_seq.nextval, #{board_id}, #{stars}, sysdate, #{review_content}, #{user_id}, 'N' )
+	
+	</insert>
 
 </mapper>

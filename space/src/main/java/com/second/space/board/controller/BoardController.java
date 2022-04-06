@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +29,7 @@ import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.board.model.FollowingDTO;
+import com.second.space.board.model.ReviewDTO;
 import com.second.space.board.model.WinningBidDTO;
 import com.second.space.board.service.BoardServiceImpl;
 import com.second.space.common.util.Utils;
@@ -549,6 +551,28 @@ public class BoardController {
 				}
 			}
 		}
+		return mav;
+	}
+	
+	@RequestMapping("/board/review")
+	public ModelAndView review(ReviewDTO review, ModelAndView mav, HttpServletRequest request) {
+		log.info(review);
+		HttpSession session = request.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
+		review.setUser_id(user.getUser_id());
+		
+		int result = boardService.insertReview(review);
+		
+		if(result > 0) {
+			 mav.addObject("msg", "후기 작성 완료");
+			 mav.setViewName("common/msg");
+			 mav.addObject("loc", "/");
+		}else {
+			 mav.addObject("msg", "후기 작성 실패");
+			 mav.setViewName("common/msg");
+             mav.addObject("loc", "/board/boardVieww?board_id="+ review.getBoard_id());
+		}
+		
 		return mav;
 	}
 }

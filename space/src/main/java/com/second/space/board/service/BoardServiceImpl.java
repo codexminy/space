@@ -13,6 +13,7 @@ import com.second.space.board.model.BoardLikeDTO;
 import com.second.space.board.model.FollowerDTO;
 import com.second.space.board.model.FollowingDTO;
 import com.second.space.board.model.PaymentsCategoryDTO;
+import com.second.space.board.model.ReviewDTO;
 import com.second.space.board.model.WinningBidDTO;
 import com.second.space.mapper.BoardXMLMapper;
 import com.second.space.user_.model.UserDTO;
@@ -209,6 +210,10 @@ public class BoardServiceImpl implements BoardService {
 
 	public int updateBoardImg(Integer board_id) {
 		return boardMapper.updateBoardImg(board_id);
+	}
+
+	public int insertReview(ReviewDTO review) {
+		return boardMapper.insertReview(review);
 	}
 	
 	

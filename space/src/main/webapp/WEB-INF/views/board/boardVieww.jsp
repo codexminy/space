@@ -184,6 +184,7 @@
                     	<div class="follow" id="follow"></div>
                     </c:if>
                 </div>
+               
                 <input type="button" value="거래후기 남기기 >" id="review"/>
 	            <div class="review-background">
 	                <div class="review-window">
@@ -191,15 +192,15 @@
 	                        <h3>거래 후기</h3>
 	                        <div class="star-rating">
 	                            <span class="star-cb-group">
-	                                <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-	                                <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
-	                                <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-	                                <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-	                                <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-	                                <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+	                                <input type="radio" id="rating-0" name="stars" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+	                                <input type="radio" id="rating-1" name="stars" value="1" /><label for="rating-1">1</label>
+	                                <input type="radio" id="rating-2" name="stars" value="2" /><label for="rating-2">2</label>
+	                                <input type="radio" id="rating-3" name="stars" value="3" /><label for="rating-3">3</label>
+	                                <input type="radio" id="rating-4" name="stars" value="4" checked="checked" /><label for="rating-4">4</label>
+	                                <input type="radio" id="rating-5" name="stars" value="5" /><label for="rating-5">5</label>
 	                            </span>
 	                        </div>
-	                        <textarea rows="20"  name="review-write" id="review-write" 
+	                        <textarea rows="20"  name="review_content" id="review-write" 
 	                                    placeholder="후기를 입력해주세요."></textarea>
 	                        <div class="review-write-buttons">
 	                            <input type="button" value="등록" id="send-review"/>
@@ -208,6 +209,7 @@
 	                    </div>
 	                </div>
 	            </div>
+	           
             </div>
         </div>
         <div class="buttons">
@@ -348,5 +350,21 @@
      	 location.href = `${pageContext.request.contextPath}/board/delete?board_id=${board.board_id}`; 
       });
       }
+      
+     var reviewBtn = document.getElementById("send-review");
+     var reviewFrm = document.getElementById("reviewFrm");
+     reviewBtn.addEventListener('click', (e) => {
+    	 var star = document.getElementsByName("stars");
+    	 var review = document.getElementById('review-write');
+    	 var starval = "";
+    	 for(var i = 0 ; i < star.length; i++){
+    		 if(star[i].checked == true){
+    			 starval = star[i].value;
+    		 }
+    	 }
+    	 
+    	 location.href = `${pageContext.request.contextPath}/board/review?board_id=${board.board_id}&review_content=`+ review.value + 
+    			 `&stars=` + starval;
+     });
 </script>
 </html>
