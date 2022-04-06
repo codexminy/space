@@ -2,6 +2,7 @@ package com.second.space.chatting.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,10 +41,10 @@ public class ChatController {
 		Integer user_login_id = user.getUser_login_id();
 		String user_id = chatService.getLoginId(user_login_id);
 
-		List<ChatContentDTO> content = chatService.getChatRoom(user.getUser_id()+"");
+		List<ChatContentDTO> contents = chatService.getChatRoom(user.getUser_id()+"");
 
 		
-		for(ChatContentDTO c : content) {
+		for(ChatContentDTO c : contents) {
 
 			int num = user.getUser_id();
 			int num2 = Integer.parseInt(c.getSeller_id());
@@ -64,6 +65,8 @@ public class ChatController {
 				}
 			}
 		}
+		
+		List<ChatContentDTO> content = contents.stream().distinct().collect(Collectors.toList());
 		
 		model.addAttribute("content", content);
 		model.addAttribute("user", user);
