@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.second.space.admin.model.NoticeDTO;
+import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
@@ -140,5 +141,10 @@ public class UserServiceImpl implements UserService{
 	
 	public List<BoardLikeDTO> getBoardLikeList(Integer user_id) {
 		return userMapper.getBoardLikeList(user_id);
+	}
+
+	@Override
+	public List<Notification_adDTO> getNotificationAdList() {
+		return userMapper.getNotificationAdList();
 	}
 }

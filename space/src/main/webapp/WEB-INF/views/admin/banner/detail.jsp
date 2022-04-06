@@ -25,7 +25,7 @@
 					<tbody class="banner-table">
 						<tr>
 							<td>배너</td>
-							<td class="detail-img"><img width="600"/></td>
+							<td class="detail-img"><img height="300"/></td>
 						</tr>
 						<tr>
 							<td>배너 URL</td>

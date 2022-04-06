@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.second.space.mapper.UserXMLMapper">
 
+<!-- 홈 - 배너 관리 리스트 -->
+<select id="getNotificationAdList" resultType="com.second.space.admin.model.Notification_adDTO">
+	SELECT * FROM notification_ad WHERE na_end_date > sysdate-1 ORDER BY na_end_date
+</select>
+
 <select id="userableId" resultType="string" >
 	SELECT login_id from user_ INNER JOIN login_id_list USING(user_login_id) WHERE login_id = #{userId}
 </select>

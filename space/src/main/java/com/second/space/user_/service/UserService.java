@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.second.space.admin.model.NoticeDTO;
+import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.community.model.CommunityBoardDTO;
@@ -40,5 +41,7 @@ public interface UserService {
 	List<NoticeDTO> getNoticeList();
 
 	List<CommunityBoardDTO> getCommunityList(String user_address);
+	
+	public List<Notification_adDTO> getNotificationAdList();
 
 }

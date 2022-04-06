@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.second.space.admin.model.NoticeDTO;
+import com.second.space.admin.model.Notification_adDTO;
 import com.second.space.board.model.BoardDTO;
 import com.second.space.board.model.BoardImgDTO;
 import com.second.space.board.model.BoardLikeDTO;
@@ -81,5 +82,7 @@ public interface UserXMLMapper {
 	Integer cntStatus(Integer room_id);
 
 	List<Integer> getBuyerId(ChatRoomDTO temp);
+	
+	public List<Notification_adDTO> getNotificationAdList();
 
 }

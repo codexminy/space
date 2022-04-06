@@ -27,6 +27,8 @@ public class MainController {
 	
 	@GetMapping("/space")
 	public String space(Model model,  HttpServletRequest request) {
+		model.addAttribute("banner", userService.getNotificationAdList());
+
 		HttpSession session = request.getSession();
 		UserDTO user = (UserDTO)session.getAttribute("userLoggedIn");
 		

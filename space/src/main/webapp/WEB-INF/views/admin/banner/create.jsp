@@ -32,9 +32,9 @@
 										<i class="fa-solid fa-camera"></i>
 										<p>사진 등록</p>
 									</div>
-									<img src="" alt="" style="display: none;" width="600"/>
+									<img src="" alt="" style="display: none;" height="300"/>
 								</div>
-								<input type="file" id="uploadFile" name="uploadFile"/>
+								<input type="file" id="uploadFile" name="uploadFile" accept="image/*"/>
 							</td>
 						</tr>
 						<tr>
