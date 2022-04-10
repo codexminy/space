@@ -1,6 +1,6 @@
 # :computer: 중고 물품 거래 사이트 (지역 기반 중고거래 중개 플랫폼)
 
-### :point_right: [프레젠테이션(ppt) 자료 보러가기](https://www.miricanvas.com/v/1102g1q)
+### :point_right: <a href="https://www.miricanvas.com/v/1102g1q" target="_blank">프레젠테이션(ppt) 자료 보러가기</a>
 <br>
 
 > ## 프로젝트 소개
